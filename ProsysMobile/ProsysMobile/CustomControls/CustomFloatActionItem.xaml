@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="WiseMobile.CustomControls.CustomFloatActionItem"
+    x:Name="ItemGrid"
+    VerticalOptions="Center"
+    HorizontalOptions="End"
+    ColumnSpacing="16"
+    Margin="0,0,10,0">
+    
+    <Grid.GestureRecognizers>
+        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+    </Grid.GestureRecognizers>
+    
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto"/>
+    </Grid.ColumnDefinitions>
+
+    <Label Grid.Column="0" x:Name="ItemLabel" Style="{DynamicResource Partials.TextFields.TextTabel11}" TextColor="{DynamicResource Sky.White}" />
+    <Image Grid.Column="1" x:Name="ItemImage" Source="StockEntry" Aspect="AspectFill" HeightRequest="50" WidthRequest="50" />
+
+</Grid>

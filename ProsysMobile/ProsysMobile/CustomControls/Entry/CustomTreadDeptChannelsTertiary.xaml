@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:converters="clr-namespace:WiseMobile.Converters"
+      xmlns:controlentriess="clr-namespace:WiseMobile.CustomControls.Entry"
+      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+      x:Class="WiseMobile.CustomControls.Entry.CustomTreadDeptChannelsTertiary"
+      VerticalOptions="FillAndExpand"
+      HorizontalOptions="FillAndExpand"
+      ColumnSpacing="25" 
+      HeightRequest="150"
+      RowSpacing="8">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <converters:TextChangedEventArgsConverter x:Key="TextChangedEventArgsConverter" />
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+    </Grid.RowDefinitions>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="2*"/>
+        <ColumnDefinition Width="2*"/>
+    </Grid.ColumnDefinitions>
+
+    <Label x:Name="lblTitle" Grid.Row="0" Grid.ColumnSpan="4" Padding="0,0,0,8" Style="{DynamicResource Partials.TextFields.TextTabel6}"/>
+
+    <yummy:PancakeView x:Name="lblChannelNo1" Grid.Row="1" Grid.Column="0" Style="{DynamicResource Views.ThreadDepth.Number.Border}">
+        <Label Text="1" Style="{DynamicResource Views.ThreadDepth.Number.Label}"></Label>
+    </yummy:PancakeView>
+
+    <yummy:PancakeView x:Name="lblChannelNo2" Grid.Row="1" Grid.Column="1" Style="{DynamicResource Views.ThreadDepth.Number.Border}">
+        <Label Text="2" Style="{DynamicResource Views.ThreadDepth.Number.Label}"></Label>
+    </yummy:PancakeView>
+
+    <yummy:PancakeView x:Name="lblChannelNo3" Grid.Row="1" Grid.Column="2" Style="{DynamicResource Views.ThreadDepth.Number.Border}">
+        <Label Text="3" Style="{DynamicResource Views.ThreadDepth.Number.Label}"></Label>
+    </yummy:PancakeView>
+
+    <yummy:PancakeView x:Name="lblChannelNo4" Grid.Row="1" Grid.Column="3" Style="{DynamicResource Views.ThreadDepth.Number.Border}">
+        <Label Text="4" Style="{DynamicResource Views.ThreadDepth.Number.Label}"></Label>
+    </yummy:PancakeView>
+
+    <controlentriess:CustomDecimalEntry x:Name="txtChannel1" Grid.Row="2" Grid.Column="0" Text="{Binding Channel1Text}" EntryTextChanged="txtChannel1_EntryTextChanged" EntryFocused="txtChannel1_EntryFocused"/>
+    <controlentriess:CustomDecimalEntry x:Name="txtChannel2" Grid.Row="2" Grid.Column="1" Text="{Binding Channel2Text}" EntryTextChanged="txtChannel2_EntryTextChanged" EntryFocused="txtChannel2_EntryFocused"/>
+    <controlentriess:CustomDecimalEntry x:Name="txtChannel3" Grid.Row="2" Grid.Column="2" Text="{Binding Channel3Text}" EntryTextChanged="txtChannel3_EntryTextChanged" EntryFocused="txtChannel3_EntryFocused"/>
+    <controlentriess:CustomDecimalEntry x:Name="txtChannel4" Grid.Row="2" Grid.Column="3" Text="{Binding Channel4Text}" EntryTextChanged="txtChannel4_EntryTextChanged" EntryFocused="txtChannel4_EntryFocused"/>
+  
+    <Label x:Name="lblOldChannel1" Grid.Row="3" Grid.Column="0" IsVisible="{Binding IsOldChannel1Visible}" Text="{Binding OldChannel1Text}" Style="{DynamicResource Views.ThreadDepth.Info.Label}"></Label>
+    <Label x:Name="lblOldChannel2" Grid.Row="3" Grid.Column="1" IsVisible="{Binding IsOldChannel2Visible}" Text="{Binding OldChannel2Text}" Style="{DynamicResource Views.ThreadDepth.Info.Label}"></Label>
+    <Label x:Name="lblOldChannel3" Grid.Row="3" Grid.Column="2" IsVisible="{Binding IsOldChannel3Visible}" Text="{Binding OldChannel3Text}" Style="{DynamicResource Views.ThreadDepth.Info.Label}"></Label>
+    <Label x:Name="lblOldChannel4" Grid.Row="3" Grid.Column="3" IsVisible="{Binding IsOldChannel4Visible}" Text="{Binding OldChannel4Text}" Style="{DynamicResource Views.ThreadDepth.Info.Label}"></Label>
+</Grid>

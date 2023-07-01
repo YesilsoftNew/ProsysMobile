@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AbsoluteLayout xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:effects="clr-namespace:WiseMobile.Renderer"
+                xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                x:Class="WiseMobile.CustomControls.Entry.CustomDecimalEntry"
+                HeightRequest="48"
+                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+    <yummy:PancakeView AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" Style="{DynamicResource Views.ThreadDepth.LighterBorder}" HeightRequest="48" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="0" x:Name="BorderMain">
+        <effects:CustomDecimalEntry x:Name="ItemEntry" Margin="5,0,0,0" Style="{DynamicResource Views.ThreadDepth.DecimalEntry}" TextChanged="OnEntryTextChanged" Focused="OnEntryFocused" Keyboard="Numeric" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+    </yummy:PancakeView>
+    
+    <StackLayout x:Name="stcBorder" AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All" BackgroundColor="Transparent" />
+</AbsoluteLayout>

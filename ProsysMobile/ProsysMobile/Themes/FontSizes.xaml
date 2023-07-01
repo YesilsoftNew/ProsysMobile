@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="WiseMobile.Themes.FontSizes"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <!--#region Eski-->
+    <x:Int16 x:Key="FontSizeXLarge">32</x:Int16>
+    <x:Int16 x:Key="FontSizeLarge">24</x:Int16>
+    <x:Int16 x:Key="FontSizeMedium">16</x:Int16>
+    <x:Int16 x:Key="FontSizeSmall">14</x:Int16>
+    <x:Int16 x:Key="FontSizeXSmall">12</x:Int16>
+    <x:Int16 x:Key="FontSizeXXSmall">10</x:Int16>
+    <!--#endregion-->
+
+    <x:Int16 x:Key="Title1">48</x:Int16>
+    <x:Int16 x:Key="Title2">32</x:Int16>
+    <x:Int16 x:Key="Title3">24</x:Int16>
+    <x:Int16 x:Key="Large">18</x:Int16>
+    <x:Int16 x:Key="Regular">16</x:Int16>
+    <x:Int16 x:Key="Small">14</x:Int16>
+    <x:Int16 x:Key="Tiny">12</x:Int16>
+    <x:Int16 x:Key="ExtraSmall">10</x:Int16>
+</ResourceDictionary>

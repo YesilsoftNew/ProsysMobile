@@ -1,0 +1,135 @@
+﻿<ResourceDictionary
+    x:Class="WiseMobile.Themes.Views.Bluetooth"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <Style x:Key="Views.Bluetooth.Connect" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.Lighter}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent}" />
+        <Setter Property="HeightRequest" Value="24" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.NotConnect" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.Lighter}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#F2F4F5'}" />
+        <!--  Sky.Lighter  -->
+        <Setter Property="HeightRequest" Value="24" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.Connecting" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Blue.Lightest}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#C9F0FF'}" />
+        <!--  Blue.Lightest  -->
+        <Setter Property="HeightRequest" Value="24" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.ConnectionSuccessful" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Green.Lightest}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#ECFCE5'}" />
+        <!--  Green.Lightest  -->
+        <Setter Property="HeightRequest" Value="24" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.ConnectionFailed" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Red.Lightest}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent}" />
+        <Setter Property="HeightRequest" Value="24" />
+    </Style>
+
+
+    <Style x:Key="Views.Bluetooth.ConnectLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Base}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.NotConnectLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Base}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.ConnectingLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Blue.Darkest}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.ConnectionSuccessfulLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Green.Darkest}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.ConnectionFailedLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Red.Darkest}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.Image" TargetType="Image">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="16" />
+        <Setter Property="HeightRequest" Value="16" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.SmallImage" TargetType="Image">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="12" />
+        <Setter Property="HeightRequest" Value="12" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.InfoBorder" TargetType="yummy:PancakeView">
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent, Thickness=0}" />
+        <Setter Property="HeightRequest" Value="200" />
+        <Setter Property="WidthRequest" Value="200" />
+        <Setter Property="CornerRadius" Value="100" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary.Base}" />
+    </Style>
+
+
+    <Style x:Key="Views.Bluetooth.InfoLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="FontFamily" Value="InterBold" />
+        <Setter Property="FontSize" Value="{DynamicResource Title3}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="Views.Bluetooth.PrimaryContent" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Base}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+</ResourceDictionary>

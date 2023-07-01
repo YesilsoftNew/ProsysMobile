@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="WiseMobile.Themes.LightTheme"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
+
+    <!--#region Entry-->
+    <Color x:Key="PrimaryEntryTextColor">#000000</Color>
+    <Color x:Key="SecondaryEntryTextColor">#FFFFFF</Color>
+    <Color x:Key="PrimaryEntryPlaceHolderColor">#77869E</Color>
+    <!--#endregion-->
+
+    <!--#region Label-->
+    <Color x:Key="PrimaryLabelTextColor">#000000</Color>
+    <Color x:Key="SecondaryLabelTextColor">#77869E</Color>
+    <Color x:Key="TertiaryLabelTextColor">#FFFFFF</Color>
+    <Color x:Key="FloatActionLabelTextColor">#FFFFFF</Color>
+    <!--#endregion-->
+
+
+    <!--#region Button-->
+    <Color x:Key="PrimaryButtonTextColor">#FFFFFF</Color>
+    <Color x:Key="SecondaryButtonTextColor">#FF681C</Color>
+    <Color x:Key="SpecialButtonTextColor">#007EFF</Color>
+
+    <Color x:Key="PrimaryButtonBackColor">#FF681C</Color>
+    <Color x:Key="SecondaryButtonBackColor">#FFFFFF</Color>
+
+    <Color x:Key="PrimaryButtonBorderColor">Transparent</Color>
+    <Color x:Key="SecondaryButtonBorderColor">#FF681C</Color>
+    <!--#endregion-->
+
+    <!--#region Text-->
+    <Color x:Key="PrimaryPickerTextColor">#000000</Color>
+    <Color x:Key="PickerTitleColor">#000000</Color>
+    <Color x:Key="PrimaryPickerBackColor">#F1F1F1</Color>
+    <!--#endregion-->
+
+    <!--#region Border-->
+    <Color x:Key="nvgBarBorderBackColor">#FFFFFF</Color>
+    <Color x:Key="SearchEntryBorderBackColor">#FFFFFF</Color>
+    <Color x:Key="EmptyLineBorderBackColor">#F1F3F5</Color>
+    <Color x:Key="PrimaryPickerBorderBackColor">#FFFFFF</Color>
+    <Color x:Key="SecondaryPickerBorderBackColor">#F1F3F5</Color>
+    <Color x:Key="YesNoBorder_ActiveBackColor">#FFFFFF</Color>
+    <Color x:Key="YesNoBorder_DeActiveBackColor">#F1F3F5</Color>
+    <Color x:Key="PrimaryCardBorderColor">#FFFFFF</Color>
+    <Color x:Key="PrimaryBorderColor">#F1F3F5</Color>
+    <Color x:Key="PrimaryEntryBorderColor">#F1F3F5</Color>
+    <Color x:Key="YesNoButtonBorderBackColor">#F1F3F5</Color>
+    <!--#endregion-->
+
+    <!--#region RadioButton-->
+    <Color x:Key="PrimaryRadioButtonTextColor">#000000</Color>
+    <Color x:Key="PrimaryRadioButtonBackColor">#FF681C</Color>
+    <!--#endregion-->
+
+    <Color x:Key="PrimarySuccessColor">#2AC769</Color>
+    <Color x:Key="SecondaryWarningColor">#F6A609</Color>
+    <Color x:Key="SecondaryErrorColor">#FB4E4E</Color>
+
+    <Color x:Key="TransparentColor">Transparent</Color>
+
+    <!--#region CheckBox-->
+    <Color x:Key="PrimaryCheckBoxColor">#FF681C</Color>
+    <!--#endregion-->
+
+</ResourceDictionary>

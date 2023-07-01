@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<yummy:PancakeView xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   x:Class="WiseMobile.CustomControls.Bar.CustomTabViewQuaternary"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand"
+                   BackgroundColor="Transparent"
+                   Style="{DynamicResource Controls.SegmentedControls.PrimaryBorder}" >
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="2,2,2,2" RowSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Column="0" x:Name="btnItem1" Text="" Clicked="btnItem1_Clicked" Style="{DynamicResource Controls.SegmentedControls.TertiaryButton}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Column="1" x:Name="btnItem2" Text="" Clicked="btnItem2_Clicked" Style="{DynamicResource Controls.SegmentedControls.TertiaryButton}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Column="2" x:Name="btnItem3" Text="" Clicked="btnItem3_Clicked" Style="{DynamicResource Controls.SegmentedControls.TertiaryButton}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Column="3" x:Name="btnItem4" Text="" Clicked="btnItem4_Clicked" Style="{DynamicResource Controls.SegmentedControls.TertiaryButton}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Column="4" x:Name="btnItem5" Text="" Clicked="btnItem5_Clicked" Style="{DynamicResource Controls.SegmentedControls.TertiaryButton}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+        <yummy:PancakeView Grid.Row="1" Grid.Column="0" x:Name="bxItem1" Style="{DynamicResource Views.VehicleDetail.Line}" BackgroundColor="{DynamicResource Primary.Base}" HorizontalOptions="FillAndExpand" Margin="0,12,0,0"/>
+        <yummy:PancakeView Grid.Row="1" Grid.Column="1" x:Name="bxItem2" Style="{DynamicResource Views.VehicleDetail.Line}" BackgroundColor="{DynamicResource Primary.Base}" HorizontalOptions="FillAndExpand" Margin="0,12,0,0"/>
+        <yummy:PancakeView Grid.Row="1" Grid.Column="2" x:Name="bxItem3" Style="{DynamicResource Views.VehicleDetail.Line}" BackgroundColor="{DynamicResource Primary.Base}" HorizontalOptions="FillAndExpand" Margin="0,12,0,0"/>
+        <yummy:PancakeView Grid.Row="1" Grid.Column="3" x:Name="bxItem4" Style="{DynamicResource Views.VehicleDetail.Line}" BackgroundColor="{DynamicResource Primary.Base}" HorizontalOptions="FillAndExpand" Margin="0,12,0,0"/>
+        <yummy:PancakeView Grid.Row="1" Grid.Column="4" x:Name="bxItem5" Style="{DynamicResource Views.VehicleDetail.Line}" BackgroundColor="{DynamicResource Primary.Base}" HorizontalOptions="FillAndExpand" Margin="0,12,0,0"/>
+    </Grid>
+</yummy:PancakeView>

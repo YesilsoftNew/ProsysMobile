@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary
+    x:Class="WiseMobile.Themes.Colors"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--#region Ink-->
+    <Color x:Key="Ink.Lighter">#72777A</Color>
+    <Color x:Key="Ink.Light">#6C7072</Color>
+    <Color x:Key="Ink.Base">#404446</Color>
+    <Color x:Key="Ink.Dark">#303437</Color>
+    <Color x:Key="Ink.Darker">#232323</Color>
+    <Color x:Key="Ink.Darkest">#090A0A</Color>
+    <!--#endregion-->
+
+    <!--#region Sky-->
+    <Color x:Key="Sky.Lightest">#F7F9FA</Color>
+    <Color x:Key="Sky.Lighter">#F2F4F5</Color>
+    <Color x:Key="Sky.Light">#E3E5E5</Color>
+    <Color x:Key="Sky.Base">#CDCFD0</Color>
+    <Color x:Key="Sky.Dark">#979C9E</Color>
+    <Color x:Key="Sky.White">#FFFFFF</Color>
+
+    <!--#endregion-->
+
+    <!--#region Primary-->
+    <Color x:Key="Primary.Lightest">#FFD2BB</Color>
+    <Color x:Key="Primary.Lighter">#FFB48E</Color>
+    <Color x:Key="Primary.Light">#FF9560</Color>
+    <Color x:Key="Primary.Base">#FF681C</Color>
+    <Color x:Key="Primary.Dark">#FF4B11</Color>
+    <!--#endregion-->
+
+    <!--#region Red-->
+    <Color x:Key="Red.Lightest">#FFE5E5</Color>
+    <Color x:Key="Red.Lighter">#FF9898</Color>
+    <Color x:Key="Red.Light">#FF6D6D</Color>
+    <Color x:Key="Red.Base">#FF5247</Color>
+    <Color x:Key="Red.Darkest">#D3180C</Color>
+    <!--#endregion-->
+
+    <!--#region Green-->
+    <Color x:Key="Green.Lightest">#ECFCE5</Color>
+    <Color x:Key="Green.Lighter">#7DDE86</Color>
+    <Color x:Key="Green.Light">#4CD471</Color>
+    <Color x:Key="Green.Base">#23C16B</Color>
+    <Color x:Key="Green.Darkest">#198155</Color>
+    <!--#endregion-->
+
+    <!--#region Yellow-->
+    <Color x:Key="Yellow.Lightest">#FFEFD7</Color>
+    <Color x:Key="Yellow.Lighter">#FFD188</Color>
+    <Color x:Key="Yellow.Light">#FFC462</Color>
+    <Color x:Key="Yellow.Base">#FFB323</Color>
+    <Color x:Key="Yellow.Darkest">#A05E03</Color>
+    <!--#endregion-->
+
+    <!--#region Blue-->
+    <Color x:Key="Blue.Lightest">#C9F0FF</Color>
+    <Color x:Key="Blue.Lighter">#9BDCFD</Color>
+    <Color x:Key="Blue.Light">#6EC2FB</Color>
+    <Color x:Key="Blue.Base">#48A7F8</Color>
+    <Color x:Key="Blue.Darkest">#0065D0</Color>
+    <!--#endregion-->
+
+    <!--#region Facebook-->
+    <Color x:Key="Facebook.Base">#0078FF</Color>
+    <Color x:Key="Facebook.Dark">#0067DB</Color>
+    <!--#endregion-->
+
+    <!--#region Twitter-->
+    <Color x:Key="Twitter.Base">#1DA1F2</Color>
+    <Color x:Key="Twitter.Dark">#0C90E1</Color>
+    <!--#endregion-->
+</ResourceDictionary>

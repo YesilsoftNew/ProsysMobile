@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<backdrop:BackdropPage
+    x:Class="WiseMobile.CustomControls.Backdrop.BottomToTopBackdropPopupPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+    xmlns:backdrop="clr-namespace:WiseMobile.CustomControls.Backdrop"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    x:Name="xBackDropPage"
+    mc:Ignorable="d" Padding="0,20,0,0">
+    
+    <popup:PopupPage.Animation>
+        <animations:MoveAnimation
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </popup:PopupPage.Animation>
+    
+    <RelativeLayout
+        x:Name="FullView"
+        Margin="{Binding Path=ViewMargin}"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand">
+        <ContentView
+            x:Name="CoverView"
+            IsVisible="False"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Height,
+                                                                   Factor=1,
+                                                                   Constant=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=1,
+                                                                  Constant=0}" />
+        <Frame
+            x:Name="Indictor"
+            Margin="16"
+            Padding="0"
+            BackgroundColor="{Binding Path=IndicatorColor}"
+            BorderColor="{Binding Path=IndicatorColor}"
+            CornerRadius="2"
+            HeightRequest="5"
+            HorizontalOptions="CenterAndExpand"
+            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                              Property=Width,
+                                                              Factor=0.5,
+                                                              Constant=-36}"
+            WidthRequest="40" />
+        <backdrop:RoundedCornerStackLayout
+            x:Name="PageView"
+            Margin="1,1,1,1"
+            BackgroundColor="Transparent"
+            BorderColor="{Binding Path=BorderColor}"
+            BorderThickness="{Binding Path=BorderThickness}"
+            CornerRadius="{Binding Path=CornerRadius}"
+            HorizontalOptions="FillAndExpand"
+            HorizontalShadowOffset="{Binding Path=HorizontalShadowOffset}"
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                   Property=Height,
+                                                                   Factor=1,
+                                                                   Constant=0}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                                                                  Property=Width,
+                                                                  Factor=1,
+                                                                  Constant=0}"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
+                                                              ElementName=Indictor,
+                                                              Property=Height,
+                                                              Factor=1,
+                                                              Constant=32}"
+            RoundedCorners="{Binding Path=RoundedCorners}"
+            ShadowColor="{Binding Path=ShadowColor}"
+            ShadowOpacity="{Binding Path=ShadowOpacity}"
+            ShadowRadius="{Binding Path=ShadowRadius}"
+            VerticalOptions="FillAndExpand"
+            VerticalShadowOffset="{Binding Path=VerticalShadowOffset}">
+            <ContentView
+                x:Name="ViewContent"
+                Content="{Binding Path=PageContent,Source={x:Reference xBackDropPage}}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
+        </backdrop:RoundedCornerStackLayout>
+    </RelativeLayout>
+</backdrop:BackdropPage>

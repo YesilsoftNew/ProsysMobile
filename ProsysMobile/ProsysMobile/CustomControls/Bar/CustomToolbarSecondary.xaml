@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<yummy:PancakeView xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:controlbuttons="clr-namespace:WiseMobile.CustomControls.Button"
+                   xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   x:Class="WiseMobile.CustomControls.Bar.CustomToolbarSecondary"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand"
+                   Style="{DynamicResource NavBars.Standart.Title.Border}">
+
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <controlbuttons:CustomStandardImageButton Grid.Column="0" x:Name="ItemButtonPrevious" ImageButtonClicked="ItemButtonPrevious_Clicked" Style="{DynamicResource NavBars.Standard.ImageButton}" VerticalOptions="CenterAndExpand" HorizontalOptions="Start"/>
+        <Grid Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1" x:Name="ItemTitle"  Style="{DynamicResource NavBars.Standard.Title}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" />
+            <Grid Grid.Row="1" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <yummy:PancakeView Grid.Column="0" x:Name="ItemBoxViewConnectionStatus" Style="{DynamicResource NavBars.Standard.StatusColor}" />
+                <Label Grid.Column="1" x:Name="ItemLabelConnectionStatus" Text="Çevrimiçi" Style="{DynamicResource NavBars.Standard.Status}" />
+            </Grid>
+        </Grid>
+        <controlbuttons:CustomStandardImageButton x:Name="ItemRightImageButton" Grid.Column="2" ImageButtonClicked="ItemRightImageButton_ImageButtonClicked" Style="{DynamicResource NavBars.Standard.ImageButton}" VerticalOptions="CenterAndExpand" HorizontalOptions="End"/>
+    </Grid>
+</yummy:PancakeView>

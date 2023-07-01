@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      xmlns:converters="clr-namespace:WiseMobile.Converters"
+      xmlns:controls="clr-namespace:WiseMobile.CustomControls"
+      xmlns:controlentriess="clr-namespace:WiseMobile.CustomControls.Entry"
+      x:Class="WiseMobile.CustomControls.Entry.CustomAirPressure"
+      VerticalOptions="FillAndExpand"
+      HorizontalOptions="FillAndExpand">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <converters:TextChangedEventArgsConverter x:Key="TextChangedEventArgsConverter" />
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+        <RowDefinition Height="auto"></RowDefinition>
+    </Grid.RowDefinitions>
+ 
+    <Label x:Name="lblTitle" Grid.Row="0" Padding="0,0,8,8" Style="{DynamicResource Partials.TextFields.TextTabel6}"/>
+
+    <controls:CustomSwitch Grid.Row="1" x:Name="swtAirPressure" Padding="0,0,8,0" Text="Lastik Sıcak" IsToggled="{Binding IsTireHotValue}" SwitchToggled="swtAirPressure_SwitchToggled"/>
+
+    <controlentriess:CustomDecimalEntrySecondary Grid.Row="2" Padding="0,0,8,0" x:Name="txtAirPressure" Text="{Binding AirPressureText}" EntryTextChanged="txtAirPressure_EntryTextChanged" EntryFocused="txtAirPressure_EntryFocused" Title="Hava Basıncı" Placeholder="Hava Basıncı" HorizontalTextAlignment="Start" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+
+    <Grid Grid.Row="3" x:Name="grdRecommendedAirPressure">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Column="0" Text="Tavsiye Edilen Hava Basıncı:" Style="{DynamicResource Partials.TextFields.TextTabel4}"></Label>
+        <Label x:Name="lblRecommendedAirPressure" Grid.Column="1" Text="{Binding RecommendedAirPressureText}" Style="{DynamicResource Partials.TextFields.TextTabel5}"></Label>
+    </Grid>
+</Grid>

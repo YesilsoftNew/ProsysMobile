@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="WiseMobile.CustomControls.Button.CustomButtonLabelPrimary"
+      VerticalOptions="FillAndExpand"
+      HorizontalOptions="StartAndExpand"
+      IsEnabled="{Binding IsBusy, Converter={StaticResource Key=doubleTappingConverter}}"
+      xmlns:converters="clr-namespace:WiseMobile.Converters"      
+      x:Name="ItemGrid">
+
+    <Grid.Resources>
+        <ResourceDictionary>
+            <converters:DoubleTappingConverter x:Key="doubleTappingConverter" />
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto"/>
+        <ColumnDefinition Width="auto" />
+    </Grid.ColumnDefinitions>
+
+    <Image Grid.Column="0" x:Name="ItemImage" Source="PlusCircleOrange" Style="{DynamicResource Views.Popovers.Views.Image}"/>
+    <Label Grid.Column="1" x:Name="ItemLabel" Style="{DynamicResource Partials.TextFields.TextTabel11}" TextColor="{DynamicResource Primary.Base}"/>
+</Grid>

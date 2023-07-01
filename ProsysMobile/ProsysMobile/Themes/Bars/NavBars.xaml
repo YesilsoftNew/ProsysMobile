@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="WiseMobile.Themes.Bars.NavBars"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <!--#region Standard-->
+    <Style x:Key="NavBars.Standard.Title" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Large}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NavBars.Standard.Button.Primary" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary.Base}" />
+        <Setter Property="TextColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="WidthRequest" Value="82" />
+        <Setter Property="HeightRequest" Value="32" />
+    </Style>
+
+    <Style x:Key="NavBars.Standard.Button.Secondary" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary.Base}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="WidthRequest" Value="82" />
+        <Setter Property="HeightRequest" Value="32" />
+    </Style>
+
+    <Style x:Key="NavBars.Standard.Button.Secondary1" TargetType="Label">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary.Base}" />
+        <Setter Property="FontFamily" Value="InterMedium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HeightRequest" Value="32" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+
+    <Style x:Key="NavBars.Standard.ImageButton" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="36" />
+        <Setter Property="HeightRequest" Value="36" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+
+    <Style x:Key="NavBars.Standard.Status" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Light}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource ExtraSmall}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NavBars.Standard.StatusColor" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Green.Base}" />
+        <Setter Property="CornerRadius" Value="50" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent}" />
+        <Setter Property="WidthRequest" Value="8" />
+        <Setter Property="HeightRequest" Value="8" />
+        <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+    </Style>
+
+    <!--#region Large-->
+    <Style x:Key="NavBars.Large.Title" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterBold" />
+        <Setter Property="FontSize" Value="{DynamicResource Title3}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NavBars.Large.Caption" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NavBars.Large.ImageButton" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="32" />
+        <Setter Property="HeightRequest" Value="32" />
+    </Style>
+
+    <Style x:Key="NavBars.Standart.Title.Border" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Padding" Value="12,0,12,0" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent}" />
+    </Style>
+    <!--#endregion-->
+
+    <Style x:Key="NavBars.BackDrop.Title.Primary" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterBold" />
+        <Setter Property="FontSize" Value="{DynamicResource Large}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NavBars.BackDrop.Title.Secondary" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NavBars.BackDrop.Title.Border" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent}" />
+    </Style>
+</ResourceDictionary>

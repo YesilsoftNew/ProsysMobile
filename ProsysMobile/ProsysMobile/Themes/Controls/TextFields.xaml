@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="WiseMobile.Themes.Controls.TextFields"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:WiseMobile.Renderer"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <Style x:Key="Controls.TextFields.PrimaryCaption" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.SecondaryCaption" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Lighter}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Tiny}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.ErrorMessage" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Red.Base}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Small}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.ToastMessage" TargetType="Label">
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Small}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.Entry" TargetType="effects:CustomEntry">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Ink.Lighter}" />
+        <Setter Property="Margin" Value="{OnPlatform '16,0,16,4', iOS='8,0,8,4'}" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.EntrySecondary" TargetType="effects:CustomEntry">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Ink.Lighter}" />
+        <Setter Property="Margin" Value="{OnPlatform '16,16,16,16', iOS='8,16,8,16'}" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.DecimalEntry" TargetType="effects:CustomDecimalEntry">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Ink.Lighter}" />
+        <Setter Property="Margin" Value="16,0,16,0" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.Picker" TargetType="effects:CustomPicker">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TitleColor" Value="{DynamicResource Ink.Lighter}" />
+        <Setter Property="Margin" Value="{OnPlatform '16,0,16,2', iOS='8,2,8,1'}" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.DatePicker" TargetType="effects:CustomDatePicker">
+        <Setter Property="TextColor" Value="{DynamicResource Ink.Darkest}" />
+        <Setter Property="FontFamily" Value="InterRegular" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="Margin" Value="{OnPlatform '16,0,16,2', iOS='8,0,8,2'}" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.DatePickerImage" TargetType="Image">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="24" />
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="Aspect" Value="AspectFit" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.ImageButton" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="Margin" Value="0,0,12,0" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.LightBorder" TargetType="yummy:PancakeView">
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#E3E5E5', Thickness=1}" />
+        <!--  Sky.Lighter  -->
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="HeightRequest" Value="48" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.PrimaryBorder" TargetType="yummy:PancakeView">
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#FF681C', Thickness=2}" />
+        <!--  Primary.Base  -->
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.LighterBorder" TargetType="yummy:PancakeView">
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#F2F4F5', Thickness=2}" />
+        <!--  Sky.Lighter  -->
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.DisabledBorder" TargetType="yummy:PancakeView">
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent, Thickness=2}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.Lighter}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.CarouselBorder" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Shadow" Value="{yummy:ShadowMarkup BlurRadius='30'}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#E9E9E9', Thickness=1}" />
+        <Setter Property="Padding" Value="16,16,16,16" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.RedBorder" TargetType="yummy:PancakeView">
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#FF5247', Thickness=2}" />
+        <!--  Red.base  -->
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.CardBorder" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Shadow" Value="{yummy:ShadowMarkup BlurRadius='5'}" />
+        <Setter Property="Padding" Value="12,12,12,12" />
+        <Setter Property="Margin" Value="5,5,5,5" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.CardBorderSecondary" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="CornerRadius" Value="25" />
+        <Setter Property="Shadow" Value="{yummy:ShadowMarkup BlurRadius='2'}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#E9E9E9', Thickness=1}" />
+        <Setter Property="Padding" Value="12,12,12,12" />
+        <Setter Property="Margin" Value="0,5,0,-10" />
+    </Style>
+
+    <Style x:Key="Controls.TextFields.CardBorderTertiary" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource Sky.White}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Shadow" Value="{yummy:ShadowMarkup BlurRadius='5'}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color='#F6F6F6', Thickness=1}" />
+        <Setter Property="Padding" Value="12,12,12,12" />
+        <Setter Property="Margin" Value="0,5,0,-10" />
+    </Style>
+
+</ResourceDictionary>
