@@ -4,12 +4,12 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using WiseMobile.Helper;
-using WiseMobile.Pages.System;
+using ProsysMobile.Helper;
+using ProsysMobile.Pages.System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Backdrop
+namespace ProsysMobile.CustomControls.Backdrop
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BottomToTopBackdropPopupPage : BackdropPage, INotifyPropertyChanged

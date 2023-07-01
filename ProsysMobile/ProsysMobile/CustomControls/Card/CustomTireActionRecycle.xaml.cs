@@ -1,14 +1,14 @@
 ﻿using Autofac.Core;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using WiseMobile.Helper;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Themes.Views;
+using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Themes.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Card
+namespace ProsysMobile.CustomControls.Card
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomTireActionRecycle : PancakeView

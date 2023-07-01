@@ -1,7 +1,7 @@
-﻿using WiseMobile.Models.CommonModels.SQLiteModels;
-using WorkOrderProcessStatus = WiseMobile.Models.CommonModels.SQLiteModels.WorkOrderProcessStatus;
+﻿using ProsysMobile.Models.CommonModels.SQLiteModels;
+using WorkOrderProcessStatus = ProsysMobile.Models.CommonModels.SQLiteModels.WorkOrderProcessStatus;
 
-namespace WiseMobile.Helper.SQLite
+namespace ProsysMobile.Helper.SQLite
 {
     public class SQLiteDBSync : BaseSync
     {

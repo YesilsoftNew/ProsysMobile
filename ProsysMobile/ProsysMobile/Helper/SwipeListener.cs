@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
 	public class SwipeListener : PanGestureRecognizer
 	{

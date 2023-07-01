@@ -3,7 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using WiseDynamicMobile.Helper;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public static class ZipFile
     {

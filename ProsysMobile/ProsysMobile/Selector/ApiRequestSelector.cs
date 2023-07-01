@@ -1,7 +1,7 @@
-﻿using WiseMobile.Handler;
-using WiseMobile.Models.CommonModels.Enums;
+﻿using ProsysMobile.Handler;
+using ProsysMobile.Models.CommonModels.Enums;
 
-namespace WiseMobile.Selector
+namespace ProsysMobile.Selector
 {
     public class ApiRequestSelector<T> : IApiRequestSelector<T>
     {

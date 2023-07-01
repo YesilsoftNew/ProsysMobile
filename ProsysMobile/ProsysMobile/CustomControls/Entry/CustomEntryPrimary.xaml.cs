@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Linq;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Entry
+namespace ProsysMobile.CustomControls.Entry
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomEntryPrimary : PancakeView

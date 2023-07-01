@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public static class Extensions
     {

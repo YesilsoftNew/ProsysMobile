@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using WiseMobile.Endpoints.Auth;
-using WiseMobile.Helper.ApiClient.Extensions;
+using ProsysMobile.Endpoints.Auth;
+using ProsysMobile.Helper.ApiClient.Extensions;
 
-namespace WiseMobile.Helper.ApiClient
+namespace ProsysMobile.Helper.ApiClient
 {
     public class ApiClient
     {

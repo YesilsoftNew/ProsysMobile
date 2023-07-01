@@ -1,4 +1,4 @@
-﻿namespace WiseMobile.Handler
+﻿namespace ProsysMobile.Handler
 {
     public interface IApiRequest<out T>
     {

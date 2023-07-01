@@ -2,21 +2,21 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
-using WiseMobile.Models.CommonModels;
-using WiseMobile.Models.CommonModels.CustomModel;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Models.CommonModels.SQLiteModels;
-using WiseMobile.Models.CommonModels.ViewParamModels;
-using WiseMobile.Services.Bluetooth;
-using WiseMobile.Services.Navigation;
-using WiseMobile.Services.SQLite;
-using WiseMobile.ViewModels.Base;
-using WiseMobile.ViewModels.Pages.System;
+using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.CustomModel;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Services.Bluetooth;
+using ProsysMobile.Services.Navigation;
+using ProsysMobile.Services.SQLite;
+using ProsysMobile.ViewModels.Base;
+using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Layout
+namespace ProsysMobile.CustomControls.Layout
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomTireChannelLayout : ContentView

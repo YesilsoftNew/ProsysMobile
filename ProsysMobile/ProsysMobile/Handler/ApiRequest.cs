@@ -3,9 +3,9 @@ using ModernHttpClient;
 using Refit;
 using System;
 using System.Net.Http;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 
-namespace WiseMobile.Handler
+namespace ProsysMobile.Handler
 {
     public class ApiRequest<T> : IApiRequest<T>
     {

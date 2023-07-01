@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary
-    x:Class="WiseMobile.Themes.Partials.Backdrop"
+    x:Class="ProsysMobile.Themes.Partials.Backdrop"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:backdrop="clr-namespace:WiseMobile.Models">
+    xmlns:backdrop="clr-namespace:ProsysMobile.Models">
 
     <Style x:Key="Partials.Backdrop.Backdrop" TargetType="backdrop:CustomBackdrop">
         <Setter Property="BorderColor" Value="{DynamicResource TransparentColor}" />

@@ -4,13 +4,13 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
-using WiseMobile.Services.Dialog;
-using WiseMobile.Services.Navigation;
+using ProsysMobile.Helper;
+using ProsysMobile.Services.Dialog;
+using ProsysMobile.Services.Navigation;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-namespace WiseMobile.ViewModels.Base
+namespace ProsysMobile.ViewModels.Base
 {
     public class ViewModelBase : ExtendedBindableObject
     {

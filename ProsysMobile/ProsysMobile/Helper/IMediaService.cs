@@ -1,4 +1,4 @@
-﻿namespace WiseMobile.Helper
+﻿namespace ProsysMobile.Helper
 {
     public interface IMediaService
     {

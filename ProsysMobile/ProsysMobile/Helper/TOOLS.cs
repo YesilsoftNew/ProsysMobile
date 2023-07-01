@@ -5,10 +5,10 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
-using WiseMobile.Helper;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Models.CommonModels.SQLiteModels;
-using WiseMobile.Resources.Language;
+using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
+using ProsysMobile.Resources.Language;
 using Xamarin.Forms;
 
 namespace WiseDynamicMobile.Helper

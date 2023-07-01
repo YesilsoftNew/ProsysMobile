@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Picker
+namespace ProsysMobile.CustomControls.Picker
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomPicker : PancakeView

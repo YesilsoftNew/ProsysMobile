@@ -1,7 +1,7 @@
 ﻿using System;
 using WiseDynamicMobile.Helper;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public class GlobalSetting
     {
@@ -23,7 +23,7 @@ namespace WiseMobile.Helper
         public string PagesPath { get; set; } = "Pages";
         public string ViewModelPath { get; set; } = "ViewModels";
         public string CustomControlsPath { get; set; } = "CustomControls";
-        public string ImageFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/WiseMobileImages/";
+        public string ImageFolder = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/ProsysMobileImages/";
         #endregion
 
         #region Api

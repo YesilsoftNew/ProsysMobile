@@ -1,9 +1,9 @@
-﻿using WiseMobile.Models.CommonModels.Enums;
+﻿using ProsysMobile.Models.CommonModels.Enums;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls
+namespace ProsysMobile.CustomControls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomBadges : PancakeView

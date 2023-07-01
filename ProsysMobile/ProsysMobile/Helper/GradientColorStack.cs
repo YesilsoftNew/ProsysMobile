@@ -1,5 +1,5 @@
 ﻿using Xamarin.Forms;
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public class GradientColorStack : StackLayout
     {

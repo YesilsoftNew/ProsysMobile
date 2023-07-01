@@ -3,7 +3,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Bar
+namespace ProsysMobile.CustomControls.Bar
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomTabViewDual : PancakeView

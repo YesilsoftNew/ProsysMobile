@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public class WiseLogger
     {

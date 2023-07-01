@@ -3,7 +3,7 @@ using System;
 using System.Globalization;
 using Xamarin.Forms;
 
-namespace WiseMobile.Converters
+namespace ProsysMobile.Converters
 {
     public class ImageLoadedEventArgsConverter : IValueConverter
     {

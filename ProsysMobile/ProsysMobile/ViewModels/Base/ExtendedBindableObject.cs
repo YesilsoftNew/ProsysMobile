@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Xamarin.Forms;
 
-namespace WiseMobile.ViewModels.Base
+namespace ProsysMobile.ViewModels.Base
 {
     public abstract class ExtendedBindableObject : BindableObject
     {

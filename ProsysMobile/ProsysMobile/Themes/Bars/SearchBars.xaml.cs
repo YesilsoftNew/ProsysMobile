@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.Themes.Bars
+namespace ProsysMobile.Themes.Bars
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchBars : ResourceDictionary

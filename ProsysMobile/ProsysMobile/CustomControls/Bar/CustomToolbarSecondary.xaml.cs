@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows.Input;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Bar
+namespace ProsysMobile.CustomControls.Bar
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomToolbarSecondary : PancakeView

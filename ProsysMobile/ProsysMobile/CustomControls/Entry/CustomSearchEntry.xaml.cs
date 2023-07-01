@@ -1,10 +1,10 @@
 ﻿using System;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Entry
+namespace ProsysMobile.CustomControls.Entry
 {
     // BindingMode
     // https://learn.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/binding-mode

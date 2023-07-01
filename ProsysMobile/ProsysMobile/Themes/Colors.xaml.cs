@@ -1,7 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.Themes
+namespace ProsysMobile.Themes
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Colors : ResourceDictionary

@@ -1,15 +1,15 @@
 ﻿using Autofac.Core;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using WiseMobile.CustomControls.Button;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Models.CommonModels.SQLiteModels;
-using WiseMobile.Themes.Views;
+using ProsysMobile.CustomControls.Button;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
+using ProsysMobile.Themes.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Card
+namespace ProsysMobile.CustomControls.Card
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomVehicleEntryOdometer : PancakeView

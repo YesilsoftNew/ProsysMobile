@@ -5,11 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Models.CommonModels.SQLiteModels;
-using WiseMobile.Services.SQLite;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
+using ProsysMobile.Services.SQLite;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public class VehicleTypeImageDownload
     {

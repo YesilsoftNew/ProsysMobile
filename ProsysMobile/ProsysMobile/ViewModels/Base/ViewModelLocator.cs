@@ -1,19 +1,19 @@
 ﻿using Autofac;
-using WiseMobile.CustomControls.Backdrop;
+using ProsysMobile.CustomControls.Backdrop;
 using Rg.Plugins.Popup.Pages;
 using System;
 using System.Globalization;
 using System.Reflection;
-using WiseMobile.Handler;
-using WiseMobile.Helper;
-using WiseMobile.Pages.Service.Mounting;
-using WiseMobile.Selector;
-using WiseMobile.Services.Base;
-using WiseMobile.Services.Navigation;
+using ProsysMobile.Handler;
+using ProsysMobile.Helper;
+using ProsysMobile.Pages.Service.Mounting;
+using ProsysMobile.Selector;
+using ProsysMobile.Services.Base;
+using ProsysMobile.Services.Navigation;
 using Xamarin.Forms;
 using WiseDynamicMobile.Helper;
 
-namespace WiseMobile.ViewModels.Base
+namespace ProsysMobile.ViewModels.Base
 {
     public static class ViewModelLocator
     {

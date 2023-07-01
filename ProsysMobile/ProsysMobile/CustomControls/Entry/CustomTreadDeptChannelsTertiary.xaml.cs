@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Input;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Services.Bluetooth;
+using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Services.Bluetooth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Entry
+namespace ProsysMobile.CustomControls.Entry
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomTreadDeptChannelsTertiary : Grid

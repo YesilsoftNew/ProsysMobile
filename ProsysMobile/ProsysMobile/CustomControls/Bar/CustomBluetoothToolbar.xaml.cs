@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WiseMobile.Helper;
-using WiseMobile.Models.CommonModels;
-using WiseMobile.Models.CommonModels.Enums;
-using WiseMobile.Models.CommonModels.ViewParamModels;
-using WiseMobile.Services.Bluetooth;
-using WiseMobile.Services.Dialog;
-using WiseMobile.Services.Navigation;
-using WiseMobile.ViewModels.Base;
-using WiseMobile.ViewModels.Pages.Main.Settings;
+using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Services.Bluetooth;
+using ProsysMobile.Services.Dialog;
+using ProsysMobile.Services.Navigation;
+using ProsysMobile.ViewModels.Base;
+using ProsysMobile.ViewModels.Pages.Main.Settings;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Bar
+namespace ProsysMobile.CustomControls.Bar
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomBluetoothToolbar : PancakeView

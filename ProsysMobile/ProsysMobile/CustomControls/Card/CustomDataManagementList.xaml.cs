@@ -2,7 +2,7 @@
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Card
+namespace ProsysMobile.CustomControls.Card
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomDataManagementList : PancakeView

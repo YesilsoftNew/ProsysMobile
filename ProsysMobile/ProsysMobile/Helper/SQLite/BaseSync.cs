@@ -4,10 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using WiseMobile.Helper;
-using WiseMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Helper;
+using ProsysMobile.Models.APIModels.ResponseModels;
 
-namespace WiseMobile.Helper.SQLite
+namespace ProsysMobile.Helper.SQLite
 {
     public class BaseSync
     {

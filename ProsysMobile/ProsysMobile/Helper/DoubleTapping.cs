@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     public struct DoubleTapping
     {

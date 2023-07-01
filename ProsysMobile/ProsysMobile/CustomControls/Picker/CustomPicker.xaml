@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <yummy:PancakeView xmlns="http://xamarin.com/schemas/2014/forms"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                   xmlns:effects="clr-namespace:WiseMobile.Renderer"
+                   xmlns:effects="clr-namespace:ProsysMobile.Renderer"
                    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-                   x:Class="WiseMobile.CustomControls.Picker.CustomPicker"
+                   x:Class="ProsysMobile.CustomControls.Picker.CustomPicker"
                    Style="{DynamicResource Controls.TextFields.LighterBorder}"
                    HorizontalOptions="FillAndExpand" 
                    VerticalOptions="FillAndExpand"

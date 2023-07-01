@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
 	public interface ISwipeCallBack
 	{

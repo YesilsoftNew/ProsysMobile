@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls
+namespace ProsysMobile.CustomControls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomSwitch : Grid

@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
-using WiseMobile.Pages.System;
-using WiseMobile.Themes.Views;
+using ProsysMobile.Helper;
+using ProsysMobile.Pages.System;
+using ProsysMobile.Themes.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Bar
+namespace ProsysMobile.CustomControls.Bar
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomBackDropToolbarPrimary : PancakeView

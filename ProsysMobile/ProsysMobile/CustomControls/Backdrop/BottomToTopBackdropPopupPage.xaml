@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <backdrop:BackdropPage
-    x:Class="WiseMobile.CustomControls.Backdrop.BottomToTopBackdropPopupPage"
+    x:Class="ProsysMobile.CustomControls.Backdrop.BottomToTopBackdropPopupPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-    xmlns:backdrop="clr-namespace:WiseMobile.CustomControls.Backdrop"
+    xmlns:backdrop="clr-namespace:ProsysMobile.CustomControls.Backdrop"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"

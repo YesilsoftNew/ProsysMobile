@@ -1,10 +1,10 @@
 ﻿using System;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Entry
+namespace ProsysMobile.CustomControls.Entry
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomDecimalEntry : AbsoluteLayout

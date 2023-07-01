@@ -4,7 +4,7 @@ using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
 using static Xamarin.CommunityToolkit.UI.Views.TabView;
 
-namespace WiseMobile.Converters
+namespace ProsysMobile.Converters
 {
     public class TabSelectionChangedEventArgsConverter : IValueConverter
     {

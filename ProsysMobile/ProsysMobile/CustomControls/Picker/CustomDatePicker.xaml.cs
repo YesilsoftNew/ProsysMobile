@@ -6,7 +6,7 @@ using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using Xamarin.Forms.Xaml;
 using Application = Xamarin.Forms.Application;
 
-namespace WiseMobile.CustomControls.Picker
+namespace ProsysMobile.CustomControls.Picker
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomDatePicker : PancakeView

@@ -3,7 +3,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.CustomControls.Button
+namespace ProsysMobile.CustomControls.Button
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomStandardImageButton : ImageButton

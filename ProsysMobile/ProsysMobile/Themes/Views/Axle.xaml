@@ -1,5 +1,5 @@
 ﻿<ResourceDictionary
-    x:Class="WiseMobile.Themes.Views.Axle"
+    x:Class="ProsysMobile.Themes.Views.Axle"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">

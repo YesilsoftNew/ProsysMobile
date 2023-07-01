@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace WiseMobile.Helper.SQLite
+namespace ProsysMobile.Helper.SQLite
 {
     public static class Database
     {

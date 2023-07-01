@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Grid xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-      xmlns:converters="clr-namespace:WiseMobile.Converters"
-      xmlns:controls="clr-namespace:WiseMobile.CustomControls"
-      xmlns:controlentriess="clr-namespace:WiseMobile.CustomControls.Entry"
-      x:Class="WiseMobile.CustomControls.Entry.CustomAirPressure"
+      xmlns:converters="clr-namespace:ProsysMobile.Converters"
+      xmlns:controls="clr-namespace:ProsysMobile.CustomControls"
+      xmlns:controlentriess="clr-namespace:ProsysMobile.CustomControls.Entry"
+      x:Class="ProsysMobile.CustomControls.Entry.CustomAirPressure"
       VerticalOptions="FillAndExpand"
       HorizontalOptions="FillAndExpand">
 

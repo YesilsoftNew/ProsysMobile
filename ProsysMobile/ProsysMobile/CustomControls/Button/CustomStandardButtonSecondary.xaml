@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Label xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       x:Class="WiseMobile.CustomControls.Button.CustomStandardButtonSecondary"
+       x:Class="ProsysMobile.CustomControls.Button.CustomStandardButtonSecondary"
        IsEnabled="{Binding IsBusy, Converter={StaticResource Key=doubleTappingConverter}}"
-       xmlns:converters="clr-namespace:WiseMobile.Converters"       
+       xmlns:converters="clr-namespace:ProsysMobile.Converters"       
        x:Name="ItemLabel">
     
     <Label.Resources>

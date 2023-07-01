@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <yummy:PancakeView xmlns="http://xamarin.com/schemas/2014/forms"
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                   xmlns:controlbuttons="clr-namespace:WiseMobile.CustomControls.Button"
+                   xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
                    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-                   x:Class="WiseMobile.CustomControls.Bar.CustomToolbarSecondary"
+                   x:Class="ProsysMobile.CustomControls.Bar.CustomToolbarSecondary"
                    VerticalOptions="FillAndExpand"
                    HorizontalOptions="FillAndExpand"
                    Style="{DynamicResource NavBars.Standart.Title.Border}">

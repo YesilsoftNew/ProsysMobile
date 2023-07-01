@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Reflection;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     static class BitmapExtensions
     {

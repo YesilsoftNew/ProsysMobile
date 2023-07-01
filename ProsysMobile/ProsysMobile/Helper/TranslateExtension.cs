@@ -5,12 +5,12 @@ using System.Resources;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        const string ResourceId = "WiseMobile.Resources.Language.AppResources";
+        const string ResourceId = "ProsysMobile.Resources.Language.AppResources";
 
         static readonly Lazy<ResourceManager> resmgr = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
 

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace WiseMobile.Renderer
+namespace ProsysMobile.Renderer
 {
     public class CustomEntry : Entry
     {

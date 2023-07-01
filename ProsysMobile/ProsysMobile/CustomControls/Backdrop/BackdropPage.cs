@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Forms;
 
-namespace WiseMobile.CustomControls.Backdrop
+namespace ProsysMobile.CustomControls.Backdrop
 {
     public class BackdropPage : Rg.Plugins.Popup.Pages.PopupPage, INotifyPropertyChanged
     {

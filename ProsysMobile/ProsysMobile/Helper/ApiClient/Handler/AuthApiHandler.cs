@@ -11,9 +11,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WiseDynamicMobile.Helper;
-using WiseMobile.Helper;
+using ProsysMobile.Helper;
 
-namespace WiseMobile.Helper.ApiClient.Handler
+namespace ProsysMobile.Helper.ApiClient.Handler
 {
     public class AuthApiHandler : DelegatingHandler
     {

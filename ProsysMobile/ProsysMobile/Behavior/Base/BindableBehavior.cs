@@ -1,7 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace WiseMobile.Behavior.Base
+namespace ProsysMobile.Behavior.Base
 {
     public class BindableBehavior<T> : Behavior<T> where T : BindableObject
     {

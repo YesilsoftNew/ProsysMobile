@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace WiseMobile.Behavior.Base
+namespace ProsysMobile.Behavior.Base
 {
     public class EventToCommandBehavior : BindableBehavior<View>
     {

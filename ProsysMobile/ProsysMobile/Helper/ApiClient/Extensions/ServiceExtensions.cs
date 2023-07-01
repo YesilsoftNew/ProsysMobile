@@ -5,13 +5,13 @@ using System.Diagnostics;
 using System.Text;
 using Polly;
 using Refit;
-using WiseMobile.Endpoints.Auth;
-using WiseMobile.Helper;
-using WiseMobile.Helper.ApiClient.Handler;
-using WiseMobile.Endpoints.General;
-using WiseMobile.Endpoints.Enum;
+using ProsysMobile.Endpoints.Auth;
+using ProsysMobile.Helper;
+using ProsysMobile.Helper.ApiClient.Handler;
+using ProsysMobile.Endpoints.General;
+using ProsysMobile.Endpoints.Enum;
 
-namespace WiseMobile.Helper.ApiClient.Extensions
+namespace ProsysMobile.Helper.ApiClient.Extensions
 {
     public static class ServiceExtensions
     {

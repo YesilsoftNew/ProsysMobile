@@ -1,7 +1,7 @@
 ﻿using SkiaSharp;
 using System;
 
-namespace WiseMobile.Helper
+namespace ProsysMobile.Helper
 {
     class CroppingRectangle
     {
