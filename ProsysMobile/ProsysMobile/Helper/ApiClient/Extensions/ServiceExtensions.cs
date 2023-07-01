@@ -1,15 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
-using Polly;
-using Refit;
-using ProsysMobile.Endpoints.Auth;
-using ProsysMobile.Helper;
-using ProsysMobile.Helper.ApiClient.Handler;
-using ProsysMobile.Endpoints.General;
-using ProsysMobile.Endpoints.Enum;
 
 namespace ProsysMobile.Helper.ApiClient.Extensions
 {

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+    mc:Ignorable="d"
+    xmlns:controls="clr-namespace:WiseMobile.CustomControls"                       
+             xmlns:behaviors="clr-namespace:WiseMobile.Behavior.Base"
+             xmlns:converters="clr-namespace:WiseMobile.Converters"
+             xmlns:views="clr-namespace:WiseMobile.Views"
+             xmlns:viewModelBase="clr-namespace:WiseMobile.ViewModels.Base"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+                 x:Class="WiseMobile.Pages.System.SecondSenkPage">
+
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <BoxView BackgroundColor="Black" AbsoluteLayout.LayoutBounds="1,1,1,1" AbsoluteLayout.LayoutFlags="All" Opacity="0.3"></BoxView>
+        </AbsoluteLayout>
+    </StackLayout>
+</popup:PopupPage>

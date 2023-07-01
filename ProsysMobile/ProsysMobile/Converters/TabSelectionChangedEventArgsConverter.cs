@@ -2,7 +2,6 @@
 using System.Globalization;
 using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Forms;
-using static Xamarin.CommunityToolkit.UI.Views.TabView;
 
 namespace ProsysMobile.Converters
 {

@@ -1,11 +1,11 @@
-﻿using Rg.Plugins.Popup.Animations;
+﻿using ProsysMobile.Helper;
+using Rg.Plugins.Popup.Animations;
 using Rg.Plugins.Popup.Enums;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using ProsysMobile.Helper;
-using ProsysMobile.Pages.System;
+using WiseMobile.Pages.System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

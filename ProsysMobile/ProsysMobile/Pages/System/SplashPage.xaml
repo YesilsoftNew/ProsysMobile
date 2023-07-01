@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:WiseMobile.CustomControls"                       
+             xmlns:behaviors="clr-namespace:WiseMobile.Behavior.Base"
+             xmlns:converters="clr-namespace:WiseMobile.Converters"
+             xmlns:views="clr-namespace:WiseMobile.Views"
+             xmlns:viewModelBase="clr-namespace:WiseMobile.ViewModels.Base"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             x:Class="WiseMobile.Pages.System.SplashPage" BackgroundColor="{DynamicResource Sky.White}">
+
+    <ContentPage.Content>
+        <Image Source="Splash" x:Name="splashImage" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+    </ContentPage.Content>
+</ContentPage>

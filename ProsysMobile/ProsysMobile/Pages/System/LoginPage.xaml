@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:trns="clr-namespace:WiseMobile.Helper"
+             xmlns:renderer="clr-namespace:WiseMobile.Renderer"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             mc:Ignorable="d"
+             xmlns:controls="clr-namespace:WiseMobile.CustomControls"                     
+             xmlns:controlbars="clr-namespace:WiseMobile.CustomControls.Bar"                       
+             xmlns:controlbuttons="clr-namespace:WiseMobile.CustomControls.Button"                       
+             xmlns:controlentriess="clr-namespace:WiseMobile.CustomControls.Entry"                       
+             xmlns:controlpickers="clr-namespace:WiseMobile.CustomControls.Picker"  
+             xmlns:behaviors="clr-namespace:WiseMobile.Behavior.Base"
+             xmlns:converters="clr-namespace:WiseMobile.Converters" 
+             xmlns:viewModelBase="clr-namespace:WiseMobile.ViewModels.Base"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             x:Class="WiseMobile.Pages.System.LoginPage" BackgroundColor="{DynamicResource Sky.White}" >
+
+    <ContentPage.Content>
+        <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="16,0,16,0" BackgroundColor="{DynamicResource Sky.White}" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Image Grid.Row="0" Source="Logo" Aspect="AspectFit" VerticalOptions="Fill" HorizontalOptions="Center" />
+
+            <Label Grid.Row="1" Text="Hoş geldin" Style="{DynamicResource NavBars.Large.Title}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,12,0,4"/>
+
+            <Label Grid.Row="2" Text="Oturum açman için kullanıcı adı ve şifrene ihtiyacımız var, lütfen bilgilerini gir." Style="{DynamicResource NavBars.Large.Caption}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,4,0,12"/>
+
+<!--<<<<<<< HEAD--><!--
+            <controlentriess:CustomEntryPrimary Grid.Row="3" Title="Kullanıcı Adı" Margin="0,16,0,12" Text="{Binding UserName}"/>
+
+            <controlentriess:CustomEntryPrimary Grid.Row="4" Title="Şifre" DisabledImageSource="EyeGray" Text="{Binding Password}" IsPassword="True" Margin="0,12,0,0"/>
+
+            <Label Grid.Row="5" Text="Şifreniz 8 karakterden az olmamalı" Style="{DynamicResource Partials.TextFields.TextTabel1}" TextColor="{DynamicResource Ink.Lighter}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,12,0,32"/>
+
+            <Button Grid.Row="6" Text="Giriş Yap" IsEnabled="True" Style="{DynamicResource Controls.Buttons.Primary}" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Command="{Binding LoginClickCommand}" />
+--><!--=======-->
+            <controlentriess:CustomEntryPrimary Grid.Row="3" Title="Kullanıcı Adı" Text="{Binding UserName}" Margin="0,16,0,12"/>
+
+            <controlentriess:CustomEntryPrimary Grid.Row="4" Title="Şifre" Text="{Binding Password}" DisabledImageSource="EyeGray" IsPassword="True" Margin="0,12,0,0"/>
+
+            <Label Grid.Row="5" Text="Şifreniz 8 karakterden az olmamalı" Style="{DynamicResource Partials.TextFields.TextTabel1}" TextColor="{DynamicResource Ink.Lighter}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,12,0,32"/>
+
+            <Button Grid.Row="6" Text="Giriş Yap" IsEnabled="True" Command="{Binding LoginClickCommand}" Style="{DynamicResource Controls.Buttons.Primary}" VerticalOptions="Start" HorizontalOptions="FillAndExpand" />
+<!-->>>>>>> 3c952ac7e66d69cb711496f340189bd93477eeb9-->
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
