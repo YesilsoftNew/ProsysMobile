@@ -4,9 +4,9 @@ using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms;
 using System.Linq;
 using Android.Graphics;
-using WiseMobile.Renderer;
+using ProsysMobile.Renderer;
 
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
 	public static class BorderRendererVisual
 	{

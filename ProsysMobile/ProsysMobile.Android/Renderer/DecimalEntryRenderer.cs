@@ -15,13 +15,13 @@ using Android.Text;
 using Android.Text.Method;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(CustomDecimalEntry), typeof(WiseMobile.Droid.Renderer.DecimalEntryRenderer))]
-namespace WiseMobile.Droid.Renderer
+[assembly: ExportRenderer(typeof(CustomDecimalEntry), typeof(ProsysMobile.Droid.Renderer.DecimalEntryRenderer))]
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class DecimalEntryRenderer : EntryRenderer

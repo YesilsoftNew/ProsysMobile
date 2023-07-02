@@ -8,12 +8,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Renderer;
+using ProsysMobile.Droid.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(Xamarin.Forms.Button), typeof(WiseMobile.Droid.Renderer.ButtonRenderer))]
-namespace WiseMobile.Droid.Renderer
+[assembly: ExportRenderer(typeof(Xamarin.Forms.Button), typeof(ProsysMobile.Droid.Renderer.ButtonRenderer))]
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class ButtonRenderer : Xamarin.Forms.Platform.Android.ButtonRenderer

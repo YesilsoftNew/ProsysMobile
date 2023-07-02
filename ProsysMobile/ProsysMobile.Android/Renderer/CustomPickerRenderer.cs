@@ -10,13 +10,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(CustomPicker), typeof(CustomPickerRenderer))]
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
     public class CustomPickerRenderer : PickerRenderer
     {

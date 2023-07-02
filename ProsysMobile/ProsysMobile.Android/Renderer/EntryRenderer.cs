@@ -12,13 +12,13 @@ using Android.Runtime;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ExportRenderer(typeof(CustomEntry), typeof(WiseMobile.Droid.Renderer.EntryRenderer))]
-namespace WiseMobile.Droid.Renderer
+[assembly: ExportRenderer(typeof(CustomEntry), typeof(ProsysMobile.Droid.Renderer.EntryRenderer))]
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class EntryRenderer : Xamarin.Forms.Platform.Android.EntryRenderer 

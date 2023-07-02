@@ -9,16 +9,16 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Helper;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using FormsTintImageEffect = WiseMobile.Renderer.TintImageEffect;
+using FormsTintImageEffect = ProsysMobile.Renderer.TintImageEffect;
 
 // Img croplama için kapattım burayı burası kapalı olduğu için çalışmaz suanda
 //[assembly: ResolutionGroupName(WiseDynamicMobile.Renderer.TintImageEffect.GroupName)]
-[assembly: ExportEffect(typeof(TintImageEffect), WiseMobile.Renderer.TintImageEffect.Name)]
-namespace WiseMobile.Droid.Renderer
+[assembly: ExportEffect(typeof(TintImageEffect), ProsysMobile.Renderer.TintImageEffect.Name)]
+namespace ProsysMobile.Droid.Renderer
 {
     public class TintImageEffect : PlatformEffect
     {

@@ -8,14 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(CustomTimePicker), typeof(CustomTimePickerRenderer))]
 
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class CustomTimePickerRenderer : TimePickerRenderer

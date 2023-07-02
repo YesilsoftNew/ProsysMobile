@@ -9,12 +9,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Text;
 using Android.Views;
-using WiseMobile.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android; 
 
-[assembly: ExportRenderer(typeof(CustomDatePicker), typeof(WiseMobile.Droid.Renderer.DatePickerRenderer))]
-namespace WiseMobile.Droid.Renderer
+[assembly: ExportRenderer(typeof(CustomDatePicker), typeof(ProsysMobile.Droid.Renderer.DatePickerRenderer))]
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class DatePickerRenderer : Xamarin.Forms.Platform.Android.DatePickerRenderer

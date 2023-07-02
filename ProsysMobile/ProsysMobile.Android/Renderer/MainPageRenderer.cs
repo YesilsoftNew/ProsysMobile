@@ -12,13 +12,13 @@ using Android.Widget;
 using Android.Support;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android.AppCompat;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms.Platform.Android;
 using Google.Android.Material.Tabs;
 
 [assembly: ExportRenderer(typeof(MainTabbedPage), typeof(MainPageRenderer))]
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class MainPageRenderer : TabbedPageRenderer, TabLayout.IOnTabSelectedListener

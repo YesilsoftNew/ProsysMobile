@@ -12,13 +12,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.CustomControls.Backdrop;
-using WiseMobile.Droid.Renderer;
+using ProsysMobile.CustomControls.Backdrop;
+using ProsysMobile.Droid.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(RoundedCornerStackLayout), typeof(RoundedCornerStackLayoutRenderer))]
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
     public class RoundedCornerStackLayoutRenderer : ViewRenderer
     {

@@ -1,12 +1,12 @@
 ﻿using Android.Graphics;
 using System.ComponentModel;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRendererAttribute(typeof(Border), typeof(BorderRenderer))]
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
     public class BorderRenderer : VisualElementRenderer<Border>
     {

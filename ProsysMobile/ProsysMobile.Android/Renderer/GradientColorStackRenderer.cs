@@ -9,13 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Renderer;
-using WiseMobile.Helper;
+using ProsysMobile.Droid.Renderer;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
 [assembly: ExportRenderer(typeof(GradientColorStack), typeof(GradientColorStackRenderer))]
-namespace WiseMobile.Droid.Renderer
+namespace ProsysMobile.Droid.Renderer
 {
     [Obsolete]
     public class GradientColorStackRenderer : VisualElementRenderer<StackLayout>
