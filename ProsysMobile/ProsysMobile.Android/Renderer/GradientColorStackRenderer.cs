@@ -62,7 +62,7 @@ namespace ProsysMobile.Droid.Renderer
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 System.Diagnostics.Debug.WriteLine(@"ERROR:", ex.Message);
             }

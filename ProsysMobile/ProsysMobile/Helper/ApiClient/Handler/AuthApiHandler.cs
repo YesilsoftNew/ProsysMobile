@@ -140,13 +140,13 @@ namespace ProsysMobile.Helper.ApiClient.Handler
             }
             catch (TaskCanceledException ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 return new HttpResponseMessage(System.Net.HttpStatusCode.RequestTimeout) { Content = new StringContent("Timeout") };
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 return new HttpResponseMessage(System.Net.HttpStatusCode.Conflict) { Content = new StringContent(ex.ToString()) };
             }

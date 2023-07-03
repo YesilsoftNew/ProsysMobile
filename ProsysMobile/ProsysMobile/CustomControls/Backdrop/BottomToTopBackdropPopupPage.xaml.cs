@@ -34,7 +34,7 @@ namespace ProsysMobile.CustomControls.Backdrop
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
 
             SetPanListener();
@@ -204,7 +204,7 @@ namespace ProsysMobile.CustomControls.Backdrop
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
 

@@ -36,7 +36,7 @@ namespace ProsysMobile.Droid.Renderer
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 System.Diagnostics.Debug.WriteLine(
                     $"An error occurred when setting the {typeof(TintImageEffect)} effect: {ex.Message}\n{ex.StackTrace}");

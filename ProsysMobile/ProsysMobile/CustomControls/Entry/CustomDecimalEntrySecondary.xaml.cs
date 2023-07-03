@@ -364,7 +364,7 @@ namespace ProsysMobile.CustomControls.Entry
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
 

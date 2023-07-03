@@ -10,7 +10,7 @@ namespace ProsysMobile.Helper
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        const string ResourceId = "ProsysMobile.Resources.Language.AppResources";
+        const string ResourceId = "ProsysMobile.Resources.Language.Resource";
 
         static readonly Lazy<ResourceManager> resmgr = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
 

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Polly;
+using Refit;
 using System;
 using System.Diagnostics;
 
@@ -12,23 +14,23 @@ namespace ProsysMobile.Helper.ApiClient.Extensions
             try
             {
                 //Auth Api
-                #region Auth Api
-                services.AddRefitClient<IAuthEndpoint>()
-                .ConfigureHttpClient(c =>
-                {
-                    c.BaseAddress = new Uri(GlobalSetting.Instance.BaseEndpoint);
-                    c.Timeout = TimeOut;
-                }).AddTransientHttpErrorPolicy(p => p.RetryAsync())
+                //#region Auth Api
+                //services.AddRefitClient<IAuthEndpoint>()
+                //.ConfigureHttpClient(c =>
+                //{
+                //    c.BaseAddress = new Uri(GlobalSetting.Instance.BaseEndpoint);
+                //    c.Timeout = TimeOut;
+                //}).AddTransientHttpErrorPolicy(p => p.RetryAsync())
                 //.AddHttpMessageHandler(serviceProvider =>
                 //{
                 //    return new AuthApiHandler();
                 //})
                 ;
-                #endregion  
+                //#endregion  
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 Debug.WriteLine(ex.ToString());
             }

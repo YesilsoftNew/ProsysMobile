@@ -112,7 +112,7 @@ namespace ProsysMobile.CustomControls.Button
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 return;
             }

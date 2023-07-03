@@ -309,7 +309,7 @@ namespace ProsysMobile.CustomControls.Picker
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
 
@@ -336,7 +336,7 @@ namespace ProsysMobile.CustomControls.Picker
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
 
@@ -372,7 +372,7 @@ namespace ProsysMobile.CustomControls.Picker
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
 

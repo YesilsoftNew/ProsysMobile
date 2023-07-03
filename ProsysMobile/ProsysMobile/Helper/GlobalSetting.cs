@@ -29,18 +29,14 @@ namespace ProsysMobile.Helper
         #region Api
         public string JWTToken { get; set; } = "";
         public DateTime JWTTokenExpireDate { get; set; }
-        public User User { get; set; }
+        //public User User { get; set; }
         //public string WebAppLink => "http://sprov.wise-dynamic.com/";
         //public string WebAppLink => "http://apimigtest.wise-dynamic.com/";
-        public string WebAppLink => "https://appv2.wise-dynamic.com/";
+        //public string WebAppLink => "https://appv2.wise-dynamic.com/";
         #endregion
 
         #region Other
-        public string WorkOrderProcessCancelledReasonGuid => "CB60DFF4-89C9-4ACA-9413-7CB6F907016B";
-        public decimal threadDepthTolerance = TOOLS.ToDecimal(0.5);
         public string ImageThumbnailPrefix => "thumbnail_";
-        public System.Timers.Timer tmrDataManagement; // bekleyen verileri gondermek icin kullanıyoruz
-        public bool SendWaitingDataProcessRunning { get; set; } // localde gonderilmeyi bekleyen kayıtlar gonderiliyorsa bu alanı true yapıyorum. (bu alanı DataManagement ekranında ve arka planda çalışan otomatik service icerisinde kullanıyoruz)
         #endregion
     }
 }

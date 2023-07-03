@@ -33,7 +33,7 @@ namespace ProsysMobile.Helper
 					}
 					catch (Exception err)
 					{
-                        WiseLogger.Instance.CrashLog(err);
+                        ProsysLogger.Instance.CrashLog(err);
 
                         System.Diagnostics.Debug.WriteLine("" + err.Message);
 					}

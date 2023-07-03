@@ -314,7 +314,7 @@ namespace ProsysMobile.CustomControls.Entry
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
 
             if (EntryTextChanged != null)
@@ -395,7 +395,7 @@ namespace ProsysMobile.CustomControls.Entry
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
     }

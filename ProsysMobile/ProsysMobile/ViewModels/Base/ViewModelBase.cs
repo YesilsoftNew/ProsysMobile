@@ -105,28 +105,28 @@ namespace ProsysMobile.ViewModels.Base
             }
             catch (ApiException ae)
             {
-                WiseLogger.Instance.CrashLog(ae);
+                ProsysLogger.Instance.CrashLog(ae);
 
                 //result.IsSuccess = false;
                 //result.ExceptionMessage = ae.Message; /*ExceptionHelper.ApiEx(ae);*/
             }
             catch (TaskCanceledException tce)
             {
-                WiseLogger.Instance.CrashLog(tce);
+                ProsysLogger.Instance.CrashLog(tce);
 
                 //result.IsSuccess = false;
                 //result.ExceptionMessage = tce.Message; /*Sabit Mesaj Gösterilebilir*/
             }
             catch (TimeoutRejectedException tre)
             {
-                WiseLogger.Instance.CrashLog(tre);
+                ProsysLogger.Instance.CrashLog(tre);
 
                 //result.IsSuccess = false;
                 //result.ExceptionMessage = tre.Message;/*Sabit Mesaj Gösterilebilir*/
             }
             catch (Exception e)
             {
-                WiseLogger.Instance.CrashLog(e);
+                ProsysLogger.Instance.CrashLog(e);
 
                 if (!e.Message.Contains("canceled."))
                 {

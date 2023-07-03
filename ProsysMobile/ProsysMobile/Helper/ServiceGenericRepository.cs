@@ -6,7 +6,7 @@ namespace ProsysMobile.Helper
 {
     public interface IServiceGenericRepository<TEntity> where TEntity : class
     {
-        public static StringBuilder sSQL = new StringBuilder();
+       // public static StringBuilder sSQL = new StringBuilder();
     }
     public class ServiceGenericRepository<TEntity> : IServiceGenericRepository<TEntity> where TEntity : class, new()
     {
