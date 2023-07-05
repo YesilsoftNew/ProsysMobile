@@ -1,6 +1,6 @@
 ﻿using ProsysMobile.Helper;
 using System;
-using WiseDynamicMobile.Helper;
+using ProsysMobile.Helper;
 
 namespace ProsysMobile.Models.APIModels.CommonModels
 {

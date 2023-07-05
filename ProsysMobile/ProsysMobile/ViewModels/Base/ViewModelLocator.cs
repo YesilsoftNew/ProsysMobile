@@ -1,17 +1,15 @@
 ﻿using Autofac;
 using ProsysMobile.CustomControls.Backdrop;
+using ProsysMobile.Handler;
+using ProsysMobile.Helper;
+using ProsysMobile.Selector;
+using ProsysMobile.Services.Base;
+using ProsysMobile.Services.Navigation;
 using Rg.Plugins.Popup.Pages;
 using System;
 using System.Globalization;
 using System.Reflection;
-using ProsysMobile.Handler;
-using ProsysMobile.Helper;
-using ProsysMobile.Pages.Service.Mounting;
-using ProsysMobile.Selector;
-using ProsysMobile.Services.Base;
-using ProsysMobile.Services.Navigation;
 using Xamarin.Forms;
-using WiseDynamicMobile.Helper;
 
 namespace ProsysMobile.ViewModels.Base
 {

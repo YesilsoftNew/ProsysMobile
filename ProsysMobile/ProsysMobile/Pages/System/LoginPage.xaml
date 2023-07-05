@@ -3,21 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:trns="clr-namespace:WiseMobile.Helper"
-             xmlns:renderer="clr-namespace:WiseMobile.Renderer"
+             xmlns:trns="clr-namespace:ProsysMobile.Helper"
+             xmlns:renderer="clr-namespace:ProsysMobile.Renderer"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
-             xmlns:controls="clr-namespace:WiseMobile.CustomControls"                     
-             xmlns:controlbars="clr-namespace:WiseMobile.CustomControls.Bar"                       
-             xmlns:controlbuttons="clr-namespace:WiseMobile.CustomControls.Button"                       
-             xmlns:controlentriess="clr-namespace:WiseMobile.CustomControls.Entry"                       
-             xmlns:controlpickers="clr-namespace:WiseMobile.CustomControls.Picker"  
-             xmlns:behaviors="clr-namespace:WiseMobile.Behavior.Base"
-             xmlns:converters="clr-namespace:WiseMobile.Converters" 
-             xmlns:viewModelBase="clr-namespace:WiseMobile.ViewModels.Base"
+             xmlns:controls="clr-namespace:ProsysMobile.CustomControls"                     
+             xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"                       
+             xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"                       
+             xmlns:controlentriess="clr-namespace:ProsysMobile.CustomControls.Entry"                       
+             xmlns:controlpickers="clr-namespace:ProsysMobile.CustomControls.Picker"  
+             xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
+             xmlns:converters="clr-namespace:ProsysMobile.Converters" 
+             xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-             x:Class="WiseMobile.Pages.System.LoginPage" BackgroundColor="{DynamicResource Sky.White}" >
+             x:Class="ProsysMobile.Pages.System.LoginPage" BackgroundColor="{DynamicResource Sky.White}" >
 
     <ContentPage.Content>
         <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="16,0,16,0" BackgroundColor="{DynamicResource Sky.White}" RowSpacing="0">

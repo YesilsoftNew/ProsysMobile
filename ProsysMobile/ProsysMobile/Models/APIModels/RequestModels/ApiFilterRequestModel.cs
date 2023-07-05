@@ -1,7 +1,4 @@
-﻿using WiseMobile.Helper;
-using WiseMobile.Models.CommonModels.Enums;
-
-namespace WiseMobile.Models.APIModels.RequestModels
+﻿namespace ProsysMobile.Models.APIModels.RequestModels
 {
     public class ApiFilterRequestModel
     {

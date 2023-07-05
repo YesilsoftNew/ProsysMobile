@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using WiseDynamicMobile.Helper;
+using ProsysMobile.Helper;
 using ProsysMobile.Helper;
 
 namespace ProsysMobile.Helper.ApiClient.Handler

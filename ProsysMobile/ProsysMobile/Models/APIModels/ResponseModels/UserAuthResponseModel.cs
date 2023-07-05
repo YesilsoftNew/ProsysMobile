@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WiseMobile.Models.CommonModels.SQLiteModels;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
 
-namespace WiseMobile.Models.APIModels.ResponseModels
+namespace ProsysMobile.Models.APIModels.ResponseModels
 {
     public class UserAuthResponseModel
     {

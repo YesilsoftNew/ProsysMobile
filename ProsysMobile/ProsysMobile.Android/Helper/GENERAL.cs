@@ -1,6 +1,6 @@
 ﻿using Android.Bluetooth;
 
-namespace WiseMobile.Droid.Helper
+namespace ProsysMobile.Droid.Helper
 {
     public static class GENERAL
     {

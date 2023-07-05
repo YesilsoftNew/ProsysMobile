@@ -1,12 +1,14 @@
-﻿using Plugin.Multilingual;
+﻿using Plugin.Connectivity;
+using Plugin.Multilingual;
 using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Resources.Language;
 using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
 
-namespace WiseDynamicMobile.Helper
+namespace ProsysMobile.Helper
 {
     public static class TOOLS
     {

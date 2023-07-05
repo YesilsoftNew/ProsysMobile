@@ -1,6 +1,5 @@
-﻿using System;
-using WiseDynamicMobile.Helper;
-using ProsysMobile.Helper;
+﻿using ProsysMobile.Helper;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

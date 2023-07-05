@@ -3,7 +3,7 @@ using Refit;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WiseDynamicMobile.Helper;
+using ProsysMobile.Helper;
 using ProsysMobile.Helper;
 using ProsysMobile.Services.Dialog;
 using ProsysMobile.Services.Navigation;
@@ -15,7 +15,7 @@ namespace ProsysMobile.ViewModels.Base
     public class ViewModelBase : ExtendedBindableObject
     {
         private bool _isBusy;
-        
+
         double time;
 
         public bool IsBusy
@@ -55,7 +55,7 @@ namespace ProsysMobile.ViewModels.Base
 
         protected readonly IDialogService DialogService;
         protected readonly INavigationService NavigationService;
-        
+
         public ViewModelBase()
         {
             DialogService = ViewModelLocator.Resolve<IDialogService>();
@@ -73,7 +73,7 @@ namespace ProsysMobile.ViewModels.Base
 
         //    IsInternetConnectionAvailable = GlobalSetting.Instance.IsInternetConnectionAvailable;
         //}
-         
+
         public virtual Task InitializeAsync(object navigationData)
         {
             return Task.FromResult(false);
@@ -90,18 +90,9 @@ namespace ProsysMobile.ViewModels.Base
         {
             var result = Activator.CreateInstance<T>(); //or default(T)
             try
-            {
-                if (GlobalSetting.Instance.IsInternetConnectionAvailable)
-                {
-                    if (showLoading) IsBusy = true;
-                    result = await task;
-                    //result.IsSuccess = true;
-                }
-                else
-                {
-                    //result.IsSuccess = false;
-                    //result.ExceptionMessage =   /*Sabit Mesaj Gösterilebilir*/;
-                }
+            { // TODO : DOUBLETAPPİNG 
+                if (showLoading) IsBusy = true;
+                result = await task;
             }
             catch (ApiException ae)
             {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
-using WiseDynamicMobile.Helper;
+using ProsysMobile.Helper;
 
 namespace ProsysMobile.Helper
 {

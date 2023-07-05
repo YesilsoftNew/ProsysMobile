@@ -11,12 +11,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using WiseMobile.Droid.Helper;
-using WiseMobile.Helper;
+using ProsysMobile.Droid.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(MediaService))]
-namespace WiseMobile.Droid.Helper
+namespace ProsysMobile.Droid.Helper
 {
     class MediaService : IMediaService
     {
@@ -33,7 +33,7 @@ namespace WiseMobile.Droid.Helper
             }
             catch (System.Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 return imageData;
             }
@@ -52,7 +52,7 @@ namespace WiseMobile.Droid.Helper
             }
             catch (System.Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 return new byte[0];
             }

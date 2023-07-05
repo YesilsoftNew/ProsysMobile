@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace WiseMobile.Models.CommonModels
+namespace ProsysMobile.Models.CommonModels
 {
     public class NavigationModel<T>
     {

@@ -1,9 +1,9 @@
 ﻿using Xamarin.Forms;
-using WiseMobile.Droid.Helper;
-using WiseMobile.Helper;
+using ProsysMobile.Droid.Helper;
+using ProsysMobile.Helper;
 
 [assembly: Dependency(typeof(AndroidRendererResolver))]
-namespace WiseMobile.Droid.Helper
+namespace ProsysMobile.Droid.Helper
 {
     public class AndroidRendererResolver : IRendererResolver
     {

@@ -9,12 +9,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using WiseMobile.Droid.Helper;
-using WiseMobile.Helper;
+using ProsysMobile.Droid.Helper;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 
 [assembly: Dependency(typeof(SettingsApp))]
-namespace WiseMobile.Droid.Helper
+namespace ProsysMobile.Droid.Helper
 {
     public class SettingsApp : ISettings
     {
