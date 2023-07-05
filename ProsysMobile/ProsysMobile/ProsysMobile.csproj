@@ -43,15 +43,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Endpoints\" />
-    <Folder Include="ViewModels\Pages\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Resources\Language\Resource.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Themes\Customs\Borders.xaml.cs">
+      <DependentUpon>Borders.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Themes\Customs\Buttons.xaml.cs">
+      <DependentUpon>Buttons.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Themes\Customs\Labels.xaml.cs">
+      <DependentUpon>Labels.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

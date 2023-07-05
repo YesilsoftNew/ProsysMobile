@@ -11,6 +11,15 @@
     <Color x:Key="Color4">#1167B1</Color>
     <Color x:Key="Color5">#0061A1</Color>
     <Color x:Key="Color6">#A5A5A5</Color>
+
+    <Color x:Key="Black1">#090A0A</Color>
+    
+    <Color x:Key="White1">#FFFFFF</Color>
+    
+    <Color x:Key="Gray1">#656F77</Color>
+    <Color x:Key="Gray2">#72777A</Color>
+
+
     <!--#endregion-->
 
 </ResourceDictionary>

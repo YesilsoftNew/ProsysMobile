@@ -1,6 +1,7 @@
 ﻿using System;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
 
 namespace ProsysMobile.Helper
 {
@@ -30,7 +31,7 @@ namespace ProsysMobile.Helper
         #region Api
         public string JWTToken { get; set; } = "";
         public DateTime JWTTokenExpireDate { get; set; }
-        //public User User { get; set; }
+        public User User { get; set; }
         //public string WebAppLink => "http://sprov.wise-dynamic.com/";
         //public string WebAppLink => "http://apimigtest.wise-dynamic.com/";
         //public string WebAppLink => "https://appv2.wise-dynamic.com/";

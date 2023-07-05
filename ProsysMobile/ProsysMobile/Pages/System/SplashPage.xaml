@@ -13,6 +13,6 @@
              x:Class="ProsysMobile.Pages.System.SplashPage" BackgroundColor="{DynamicResource Sky.White}">
 
     <ContentPage.Content>
-        <Image Source="Splash" x:Name="splashImage" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
+        <Image Source="icon" x:Name="splashImage" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>
     </ContentPage.Content>
 </ContentPage>

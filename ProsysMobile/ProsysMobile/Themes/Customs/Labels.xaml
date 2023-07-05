@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="ProsysMobile.Themes.Customs.Labels"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="Header1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black1}" />
+        <Setter Property="FontFamily" Value="poppins_semi_bold" />
+        <Setter Property="FontSize" Value="{DynamicResource Title3}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="Description1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray1}" />
+        <Setter Property="FontFamily" Value="poppins_regular" />
+        <Setter Property="FontSize" Value="{DynamicResource Small}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="Caption1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray2}" />
+        <Setter Property="FontFamily" Value="poppins_regular" />
+        <Setter Property="FontSize" Value="{DynamicResource Tiny}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="TextField1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black1}" />
+        <Setter Property="FontFamily" Value="poppins_black" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="Link1" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Color5}" />
+        <Setter Property="FontFamily" Value="poppins_regular" />
+        <Setter Property="FontSize" Value="{DynamicResource Small}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
+</ResourceDictionary>

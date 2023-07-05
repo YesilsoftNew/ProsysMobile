@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using ProsysMobile.Helper;
+using ProsysMobile.ViewModels.Base;
+using ProsysMobile.ViewModels.Pages.System;
+using Xamarin.Forms;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
 [assembly: ExportFont("poppins_black_italic.ttf", Alias = "poppins_black_italic")]
@@ -23,11 +26,18 @@ namespace ProsysMobile
 {
     public partial class App : Application
     {
+        public static string Prosys_Api = "ysın";   // dev test
+
         public App()
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            GlobalSetting.Instance.PagesPath = "Pages";
+            GlobalSetting.Instance.ViewsPath = "Views";
+            GlobalSetting.Instance.ViewModelPath = "ViewModels";
+            GlobalSetting.Instance.BaseEndpoint = Prosys_Api;
+
+            ViewModelLocator.Init<SplashPageViewModel>();
         }
 
         protected override void OnStart()

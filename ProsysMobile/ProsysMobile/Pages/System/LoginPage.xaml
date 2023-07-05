@@ -3,26 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:trns="clr-namespace:ProsysMobile.Helper"
-             xmlns:renderer="clr-namespace:ProsysMobile.Renderer"
+             xmlns:controlentriess="clr-namespace:ProsysMobile.CustomControls.Entry"
+             xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
-             xmlns:controls="clr-namespace:ProsysMobile.CustomControls"                     
-             xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"                       
-             xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"                       
-             xmlns:controlentriess="clr-namespace:ProsysMobile.CustomControls.Entry"                       
-             xmlns:controlpickers="clr-namespace:ProsysMobile.CustomControls.Picker"  
-             xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
-             xmlns:converters="clr-namespace:ProsysMobile.Converters" 
-             xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
-             x:Class="ProsysMobile.Pages.System.LoginPage" BackgroundColor="{DynamicResource Sky.White}" >
+             x:Class="ProsysMobile.Pages.System.LoginPage" BackgroundColor="{DynamicResource White1}" >
 
     <ContentPage.Content>
-        <Grid VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" Margin="16,0,16,0" BackgroundColor="{DynamicResource Sky.White}" RowSpacing="0">
+        <Grid VerticalOptions="StartAndExpand"
+              HorizontalOptions="FillAndExpand"
+              Margin="16,5,16,5" 
+              BackgroundColor="{DynamicResource White1}"
+              RowSpacing="24">
+
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
@@ -31,29 +27,83 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Source="Logo" Aspect="AspectFit" VerticalOptions="Fill" HorizontalOptions="Center" />
+            <Image Grid.Row="0"
+                   Source="Logo"
+                   Aspect="AspectFit"
+                   VerticalOptions="Fill" 
+                   HorizontalOptions="Center" />
 
-            <Label Grid.Row="1" Text="Hoş geldin" Style="{DynamicResource NavBars.Large.Title}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,12,0,4"/>
+            <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
 
-            <Label Grid.Row="2" Text="Oturum açman için kullanıcı adı ve şifrene ihtiyacımız var, lütfen bilgilerini gir." Style="{DynamicResource NavBars.Large.Caption}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,4,0,12"/>
+                <Label Grid.Row="0"
+                       Text="Welcome" 
+                       Style="{DynamicResource NavBars.Large.Title}"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="StartAndExpand"
+                       HorizontalTextAlignment="Start"
+                       Margin="0,12,0,4"/>
 
-<!--<<<<<<< HEAD--><!--
-            <controlentriess:CustomEntryPrimary Grid.Row="3" Title="Kullanıcı Adı" Margin="0,16,0,12" Text="{Binding UserName}"/>
+                <Label Grid.Row="1"
+                       Text="To register, please fill in the information."
+                       Style="{DynamicResource NavBars.Large.Caption}"
+                       VerticalOptions="FillAndExpand"
+                       HorizontalOptions="StartAndExpand" 
+                       HorizontalTextAlignment="Start" 
+                       Margin="0,4,0,12"/>
 
-            <controlentriess:CustomEntryPrimary Grid.Row="4" Title="Şifre" DisabledImageSource="EyeGray" Text="{Binding Password}" IsPassword="True" Margin="0,12,0,0"/>
+            </Grid>
 
-            <Label Grid.Row="5" Text="Şifreniz 8 karakterden az olmamalı" Style="{DynamicResource Partials.TextFields.TextTabel1}" TextColor="{DynamicResource Ink.Lighter}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,12,0,32"/>
 
-            <Button Grid.Row="6" Text="Giriş Yap" IsEnabled="True" Style="{DynamicResource Controls.Buttons.Primary}" VerticalOptions="Start" HorizontalOptions="FillAndExpand" Command="{Binding LoginClickCommand}" />
---><!--=======-->
-            <controlentriess:CustomEntryPrimary Grid.Row="3" Title="Kullanıcı Adı" Text="{Binding UserName}" Margin="0,16,0,12"/>
+            <controlentriess:CustomEntryPrimary Grid.Row="2" 
+                                                Title="Email" 
+                                                Text="{Binding UserName}"
+                                                Margin="0,16,0,12"/>
 
-            <controlentriess:CustomEntryPrimary Grid.Row="4" Title="Şifre" Text="{Binding Password}" DisabledImageSource="EyeGray" IsPassword="True" Margin="0,12,0,0"/>
+            <controlentriess:CustomEntryPrimary Grid.Row="3" 
+                                                Title="Password" 
+                                                Text="{Binding Password}"
+                                                DisabledImageSource="EyeOff"
+                                                IsPassword="True" 
+                                                Margin="0,12,0,0"/>
 
-            <Label Grid.Row="5" Text="Şifreniz 8 karakterden az olmamalı" Style="{DynamicResource Partials.TextFields.TextTabel1}" TextColor="{DynamicResource Ink.Lighter}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Start" Margin="0,12,0,32"/>
+            <Button Grid.Row="4"
+                    Text="Sign in"
+                    IsEnabled="True" 
+                    Command="{Binding LoginClickCommand}"
+                    Style="{DynamicResource Button.Primary}" 
+                    VerticalOptions="Start" 
+                    HorizontalOptions="FillAndExpand" />
 
-            <Button Grid.Row="6" Text="Giriş Yap" IsEnabled="True" Command="{Binding LoginClickCommand}" Style="{DynamicResource Controls.Buttons.Primary}" VerticalOptions="Start" HorizontalOptions="FillAndExpand" />
-<!-->>>>>>> 3c952ac7e66d69cb711496f340189bd93477eeb9-->
+            <Grid Grid.Row="5" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Column="0" 
+                   Text="Don't have an account?" 
+                   Style="{DynamicResource Description1}"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="EndAndExpand"
+                   HorizontalTextAlignment="End"/>
+
+                <Label Grid.Column="1"
+                       Text="Register"
+                       Style="{DynamicResource Link1}"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="StartAndExpand"
+                       HorizontalTextAlignment="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding RegisterClickCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+            </Grid>
+
 
         </Grid>
     </ContentPage.Content>
