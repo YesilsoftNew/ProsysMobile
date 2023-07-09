@@ -32,7 +32,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             if (Debugger.IsAttached)
             {
-                UserName = "yiyi";
+                UserName = "yiyi"; 
                 Password = "6161";
             }
 
@@ -53,6 +53,8 @@ namespace ProsysMobile.ViewModels.Pages.System
             try
             {
                 //await GetUserAuthAsync();
+                
+                //NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
             {

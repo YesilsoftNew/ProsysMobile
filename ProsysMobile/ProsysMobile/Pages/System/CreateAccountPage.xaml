@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<backdrop:CustomBackdrop xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:backdrop="clr-namespace:ProsysMobile.Models"
+                         xmlns:controlentries="clr-namespace:ProsysMobile.CustomControls.Entry"
+                         x:Class="ProsysMobile.Pages.System.CreateAccountPage">
+    <backdrop:CustomBackdrop.PageContent>
+        <ContentView>
+            <Grid
+                RowSpacing="16"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="AUTO"/>
+                </Grid.RowDefinitions>
+                
+                <controlentries:CustomEntryPrimary Grid.Row="0" 
+                                                    Title="FirstName QQQ" 
+                                                    Text="{Binding FirstName}"/>
+                
+                <controlentries:CustomEntryPrimary Grid.Row="0" 
+                                                   Title="Surname QQQ" 
+                                                   Text="{Binding Surname}"/>
+                
+                <controlentries:CustomEntryPrimary Grid.Row="0" 
+                                                   Title="CompanyCode QQQ" 
+                                                   Text="{Binding CompanyCode}"/>
+                
+                <controlentries:CustomEntryPrimary Grid.Row="0" 
+                                                   Title="Email QQQ" 
+                                                   Text="{Binding Email}"/>
+                
+            </Grid>
+        </ContentView>
+    </backdrop:CustomBackdrop.PageContent>
+</backdrop:CustomBackdrop>
