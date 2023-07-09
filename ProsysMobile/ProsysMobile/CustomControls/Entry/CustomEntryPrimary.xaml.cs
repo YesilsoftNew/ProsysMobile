@@ -112,19 +112,19 @@ namespace ProsysMobile.CustomControls.Entry
             set { SetValue(HorizontalTextAlignmentProperty, value); }
         }
 
-        /// <summary>
-        /// VerticalTextAlignment Property
-        /// </summary>
-        public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create(nameof(VerticalTextAlignment), typeof(TextAlignment), typeof(CustomEntryPrimary), TextAlignment.Center, Xamarin.Forms.BindingMode.OneWay);
+        ///// <summary>
+        ///// VerticalTextAlignment Property
+        ///// </summary>
+        //public static readonly BindableProperty VerticalTextAlignmentProperty = BindableProperty.Create(nameof(VerticalTextAlignment), typeof(TextAlignment), typeof(CustomEntryPrimary), TextAlignment.Center, Xamarin.Forms.BindingMode.OneWay);
 
-        /// <summary>
-        /// VerticalTextAlignment
-        /// </summary>
-        public TextAlignment VerticalTextAlignment
-        {
-            get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
-            set { SetValue(VerticalTextAlignmentProperty, value); }
-        }
+        ///// <summary>
+        ///// VerticalTextAlignment
+        ///// </summary>
+        //public TextAlignment VerticalTextAlignment
+        //{
+        //    get { return (TextAlignment)GetValue(VerticalTextAlignmentProperty); }
+        //    set { SetValue(VerticalTextAlignmentProperty, value); }
+        //}
 
         /// <summary>
         /// IsDisabled Property
@@ -277,7 +277,7 @@ namespace ProsysMobile.CustomControls.Entry
                 ItemEntry.Keyboard = Keyboard;
                 ItemEntry.Text = Text;
                 ItemEntry.Placeholder = Placeholder;
-                ItemEntry.VerticalTextAlignment = VerticalTextAlignment;
+                //ItemEntry.VerticalTextAlignment = VerticalTextAlignment;
                 ItemEntry.HorizontalTextAlignment = HorizontalTextAlignment;
                 ItemImage.Source = DisabledImageSource;
                 ItemEntry.ReturnCommandParameter = ReturnCommandParameter;
@@ -384,10 +384,10 @@ namespace ProsysMobile.CustomControls.Entry
                 {
                     ItemEntry.HorizontalTextAlignment = HorizontalTextAlignment;
                 }
-                else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
-                {
-                    ItemEntry.VerticalTextAlignment = VerticalTextAlignment;
-                }
+                //else if (propertyName == VerticalTextAlignmentProperty.PropertyName)
+                //{
+                //    ItemEntry.VerticalTextAlignment = VerticalTextAlignment;
+                //}
                 else if (propertyName == IsDisabledProperty.PropertyName)
                 {
                     CheckIsDisabled();
