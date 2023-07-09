@@ -162,34 +162,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\EyeOff.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-hdpi\Logo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\EyeOff.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-mdpi\Logo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\EyeOff.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Close.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xhdpi\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\EyeOff.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxhdpi\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\EyeOff.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\mipmap-xxxhdpi\Logo.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

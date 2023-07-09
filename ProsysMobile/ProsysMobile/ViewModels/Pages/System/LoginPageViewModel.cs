@@ -54,7 +54,6 @@ namespace ProsysMobile.ViewModels.Pages.System
             {
                 //await GetUserAuthAsync();
 
-                NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
             {
@@ -66,7 +65,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                //await GetUserAuthAsync();
+                NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
             {

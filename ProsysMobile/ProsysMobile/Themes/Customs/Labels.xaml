@@ -2,6 +2,7 @@
 <ResourceDictionary
     x:Class="ProsysMobile.Themes.Customs.Labels"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:effects="clr-namespace:ProsysMobile.Renderer"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
     <Style x:Key="Header1" TargetType="Label">
@@ -28,12 +29,17 @@
         <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
     </Style>
 
-    <Style x:Key="TextField1" TargetType="Label">
+    <Style x:Key="TextField1" TargetType="effects:CustomEntry">
         <Setter Property="TextColor" Value="{DynamicResource Black1}" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
         <Setter Property="FontFamily" Value="poppins_black" />
         <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontAttributes" Value="None" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
-        <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
+        <Setter Property="VerticalTextAlignment" Value="Start" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Black2}" />
+        <Setter Property="Margin" Value="{OnPlatform '16,0,16,4', iOS='8,0,8,4'}" />
     </Style>
 
     <Style x:Key="Link1" TargetType="Label">
@@ -42,6 +48,15 @@
         <Setter Property="FontSize" Value="{DynamicResource Small}" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
+    </Style>
+
+    <Style x:Key="Header2" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black1}" />
+        <Setter Property="FontFamily" Value="poppins_semi_bold" />
+        <Setter Property="FontSize" Value="{DynamicResource Large}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Padding" Value="16" />
     </Style>
 
 </ResourceDictionary>

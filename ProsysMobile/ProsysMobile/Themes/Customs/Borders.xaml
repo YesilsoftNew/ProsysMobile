@@ -13,4 +13,17 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>
 
+    <Style x:Key="Border2" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource White1}" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent}" />
+    </Style>
+
+    <Style x:Key="Border3" TargetType="yummy:PancakeView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource White2}" />
+        <Setter Property="Border" Value="{yummy:BorderMarkup Color=Transparent, Thickness=0}" />
+        <Setter Property="HeightRequest" Value="1" />
+    </Style>
+
 </ResourceDictionary>

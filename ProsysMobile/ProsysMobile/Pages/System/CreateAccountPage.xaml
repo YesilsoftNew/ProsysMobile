@@ -1,41 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <backdrop:CustomBackdrop xmlns="http://xamarin.com/schemas/2014/forms"
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                          xmlns:backdrop="clr-namespace:ProsysMobile.Models"
+                         xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
+                         xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
                          xmlns:controlentries="clr-namespace:ProsysMobile.CustomControls.Entry"
+                         xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+                         Style="{DynamicResource Customs.Backdrop.Backdrop}"
+                         IsSetPanListener="True"
                          x:Class="ProsysMobile.Pages.System.CreateAccountPage">
+
     <backdrop:CustomBackdrop.PageContent>
         <ContentView>
-            <Grid
-                RowSpacing="16"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-                
+
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
-                    <RowDefinition Height="AUTO"/>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
-                <controlentries:CustomEntryPrimary Grid.Row="0" 
-                                                    Title="FirstName QQQ" 
-                                                    Text="{Binding FirstName}"/>
-                
-                <controlentries:CustomEntryPrimary Grid.Row="0" 
-                                                   Title="Surname QQQ" 
+
+                <controlbars:CustomBackDropToolbarPrimary 
+                                                            Grid.Row="0"
+                                                            Title="New Account QQQ">
+                    <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
+                    </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
+                </controlbars:CustomBackDropToolbarPrimary>
+
+                <Grid
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    RowSpacing="16"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="16,16,16,0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <controlentries:CustomEntryPrimary 
+                                                   Grid.Row="0" 
+                                                   Title="FirstName QQQ"
+                                                   Text="{Binding FirstName}"/>
+
+                    <controlentries:CustomEntryPrimary 
+                                                   Grid.Row="1" 
+                                                   Title="Surname QQQ"
                                                    Text="{Binding Surname}"/>
-                
-                <controlentries:CustomEntryPrimary Grid.Row="0" 
-                                                   Title="CompanyCode QQQ" 
+
+                    <controlentries:CustomEntryPrimary 
+                                                   Grid.Row="2" 
+                                                   Title="CompanyCode QQQ"
                                                    Text="{Binding CompanyCode}"/>
-                
-                <controlentries:CustomEntryPrimary Grid.Row="0" 
-                                                   Title="Email QQQ" 
+
+                    <controlentries:CustomEntryPrimary 
+                                                   Grid.Row="3" 
+                                                   Title="Email QQQ"
                                                    Text="{Binding Email}"/>
-                
+
+                    <Button 
+                        Grid.Row="4"
+                        Text="Sign up QQQ"
+                        Command="{Binding LoginClickCommand}"
+                        Style="{DynamicResource Button.Primary}" 
+                        VerticalOptions="FillAndExpand" 
+                        HorizontalOptions="FillAndExpand"
+                        Margin="0,16,0,0"/>
+
+                </Grid>
+
             </Grid>
+
         </ContentView>
     </backdrop:CustomBackdrop.PageContent>
+
 </backdrop:CustomBackdrop>
