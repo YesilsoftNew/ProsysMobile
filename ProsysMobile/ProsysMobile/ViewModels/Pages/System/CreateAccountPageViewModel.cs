@@ -4,18 +4,19 @@ using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using System;
 using System.Diagnostics;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
 {
-    public class LoginPageViewModel : ViewModelBase
+    public class CreateAccountPageViewModel : ViewModelBase
     {
         //private IAuthService _authService;
         //private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
 
-        public LoginPageViewModel(/*IAuthService authService, IDefaultSettingsSQLiteService defaultSettingsSQLiteService*/)
+        public CreateAccountPageViewModel(/*IAuthService authService, IDefaultSettingsSQLiteService defaultSettingsSQLiteService*/)
         {
             //_authService = authService;
             //_defaultSettingsSQLiteService = defaultSettingsSQLiteService;
@@ -32,19 +33,27 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             if (Debugger.IsAttached)
             {
-                UserName = "yiyi";
-                Password = "6161";
+                FirstName = "Yasin";
+                Surname = "Altıntop";
+                CompanyCode = "123456";
+                Email = "altintopyasin8@gmail.com";
             }
 
             return base.InitializeAsync(navigationData);
         }
 
         #region Propertys
-        private string _userName;
-        public string UserName { get => _userName; set { _userName = value; PropertyChanged(() => UserName); } }
+        private string _firstName;
+        public string FirstName { get => _firstName; set { _firstName = value; PropertyChanged(() => FirstName); } }
 
-        private string _password;
-        public string Password { get => _password; set { _password = value; PropertyChanged(() => Password); } }
+        private string _surname;
+        public string Surname { get => _surname; set { _surname = value; PropertyChanged(() => Surname); } }
+        
+        private string _companyCode;
+        public string CompanyCode { get => _companyCode; set { _companyCode = value; PropertyChanged(() => CompanyCode); } }
+        
+        private string _email;
+        public string Email { get => _email; set { _email = value; PropertyChanged(() => Email); } }
         #endregion
 
         #region Commands
@@ -53,8 +62,6 @@ namespace ProsysMobile.ViewModels.Pages.System
             try
             {
                 //await GetUserAuthAsync();
-                
-                NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
             {
