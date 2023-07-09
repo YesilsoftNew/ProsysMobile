@@ -4,10 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              mc:Ignorable="d"
-             xmlns:controls="clr-namespace:ProsysMobile.CustomControls"                       
-             xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
-             xmlns:converters="clr-namespace:ProsysMobile.Converters"
-             xmlns:views="clr-namespace:ProsysMobile.Views"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
              x:Class="ProsysMobile.Pages.System.SplashPage" BackgroundColor="{DynamicResource Sky.White}">

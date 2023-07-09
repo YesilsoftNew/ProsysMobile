@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:controlentriess="clr-namespace:ProsysMobile.CustomControls.Entry"
+             xmlns:controlentries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
@@ -58,17 +58,17 @@
             </Grid>
 
 
-            <controlentriess:CustomEntryPrimary Grid.Row="2" 
-                                                Title="Email" 
-                                                Text="{Binding UserName}"
-                                                Margin="0,16,0,12"/>
+            <controlentries:CustomEntryPrimary Grid.Row="2" 
+                                               Title="Email" 
+                                               Text="{Binding UserName}"
+                                               Margin="0,16,0,12"/>
 
-            <controlentriess:CustomEntryPrimary Grid.Row="3" 
-                                                Title="Password" 
-                                                Text="{Binding Password}"
-                                                DisabledImageSource="EyeOff"
-                                                IsPassword="True" 
-                                                Margin="0,12,0,0"/>
+            <controlentries:CustomEntryPrimary Grid.Row="3" 
+                                               Title="Password" 
+                                               Text="{Binding Password}"
+                                               DisabledImageSource="EyeOff"
+                                               IsPassword="True" 
+                                               Margin="0,12,0,0"/>
 
             <Button Grid.Row="4"
                     Text="Sign in"
@@ -101,9 +101,7 @@
                         <TapGestureRecognizer Command="{Binding RegisterClickCommand}"/>
                     </Label.GestureRecognizers>
                 </Label>
-
             </Grid>
-
 
         </Grid>
     </ContentPage.Content>
