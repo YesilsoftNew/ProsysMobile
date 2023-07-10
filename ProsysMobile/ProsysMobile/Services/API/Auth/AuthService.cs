@@ -21,21 +21,21 @@ namespace ProsysMobile.Services.API.Auth
 
         }
 
-        public Task<ServiceBaseResponse<UserAuthResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
+        public Task<ServiceBaseResponse<AuthenticationResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<UserAuthResponseModel>> UserAuthentication(UserAuthRequestModel userAuthRequestModel, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<AuthenticationResponseModel>> UserAuthentication(SignIn signIn, enPriorityType priorityType)
         {
-            ServiceBaseResponse<UserAuthResponseModel> result = null;
-            Task<ServiceBaseResponse<UserAuthResponseModel>> _task = null;
+            ServiceBaseResponse<AuthenticationResponseModel> result = null;
+            Task<ServiceBaseResponse<AuthenticationResponseModel>> _task = null;
             Exception exception = null;
 
             try
             {
                 var _api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                _task = _api.UserAuthentication(userAuthRequestModel);
+                _task = _api.SignIn(signIn);
                 result = await Policy
                           .Handle<ApiException>()
                           .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>

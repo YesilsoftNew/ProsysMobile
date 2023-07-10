@@ -58,7 +58,7 @@
 
             <controlentries:CustomEntryPrimary Grid.Row="2" 
                                                Title="Email" 
-                                               Text="{Binding UserName}"
+                                               Text="{Binding Email}"
                                                Margin="0,16,0,12"/>
 
             <controlentries:CustomEntryPrimary Grid.Row="3" 

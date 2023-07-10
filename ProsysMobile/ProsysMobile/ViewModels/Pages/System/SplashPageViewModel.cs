@@ -31,7 +31,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                User user;
+                USERMOBILE user;
 
                 await Task.Delay(500);
 
