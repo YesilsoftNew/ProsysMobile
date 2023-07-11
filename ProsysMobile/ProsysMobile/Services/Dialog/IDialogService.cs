@@ -27,11 +27,11 @@ namespace ProsysMobile.Services.Dialog
         void ShowLoading(string title = "Lütfen bekleyiniz", MaskType? maskType = null);
         Task<TimePromptResult> TimePromptAsync(TimePromptConfig config, CancellationToken? cancelToken = null);
         Task<TimePromptResult> TimePromptAsync(string title = null, TimeSpan? selectedTime = null, CancellationToken? cancelToken = null);
-        //Task ToastMessage(string message, double duration, bool showOnTop, string icon, Color bgColor, Color msgColor);
+        Task ToastMessage(string message, double duration, bool showOnTop, string icon, Color bgColor, Color msgColor);
 
-        //Task InfoToastMessage(string message);
-        //Task SuccessToastMessage(string message);
-        //Task ErrorToastMessage(string message);
-        //Task WarningToastMessage(string message);
+        Task InfoToastMessage(string message);
+        Task SuccessToastMessage(string message);
+        Task ErrorToastMessage(string message);
+        Task WarningToastMessage(string message);
     }
 }

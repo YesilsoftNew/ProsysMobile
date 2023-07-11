@@ -2,7 +2,7 @@
 using Refit;
 using System;
 using System.Threading.Tasks;
-using ProsysMobile.Endpoints.Auth;
+using ProsysMobile.Endpoints.UserMobile;
 using ProsysMobile.Handler;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
@@ -10,15 +10,17 @@ using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Selector;
 
-namespace ProsysMobile.Services.API.Auth
+namespace ProsysMobile.Services.API.UserMobile
 {
-    public class AuthService : IAuthService
+    public class SignInService : ISignInService
     {
-        private readonly IApiRequest<IAuthEndpoint> _request;
-        private readonly IApiRequestSelector<IAuthEndpoint> _apiRequestSelector;
-        public AuthService(IApiRequest<IAuthEndpoint> request, IApiRequestSelector<IAuthEndpoint> apiRequestSelector)
-        {
+        private readonly IApiRequest<ISignInEndpoint> _request;
+        private readonly IApiRequestSelector<ISignInEndpoint> _apiRequestSelector;
 
+        public SignInService(IApiRequest<ISignInEndpoint> request, IApiRequestSelector<ISignInEndpoint> apiRequestSelector)
+        {
+            _request = request;
+            _apiRequestSelector = apiRequestSelector;
         }
 
         public Task<ServiceBaseResponse<AuthenticationResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
@@ -26,7 +28,7 @@ namespace ProsysMobile.Services.API.Auth
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<AuthenticationResponseModel>> UserAuthentication(SignIn signIn, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<AuthenticationResponseModel>> SignIn(SignIn signIn, enPriorityType priorityType)
         {
             ServiceBaseResponse<AuthenticationResponseModel> result = null;
             Task<ServiceBaseResponse<AuthenticationResponseModel>> _task = null;

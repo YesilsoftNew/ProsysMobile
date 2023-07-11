@@ -3,12 +3,12 @@ using ProsysMobile.Models.APIModels.ResponseModels;
 using Refit;
 using System.Threading.Tasks;
 
-namespace ProsysMobile.Endpoints.Auth
+namespace ProsysMobile.Endpoints.UserMobile
 {
     [Headers("Content-Type : application/json")]
-    public interface IAuthEndpoint
+    public interface ISignUpEndpoint
     {
-        [Post("/api/UserMobile/SignIn")]
-        Task<ServiceBaseResponse<AuthenticationResponseModel>> SignIn(SignIn signIn);
+        [Post("/api/UserMobile/SignUp")]
+        Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto);
     }
 }

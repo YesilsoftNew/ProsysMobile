@@ -1,6 +1,13 @@
-﻿using ProsysMobile.Helper;
+﻿using Plugin.Multilingual;
+using ProsysMobile.Helper;
+using ProsysMobile.Helper.SQLite;
+using ProsysMobile.Models.CommonModels.SQLiteModels;
+using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.System;
+using System;
+using System.IO;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
@@ -38,10 +45,73 @@ namespace ProsysMobile
             GlobalSetting.Instance.BaseEndpoint = Prosys_Api;
 
             ViewModelLocator.Init<SplashPageViewModel>();
+
+            GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet ? true : false;
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+        }
+
+        private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
+        {
+            GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet ? true : false;
         }
 
         protected override void OnStart()
         {
+            #region Appcenter
+            //AppCenter.Start("android=423de8a6-e8b1-4573-8376-fbe549e8b115;" +
+            //                "uwp={Your UWP App secret here};" +
+            //                "ios=08bb9a57-73b6-4e1a-b045-8fa34bae440c;",
+            //                typeof(Analytics), typeof(Crashes));
+            #endregion
+
+            #region SQLite
+            SQLiteDBSync syn = new SQLiteDBSync();
+            syn.SQLiteCreateTable();
+
+            try
+            {
+                if (!Directory.Exists(GlobalSetting.Instance.ImageFolder))
+                    Directory.CreateDirectory(GlobalSetting.Instance.ImageFolder);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            #endregion
+
+            #region Language
+            try
+            {
+                DefaultSettingsSQLiteService _defaultSettingsSQLiteService = new DefaultSettingsSQLiteService();
+                DefaultSettings defaultSettings = _defaultSettingsSQLiteService.getSettings("Language");
+
+                string DeviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
+                DeviceCultureInfo = DeviceCultureInfo.Substring(0, DeviceCultureInfo.IndexOf("-"));
+
+                if (DeviceCultureInfo == "tr" || DeviceCultureInfo == "en" || DeviceCultureInfo == "de")
+                    GlobalSetting.Instance.AppLanguage = DeviceCultureInfo;
+                else
+                    GlobalSetting.Instance.AppLanguage = "de";
+
+                if (defaultSettings != null)
+                    GlobalSetting.Instance.AppLanguage = defaultSettings.Value;
+
+                if (defaultSettings is null)
+                {
+                    defaultSettings = new DefaultSettings();
+                    defaultSettings.Key = "Language";
+                    defaultSettings.Value = GlobalSetting.Instance.AppLanguage;
+
+                    _defaultSettingsSQLiteService.Save(defaultSettings);
+                }
+
+                TOOLS.setCulture();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            #endregion
         }
 
         protected override void OnSleep()

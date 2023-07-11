@@ -1,8 +1,13 @@
 ﻿using Acr.UserDialogs;
+using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Services.Navigation;
+using ProsysMobile.ViewModels.Pages.System;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using WiseMobile.Models.CommonModels.Enums;
+using Xamarin.Forms;
 
 namespace ProsysMobile.Services.Dialog
 {
@@ -104,99 +109,71 @@ namespace ProsysMobile.Services.Dialog
             return UserDialogs.Instance.TimePromptAsync(title, selectedTime, cancelToken);
         }
 
-        //public async Task ToastMessage(string message, double duration, bool showOnTop, string icon, Color bgColor, Color msgColor)
-        //{
-        //    UserDialogs.Instance.Toast(new ToastConfig(message)
-        //                        .SetBackgroundColor(bgColor)
-        //                        .SetMessageTextColor(msgColor)
-        //                        .SetDuration(TimeSpan.FromSeconds(duration))
-        //                        .SetPosition(showOnTop ? ToastPosition.Top : ToastPosition.Bottom)
-        //                        .SetIcon(icon)
-        //                    //.SetAction(x => x
-        //                    //    .SetText(this.ActionText)
-        //                    //    //.SetTextColor(actionColor)
-        //                    //    .SetAction(() => dialogs.Alert("You clicked the primary toast button"))
-        //                    //)
-        //                    );
-        //}
+        public async Task ToastMessage(string message, double duration, bool showOnTop, string icon, Color bgColor, Color msgColor)
+        {
+            UserDialogs.Instance.Toast(new ToastConfig(message)
+                                .SetBackgroundColor(bgColor)
+                                .SetMessageTextColor(msgColor)
+                                .SetDuration(TimeSpan.FromSeconds(duration))
+                                .SetPosition(showOnTop ? ToastPosition.Top : ToastPosition.Bottom)
+                                .SetIcon(icon)
+                            );
+        }
 
-        //public async Task InfoToastMessage(string message)
-        //{
-        //    NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
-        //    {
-        //        Model = new ToastMessagePageViewParamModel
-        //        {
-        //            MessageText = message,
-        //            ToastMessageType = enToastMessageType.Info
-        //        },
-        //    };
+        public async Task InfoToastMessage(string message)
+        {
+            NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
+            {
+                Model = new ToastMessagePageViewParamModel
+                {
+                    MessageText = message,
+                    ToastMessageType = enToastMessageType.Info
+                },
+            };
 
-        //    _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
+            _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
+        }
 
-        //    //UserDialogs.Instance.Toast(new ToastConfig(message)        
-        //    //    .SetBackgroundColor(Color.FromHex("#C9F0FF"))
-        //    //    .SetMessageTextColor(Color.FromHex("#0065D0"))
-        //    //    .SetPosition(ToastPosition.Top)
-        //    //    .SetIcon("ic_info.png"));
-        //}
+        public async Task SuccessToastMessage(string message)
+        {
+            NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
+            {
+                Model = new ToastMessagePageViewParamModel
+                {
+                    MessageText = message,
+                    ToastMessageType = enToastMessageType.Success
+                },
+            };
 
-        //public async Task SuccessToastMessage(string message)
-        //{
-        //    NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
-        //    {
-        //        Model = new ToastMessagePageViewParamModel
-        //        {
-        //            MessageText = message,
-        //            ToastMessageType = enToastMessageType.Success
-        //        },
-        //    };
+            _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
+        }
 
-        //    _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
-        //    //UserDialogs.Instance.Toast(new ToastConfig(message)
-        //    //    .SetBackgroundColor(Color.FromHex("#ECFCE5"))
-        //    //    .SetMessageTextColor(Color.FromHex("#198155"))
-        //    //    .SetPosition(ToastPosition.Top)
-        //    //    .SetIcon("ic_success.png"));
-        //}
+        public async Task ErrorToastMessage(string message)
+        {
+            NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
+            {
+                Model = new ToastMessagePageViewParamModel
+                {
+                    MessageText = message,
+                    ToastMessageType = enToastMessageType.Error
+                },
+            };
 
-        //public async Task ErrorToastMessage(string message)
-        //{
-        //    NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
-        //    {
-        //        Model = new ToastMessagePageViewParamModel
-        //        {
-        //            MessageText = message,
-        //            ToastMessageType = enToastMessageType.Error
-        //        },
-        //    };
+            _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
+        }
 
-        //    _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
+        public async Task WarningToastMessage(string message)
+        {
+            NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
+            {
+                Model = new ToastMessagePageViewParamModel
+                {
+                    MessageText = message,
+                    ToastMessageType = enToastMessageType.Warning
+                },
+            };
 
-        //    //UserDialogs.Instance.Toast(new ToastConfig(message)
-        //    //        .SetBackgroundColor(Color.FromHex("#FFE5E5"))
-        //    //        .SetMessageTextColor(Color.FromHex("#D3180C"))
-        //    //        .SetPosition(ToastPosition.Top)
-        //    //        .SetIcon("ic_error.png"));
-        //}
-
-        //public async Task WarningToastMessage(string message)
-        //{
-        //    NavigationModel<ToastMessagePageViewParamModel> navigationModel = new NavigationModel<ToastMessagePageViewParamModel>
-        //    {
-        //        Model = new ToastMessagePageViewParamModel
-        //        {
-        //            MessageText = message,
-        //            ToastMessageType = enToastMessageType.Warning
-        //        },
-        //    };
-
-        //    _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
-
-            //UserDialogs.Instance.Toast(new ToastConfig(message)                       
-            //    .SetBackgroundColor(Color.FromHex("#FFEFD7"))
-            //    .SetMessageTextColor(Color.FromHex("#A05E03"))                
-            //    .SetPosition(ToastPosition.Top)
-            //    .SetIcon("ic_warning.png"));
-        //}
+            _navigationService.NavigateToPopupAsync<ToastMessagePageViewModel>(navigationModel);
+        }
     }
 }

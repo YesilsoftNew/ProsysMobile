@@ -1,9 +1,8 @@
 ﻿using ProsysMobile.Helper;
-using ProsysMobile.Helper.ApiClient;
 using ProsysMobile.Helper.SQLite;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
-using ProsysMobile.Services.API.Auth;
+using ProsysMobile.Services.API.UserMobile;
 using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using System;
@@ -19,13 +18,13 @@ namespace ProsysMobile.ViewModels.Pages.System
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        private IAuthService _authService;
+        private ISignInService _signInService;
         private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
 
-        public LoginPageViewModel(IAuthService authService, IDefaultSettingsSQLiteService defaultSettingsSQLiteService)
+        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, ISignInService signInService)
         {
-            _authService = authService;
             _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
+            _signInService = signInService;
 
             //// filo secimi yaparken hata aldıysa login'e dusuruyoruz ordada cift kullanıcı kayıtlı olmasın diye drop&create yapıyoruz
             //Database.SQLConnection.DropTable<User>();
@@ -39,8 +38,8 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             if (Debugger.IsAttached)
             {
-                Email = "uaremines"; 
-                Password = "uaremines";
+                Email = "1string"; 
+                Password = "string";
             }
 
             return base.InitializeAsync(navigationData);
@@ -89,35 +88,37 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 IsBusy = true;
 
-                //if (!GlobalSetting.Instance.IsInternetConnectionAvailable)
-                //{
-                //    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (!GlobalSetting.Instance.IsConnectedInternet)
+                {
+                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //if (string.IsNullOrWhiteSpace(UserName))
-                //{
-                //    DialogService.WarningToastMessage("Lütfen kullanıcı adınızı yazınız!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (string.IsNullOrWhiteSpace(Email))
+                {
+                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //if (string.IsNullOrWhiteSpace(Password))
-                //{
-                //    DialogService.WarningToastMessage("Lütfen şifrenizi yazınız!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (string.IsNullOrWhiteSpace(Password))
+                {
+                    DialogService.WarningToastMessage("Lütfen şifrenizi yazınız! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
                 SignIn signIn = new SignIn();
 
                 signIn.Email = Email;
                 signIn.Password = Password;
                 signIn.DeviceGuid = Guid.NewGuid();
-                signIn.Token = "";
+                signIn.Token = string.Empty;
 
-                var result = await RunSafeApi(ApiClient.Instance.AuthApi.SignIn(signIn));
+                //var result = await RunSafeApi(ApiClient.Instance.AuthApi.SignIn(signIn));
+
+                var result = await _signInService.SignIn(signIn, Models.CommonModels.Enums.enPriorityType.UserInitiated);
 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
@@ -154,8 +155,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                 }
                 else
                 {
-                    //TODO ACILCAK
-                    //DialogService.WarningToastMessage("Kullanıcı adınız veya şifreniz hatalı!");
+                    DialogService.WarningToastMessage("Email veya şifreniz hatalı! QQQ");
                     IsBusy = false;
                     return;
                 }

@@ -40,5 +40,9 @@ namespace ProsysMobile.Helper
         #region Other
         public string ImageThumbnailPrefix => "thumbnail_";
         #endregion
+
+        #region Internet
+        public bool IsConnectedInternet { get; set; }
+        #endregion
     }
 }

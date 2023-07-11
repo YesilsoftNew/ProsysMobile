@@ -239,5 +239,18 @@ namespace ProsysMobile.Helper
                 ProsysLogger.Instance.CrashLog(ex);
             }
         }
+
+        public static bool ConnectionControl()
+        {
+            try
+            {
+                return CrossConnectivity.Current.IsConnected;
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+                return false;
+            }
+        }
     }
 }

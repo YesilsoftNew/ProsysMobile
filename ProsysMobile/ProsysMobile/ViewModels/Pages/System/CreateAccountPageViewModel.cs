@@ -1,10 +1,9 @@
 ﻿using ProsysMobile.Helper;
-using ProsysMobile.Services.API.Auth;
-using ProsysMobile.Services.SQLite;
+using ProsysMobile.Models.APIModels.RequestModels;
+using ProsysMobile.Services.API.UserMobile;
 using ProsysMobile.ViewModels.Base;
 using System;
 using System.Diagnostics;
-using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -13,20 +12,11 @@ namespace ProsysMobile.ViewModels.Pages.System
 {
     public class CreateAccountPageViewModel : ViewModelBase
     {
-        //private IAuthService _authService;
-        //private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
+        private ISignUpService _signUpService;
 
-        public CreateAccountPageViewModel(/*IAuthService authService, IDefaultSettingsSQLiteService defaultSettingsSQLiteService*/)
+        public CreateAccountPageViewModel(ISignUpService signUpService)
         {
-            //_authService = authService;
-            //_defaultSettingsSQLiteService = defaultSettingsSQLiteService;
-
-            //// filo secimi yaparken hata aldıysa login'e dusuruyoruz ordada cift kullanıcı kayıtlı olmasın diye drop&create yapıyoruz
-            //Database.SQLConnection.DropTable<User>();
-            //Database.SQLConnection.DropTable<DefaultSettings>();
-
-            //Database.SQLConnection.CreateTable<User>();
-            //Database.SQLConnection.CreateTable<DefaultSettings>();
+            _signUpService = signUpService;
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -57,23 +47,12 @@ namespace ProsysMobile.ViewModels.Pages.System
         #endregion
 
         #region Commands
-        public ICommand LoginClickCommand => new Command(async () =>
-        {
-            try
-            {
-                //await GetUserAuthAsync();
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-        });
 
         public ICommand RegisterClickCommand => new Command(async () =>
         {
             try
             {
-                //await GetUserAuthAsync();
+                await GetUserSignUpAsync();
             }
             catch (Exception ex)
             {
@@ -82,7 +61,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         });
         #endregion
 
-        async Task GetUserAuthAsync()
+        async Task GetUserSignUpAsync()
         {
             try
             {
@@ -90,83 +69,66 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 IsBusy = true;
 
-                //if (!GlobalSetting.Instance.IsInternetConnectionAvailable)
-                //{
-                //    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (!GlobalSetting.Instance.IsConnectedInternet)
+                {
+                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //if (string.IsNullOrWhiteSpace(UserName))
-                //{
-                //    DialogService.WarningToastMessage("Lütfen kullanıcı adınızı yazınız!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (string.IsNullOrWhiteSpace(FirstName))
+                {
+                    DialogService.WarningToastMessage("Lütfen isminizi yazınız! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //if (string.IsNullOrWhiteSpace(Password))
-                //{
-                //    DialogService.WarningToastMessage("Lütfen şifrenizi yazınız!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (string.IsNullOrWhiteSpace(Surname))
+                {
+                    DialogService.WarningToastMessage("Lütfen soyisminizi yazınız! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //UserAuthRequestModel userModel = new UserAuthRequestModel();
-                //userModel.Username = UserName;
-                //userModel.Password = Password;
-                //userModel.UserType = (int)enAccessTokenUserType.WiseUser;
-                //userModel.DeviceGuid = Guid.NewGuid().ToString();
-                //userModel.Token = "";
+                if (string.IsNullOrWhiteSpace(Email))
+                {
+                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //var result = await RunSafeApi(ApiClient.Instance.AuthApi.UserAuthentication(userModel));
-                ////if (result.ExceptionMessage == "retryTask")
-                ////    result = await RunSafeApi(ApiClient.ApiClient.Instance.AuthApi.UserAuthentication(userModel));
-                //if (result.ResponseData != null && result.IsSuccess)
-                //{
-                //    var jwt = result.ResponseData.Token.ToString();
-                //    var handler = new JwtSecurityTokenHandler();
-                //    var token = handler.ReadJwtToken(jwt);
+                if (string.IsNullOrWhiteSpace(CompanyCode))
+                {
+                    DialogService.WarningToastMessage("Lütfen şirket kodunu yazınız! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
-                //    GlobalSetting.Instance.JWTToken = result.ResponseData.Token.ToString();
-                //    GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
+                UserMobileDto userMobileDto = new UserMobileDto();
+                userMobileDto.FIRSTNAME = FirstName;
+                userMobileDto.SURNAME = Surname;
+                userMobileDto.EMAIL = Email;
+                userMobileDto.COMPANYCODE = CompanyCode;
 
-                //    //Kullanıcı doğrulaması başarılı ise yönlendirme yapılır. Veriler çekilmeye başlar.
-                //    if (result.ResponseData.usersDto != null)
-                //    {
-                //        Database.SQLConnection.Insert(result.ResponseData.usersDto, "OR REPLACE");
-                //        GlobalSetting.Instance.User = result.ResponseData.usersDto;
-                //    }
+                var result = await _signUpService.SignUp(userMobileDto, Models.CommonModels.Enums.enPriorityType.UserInitiated);
 
-                //    NavigationModel<FleetListPageViewParamModel> navigationModel = new NavigationModel<FleetListPageViewParamModel>
-                //    {
-                //        Model = new FleetListPageViewParamModel()
-                //    };
-
-                //    await NavigationService.SetMainPageAsync<FleetListPageViewModel>(true, navigationModel);
-                //    //NavigationService.NavigateToModalAsync<FleetListPageViewModel>(result.ResponseData);
-
-                //    //await NavigationService.SetMainPageAsync<FirstSenkPageViewModel>();
-
-                //    List<DefaultSettings> TokenSettings = new List<DefaultSettings>()
-                //    {
-                //    new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
-                //    new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},
-                //    new DefaultSettings{Key="UserId",Value=GlobalSetting.Instance.User.Id.ToString()}
-                //    };
-
-                //    _defaultSettingsSQLiteService.SaveAll(TokenSettings);
-                //}
-                //else
-                //{
-                //    DialogService.WarningToastMessage("Kullanıcı adınız veya şifreniz hatalı!");
-                //    IsBusy = false;
-                //    return;
-                //}
+                if (result.ResponseData != null && result.IsSuccess)
+                {
+                    DialogService.SuccessToastMessage("Talebiniz gönderildi! QQQ");
+                    NavigationService.NavigatePopBackdropAsync();
+                }
+                else
+                {
+                    DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
+                    IsBusy = false;
+                    return;
+                }
 
                 IsBusy = false;
             }
             catch (Exception ex)
             {
+                DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
                 ProsysLogger.Instance.CrashLog(ex);
                 IsBusy = false;
             }

@@ -67,7 +67,7 @@
                     <Button 
                         Grid.Row="4"
                         Text="Sign up QQQ"
-                        Command="{Binding LoginClickCommand}"
+                        Command="{Binding RegisterClickCommand}"
                         Style="{DynamicResource Button.Primary}" 
                         VerticalOptions="FillAndExpand" 
                         HorizontalOptions="FillAndExpand"

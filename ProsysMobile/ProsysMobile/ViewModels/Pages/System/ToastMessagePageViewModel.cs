@@ -1,18 +1,19 @@
 ﻿using ProsysMobile.Helper;
+using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages.System;
 using ProsysMobile.ViewModels.Base;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using WiseMobile.Models.CommonModels.Enums;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
 {
     public class ToastMessagePageViewModel : ViewModelBase
     {
-        //TODO Toast kullanırsak aç ve düzenle
-
-        //NavigationModel<ToastMessagePageViewParamModel> _toastMessagePageViewParamModel;
+        NavigationModel<ToastMessagePageViewParamModel> _toastMessagePageViewParamModel;
         public ToastMessagePageViewModel()
         {
 
@@ -22,10 +23,10 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                //if (navigationData != null && navigationData is NavigationModel<ToastMessagePageViewParamModel> navigationModel)
-                //    _toastMessagePageViewParamModel = navigationModel;
-                //else
-                //    throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ToastMessagePageViewParamModel!");
+                if (navigationData != null && navigationData is NavigationModel<ToastMessagePageViewParamModel> navigationModel)
+                    _toastMessagePageViewParamModel = navigationModel;
+                else
+                    throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ToastMessagePageViewParamModel!");
 
                 await pageLoad();
             }
@@ -37,55 +38,55 @@ namespace ProsysMobile.ViewModels.Pages.System
 
         async Task pageLoad()
         {
-            //try
-            //{
-            //    IsBusy = true;
+            try
+            {
+                IsBusy = true;
 
-            //    MessageText = _toastMessagePageViewParamModel.Model.MessageText;
+                MessageText = _toastMessagePageViewParamModel.Model.MessageText;
 
-            //    switch (_toastMessagePageViewParamModel.Model.ToastMessageType)
-            //    {
-            //        case Models.CommonModels.Enums.enToastMessageType.Success:
-            //            IconImageSource = "SuccessGreen";
-            //            CloseImageSource = "CloseGreen";
-            //            MessageTextBackColor = Color.FromHex("#ECFCE5");
-            //            MessageTextColor = Color.FromHex("#198155");
-            //            break;
-            //        case Models.CommonModels.Enums.enToastMessageType.Info:
-            //            IconImageSource = "nfoBlue";
-            //            CloseImageSource = "CloseBlue";
-            //            MessageTextBackColor = Color.FromHex("#C9F0FF");
-            //            MessageTextColor = Color.FromHex("#0065D0");
-            //            break;
-            //        case Models.CommonModels.Enums.enToastMessageType.Error:
-            //            IconImageSource = "ErrorRed";
-            //            CloseImageSource = "CloseRed";
-            //            MessageTextBackColor = Color.FromHex("#FFE5E5");
-            //            MessageTextColor = Color.FromHex("#D3180C");
-            //            break;
-            //        case Models.CommonModels.Enums.enToastMessageType.Warning:
-            //            IconImageSource = "WarningYellow";
-            //            CloseImageSource = "CloseYellow";
-            //            MessageTextBackColor = Color.FromHex("#FFEFD7");
-            //            MessageTextColor = Color.FromHex("#A05E03");
-            //            break;
-            //    }
+                switch (_toastMessagePageViewParamModel.Model.ToastMessageType)
+                {
+                    case enToastMessageType.Success:
+                        IconImageSource = "SuccessGreen";
+                        CloseImageSource = "CloseGreen";
+                        MessageTextBackColor = Color.FromHex("#ECFCE5");
+                        MessageTextColor = Color.FromHex("#198155");
+                        break;
+                    case enToastMessageType.Info:
+                        IconImageSource = "nfoBlue";
+                        CloseImageSource = "CloseBlue";
+                        MessageTextBackColor = Color.FromHex("#C9F0FF");
+                        MessageTextColor = Color.FromHex("#0065D0");
+                        break;
+                    case enToastMessageType.Error:
+                        IconImageSource = "ErrorRed";
+                        CloseImageSource = "CloseRed";
+                        MessageTextBackColor = Color.FromHex("#FFE5E5");
+                        MessageTextColor = Color.FromHex("#D3180C");
+                        break;
+                    case enToastMessageType.Warning:
+                        IconImageSource = "WarningYellow";
+                        CloseImageSource = "CloseYellow";
+                        MessageTextBackColor = Color.FromHex("#FFEFD7");
+                        MessageTextColor = Color.FromHex("#A05E03");
+                        break;
+                }
 
-            //    _ = Task.Delay(3000).ContinueWith(async _ =>
-            //    {
-            //        //if (IsClosedPage) return;
+                _ = Task.Delay(3000).ContinueWith(async _ =>
+                {
+                    //if (IsClosedPage) return;
 
-            //        //IsClosedPage = true;
-            //        NavigationService.RemovePopupAsync(new ToastMessagePage());
-            //    });
+                    //IsClosedPage = true;
+                    NavigationService.RemovePopupAsync(new ToastMessagePage());
+                });
 
-            //    IsBusy = false;
-            //}
-            //catch (Exception ex)
-            //{
-            //    IsBusy = false;
-            //    ProsysLogger.Instance.CrashLog(ex);
-            //}
+                IsBusy = false;
+            }
+            catch (Exception ex)
+            {
+                IsBusy = false;
+                ProsysLogger.Instance.CrashLog(ex);
+            }
         }
 
         #region Propertys

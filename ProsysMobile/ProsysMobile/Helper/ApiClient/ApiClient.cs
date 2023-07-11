@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using ProsysMobile.Helper.ApiClient.Extensions;
-using ProsysMobile.Endpoints.Auth;
+using ProsysMobile.Endpoints.UserMobile;
 
 namespace ProsysMobile.Helper.ApiClient
 {
@@ -41,8 +41,8 @@ namespace ProsysMobile.Helper.ApiClient
         #endregion
 
         //#region api spesific properties
-        private IAuthEndpoint _AuthApi { get => ServiceProvider.GetRequiredService<IAuthEndpoint>(); }
-        public IAuthEndpoint AuthApi { get => Shared._AuthApi; }
+        //private IAuthEndpoint _AuthApi { get => ServiceProvider.GetRequiredService<IAuthEndpoint>(); }
+        //public IAuthEndpoint AuthApi { get => Shared._AuthApi; }
 
         //#endregion
 
