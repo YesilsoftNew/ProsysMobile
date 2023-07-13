@@ -15,7 +15,7 @@ namespace ProsysMobile.Helper.SQLite
             Database.SQLConnection.CreateTable<DefaultSettings>();
             Database.SQLConnection.CreateTable<USERMOBILE>();
         }
-        public void SQLiteDropTableForLngTables()
+        public void SQLiteDropTable()
         {
             Database.SQLConnection.DropTable<USERMOBILE>();
             Database.SQLConnection.DropTable<DefaultSettings>();

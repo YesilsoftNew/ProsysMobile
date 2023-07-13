@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProsysMobile.Models.CommonModels.SQLiteModels.Base
 {
