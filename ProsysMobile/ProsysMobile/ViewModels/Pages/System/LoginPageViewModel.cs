@@ -64,9 +64,9 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                await NavigationService.SetMainPageAsync<AppShellViewModel>();
+                //await NavigationService.SetMainPageAsync<AppShellViewModel>();
 
-                //NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
+                NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
             {
