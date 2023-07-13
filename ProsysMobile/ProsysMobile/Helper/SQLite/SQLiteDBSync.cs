@@ -12,11 +12,13 @@ namespace ProsysMobile.Helper.SQLite
         public void SQLiteCreateTable()
         {
             //Comment alınanlar değerlendirilip açılacak ya da silinecek - açılacak olanlar için service,endpoint vs. yazılacak
+            Database.SQLConnection.CreateTable<DefaultSettings>();
             Database.SQLConnection.CreateTable<USERMOBILE>();
         }
         public void SQLiteDropTableForLngTables()
         {
             Database.SQLConnection.DropTable<USERMOBILE>();
+            Database.SQLConnection.DropTable<DefaultSettings>();
         }
 
     }
