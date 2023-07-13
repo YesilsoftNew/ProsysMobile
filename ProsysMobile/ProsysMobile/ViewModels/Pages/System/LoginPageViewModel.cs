@@ -25,21 +25,14 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
             _signInService = signInService;
-
-            //// filo secimi yaparken hata aldıysa login'e dusuruyoruz ordada cift kullanıcı kayıtlı olmasın diye drop&create yapıyoruz
-            //Database.SQLConnection.DropTable<User>();
-            //Database.SQLConnection.DropTable<DefaultSettings>();
-
-            //Database.SQLConnection.CreateTable<User>();
-            //Database.SQLConnection.CreateTable<DefaultSettings>();
         }
 
         public override Task InitializeAsync(object navigationData)
         {
             if (Debugger.IsAttached)
             {
-                Email = "1string"; 
-                Password = "string";
+                Email = "test@test.com"; 
+                Password = "Test.1193";
             }
 
             return base.InitializeAsync(navigationData);
@@ -71,7 +64,9 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
+                await NavigationService.SetMainPageAsync<AppShellViewModel>();
+
+                //NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
             {
@@ -122,14 +117,13 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
-                    var jwt = result.ResponseData.SignIn.Token.ToString();
+                    var jwt = result.ResponseData.SignIn.Token;
                     var handler = new JwtSecurityTokenHandler();
                     var token = handler.ReadJwtToken(jwt);
 
-                    GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token.ToString();
+                    GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
                     GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
-
-                    //Kullanıcı doğrulaması başarılı ise yönlendirme yapılır. Veriler çekilmeye başlar.
+                    
                     if (result.ResponseData.UserMobile != null)
                     {
                         Database.SQLConnection.Insert(result.ResponseData.UserMobile, "OR REPLACE");
@@ -140,9 +134,9 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                     List<DefaultSettings> TokenSettings = new List<DefaultSettings>()
                     {
-                    new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
-                    new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},
-                    new DefaultSettings{Key="UserId",Value=GlobalSetting.Instance.User.ID.ToString()}
+                        new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
+                        new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},
+                        new DefaultSettings{Key="UserId",Value=GlobalSetting.Instance.User.ID.ToString()}
                     };
 
                     _defaultSettingsSQLiteService.SaveAll(TokenSettings);

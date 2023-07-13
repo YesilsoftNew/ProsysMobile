@@ -76,7 +76,7 @@
                     VerticalOptions="Start" 
                     HorizontalOptions="FillAndExpand" />
 
-            <Grid Grid.Row="5" VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand" ColumnSpacing="0">
+            <Grid Grid.Row="5" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
@@ -92,6 +92,7 @@
                 <Label Grid.Column="1"
                        Text="Register"
                        Style="{DynamicResource Link1}"
+                       Margin="5,0,0,0"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="StartAndExpand"
                        HorizontalTextAlignment="Start">
