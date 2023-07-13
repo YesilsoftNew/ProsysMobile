@@ -1,4 +1,4 @@
-﻿namespace WiseMobile.Models.CommonModels.Enums
+﻿namespace ProsysMobile.Models.CommonModels.Enums
 {
     public enum enToastMessageType : short
     {

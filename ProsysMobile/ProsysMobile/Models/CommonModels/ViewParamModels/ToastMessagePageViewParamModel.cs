@@ -1,5 +1,5 @@
 ﻿using ProsysMobile.Models.CommonModels.Enums;
-using WiseMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.Enums;
 
 namespace ProsysMobile.Models.CommonModels.ViewParamModels
 {

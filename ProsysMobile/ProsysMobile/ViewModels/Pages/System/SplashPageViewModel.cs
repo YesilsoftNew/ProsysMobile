@@ -31,8 +31,6 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                USERMOBILE user;
-
                 await Task.Delay(500);
 
                 await NavigationService.SetMainPageAsync<LoginPageViewModel>();

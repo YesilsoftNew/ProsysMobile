@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    x:Class="ProsysMobile.Pages.AppShell"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mainPages="clr-namespace:ProsysMobile.Pages.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:trns="clr-namespace:ProsysMobile.Helper"
+    xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+    FlyoutBackgroundColor="#FFFFFF"
+    FlyoutBehavior="Flyout"
+    FlyoutHeaderBehavior="Fixed"
+    mc:Ignorable="d">
+
+    <!--  FlyoutBehavior=Disabled  -->
+
+    <Shell.BackgroundColor>white</Shell.BackgroundColor>
+    <Shell.ForegroundColor>darkgray</Shell.ForegroundColor>
+    <Shell.DisabledColor>#77869E</Shell.DisabledColor>
+    <Shell.TitleColor>#FF681C</Shell.TitleColor>
+    <Shell.UnselectedColor>#77869E</Shell.UnselectedColor>
+    <Shell.TabBarIsVisible>true</Shell.TabBarIsVisible>
+    <Shell.NavBarIsVisible>false</Shell.NavBarIsVisible>
+    <Shell.PresentationMode>Modal</Shell.PresentationMode>
+
+    <!--<Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Label Text="asfsasfas" />
+        </DataTemplate>
+    </Shell.MenuItemTemplate>-->
+
+    <TabBar>
+        <Tab Title="Anasayfa" Icon="anasayfa">
+            <ShellContent>
+                <mainPages:HomePage />
+            </ShellContent>
+        </Tab>
+
+        <Tab Title="Ara" Icon="servis">
+            <ShellContent>
+                <mainPages:FindPage />
+            </ShellContent>
+        </Tab>
+
+        <Tab Title="Sipariş" Icon="depo">
+            <ShellContent>
+                <mainPages:OrderPage />
+            </ShellContent>
+        </Tab>
+
+        <Tab Title="Kullanıcı" Icon="isemirleri">
+            <ShellContent>
+                <mainPages:AccountPage />
+            </ShellContent>
+        </Tab>
+    </TabBar>
+    
+</Shell>

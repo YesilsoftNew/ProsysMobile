@@ -6,7 +6,7 @@ using ProsysMobile.ViewModels.Base;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using WiseMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.Enums;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System

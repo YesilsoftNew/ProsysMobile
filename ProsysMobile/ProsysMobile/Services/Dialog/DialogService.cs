@@ -6,7 +6,7 @@ using ProsysMobile.ViewModels.Pages.System;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using WiseMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.Enums;
 using Xamarin.Forms;
 
 namespace ProsysMobile.Services.Dialog

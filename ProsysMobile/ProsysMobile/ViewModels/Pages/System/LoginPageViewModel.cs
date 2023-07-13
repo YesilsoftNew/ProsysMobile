@@ -136,13 +136,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                         GlobalSetting.Instance.User = result.ResponseData.UserMobile;
                     }
 
-                    //BURDA SAYFA AÇILIYO
-                    //NavigationModel<FleetListPageViewParamModel> navigationModel = new NavigationModel<FleetListPageViewParamModel>
-                    //{
-                    //    Model = new FleetListPageViewParamModel()
-                    //};
-
-                    //await NavigationService.SetMainPageAsync<FirstSenkPageViewModel>();
+                    await NavigationService.SetMainPageAsync<AppShellViewModel>();
 
                     List<DefaultSettings> TokenSettings = new List<DefaultSettings>()
                     {
