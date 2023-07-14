@@ -146,4 +146,49 @@
     <Folder Include="Renderer\" />
     <Folder Include="test\" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Account.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Account%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Account%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Close%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Close%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Find.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Find%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Find%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Home%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Home%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Order%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Order%403x.png" />
+  </ItemGroup>
 </Project>
