@@ -31,7 +31,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             if (Debugger.IsAttached)
             {
-                Email = "test@test.com"; 
+                Email = "test@test.com";
                 Password = "Test.1193";
             }
 
@@ -123,7 +123,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                     GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
                     GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
-                    
+
                     if (result.ResponseData.UserMobile != null)
                     {
                         Database.SQLConnection.Insert(result.ResponseData.UserMobile, "OR REPLACE");
@@ -140,6 +140,8 @@ namespace ProsysMobile.ViewModels.Pages.System
                     };
 
                     _defaultSettingsSQLiteService.SaveAll(TokenSettings);
+
+                    var asdasd = _defaultSettingsSQLiteService.getSettingsAll();
                 }
                 else
                 {

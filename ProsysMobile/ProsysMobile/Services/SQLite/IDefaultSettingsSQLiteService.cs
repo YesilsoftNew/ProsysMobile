@@ -13,6 +13,8 @@ namespace ProsysMobile.Services.SQLite
         void Save(DefaultSettings defaultSettings);
 
         DefaultSettings getSettings(string key);
+        List<DefaultSettings> getSettingsAll();
+
         void Delete(DefaultSettings defaultSettings);
         long? getModifiedDateMax(string modelName);
     }

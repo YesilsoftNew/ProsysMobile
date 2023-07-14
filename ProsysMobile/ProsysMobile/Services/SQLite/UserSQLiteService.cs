@@ -19,7 +19,7 @@ namespace ProsysMobile.Services.SQLite
         {
             sSQL.Clear();
 
-            sSQL.Append(" SELECT * FROM User ");
+            sSQL.Append(" SELECT * FROM USERMOBILE ");
             sSQL.Append(" where Id=" + userId);
 
             var user = Database.SQLConnection.Query<USERMOBILE>(sSQL.ToString()).FirstOrDefault();

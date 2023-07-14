@@ -42,6 +42,8 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 DefaultSettings userDefaultSetting = _defaultSettingsSQLiteService.getSettings("UserId");
 
+                //var aasddfs = _defaultSettingsSQLiteService.getSettingsAll();
+
                 if (!(userDefaultSetting is null))
                 {
                     user = _userSQLiteService.GetUser(TOOLS.ToLong(userDefaultSetting.Value));
@@ -88,12 +90,12 @@ namespace ProsysMobile.ViewModels.Pages.System
                         
                                 userTokenDefaultSetting.Key = "UserToken";
                                 userTokenDefaultSetting.Value = GlobalSetting.Instance.JWTToken;
-                                
+
                                 _defaultSettingsSQLiteService.Save(userTokenDefaultSetting);
-                        
+
                                 userTokenExpiredDateDefaultSetting.Key = "UserTokenExpiredDate";
                                 userTokenExpiredDateDefaultSetting.Value = TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate);
-                                
+
                                 _defaultSettingsSQLiteService.Save(userTokenExpiredDateDefaultSetting);
                             }
                             #endregion

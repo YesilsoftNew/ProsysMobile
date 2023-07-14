@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProsysMobile.Android", "Pro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProsysMobile.iOS", "ProsysMobile\ProsysMobile.iOS\ProsysMobile.iOS.csproj", "{F0EF6031-C858-4203-8871-CEED2E2822AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProsysMobile", "ProsysMobile\ProsysMobile\ProsysMobile.csproj", "{792FEE93-862B-4399-BAAF-D0C8CBD8E547}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProsysMobile", "ProsysMobile\ProsysMobile\ProsysMobile.csproj", "{792FEE93-862B-4399-BAAF-D0C8CBD8E547}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

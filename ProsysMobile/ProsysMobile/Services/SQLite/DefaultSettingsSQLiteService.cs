@@ -8,10 +8,19 @@ using ProsysMobile.Services.Base;
 namespace ProsysMobile.Services.SQLite
 {
     public class DefaultSettingsSQLiteService : SqliteBaseHelper, IDefaultSettingsSQLiteService
-    { 
+    {
         public DefaultSettings getSettings(string key) //TODO nullable
         {
             return Database.SQLConnection.Table<DefaultSettings>().FirstOrDefault(t => t.Key == key);
+        }
+
+        public List<DefaultSettings> getSettingsAll()
+        {
+            sSQL.Clear();
+
+            sSQL.Append(" SELECT * FROM DefaultSettings ");
+
+            return Database.SQLConnection.Query<DefaultSettings>(sSQL.ToString());
         }
 
         public void Delete(DefaultSettings defaultSettings)
@@ -28,7 +37,6 @@ namespace ProsysMobile.Services.SQLite
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
-
             }
         }
 
