@@ -8,6 +8,7 @@ using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Selector;
 using Refit;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ProsysMobile.Services.API.ItemCategory
@@ -28,16 +29,16 @@ namespace ProsysMobile.Services.API.ItemCategory
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<Models.APIModels.ResponseModels.ItemCategory>> ItemCategory(long mainCategoryId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>>> ItemCategory(long mainCategoryId, enPriorityType priorityType)
         {
-            ServiceBaseResponse<Models.APIModels.ResponseModels.ItemCategory> result = null;
-            Task<ServiceBaseResponse<Models.APIModels.ResponseModels.ItemCategory>> _task = null;
+            ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>> result = null;
+            Task<ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>>> _task = null;
             Exception exception = null;
 
             try
             {
                 var _api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                _task = _api.ItemCategory(mainCategoryId);
+                _task = _api.ItemCategory(mainCategoryId, "Bearer " + GlobalSetting.Instance.JWTToken);
 
                 result = await Policy
                           .Handle<ApiException>()
