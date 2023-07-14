@@ -13,6 +13,7 @@
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
     FlyoutBackgroundColor="{DynamicResource White1}"
     mc:Ignorable="d"
+    TabBarTitleColor="Black"
     Background="{DynamicResource White1}"
     ForegroundColor="darkgray"
     DisabledColor="#77869E"

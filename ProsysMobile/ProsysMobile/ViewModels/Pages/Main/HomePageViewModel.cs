@@ -7,8 +7,11 @@ using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.System;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ProsysMobile.Models.APIModels.ResponseModels;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
@@ -29,7 +32,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 try
                 {
                     if (TOOLS.ToInt(arg) == 0)
-                        onload();
+                        pageLoad();
                 }
                 catch (Exception ex)
                 {
@@ -43,13 +46,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
             return base.InitializeAsync(navigationData);
         }
 
-        async Task onload()
+        async Task pageLoad()
         {
-            var result = await _itemCategoryService.ItemCategory(-1, Models.CommonModels.Enums.enPriorityType.UserInitiated);
+            var allCategoryId = -1;
+            
+            var result = await _itemCategoryService.ItemCategory(allCategoryId, Models.CommonModels.Enums.enPriorityType.UserInitiated);
 
             if (result.ResponseData != null && result.IsSuccess)
             {
-                
+                Categories = result.ResponseData;
             }
             else
             {
@@ -58,7 +63,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
         }
 
         #region Propertys
+        private IList<ItemCategory> _categories;
+        public IList<ItemCategory> Categories
+        {
+            get
+            {
+                if (_categories == null)
+                    _categories = new ObservableCollection<ItemCategory>();
 
+                return _categories;
+            }
+            set
+            {
+                _categories = value;
+                PropertyChanged(() => Categories);
+            }
+        }
         #endregion
 
         #region Commands
