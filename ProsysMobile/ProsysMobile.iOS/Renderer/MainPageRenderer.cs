@@ -5,14 +5,14 @@ using System.Text;
 
 using Foundation;
 using UIKit;
-using WiseMobile.Helper;
-using WiseMobile.iOS.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Helper;
+using ProsysMobile.iOS.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(MainTabbedPage), typeof(MainPageRenderer))]
-namespace WiseMobile.iOS.Renderer
+namespace ProsysMobile.iOS.Renderer
 {
    public  class MainPageRenderer : TabbedRenderer
     {

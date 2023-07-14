@@ -5,12 +5,12 @@ using System.Text;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using WiseMobile.iOS.Renderer;
+using ProsysMobile.iOS.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(Frame), typeof(WiseMobile.iOS.Renderer.FrameRenderer))]
-namespace WiseMobile.iOS.Renderer
+[assembly: ExportRenderer(typeof(Frame), typeof(ProsysMobile.iOS.Renderer.FrameRenderer))]
+namespace ProsysMobile.iOS.Renderer
 {
     public class FrameRenderer : Xamarin.Forms.Platform.iOS.FrameRenderer
     {

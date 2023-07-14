@@ -5,15 +5,15 @@ using System.Text;
 
 using Foundation;
 using UIKit;
-using WiseMobile.Helper;
-using WiseMobile.iOS.Renderer;
+using ProsysMobile.Helper;
+using ProsysMobile.iOS.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 using CoreAnimation;
 using CoreGraphics;
 
 [assembly: ExportRenderer(typeof(GradientColorStack), typeof(GradientColorStackRenderer))]
-namespace WiseMobile.iOS.Renderer
+namespace ProsysMobile.iOS.Renderer
 {
     public class GradientColorStackRenderer : VisualElementRenderer<StackLayout>
     {
