@@ -68,6 +68,20 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderer\CustomShellRenderer.cs" />
+    <Compile Include="Renderer\BorderRenderer.cs" />
+    <Compile Include="Renderer\CustomNaviPageRenderer.cs" />
+    <Compile Include="Renderer\CustomPageRenderer.cs" />
+    <Compile Include="Renderer\CustomPickerRenderer.cs" />
+    <Compile Include="Renderer\CustomTimePickerRenderer.cs" />
+    <Compile Include="Renderer\DatePickerRenderer.cs" />
+    <Compile Include="Renderer\DecimalEntryRenderer.cs" />
+    <Compile Include="Renderer\EntryRenderer.cs" />
+    <Compile Include="Renderer\FrameRenderer.cs" />
+    <Compile Include="Renderer\GradientColorStackRenderer.cs" />
+    <Compile Include="Renderer\MainPageRenderer.cs" />
+    <Compile Include="Renderer\RoundedCornerStackLayoutRenderer.cs" />
+    <Compile Include="Renderer\TintImageEffect.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,7 +157,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Renderer\" />
     <Folder Include="test\" />
   </ItemGroup>
   <ItemGroup>

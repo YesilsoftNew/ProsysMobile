@@ -2,13 +2,13 @@
 using CoreGraphics;
 using System.ComponentModel;
 using UIKit;
-using WiseMobile.CustomControls.Backdrop;
-using WiseMobile.iOS.Renderer;
+using ProsysMobile.CustomControls.Backdrop;
+using ProsysMobile.iOS.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(RoundedCornerStackLayout), typeof(RoundedCornerStackLayoutRenderer))]
-namespace WiseMobile.iOS.Renderer
+namespace ProsysMobile.iOS.Renderer
 {
 
     public class RoundedCornerStackLayoutRenderer : ViewRenderer

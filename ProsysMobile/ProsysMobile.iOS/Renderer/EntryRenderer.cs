@@ -5,14 +5,14 @@ using System.Text;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using WiseMobile.Helper;
-using WiseMobile.iOS.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.Helper;
+using ProsysMobile.iOS.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CustomEntry), typeof(WiseMobile.iOS.Renderer.EntryRenderer))]
-namespace WiseMobile.iOS.Renderer
+[assembly: ExportRenderer(typeof(CustomEntry), typeof(ProsysMobile.iOS.Renderer.EntryRenderer))]
+namespace ProsysMobile.iOS.Renderer
 {
     public class EntryRenderer : Xamarin.Forms.Platform.iOS.EntryRenderer
     {

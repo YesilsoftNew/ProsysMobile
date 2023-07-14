@@ -8,11 +8,11 @@ using UIKit;
 using System.Drawing;
 using CoreAnimation;
 using CoreGraphics;
-using WiseMobile.Renderer;
+using ProsysMobile.Renderer;
 
-[assembly: ExportRendererAttribute(typeof(Border), typeof(WiseMobile.iOS.Renderer.BorderRenderer))]
+[assembly: ExportRendererAttribute(typeof(Border), typeof(ProsysMobile.iOS.Renderer.BorderRenderer))]
 
-namespace WiseMobile.iOS.Renderer
+namespace ProsysMobile.iOS.Renderer
 {
     public class BorderRenderer : VisualElementRenderer<Border>
     {

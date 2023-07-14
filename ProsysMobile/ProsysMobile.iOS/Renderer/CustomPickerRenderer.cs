@@ -5,13 +5,13 @@ using System.Text;
 using CoreGraphics;
 using Foundation;
 using UIKit;
-using WiseMobile.iOS.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.iOS.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(CustomPicker), typeof(CustomPickerRenderer))]
-namespace WiseMobile.iOS.Renderer
+namespace ProsysMobile.iOS.Renderer
 {
     public class CustomPickerRenderer : PickerRenderer
     {

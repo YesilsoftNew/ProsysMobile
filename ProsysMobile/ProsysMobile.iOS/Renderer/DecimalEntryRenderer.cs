@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using Foundation;
 using UIKit;
-using WiseMobile.iOS.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.iOS.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CustomDecimalEntry), typeof(WiseMobile.iOS.Renderer.DecimalEntryRenderer))]
-namespace WiseMobile.iOS.Renderer
+[assembly: ExportRenderer(typeof(CustomDecimalEntry), typeof(ProsysMobile.iOS.Renderer.DecimalEntryRenderer))]
+namespace ProsysMobile.iOS.Renderer
 {
     public class DecimalEntryRenderer : EntryRenderer
     {

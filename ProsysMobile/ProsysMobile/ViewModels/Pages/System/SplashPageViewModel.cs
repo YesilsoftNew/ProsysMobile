@@ -16,10 +16,10 @@ namespace ProsysMobile.ViewModels.Pages.System
     public class SplashPageViewModel : ViewModelBase
     {
         private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
-        private IUserSQLiteService _userSQLiteService;
+        private IUserMobileSQLiteService _userSQLiteService;
         private ISignInService _signInService;
 
-        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserSQLiteService userSqLiteService, ISignInService signInService)
+        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService)
         {
             _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
             _userSQLiteService = userSqLiteService;

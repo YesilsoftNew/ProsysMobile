@@ -5,13 +5,13 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using UIKit;
-using WiseMobile.iOS.Renderer;
-using WiseMobile.Renderer;
+using ProsysMobile.iOS.Renderer;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(CustomTimePicker), typeof(CustomTimePickerRenderer))]
-namespace WiseMobile.iOS.Renderer
+namespace ProsysMobile.iOS.Renderer
 {
     public class CustomTimePickerRenderer : TimePickerRenderer
     {
