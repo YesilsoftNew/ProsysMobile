@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:trns="clr-namespace:ProsysMobile.Helper"
+                   x:Class="ProsysMobile.CustomControls.Other.CustomCategoryGrid"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+    </Grid.RowDefinitions>
+    
+    <Image
+        x:Name="ItemImage"
+        Grid.Row="0"
+        HorizontalOptions="Center"
+        VerticalOptions="Center"/>
+                    
+    <Label
+        x:Name="ItemLabel"
+        Grid.Row="1"
+        Text="{Binding CategoryDesc}"
+        Style="{DynamicResource Label3}"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="StartAndExpand"/>
+    
+</Grid>

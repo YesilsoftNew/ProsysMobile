@@ -21,4 +21,5 @@
     <x:Int16 x:Key="Small">14</x:Int16>
     <x:Int16 x:Key="Tiny">12</x:Int16>
     <x:Int16 x:Key="ExtraSmall">10</x:Int16>
+    <x:Int16 x:Key="ExtraSmall2">9</x:Int16>
 </ResourceDictionary>

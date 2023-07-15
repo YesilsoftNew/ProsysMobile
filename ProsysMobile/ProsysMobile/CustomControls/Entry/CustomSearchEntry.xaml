@@ -6,12 +6,12 @@
                    xmlns:effects="clr-namespace:ProsysMobile.Renderer"
                    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                    x:Class="ProsysMobile.CustomControls.Entry.CustomSearchEntry"
-                   BackgroundColor="{DynamicResource Sky.Lighter}"
+                   BackgroundColor="{DynamicResource White3}"
                    Border="{yummy:BorderMarkup Color=Transparent}"
                    VerticalOptions="FillAndExpand"
                    HorizontalOptions="FillAndExpand"
-                   CornerRadius="8"
-                   Padding="12,16,12,16"
+                   CornerRadius="18"
+                   Padding="16,18,12,18"
                    Margin="0,8,0,8">
 
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -21,8 +21,28 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <controlbuttons:CustomStandardImageButton Grid.Column="0" x:Name="ItemImage" Style="{DynamicResource Bars.SearchBars.ImageButton}" Clicked="ItemImage_Clicked"/>
-        <effects:CustomEntry x:Name="ItemSearch" Grid.Column="1" Style="{DynamicResource Bars.SearchBars.PrimaryEntry}" TextChanged="ItemSearch_TextChanged"/>
-        <controlbuttons:CustomStandardButtonSecondary Grid.Column="2"  x:Name="ItemBtnCancelSearch" IsVisible="false" Text="{trns:Translate Search_Iptal}" Clicked="ItemBtnCancelSearch_Clicked" VerticalOptions="CenterAndExpand" HorizontalOptions="End"  Style="{DynamicResource Bars.SearchBars.Label}"/>
+        <controlbuttons:CustomStandardImageButton 
+            Grid.Column="0" 
+            x:Name="ItemImage"
+            Style="{DynamicResource ImageButton1}" 
+            Clicked="ItemImage_Clicked" />
+        
+        <effects:CustomEntry 
+            x:Name="ItemSearch" 
+            Grid.Column="1"
+            Margin="14,0,0,0"
+            Style="{DynamicResource Entry1}"
+            TextChanged="ItemSearch_TextChanged"/>
+        
+        <controlbuttons:CustomStandardButtonSecondary 
+            Grid.Column="2"
+            x:Name="ItemBtnCancelSearch" 
+            IsVisible="false" 
+            Text="Cancel QQQ"
+            Clicked="ItemBtnCancelSearch_Clicked" 
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="End" 
+            Style="{DynamicResource Label1}"/>
+        
     </Grid>
 </yummy:PancakeView>

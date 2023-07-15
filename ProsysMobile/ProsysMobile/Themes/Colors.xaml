@@ -12,15 +12,18 @@
     <Color x:Key="Color5">#0061A1</Color>
     <Color x:Key="Color6">#A5A5A5</Color>
 
-    <Color x:Key="Black1">#090A0A</Color>
+    <Color x:Key="Black1">#000000</Color>
     <Color x:Key="Black2">#72777A</Color>
+    <Color x:Key="Black3">#090A0A</Color>
 
     <Color x:Key="White1">#FFFFFF</Color>
     <Color x:Key="White2">#CDCFD0</Color>
+    <Color x:Key="White3">#F2F4F5</Color>
     
     <Color x:Key="Gray1">#656F77</Color>
     <Color x:Key="Gray2">#72777A</Color>
     <Color x:Key="Gray3">#666666</Color>
+    <Color x:Key="Gray4">#7C7C7C</Color>
     
 
     <!--#endregion-->

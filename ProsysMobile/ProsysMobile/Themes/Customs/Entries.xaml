@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="ProsysMobile.Themes.Customs.Entries"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:backdrop="clr-namespace:ProsysMobile.Models"
+    xmlns:renderer="clr-namespace:ProsysMobile.Renderer;assembly=ProsysMobile">
+
+    <Style x:Key="Entry1" TargetType="renderer:CustomEntry">
+        <Setter Property="BackgroundColor" Value="{DynamicResource TransparentColor}" />
+        <Setter Property="TextColor" Value="{DynamicResource Black1}" />
+        <Setter Property="PlaceholderColor" Value="{DynamicResource Gray4}" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="FontFamily" Value="poppins_regular" />
+        <Setter Property="FontAttributes" Value="None" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+
+</ResourceDictionary>

@@ -57,6 +57,21 @@
     <Compile Update="Themes\Customs\Labels.xaml.cs">
       <DependentUpon>Labels.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Themes\Customs\Entries.xaml.cs">
+      <DependentUpon>Entries.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CustomControls\Other\CustomCategoryGrid.xaml.cs">
+      <DependentUpon>CustomSearchEntry.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="CustomControls\Entry\CustomSearchEntry.xaml.cs">
+      <DependentUpon>CustomCategoryGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CustomControls\OrderListItems\OrderItemSecondary.xaml.cs">
+      <DependentUpon>OrderItemSecondary.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -80,6 +95,9 @@
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Themes\Customs\Backdrop.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Themes\Customs\Entries.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

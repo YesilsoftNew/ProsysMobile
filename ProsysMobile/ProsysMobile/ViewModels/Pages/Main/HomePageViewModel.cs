@@ -12,6 +12,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.ViewModels.Pages.Order;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
@@ -31,7 +33,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 try
                 {
-                    if (TOOLS.ToInt(arg) == 0)
+                    if (TOOLS.ToInt(arg) == (int)enTabBarItem.HomePage)
                         PageLoad();
                 }
                 catch (Exception ex)
@@ -107,6 +109,20 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 ProsysLogger.Instance.CrashLog(ex);
             }
         });
+        
+        public ICommand ItemDetailTest => new Command(async () =>
+        {
+            try
+            {
+                NavigationService.NavigateToBackdropAsync<OrderDetailViewModel>();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
+        
 
         #endregion
 

@@ -138,6 +138,18 @@
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable-hdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\EntrySearch.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\EntrySearch.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\EntrySearch.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\EntrySearch.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\EntrySearch.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\EntrySearch.png" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />

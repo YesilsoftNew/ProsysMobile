@@ -31,25 +31,25 @@
     </Shell.MenuItemTemplate>-->
 
     <TabBar PropertyChanged="TabBar_PropertyChanged">
-        <Tab Icon="Home">
+        <Tab Icon="Home" TabIndex="0">
             <ShellContent>
                 <mainPages:HomePage />
             </ShellContent>
         </Tab>
 
-        <Tab Icon="Find">
+        <Tab Icon="Find" TabIndex="1">
             <ShellContent>
                 <mainPages:FindPage />
             </ShellContent>
         </Tab>
 
-        <Tab Icon="Order">
+        <Tab Icon="Order" TabIndex="2">
             <ShellContent>
                 <mainPages:OrderPage />
             </ShellContent>
         </Tab>
 
-        <Tab Icon="Account">
+        <Tab Icon="Account" TabIndex="3">
             <ShellContent>
                 <mainPages:AccountPage />
             </ShellContent>

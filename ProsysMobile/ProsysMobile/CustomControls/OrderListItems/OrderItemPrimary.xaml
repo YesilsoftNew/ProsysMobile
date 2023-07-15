@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemPrimary"
+      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand">
+    
+      <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+      </Grid.RowDefinitions>
+      
+      <yummy:PancakeView 
+            Grid.Row="0"
+            Border="{yummy:BorderMarkup Color={DynamicResource Color6}, Thickness=1 }"
+            CornerRadius="16"
+            VerticalOptions="FillAndExpand"
+            HorizontalOptions="Start">
+                            
+            <Image
+                  x:Name="ItemImage"
+                  WidthRequest="100"
+                  HeightRequest="100"
+                  Source="http://yas.yesilsoft.net/Images/Spices.png"
+                  HorizontalOptions="Start"
+                  VerticalOptions="FillAndExpand" />
+                            
+      </yummy:PancakeView>
+                        
+      <Label
+            x:Name="ItemPrice"
+            Grid.Row="1"
+            Text="-"
+            Style="{DynamicResource Header3}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+                        
+      <Label
+            x:Name="ItemName"
+            Grid.Row="2"
+            Text="-"
+            Style="{DynamicResource Description2}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+                        
+      <Label
+            x:Name="ItemPieces"
+            Grid.Row="3"
+            Text="-"
+            Style="{DynamicResource Description3}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+      
+</Grid>

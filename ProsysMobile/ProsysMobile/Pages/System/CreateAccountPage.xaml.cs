@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace ProsysMobile.Pages.System
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateAccountPage : CustomBackdrop
+    public partial class CreateAccountPage
     {
         public CreateAccountPage()
         {

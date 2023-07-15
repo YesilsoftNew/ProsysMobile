@@ -6,6 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+             xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -20,6 +21,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             
             <Label
@@ -28,8 +30,7 @@
                 Style="{DynamicResource Caption2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="16,0,0,0"
-                />
+                Margin="16,0,0,0" />
             
             <FlexLayout 
                 Grid.Row="1"
@@ -43,42 +44,30 @@
                 
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Grid
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
+                        
+                        <customContolsOther:CustomCategoryGrid
+                            Text="{Binding CategoryDesc}"
+                            ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
+                            ImageHeight="95"
+                            ImageWidth="95"
+                            LabelStyle="{DynamicResource Label2}"
+                            Margin="0,0,24,0"
                             FlexLayout.Basis="33%"
-                            RowSpacing="6">
-                
-                            <!-- <Grid.GestureRecognizers> -->
-                            <!--     <TapGestureRecognizer Command="{Binding Source={x:Reference lstTireGropup}, Path=BindingContext.SelectionChangedCommand}" CommandParameter="{Binding .}" ></TapGestureRecognizer> -->
-                            <!-- </Grid.GestureRecognizers> -->
-                
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                
-                            <Image
-                                Grid.Row="0"
-                                WidthRequest="95"
-                                HeightRequest="95"
-                                Source="http://yas.yesilsoft.net/Images/Spices.png"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"/>
-                
-                            <Label
-                                Grid.Row="1"
-                                HeightRequest="20"
-                                Text="{Binding CategoryDesc}"
-                                Style="{DynamicResource Caption2}"
-                                HorizontalOptions="CenterAndExpand"
-                                VerticalOptions="StartAndExpand"/>
-                
-                        </Grid>
+                            RowSpacing="6"
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="FillAndExpand" />
+                        
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
                 
             </FlexLayout>
+            
+            <Button
+                Grid.Row="2"
+                Text="Item Detail test"
+                Command="{Binding ItemDetailTest}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="EndAndExpand" />
             
         </Grid>
         <!-- -->
