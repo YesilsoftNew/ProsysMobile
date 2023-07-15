@@ -14,52 +14,66 @@
         
         <Grid
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand">
+            VerticalOptions="FillAndExpand"
+            Margin="0,16,0,16">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Label
+                Grid.Row="0"
+                Text="Categories"
+                Style="{DynamicResource Caption2}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="16,0,0,0"
+                />
             
             <FlexLayout 
+                Grid.Row="1"
                 x:Name="LstCategories" 
-                Direction="Row" 
+                Direction="Row"
                 Wrap="Wrap"
                 BindableLayout.ItemsSource="{Binding Categories}"
-                HorizontalOptions="CenterAndExpand">
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="0,6,0,0">
                 
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <Grid 
-                            HorizontalOptions="FillAndExpand" 
+                        <Grid
+                            HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
-                            RowSpacing="0"
-                            Margin="24,0,24,0">
-                            
+                            FlexLayout.Basis="33%"
+                            RowSpacing="6">
+                
                             <!-- <Grid.GestureRecognizers> -->
                             <!--     <TapGestureRecognizer Command="{Binding Source={x:Reference lstTireGropup}, Path=BindingContext.SelectionChangedCommand}" CommandParameter="{Binding .}" ></TapGestureRecognizer> -->
                             <!-- </Grid.GestureRecognizers> -->
-                            
-                            <Grid 
-                                VerticalOptions="FillAndExpand" 
-                                HorizontalOptions="FillAndExpand" 
-                                RowSpacing="6">
-
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-                    
-                                    <Image
-                                        Grid.Row="0"
-                                        WidthRequest="95"
-                                        HeightRequest="95"
-                                        Source="http://yas.yesilsoft.net/Images/Spices.png"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="CenterAndExpand"/>
-                    
-                                    <Label
-                                        Grid.Row="1"
-                                        Text="{Binding CategoryDesc}"
-                                        HorizontalOptions="Center"
-                                        VerticalOptions="StartAndExpand"/>
-
-                            </Grid>
+                
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                
+                            <Image
+                                Grid.Row="0"
+                                WidthRequest="95"
+                                HeightRequest="95"
+                                Source="http://yas.yesilsoft.net/Images/Spices.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"/>
+                
+                            <Label
+                                Grid.Row="1"
+                                HeightRequest="20"
+                                Text="{Binding CategoryDesc}"
+                                Style="{DynamicResource Caption2}"
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="StartAndExpand"/>
+                
                         </Grid>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

@@ -20,7 +20,8 @@
     
     <Color x:Key="Gray1">#656F77</Color>
     <Color x:Key="Gray2">#72777A</Color>
-
+    <Color x:Key="Gray3">#666666</Color>
+    
 
     <!--#endregion-->
 

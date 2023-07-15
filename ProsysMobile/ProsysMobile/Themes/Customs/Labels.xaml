@@ -58,5 +58,13 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Padding" Value="16" />
     </Style>
+    
+    <Style x:Key="Caption2" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray3}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Tiny}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
+    </Style>
 
 </ResourceDictionary>

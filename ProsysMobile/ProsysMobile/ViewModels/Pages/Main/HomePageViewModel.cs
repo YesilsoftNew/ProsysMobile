@@ -32,7 +32,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 try
                 {
                     if (TOOLS.ToInt(arg) == 0)
-                        pageLoad();
+                        PageLoad();
                 }
                 catch (Exception ex)
                 {
@@ -46,7 +46,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             return base.InitializeAsync(navigationData);
         }
 
-        async Task pageLoad()
+        async Task PageLoad()
         {
             var allCategoryId = -1;
             
