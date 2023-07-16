@@ -24,6 +24,7 @@
     <Color x:Key="Gray2">#72777A</Color>
     <Color x:Key="Gray3">#666666</Color>
     <Color x:Key="Gray4">#7C7C7C</Color>
+    <Color x:Key="Gray5">#D3D3D3</Color>
     
 
     <!--#endregion-->

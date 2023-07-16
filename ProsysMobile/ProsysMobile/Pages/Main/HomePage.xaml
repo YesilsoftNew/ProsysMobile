@@ -7,6 +7,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
+             xmlns:customContolsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -22,6 +23,7 @@
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
             
             <Label
@@ -68,6 +70,15 @@
                 Command="{Binding ItemDetailTest}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="EndAndExpand" />
+            
+            <customContolsOrders:OrderItemTertiary
+                Grid.Row="3"
+                NameText="SUNTAT Gehackte Tomaten"
+                PriceText="$1,56"
+                PiecesText="750 pcs"
+                ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
             
         </Grid>
         <!-- -->

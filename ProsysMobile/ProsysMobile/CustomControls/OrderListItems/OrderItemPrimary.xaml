@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Grid xmlns="http://xamarin.com/schemas/2014/forms"
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemPrimary"
@@ -16,7 +15,7 @@
       
       <yummy:PancakeView 
             Grid.Row="0"
-            Border="{yummy:BorderMarkup Color={DynamicResource Color6}, Thickness=1 }"
+            Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
             CornerRadius="16"
             VerticalOptions="FillAndExpand"
             HorizontalOptions="Start">

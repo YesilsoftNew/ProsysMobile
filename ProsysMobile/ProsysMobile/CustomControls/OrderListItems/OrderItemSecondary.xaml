@@ -4,10 +4,16 @@
       x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemSecondary"
       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
       xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
+      xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
       HorizontalOptions="FillAndExpand"
       VerticalOptions="FillAndExpand"
       ColumnSpacing="22">
     
+      <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+      </Grid.RowDefinitions>
+      
       <Grid.ColumnDefinitions>
             <ColumnDefinition Width="AUTO"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -17,9 +23,10 @@
       <yummy:PancakeView 
             Grid.Row="0"
             Grid.Column="0"
-            Border="{yummy:BorderMarkup Color={DynamicResource Color6}, Thickness=1 }"
+            Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+            Margin="16,0,0,0"
             CornerRadius="16"
-            VerticalOptions="FillAndExpand"
+            VerticalOptions="StartAndExpand"
             HorizontalOptions="Start">
                             
             <Image
@@ -28,7 +35,7 @@
                   HeightRequest="100"
                   Source="http://yas.yesilsoft.net/Images/Spices.png"
                   HorizontalOptions="Start"
-                  VerticalOptions="FillAndExpand" />
+                  VerticalOptions="StartAndExpand" />
                             
       </yummy:PancakeView>
       
@@ -76,6 +83,15 @@
             Grid.Row="0" 
             x:Name="ItemImageButton"
             Source="AddBasket"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="EndAndExpand"
+            Margin="0,0,16,0"
             Style="{DynamicResource ImageButton2}" />
+      
+      <controlOther:CustomLine
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="0,5,0,0" />
       
 </Grid>

@@ -5,6 +5,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:controlentries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+             xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
@@ -101,17 +102,22 @@
                     HorizontalOptions="EndAndExpand"
                     HorizontalTextAlignment="End" />
 
-                <Label Grid.Column="1"
-                       Text="Register"
-                       Style="{DynamicResource Link1}"
-                       Margin="5,0,0,0"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="StartAndExpand"
-                       HorizontalTextAlignment="Start">
+                <!-- TODO DEĞİŞÇEK TIKLANINCA AKSİYON OLAN HALİ İLE -->
+                <Label 
+                    Grid.Column="1"
+                    Text="Register"
+                    Style="{DynamicResource Link1}"
+                    Margin="5,0,0,0"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="StartAndExpand"
+                    HorizontalTextAlignment="Start">
+                    
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RegisterClickCommand}"/>
                     </Label.GestureRecognizers>
+                    
                 </Label>
+                
             </Grid>
 
         </Grid>

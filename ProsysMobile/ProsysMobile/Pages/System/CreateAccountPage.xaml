@@ -21,8 +21,8 @@
                 </Grid.RowDefinitions>
 
                 <controlbars:CustomBackDropToolbarPrimary 
-                                                            Grid.Row="0"
-                                                            Title="New Account QQQ">
+                    Grid.Row="0"
+                    Title="New Account QQQ">
                     <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
                         <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
                     </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
@@ -45,24 +45,24 @@
                     </Grid.RowDefinitions>
 
                     <controlentries:CustomEntryPrimary 
-                                                   Grid.Row="0" 
-                                                   Title="FirstName QQQ"
-                                                   Text="{Binding FirstName}"/>
+                       Grid.Row="0" 
+                       Title="FirstName QQQ"
+                       Text="{Binding FirstName}"/>
 
                     <controlentries:CustomEntryPrimary 
-                                                   Grid.Row="1" 
-                                                   Title="Surname QQQ"
-                                                   Text="{Binding Surname}"/>
+                       Grid.Row="1" 
+                       Title="Surname QQQ"
+                       Text="{Binding Surname}"/>
 
                     <controlentries:CustomEntryPrimary 
-                                                   Grid.Row="2" 
-                                                   Title="CompanyCode QQQ"
-                                                   Text="{Binding CompanyCode}"/>
+                       Grid.Row="2" 
+                       Title="CompanyCode QQQ"
+                       Text="{Binding CompanyCode}"/>
 
                     <controlentries:CustomEntryPrimary 
-                                                   Grid.Row="3" 
-                                                   Title="Email QQQ"
-                                                   Text="{Binding Email}"/>
+                       Grid.Row="3" 
+                       Title="Email QQQ"
+                       Text="{Binding Email}"/>
 
                     <Button 
                         Grid.Row="4"

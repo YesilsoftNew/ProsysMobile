@@ -1,32 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProsysMobile.CustomControls.OrderListItems
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OrderItemSecondary
+    public partial class OrderItemTertiary
     {
-        public static readonly BindableProperty PriceTextProperty = BindableProperty.Create(nameof(PriceText),
+public static readonly BindableProperty PriceTextProperty = BindableProperty.Create(nameof(PriceText),
             typeof(string),
-            typeof(OrderItemSecondary),
+            typeof(OrderItemTertiary),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
         public static readonly BindableProperty NameTextProperty = BindableProperty.Create(nameof(NameText),
             typeof(string),
-            typeof(OrderItemSecondary),
+            typeof(OrderItemTertiary),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
         public static readonly BindableProperty PiecesTextProperty = BindableProperty.Create(nameof(PiecesText),
             typeof(string),
-            typeof(OrderItemSecondary),
+            typeof(OrderItemTertiary),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
         public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource),
             typeof(string),
-            typeof(OrderItemSecondary),
+            typeof(OrderItemTertiary),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
@@ -54,7 +60,7 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(ImageSourceProperty, value);
         }
         
-        public OrderItemSecondary()
+        public OrderItemTertiary()
         {
             InitializeComponent();
             
