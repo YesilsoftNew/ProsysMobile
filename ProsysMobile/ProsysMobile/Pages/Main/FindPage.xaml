@@ -13,21 +13,21 @@
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
-    
+
     <ContentPage.Content>
         <Grid
             Margin="0,16,0,0"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
-            RowSpacing="0">
-            
+            RowSpacing="20">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <entries:CustomSearchEntry 
                 Grid.Row="0"
                 Margin="16,0,16,0"
@@ -35,27 +35,30 @@
                 ImageSource="EntrySearch"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand" />
-            
+
             <ScrollView 
                 Grid.Row="1" 
                 Orientation="Horizontal" 
                 HorizontalOptions="FillAndExpand" 
                 VerticalOptions="FillAndExpand">
+                
+                <StackLayout 
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand">
 
-                <FlexLayout
+                    <FlexLayout
                     x:Name="LstCategories"
-                    HeightRequest="59"
                     Direction="Row"
                     Wrap="NoWrap"
                     BindableLayout.ItemsSource="{Binding Categories}"
-                    Margin="16,20,0,0"
+                    Margin="16,0,0,0"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-    
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-    
-                            <customContolsOther:CustomCategoryGrid
+                    VerticalOptions="Fill">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <customContolsOther:CustomCategoryGrid
                                 Text="{Binding CategoryDesc}"
                                 ImageSource="{Binding Image}"
                                 ImageHeight="40"
@@ -65,57 +68,59 @@
                                 RowSpacing="4"
                                 HorizontalOptions="FillAndExpand" 
                                 VerticalOptions="FillAndExpand" />
-                            
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-            
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </StackLayout>
+
             </ScrollView>
-            
+
             <ScrollView 
                 Grid.Row="2" 
                 Orientation="Horizontal" 
                 HorizontalOptions="FillAndExpand" 
                 VerticalOptions="FillAndExpand">
-                
-                <FlexLayout
+
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <FlexLayout
                     x:Name="LstSubCategories"
                     HeightRequest="24"
                     Direction="Row"
                     Wrap="NoWrap"
                     BindableLayout.ItemsSource="{Binding Categories}"
-                    Margin="16,20,0,0"
+                    Margin="16,0,0,0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
-            
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                        
-                            <customContolsOther:CustomSubCategoryGrid
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <customContolsOther:CustomSubCategoryGrid
                                 Text="{Binding CategoryDesc}"
                                 Color="Blue"
                                 Margin="0,0,16,0"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand" />
-            
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                    
-                </FlexLayout>
-            
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </FlexLayout>
+                </StackLayout>
+
             </ScrollView>
 
             <Grid
                 Grid.Row="3"
-                Margin="0,30,0,0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="AUTO"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <Label
                     Grid.Row="0"
                     Text="Bestsellers"
@@ -123,16 +128,16 @@
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand"
                     Margin="16,0,0,0" />
-                
+
                 <ScrollView
                     Grid.Row="1" 
                     Orientation="Horizontal" 
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand">
-                
-                    <FlexLayout 
+                    
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        <FlexLayout 
                         x:Name="LstBestseller"
-                        HeightRequest="195"
                         Direction="Row"
                         Wrap="NoWrap"
                         AlignContent="Start"
@@ -142,11 +147,11 @@
                         Margin="16,0,11,0"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">
-                    
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                        
-                                <customContolsOrders:OrderItemPrimary
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <customContolsOrders:OrderItemPrimary
                                     NameText="{Binding Name}"
                                     PiecesText="{Binding Pieces}"
                                     PriceText="{Binding Price}"
@@ -154,16 +159,17 @@
                                     Margin="0,0,5,0"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand" />
-            
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                        
-                    </FlexLayout>
-                
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </FlexLayout>
+                    </StackLayout>
+
                 </ScrollView>
-                
+
             </Grid>
-            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
