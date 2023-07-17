@@ -110,7 +110,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
         
-        public ICommand ItemDetailTest => new Command(async () =>
+        public ICommand ItemDetailTest => new Command<object>(async (sender) =>
         {
             try
             {

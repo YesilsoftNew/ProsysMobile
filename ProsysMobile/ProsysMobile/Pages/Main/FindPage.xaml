@@ -130,11 +130,14 @@
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand">
                 
-                    <FlexLayout
+                    <FlexLayout 
                         x:Name="LstBestseller"
                         HeightRequest="195"
                         Direction="Row"
                         Wrap="NoWrap"
+                        AlignContent="Start"
+                        AlignItems="Start"
+                        JustifyContent="SpaceAround"
                         BindableLayout.ItemsSource="{Binding Bestsellers}"
                         Margin="16,0,11,0"
                         HorizontalOptions="FillAndExpand"
@@ -164,3 +167,6 @@
         </Grid>
     </ContentPage.Content>
 </ContentPage>
+
+
+<!-- TODO ITEMLARI GETİRİRKEN DEPOPAGE 174.SATIRA BAK YAPARKEN COLLECTİO VİEW YAPCAN  -->
