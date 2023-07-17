@@ -66,7 +66,7 @@
                                 
                                 <customContolsOther:CustomCategoryGrid.GestureRecognizers>
                                     <TapGestureRecognizer 
-                                        Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.ItemDetailTest}" 
+                                        Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.CategoryClickCommand}" 
                                         CommandParameter="{Binding .}" />
                                 </customContolsOther:CustomCategoryGrid.GestureRecognizers>
                                 

@@ -7,6 +7,9 @@ using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.System;
 using System;
 using System.IO;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -58,10 +61,10 @@ namespace ProsysMobile
         protected override void OnStart()
         {
             #region Appcenter
-            //AppCenter.Start("android=423de8a6-e8b1-4573-8376-fbe549e8b115;" +
-            //                "uwp={Your UWP App secret here};" +
-            //                "ios=08bb9a57-73b6-4e1a-b045-8fa34bae440c;",
-            //                typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("android=3124f4df-dc29-422f-b729-37d848c9eb5b;" +
+                            "uwp={Your UWP App secret here};" +
+                            "ios=16447944-c577-4d52-a9c8-079fd36f482c;",
+                            typeof(Analytics), typeof(Crashes));
             #endregion
 
             #region SQLite

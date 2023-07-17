@@ -20,13 +20,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
     public class HomePageViewModel : ViewModelBase
     {
         private IItemCategoryService _itemCategoryService;
-        private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
-        private IUserMobileSQLiteService _userSQLiteService;
 
-        public HomePageViewModel( IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSQLiteService, IItemCategoryService itemCategoryService)
+        public HomePageViewModel(IItemCategoryService itemCategoryService)
         {
-            _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
-            _userSQLiteService = userSQLiteService;
             _itemCategoryService = itemCategoryService;
 
             Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
@@ -60,7 +56,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             else
             {
-                
+                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
             }
         }
 
@@ -84,45 +80,19 @@ namespace ProsysMobile.ViewModels.Pages.Main
         #endregion
 
         #region Commands
-        public ICommand LogoutClickCommand => new Command(async () =>
+
+        public ICommand CategoryClickCommand => new Command<object>(async (sender) =>
         {
             try
             {
-                //user bilgilerini siliyorum
-                _userSQLiteService.DeleteUser(GlobalSetting.Instance.User);
-                GlobalSetting.Instance.User = null;
-
-                //TODO: BURASIAYARLANACAK
-                DefaultSettings defaultSettings = _defaultSettingsSQLiteService.getSettings("UserId");
-                DefaultSettings defaultSettingss = _defaultSettingsSQLiteService.getSettings("UserTokenExpiredDate");
-                DefaultSettings defaultSettingsss = _defaultSettingsSQLiteService.getSettings("UserToken");
-
-                _defaultSettingsSQLiteService.Delete(defaultSettings);
-                _defaultSettingsSQLiteService.Delete(defaultSettingss);
-                _defaultSettingsSQLiteService.Delete(defaultSettingsss);
-
-                //login sayfasına atıyorum
-                await NavigationService.SetMainPageAsync<LoginPageViewModel>();
+                var category = sender as ItemCategory;
+                
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
         });
-        
-        public ICommand ItemDetailTest => new Command<object>(async (sender) =>
-        {
-            try
-            {
-                NavigationService.NavigateToBackdropAsync<OrderDetailViewModel>();
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-        });
-        
-        
 
         #endregion
 

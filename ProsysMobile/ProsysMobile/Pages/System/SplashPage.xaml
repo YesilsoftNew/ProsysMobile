@@ -9,7 +9,6 @@
              x:Class="ProsysMobile.Pages.System.SplashPage" BackgroundColor="{DynamicResource Sky.White}">
 
     <ContentPage.Content>
-        <!--<Image Source="icon" x:Name="splashImage" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"></Image>-->
         <Image VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" Source="Logo" Aspect="AspectFill" HeightRequest="261" WidthRequest="261"/>
     </ContentPage.Content>
 </ContentPage>
