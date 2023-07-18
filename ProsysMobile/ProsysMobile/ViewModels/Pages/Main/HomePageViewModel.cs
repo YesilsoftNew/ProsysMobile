@@ -86,7 +86,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             try
             {
                 var category = sender as ItemCategory;
-                
+
             }
             catch (Exception ex)
             {

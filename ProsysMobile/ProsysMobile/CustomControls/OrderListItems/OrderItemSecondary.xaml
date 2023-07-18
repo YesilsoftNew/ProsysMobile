@@ -7,6 +7,7 @@
       xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
       HorizontalOptions="FillAndExpand"
       VerticalOptions="FillAndExpand"
+      Padding="0,16,0,0"
       ColumnSpacing="22">
     
       <Grid.RowDefinitions>
@@ -92,6 +93,6 @@
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="3"
-            Margin="0,5,0,0" />
+            Margin="0,8,0,0" />
       
 </Grid>

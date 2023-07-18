@@ -7,13 +7,25 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
+             xmlns:converters="clr-namespace:ProsysMobile.Converters"
+             xmlns:controlEntries="clr-namespace:ProsysMobile.CustomControls.Entry"                       
              xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
              xmlns:customContolsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
-
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CollectionViewSelectionChangedEventArgsConverter x:Key="CollectionViewSelectionChangedEventArgsConverter" />
+            <converters:CollectionViewRemainingItemsThresholdReachedEventArgsConverter x:Key="CollectionViewRemainingItemsThresholdReachedEventArgsConverter" />
+            <converters:TextChangedEventArgsConverter x:Key="TextChangedEventArgsConverter" />
+            <converters:ClickedEventArgsConverter x:Key="ClickedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid
             Margin="0,16,0,0"
@@ -31,10 +43,22 @@
             <entries:CustomSearchEntry 
                 Grid.Row="0"
                 Margin="16,0,16,0"
+                Text="{Binding Search}"
                 Placeholder="Search here QQQ"
                 ImageSource="EntrySearch"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand" />
+                VerticalOptions="FillAndExpand">
+                
+                <controlEntries:CustomSearchEntry.Behaviors>
+                    
+                    <behaviors:EventToCommandBehavior 
+                        EventName="EntryTextChanged"
+                        EventArgsConverter="{StaticResource TextChangedEventArgsConverter}"
+                        Command="{Binding SearchEntryTextChangedCommand}"/>
+                    
+                </controlEntries:CustomSearchEntry.Behaviors>
+                
+            </entries:CustomSearchEntry>
 
             <ScrollView 
                 Grid.Row="1" 
@@ -47,27 +71,27 @@
                     HorizontalOptions="FillAndExpand">
 
                     <FlexLayout
-                    x:Name="LstCategories"
-                    Direction="Row"
-                    Wrap="NoWrap"
-                    BindableLayout.ItemsSource="{Binding Categories}"
-                    Margin="16,0,0,0"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="Fill">
+                        x:Name="LstCategories"
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        BindableLayout.ItemsSource="{Binding Categories}"
+                        Margin="16,0,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Fill">
 
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
 
                                 <customContolsOther:CustomCategoryGrid
-                                Text="{Binding CategoryDesc}"
-                                ImageSource="{Binding Image}"
-                                ImageHeight="40"
-                                ImageWidth="40"
-                                LabelStyle="{DynamicResource Label3}"
-                                Margin="0,0,24,0"
-                                RowSpacing="4"
-                                HorizontalOptions="FillAndExpand" 
-                                VerticalOptions="FillAndExpand" />
+                                    Text="{Binding CategoryDesc}"
+                                    ImageSource="{Binding Image}"
+                                    ImageHeight="40"
+                                    ImageWidth="40"
+                                    LabelStyle="{DynamicResource Label3}"
+                                    Margin="0,0,24,0"
+                                    RowSpacing="4"
+                                    HorizontalOptions="FillAndExpand" 
+                                    VerticalOptions="FillAndExpand" />
 
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -78,30 +102,31 @@
 
             <ScrollView 
                 Grid.Row="2" 
-                Orientation="Horizontal" 
+                IsVisible="{Binding ShowSubCategories}"
+                Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand" 
                 VerticalOptions="FillAndExpand">
 
                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <FlexLayout
-                    x:Name="LstSubCategories"
-                    HeightRequest="24"
-                    Direction="Row"
-                    Wrap="NoWrap"
-                    BindableLayout.ItemsSource="{Binding Categories}"
-                    Margin="16,0,0,0"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
+                        x:Name="LstSubCategories"
+                        HeightRequest="24"
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        BindableLayout.ItemsSource="{Binding Categories}"
+                        Margin="16,0,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
 
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
 
                                 <customContolsOther:CustomSubCategoryGrid
-                                Text="{Binding CategoryDesc}"
-                                Color="Blue"
-                                Margin="0,0,16,0"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand" />
+                                    Text="{Binding CategoryDesc}"
+                                    Color="Blue"
+                                    Margin="0,0,16,0"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand" />
 
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -113,6 +138,7 @@
 
             <Grid
                 Grid.Row="3"
+                IsVisible="{Binding ShowBestsellers}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
 
@@ -152,13 +178,13 @@
                                 <DataTemplate>
 
                                     <customContolsOrders:OrderItemPrimary
-                                    NameText="{Binding Name}"
-                                    PiecesText="{Binding Pieces}"
-                                    PriceText="{Binding Price}"
-                                    ImageSource="{Binding Image}"
-                                    Margin="0,0,5,0"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="FillAndExpand" />
+                                        NameText="{Binding Name}"
+                                        PiecesText="{Binding Pieces}"
+                                        PriceText="{Binding Price}"
+                                        ImageSource="{Binding Image}"
+                                        Margin="0,0,5,0"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand" />
 
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
@@ -170,9 +196,39 @@
 
             </Grid>
 
+             <CollectionView 
+                 x:Name="ListItems" 
+                 Grid.Row="3" 
+                 IsVisible="{Binding ShowItems}" 
+                 ItemsSource="{Binding Bestsellers}" 
+                 SelectionMode="Single" 
+                 RemainingItemsThreshold="5" 
+                 VerticalScrollBarVisibility="Always">
+                 
+                 <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                  EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                  Command="{Binding TireProductListSelectionChangedCommand}"/>
+                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
+                                  EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
+                                  Command="{Binding TireProductLists_RemainingItemsThresholdReachedCommand}"/>
+                </CollectionView.Behaviors>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                    
+                        <customContolsOrders:OrderItemSecondary
+                            NameText="{Binding Name}"
+                            PiecesText="{Binding Pieces}"
+                            PriceText="{Binding Price}"
+                            ImageSource="{Binding Image}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                            
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
         </Grid>
     </ContentPage.Content>
 </ContentPage>
-
-
-<!-- TODO ITEMLARI GETİRİRKEN DEPOPAGE 174.SATIRA BAK YAPARKEN COLLECTİO VİEW YAPCAN  -->
