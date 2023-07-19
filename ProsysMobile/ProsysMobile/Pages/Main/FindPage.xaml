@@ -12,7 +12,7 @@
              xmlns:controlEntries="clr-namespace:ProsysMobile.CustomControls.Entry"                       
              xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
-             xmlns:customContolsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -64,7 +64,8 @@
                 Grid.Row="1" 
                 Orientation="Horizontal" 
                 HorizontalOptions="FillAndExpand" 
-                VerticalOptions="FillAndExpand">
+                VerticalOptions="FillAndExpand"
+                HorizontalScrollBarVisibility="Never">
                 
                 <StackLayout 
                     VerticalOptions="FillAndExpand"
@@ -91,7 +92,15 @@
                                     Margin="0,0,24,0"
                                     RowSpacing="4"
                                     HorizontalOptions="FillAndExpand" 
-                                    VerticalOptions="FillAndExpand" />
+                                    VerticalOptions="FillAndExpand">
+                                    
+                                    <customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
+                                            CommandParameter="{Binding .}" />
+                                    </customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                    
+                                </customContolsOther:CustomCategoryGrid>
 
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -105,12 +114,12 @@
                 IsVisible="{Binding ShowSubCategories}"
                 Orientation="Horizontal"
                 HorizontalOptions="FillAndExpand" 
-                VerticalOptions="FillAndExpand">
+                VerticalOptions="FillAndExpand"
+                HorizontalScrollBarVisibility="Never">
 
                 <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                     <FlexLayout
                         x:Name="LstSubCategories"
-                        HeightRequest="24"
                         Direction="Row"
                         Wrap="NoWrap"
                         BindableLayout.ItemsSource="{Binding Categories}"
@@ -159,25 +168,27 @@
                     Grid.Row="1" 
                     Orientation="Horizontal" 
                     HorizontalOptions="FillAndExpand" 
-                    VerticalOptions="FillAndExpand">
+                    VerticalOptions="FillAndExpand"
+                    HorizontalScrollBarVisibility="Never">
                     
                     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        
                         <FlexLayout 
-                        x:Name="LstBestseller"
-                        Direction="Row"
-                        Wrap="NoWrap"
-                        AlignContent="Start"
-                        AlignItems="Start"
-                        JustifyContent="SpaceAround"
-                        BindableLayout.ItemsSource="{Binding Bestsellers}"
-                        Margin="16,0,11,0"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
+                            x:Name="LstBestseller"
+                            Direction="Row"
+                            Wrap="NoWrap"
+                            AlignContent="Start"
+                            AlignItems="Start"
+                            JustifyContent="SpaceAround"
+                            BindableLayout.ItemsSource="{Binding Bestsellers}"
+                            Margin="16,0,11,0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
 
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
 
-                                    <customContolsOrders:OrderItemPrimary
+                                    <customControlsOrders:OrderItemPrimary
                                         NameText="{Binding Name}"
                                         PiecesText="{Binding Pieces}"
                                         PriceText="{Binding Price}"
@@ -190,6 +201,7 @@
                             </BindableLayout.ItemTemplate>
 
                         </FlexLayout>
+                        
                     </StackLayout>
 
                 </ScrollView>
@@ -217,7 +229,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                     
-                        <customContolsOrders:OrderItemSecondary
+                        <customControlsOrders:OrderItemSecondary
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"

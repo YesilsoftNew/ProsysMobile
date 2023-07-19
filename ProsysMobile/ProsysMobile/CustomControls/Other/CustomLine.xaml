@@ -3,7 +3,6 @@
 <BoxView xmlns="http://xamarin.com/schemas/2014/forms"
          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
          x:Class="ProsysMobile.CustomControls.Other.CustomLine"
-         WidthRequest="1"
          HeightRequest="1"
          BackgroundColor="{DynamicResource Gray5}"
          HorizontalOptions="FillAndExpand"

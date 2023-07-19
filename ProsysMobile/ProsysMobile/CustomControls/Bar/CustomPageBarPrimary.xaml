@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Label xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProsysMobile.CustomControls.Bar.CustomPageBarPrimary"
+             Margin="16,21"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+             Style="{DynamicResource Header7}" />

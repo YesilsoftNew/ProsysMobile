@@ -37,10 +37,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
-            _showBestsellers = true;
-            _showItems = false;
-            
-            _categories = new ObservableRangeCollection<ItemCategory>()
+            Categories = new ObservableRangeCollection<ItemCategory>()
             {
                 new ItemCategory()
                 {
@@ -69,7 +66,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
             };
             
-            _bestsellers = new ObservableRangeCollection<Deneme>()
+            Bestsellers = new ObservableRangeCollection<Deneme>()
             {
                 new Deneme()
                 {
@@ -109,11 +106,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Propertys
      
-        private bool _showBestsellers;
-        public bool ShowBestsellers { get => _showBestsellers; set { _showBestsellers = value; PropertyChanged(() => _showBestsellers); } }
+        private bool _showBestsellers = true;
+        public bool ShowBestsellers { get => _showBestsellers; set { _showBestsellers = value; PropertyChanged(() => ShowBestsellers); } }
         
-        private bool _showItems;
-        public bool ShowItems { get => _showItems; set { _showItems = value; PropertyChanged(() => _showItems); } }
+        private bool _showItems = false;
+        public bool ShowItems { get => _showItems; set { _showItems = value; PropertyChanged(() => ShowItems); } }
 
         private bool _showSubCategories;
         public bool ShowSubCategories { get => _showSubCategories; set { _showSubCategories = value; PropertyChanged(() => ShowSubCategories); } }
@@ -151,7 +148,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             set
             {
                 _bestsellers = value;
-                PropertyChanged(() => Categories);
+                PropertyChanged(() => Bestsellers);
             }
         }
         
@@ -176,6 +173,20 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
         
+        public ICommand MainCategoryClickCommand => new Command((sender) =>
+        {
+            try
+            {
+                var category = sender as ItemCategory;
+
+                ShowSubCategories = true;
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
         #endregion
 
         #region Methods
@@ -193,11 +204,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     
                     if (string.IsNullOrWhiteSpace(Search))
                     {
-                        
-                    }
-                    else
-                    {
-                        
+                        GetItemsAndBindFromAPI();
                     }
 
                     _isTimerWorking = false;
@@ -209,6 +216,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 
                 return true;
             });
+        }
+
+        private void GetItemsAndBindFromAPI()
+        {
+            
         }
 
         #endregion

@@ -124,5 +124,26 @@
         <Setter Property="FontSize" Value="{DynamicResource Small}" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
     </Style>
+    
+    <Style x:Key="Header7" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black3}" />
+        <Setter Property="FontFamily" Value="poppins_bold" />
+        <Setter Property="FontSize" Value="{DynamicResource Title2}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+    
+    <Style x:Key="Label4" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource White1}" />
+        <Setter Property="FontFamily" Value="poppins_regular" />
+        <Setter Property="FontSize" Value="{DynamicResource Tiny}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+    
+    <Style x:Key="Label5" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource White1}" />
+        <Setter Property="FontFamily" Value="poppins_semibold" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
 
 </ResourceDictionary>
