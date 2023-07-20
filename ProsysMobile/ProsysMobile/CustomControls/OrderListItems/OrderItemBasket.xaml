@@ -22,7 +22,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="AUTO"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <yummy:PancakeView 
@@ -86,7 +86,7 @@
                 Style="{DynamicResource Header4}"
                 HorizontalOptions="Start"
                 VerticalOptions="EndAndExpand"/>
-
+            
             <yummy:PancakeView 
                 Grid.Row="2"
                 Grid.Column="1"
@@ -94,8 +94,8 @@
                 CornerRadius="8"
                 BackgroundColor="{DynamicResource Color5}"
                 Padding="4,7"
-                VerticalOptions="EndAndExpand"
-                HorizontalOptions="EndAndExpand">
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
 
                 <Grid
                     RowSpacing="6"

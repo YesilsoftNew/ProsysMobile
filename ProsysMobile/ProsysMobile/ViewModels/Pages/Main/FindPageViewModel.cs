@@ -9,18 +9,24 @@ using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Pages;
+using ProsysMobile.Services.API.ItemCategory;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class FindPageViewModel : ViewModelBase
     {
+        private IItemCategoryService _itemCategoryService;
+
+
         private double _searchTime;
         private bool _isTimerWorking = false;
 
         
-        public FindPageViewModel()
+        public FindPageViewModel(IItemCategoryService itemCategoryService)
         {
+            _itemCategoryService = itemCategoryService;
+
             Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
                 try
@@ -37,34 +43,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
-            Categories = new ObservableRangeCollection<ItemCategory>()
-            {
-                new ItemCategory()
-                {
-                    CategoryDesc = "Legumes",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new ItemCategory()
-                {
-                    CategoryDesc = "Beverages",
-                    Image = "http://yas.yesilsoft.net/Images/Beverages.png"
-                },
-                new ItemCategory()
-                {
-                    CategoryDesc = "Groceriesh",
-                    Image = "http://yas.yesilsoft.net/Images/Groceriesh.png"
-                },
-                new ItemCategory()
-                {
-                    CategoryDesc = "Discount",
-                    Image = "http://yas.yesilsoft.net/Images/Discount.png"
-                },
-                new ItemCategory()
-                {
-                    CategoryDesc = "Other",
-                    Image = "http://yas.yesilsoft.net/Images/Other.png"
-                }
-            };
+            GetCategoriesAndBindFromApi(
+                categoryId: Constants.MainCategoryId,
+                isSubCategory: false
+            );
             
             Bestsellers = new ObservableRangeCollection<Deneme>()
             {
@@ -105,7 +87,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         }
 
         #region Propertys
-     
+
         private bool _showBestsellers = true;
         public bool ShowBestsellers { get => _showBestsellers; set { _showBestsellers = value; PropertyChanged(() => ShowBestsellers); } }
         
@@ -132,6 +114,23 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 _categories = value;
                 PropertyChanged(() => Categories);
+            }
+        }
+        
+        private ObservableRangeCollection<ItemCategory> _subCategories;
+        public ObservableRangeCollection<ItemCategory> SubCategories
+        {
+            get
+            {
+                if (_subCategories == null)
+                    _subCategories = new ObservableRangeCollection<ItemCategory>();
+
+                return _subCategories;
+            }
+            set
+            {
+                _categories = value;
+                PropertyChanged(() => SubCategories);
             }
         }
         
@@ -179,7 +178,23 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 var category = sender as ItemCategory;
 
+                GetCategoriesAndBindFromApi(
+                    categoryId: category.ID,
+                    isSubCategory: true
+                );
+
                 ShowSubCategories = true;
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
+        public ICommand ListItemsSelectionChangedCommand => new Command((sender) =>
+        {
+            try
+            {
             }
             catch (Exception ex)
             {
@@ -204,7 +219,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     
                     if (string.IsNullOrWhiteSpace(Search))
                     {
-                        GetItemsAndBindFromAPI();
+                        GetItemsAndBindFromApi();
                     }
 
                     _isTimerWorking = false;
@@ -218,11 +233,42 @@ namespace ProsysMobile.ViewModels.Pages.Main
             });
         }
 
-        private void GetItemsAndBindFromAPI()
+        private void GetItemsAndBindFromApi()
         {
             
         }
+        
+        private async void GetCategoriesAndBindFromApi(int categoryId, bool isSubCategory)
+        {
+            try
+            {
+                var response = _itemCategoryService.ItemCategory(Constants.MainCategoryId, enPriorityType.UserInitiated);
 
+                if (response.IsCompleted)
+                {
+                    var result = response.Result;
+                
+                    if (result.ResponseData != null && result.IsSuccess)
+                    {
+                        if (!isSubCategory)
+                        {
+                            Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                        }
+                        else
+                        {
+                            SubCategories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+        }
+        
         #endregion
 
         public class Deneme

@@ -17,8 +17,7 @@
     <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
-            <ColumnDefinition Width="6*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <controlbuttons:CustomStandardImageButton 
@@ -33,16 +32,6 @@
             Margin="14,0,0,0"
             Style="{DynamicResource Entry1}"
             TextChanged="ItemSearch_TextChanged"/>
-        
-        <controlbuttons:CustomStandardButtonSecondary 
-            Grid.Column="2"
-            x:Name="ItemBtnCancelSearch" 
-            IsVisible="false" 
-            Text="Cancel QQQ"
-            Clicked="ItemBtnCancelSearch_Clicked" 
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="End" 
-            Style="{DynamicResource Label1}"/>
         
     </Grid>
 </yummy:PancakeView>

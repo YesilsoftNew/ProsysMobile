@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.ViewModels.Pages.Order;
@@ -46,28 +47,46 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         async Task PageLoad()
         {
-            var allCategoryId = -1;
-            
-            var result = await _itemCategoryService.ItemCategory(allCategoryId, Models.CommonModels.Enums.enPriorityType.UserInitiated);
+            GetCategoryAndBindFromApi(
+                categoryId: Constants.MainCategoryId
+            );
+        }
 
-            if (result.ResponseData != null && result.IsSuccess)
+        private async void GetCategoryAndBindFromApi(int categoryId)
+        {
+            try
             {
-                Categories = result.ResponseData;
+                var response = _itemCategoryService.ItemCategory(Constants.MainCategoryId, enPriorityType.UserInitiated);
+
+                if (response.IsCompleted)
+                {
+                    var result = response.Result;
+                
+                    if (result.ResponseData != null && result.IsSuccess)
+                    {
+                        Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                    
+                        return;
+                    }
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
         }
 
         #region Propertys
-        private IList<ItemCategory> _categories;
-        public IList<ItemCategory> Categories
+        private ObservableRangeCollection<ItemCategory> _categories;
+        public ObservableRangeCollection<ItemCategory> Categories
         {
             get
             {
                 if (_categories == null)
-                    _categories = new ObservableCollection<ItemCategory>();
+                    _categories = new ObservableRangeCollection<ItemCategory>();
 
                 return _categories;
             }

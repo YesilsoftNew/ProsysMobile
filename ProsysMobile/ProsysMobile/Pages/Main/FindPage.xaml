@@ -30,8 +30,7 @@
         <Grid
             Margin="0,16,0,0"
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            RowSpacing="20">
+            VerticalOptions="FillAndExpand">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
@@ -63,6 +62,7 @@
             <ScrollView 
                 Grid.Row="1" 
                 Orientation="Horizontal" 
+                Margin="0,20,0,0"
                 HorizontalOptions="FillAndExpand" 
                 VerticalOptions="FillAndExpand"
                 HorizontalScrollBarVisibility="Never">
@@ -113,6 +113,7 @@
                 Grid.Row="2" 
                 IsVisible="{Binding ShowSubCategories}"
                 Orientation="Horizontal"
+                Margin="0,8,0,0"
                 HorizontalOptions="FillAndExpand" 
                 VerticalOptions="FillAndExpand"
                 HorizontalScrollBarVisibility="Never">
@@ -147,6 +148,7 @@
 
             <Grid
                 Grid.Row="3"
+                Margin="0,30,0,0"
                 IsVisible="{Binding ShowBestsellers}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
@@ -214,13 +216,13 @@
                  IsVisible="{Binding ShowItems}" 
                  ItemsSource="{Binding Bestsellers}" 
                  SelectionMode="Single" 
-                 RemainingItemsThreshold="5" 
+                 RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always">
                  
                  <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
                                   EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
-                                  Command="{Binding TireProductListSelectionChangedCommand}"/>
+                                  Command="{Binding ListItemsSelectionChangedCommand}"/>
                     <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
                                   EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
                                   Command="{Binding TireProductLists_RemainingItemsThresholdReachedCommand}"/>

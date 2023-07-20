@@ -29,37 +29,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
-            BasketItems = new ObservableRangeCollection<Deneme>()
-            {
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                }
-            };
+            GetBasketItemsAndBindFromApi();
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -97,6 +67,44 @@ namespace ProsysMobile.ViewModels.Pages.Main
         
         #endregion
 
+        #region Methods
+
+        private void GetBasketItemsAndBindFromApi()
+        {
+            BasketItems = new ObservableRangeCollection<Deneme>()
+            {
+                new Deneme()
+                {
+                    Price = "$2,66",
+                    Pieces = "500 pcs",
+                    Name = "Fruits banana 100% organic",
+                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                },
+                new Deneme()
+                {
+                    Price = "$2,66",
+                    Pieces = "500 pcs",
+                    Name = "Fruits banana 100% organic",
+                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                },
+                new Deneme()
+                {
+                    Price = "$2,66",
+                    Pieces = "500 pcs",
+                    Name = "Fruits banana 100% organic",
+                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                },
+                new Deneme()
+                {
+                    Price = "$2,66",
+                    Pieces = "500 pcs",
+                    Name = "Fruits banana 100% organic",
+                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                }
+            };
+        }
+
+        #endregion
         
         public class Deneme
         {
