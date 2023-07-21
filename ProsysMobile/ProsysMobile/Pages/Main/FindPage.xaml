@@ -30,7 +30,8 @@
         <Grid
             Margin="0,16,0,0"
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand">
+            VerticalOptions="FillAndExpand"
+            RowSpacing="0">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
@@ -85,9 +86,10 @@
 
                                 <customContolsOther:CustomCategoryGrid
                                     Text="{Binding CategoryDesc}"
-                                    ImageSource="{Binding Image}"
+                                    ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
                                     ImageHeight="40"
                                     ImageWidth="40"
+                                    IsClickable="true"
                                     LabelStyle="{DynamicResource Label3}"
                                     Margin="0,0,24,0"
                                     RowSpacing="4"
@@ -135,8 +137,17 @@
                                     Text="{Binding CategoryDesc}"
                                     Color="Blue"
                                     Margin="0,0,16,0"
+                                    IsClickable="true"
                                     HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="FillAndExpand" />
+                                    VerticalOptions="FillAndExpand">
+                                    
+                                    <customContolsOther:CustomSubCategoryGrid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference LstSubCategories}, Path=BindingContext.SubCategoryClickCommand}" 
+                                            CommandParameter="{Binding .}" />
+                                    </customContolsOther:CustomSubCategoryGrid.GestureRecognizers>
+                                    
+                                </customContolsOther:CustomSubCategoryGrid>
 
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -215,7 +226,8 @@
                  Grid.Row="3" 
                  IsVisible="{Binding ShowItems}" 
                  ItemsSource="{Binding Bestsellers}" 
-                 SelectionMode="Single" 
+                 SelectionMode="Single"
+                 SelectedItem="{Binding SelectedBestseller}"
                  RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always">
                  
@@ -227,17 +239,34 @@
                                   EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
                                   Command="{Binding TireProductLists_RemainingItemsThresholdReachedCommand}"/>
                 </CollectionView.Behaviors>
-
+                 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                    
+                        
                         <customControlsOrders:OrderItemSecondary
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand" />
+                            VerticalOptions="FillAndExpand">
+                            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                        </customControlsOrders:OrderItemSecondary>
                             
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

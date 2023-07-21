@@ -1,3 +1,5 @@
+using System;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
@@ -19,6 +21,12 @@ namespace ProsysMobile.CustomControls.Other
             default(Color),
             Xamarin.Forms.BindingMode.TwoWay);
         
+        public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable),
+            typeof(bool),
+            typeof(CustomSubCategoryGrid),
+            default(bool),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
         public string Text
         {
             get => (string)GetValue(TextProperty);
@@ -29,6 +37,12 @@ namespace ProsysMobile.CustomControls.Other
         {
             get => (Color)GetValue(ColorProperty);
             set => SetValue(ColorProperty, value);
+        }
+        
+        public bool IsClickable
+        {
+            get => (bool)GetValue(IsClickableProperty);
+            set => SetValue(IsClickableProperty, value);
         }
 
         public CustomSubCategoryGrid()
@@ -52,6 +66,41 @@ namespace ProsysMobile.CustomControls.Other
             {
                 ItemLabel.TextColor = Color;
                 ItemMain.Border.Color = Color;
+            }            
+            else if (propertyName == IsClickableProperty.PropertyName)
+            {
+                if (IsClickable)
+                {
+                    ItemMain.GestureRecognizers.Add(new TapGestureRecognizer()
+                    {
+                        Command = new Command(x =>
+                        {
+                            try
+                            {
+                                Application.Current.Resources.TryGetValue("Black3", out var blackColor);
+                                var clrBlackColor = (Color?)blackColor;
+
+                                if (ItemLabel.TextColor == Color)
+                                {
+                                    if (clrBlackColor != null)
+                                    {
+                                        ItemMain.Border = new Border() { Thickness = 1, Color = (Color)clrBlackColor };
+                                        ItemLabel.TextColor = (Color)clrBlackColor;
+                                    }
+                                }
+                                else
+                                {
+                                    ItemLabel.TextColor = Color;
+                                    ItemMain.Border = new Border() { Thickness = 1, Color = Color };
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                ProsysLogger.Instance.CrashLog(ex);
+                            }
+                        })
+                    });  
+                }
             }
         }
 

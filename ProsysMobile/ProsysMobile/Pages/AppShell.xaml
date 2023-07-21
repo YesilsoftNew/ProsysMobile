@@ -30,7 +30,9 @@
         </DataTemplate>
     </Shell.MenuItemTemplate>-->
 
-    <TabBar PropertyChanged="TabBar_PropertyChanged">
+    <TabBar
+        x:Name="Tabbar"
+        PropertyChanged="TabBar_PropertyChanged">
         <Tab Icon="Home" TabIndex="0">
             <ShellContent>
                 <mainPages:HomePage />

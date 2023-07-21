@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -21,13 +22,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private double _searchTime;
         private bool _isTimerWorking = false;
+        private List<int> selectedCategories = new List<int>();
 
         
         public FindPageViewModel(IItemCategoryService itemCategoryService)
         {
             _itemCategoryService = itemCategoryService;
 
-            Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
+            MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
                 try
                 {
@@ -129,10 +131,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             set
             {
-                _categories = value;
+                _subCategories = value;
                 PropertyChanged(() => SubCategories);
             }
         }
+        
+        private Deneme _selectedBestseller;
+        public Deneme SelectedBestseller { get => _selectedBestseller; set { _selectedBestseller = value; PropertyChanged(() => SelectedBestseller); } }
+
         
         private ObservableRangeCollection<Deneme> _bestsellers;
         public ObservableRangeCollection<Deneme> Bestsellers
@@ -176,30 +182,85 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                var category = sender as ItemCategory;
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                GetCategoriesAndBindFromApi(
-                    categoryId: category.ID,
-                    isSubCategory: true
-                );
+                if (sender is ItemCategory category)
+                {
+                    var isAnySelectedCategory = selectedCategories.Any(x => x == category.ID);
 
-                ShowSubCategories = true;
+                    if (!isAnySelectedCategory)
+                    {
+                        selectedCategories = new List<int> { category.ID };
+
+                        GetCategoriesAndBindFromApi(
+                            categoryId: category.ID,
+                            isSubCategory: true
+                        );
+                    }
+                    else
+                    {
+                        selectedCategories.Remove(category.ID);
+                    }
+                    
+                    CheckFilterAndBindShowItems();
+                }
+                
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            DoubleTapping.ResumeTap();
+        });
+        
+        public ICommand SubCategoryClickCommand => new Command((sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                if (sender is ItemCategory category)
+                {
+                    var isAnySelectedCategory = selectedCategories.Any(x => x == category.ID);
+
+                    if (!isAnySelectedCategory)
+                    {
+                        selectedCategories.Add(category.ID);
+                    }
+                    else
+                    {
+                        selectedCategories.Remove(category.ID);
+                    }
+
+                    CheckFilterAndBindShowItems();
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
         });
         
         public ICommand ListItemsSelectionChangedCommand => new Command((sender) =>
         {
             try
             {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                var b = SelectedBestseller;
+
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+
+            SelectedBestseller = null;
+            DoubleTapping.ResumeTap();
         });
         
         #endregion
@@ -242,31 +303,50 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                var response = _itemCategoryService.ItemCategory(Constants.MainCategoryId, enPriorityType.UserInitiated);
-
-                if (response.IsCompleted)
-                {
-                    var result = response.Result;
+                var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
                 
-                    if (result.ResponseData != null && result.IsSuccess)
+                if (result.ResponseData != null && result.IsSuccess)
+                {
+                    if (!isSubCategory)
                     {
-                        if (!isSubCategory)
-                        {
-                            Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
-                        }
-                        else
-                        {
-                            SubCategories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
-                        }
+                        Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
                     }
+                    else
+                    {
+                        SubCategories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                        ShowSubCategories = SubCategories.Any();
+                    }
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
                 }
             }
             catch (Exception ex)
             {
+                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                
                 ProsysLogger.Instance.CrashLog(ex);
             }
-            
-            DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+        }
+
+        private void CheckFilterAndBindShowItems()
+        {
+            if (selectedCategories.Any() || !string.IsNullOrWhiteSpace(Search))
+            {
+                ShowBestsellers = false;
+                ShowItems = true;
+            }
+            else
+            {
+                if (!selectedCategories.Any())
+                {
+                    ShowSubCategories = false;
+                }
+                
+                ShowBestsellers = true;
+                ShowItems = false;
+            }
         }
         
         #endregion

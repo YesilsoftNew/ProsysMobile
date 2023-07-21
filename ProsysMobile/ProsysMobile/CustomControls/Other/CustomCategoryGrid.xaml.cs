@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using ProsysMobile.Helper;
+using Xamarin.Forms;
+using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;
 
 namespace ProsysMobile.CustomControls.Other
@@ -36,6 +39,12 @@ namespace ProsysMobile.CustomControls.Other
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
+        public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable),
+            typeof(bool),
+            typeof(CustomCategoryGrid),
+            default(bool),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
         public string Text
         {
             get => (string)GetValue(TextProperty);
@@ -64,6 +73,12 @@ namespace ProsysMobile.CustomControls.Other
         {
             get => (string)GetValue(ImageSourceProperty);
             set => SetValue(ImageSourceProperty, value);
+        }
+        
+        public bool IsClickable
+        {
+            get => (bool)GetValue(IsClickableProperty);
+            set => SetValue(IsClickableProperty, value);
         }
 
         public CustomCategoryGrid()
@@ -100,6 +115,52 @@ namespace ProsysMobile.CustomControls.Other
             else if (propertyName == ImageHeightProperty.PropertyName)
             {
                 ItemImage.HeightRequest = ImageHeight;
+            }
+            else if (propertyName == IsClickableProperty.PropertyName)
+            {
+                if (IsClickable)
+                {
+                    MainGrid.GestureRecognizers.Add(new TapGestureRecognizer()
+                    {
+                        Command = new Command(x =>
+                        {
+                            try
+                            {
+                                if (ItemPancakeView.Border == null)
+                                {
+                                    Application.Current.Resources.TryGetValue("Gray5", out var grayColor);
+                                    Application.Current.Resources.TryGetValue("Black3", out var blackColor);
+
+                                    if (grayColor != null)
+                                    {
+                                        ItemPancakeView.Border = new Border() { Thickness = 1, Color = (Color)grayColor };
+                                    }
+
+                                    if (blackColor != null)
+                                    {
+                                        ItemLabel.TextColor = (Color)blackColor;
+                                    }
+                                }
+                                else
+                                {
+                                    Application.Current.Resources.TryGetValue("Gray3", out var defaultColor);
+
+                                    ItemPancakeView.Border = null;
+                                    
+                                    if (defaultColor != null)
+                                    {
+                                        ItemLabel.TextColor = (Color)defaultColor;
+                                    }
+                                }
+                        
+                            }
+                            catch (Exception ex)
+                            {
+                                ProsysLogger.Instance.CrashLog(ex);
+                            }
+                        })
+                    });  
+                }
             }
         }
 

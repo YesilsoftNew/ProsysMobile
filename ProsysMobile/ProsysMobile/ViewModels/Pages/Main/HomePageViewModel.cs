@@ -1,20 +1,13 @@
-﻿using MvvmHelpers.Commands;
-using ProsysMobile.Helper;
-using ProsysMobile.Models.CommonModels.SQLiteModels;
+﻿using ProsysMobile.Helper;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
-using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
-using ProsysMobile.ViewModels.Pages.System;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
-using ProsysMobile.ViewModels.Pages.Order;
+using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
@@ -26,7 +19,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             _itemCategoryService = itemCategoryService;
 
-            Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
+            Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", (sender, arg) =>
             {
                 try
                 {
@@ -38,45 +31,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ProsysLogger.Instance.CrashLog(ex);
                 }
             });
-        }
-
-        public override Task InitializeAsync(object navigationData)
-        {
-            return base.InitializeAsync(navigationData);
-        }
-
-        async Task PageLoad()
-        {
-            GetCategoryAndBindFromApi(
-                categoryId: Constants.MainCategoryId
-            );
-        }
-
-        private async void GetCategoryAndBindFromApi(int categoryId)
-        {
-            try
-            {
-                var response = _itemCategoryService.ItemCategory(Constants.MainCategoryId, enPriorityType.UserInitiated);
-
-                if (response.IsCompleted)
-                {
-                    var result = response.Result;
-                
-                    if (result.ResponseData != null && result.IsSuccess)
-                    {
-                        Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
-                    
-                        return;
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-            
-            DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
         }
 
         #region Propertys
@@ -100,18 +54,58 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Commands
 
-        public ICommand CategoryClickCommand => new Command<object>(async (sender) =>
+        public ICommand CategoryClickCommand => new MvvmHelpers.Commands.Command<object>( (sender) =>
         {
             try
             {
-                var category = sender as ItemCategory;
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
+                var category = sender as ItemCategory;
+                
+                MessagingCenter.Send<HomePageViewModel, string>(this, "xxx", category.ID.ToString());
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+
+            DoubleTapping.ResumeTap();
         });
+
+        #endregion
+
+        #region Methods
+
+        private void PageLoad()
+        {
+            GetCategoryAndBindFromApi(
+                categoryId: Constants.MainCategoryId
+            );
+        }
+        
+        private async void GetCategoryAndBindFromApi(int categoryId)
+        {
+            try
+            {
+                var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
+                
+                if (result.ResponseData != null && result.IsSuccess)
+                {
+                    Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        }
 
         #endregion
 

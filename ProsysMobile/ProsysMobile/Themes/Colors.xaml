@@ -26,6 +26,7 @@
     <Color x:Key="Gray4">#7C7C7C</Color>
     <Color x:Key="Gray5">#D3D3D3</Color>
     
+    <Color x:Key="TransparentColor">Transparent</Color>
 
     <!--#endregion-->
 

@@ -3,19 +3,30 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    xmlns:trns="clr-namespace:ProsysMobile.Helper"
                    x:Class="ProsysMobile.CustomControls.Other.CustomCategoryGrid"
+                   xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
                    VerticalOptions="FillAndExpand"
-                   HorizontalOptions="FillAndExpand">
+                   HorizontalOptions="FillAndExpand"
+                   x:Name="MainGrid">
 
     <Grid.RowDefinitions>
         <RowDefinition Height="auto"/>
         <RowDefinition Height="auto"/>
     </Grid.RowDefinitions>
     
-    <Image
-        x:Name="ItemImage"
-        Grid.Row="0"
-        HorizontalOptions="Center"
-        VerticalOptions="Center"/>
+    <yummy:PancakeView 
+        x:Name="ItemPancakeView"
+        Grid.Column="0"
+        CornerRadius="10"
+        VerticalOptions="CenterAndExpand"
+        HorizontalOptions="CenterAndExpand">
+
+        <Image
+            x:Name="ItemImage"
+            Grid.Row="0"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"/>
+
+    </yummy:PancakeView>
                     
     <Label
         x:Name="ItemLabel"
