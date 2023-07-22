@@ -19,11 +19,11 @@ namespace ProsysMobile.ViewModels.Pages.System
     public class LoginPageViewModel : ViewModelBase
     {
         private ISignInService _signInService;
-        private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
+        private IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
 
-        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, ISignInService signInService)
+        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, ISignInService signInService)
         {
-            _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
+            _defaultSettingsSqLiteService = defaultSettingsSqLiteService;
             _signInService = signInService;
         }
 
@@ -64,8 +64,6 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                //await NavigationService.SetMainPageAsync<AppShellViewModel>();
-
                 NavigationService.NavigateToBackdropAsync<CreateAccountPageViewModel>();
             }
             catch (Exception ex)
@@ -75,32 +73,37 @@ namespace ProsysMobile.ViewModels.Pages.System
         });
         #endregion
 
-        async Task GetUserAuthAsync()
+        private async Task GetUserAuthAsync()
         {
             try
             {
-                if (IsBusy) return;
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                IsBusy = true;
 
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
                     DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
-                    IsBusy = false;
+                    
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(Email))
                 {
                     DialogService.WarningToastMessage("Lütfen email adresinizi yazınız! QQQ");
-                    IsBusy = false;
+
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(Password))
                 {
                     DialogService.WarningToastMessage("Lütfen şifrenizi yazınız! QQQ");
-                    IsBusy = false;
+                   
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
@@ -110,8 +113,6 @@ namespace ProsysMobile.ViewModels.Pages.System
                 signIn.Password = Password;
                 signIn.DeviceGuid = Guid.NewGuid();
                 signIn.Token = string.Empty;
-
-                //var result = await RunSafeApi(ApiClient.Instance.AuthApi.SignIn(signIn));
 
                 var result = await _signInService.SignIn(signIn, Models.CommonModels.Enums.enPriorityType.UserInitiated);
 
@@ -132,31 +133,26 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                     await NavigationService.SetMainPageAsync<AppShellViewModel>();
 
-                    List<DefaultSettings> TokenSettings = new List<DefaultSettings>()
+                    var tokenSettings = new List<DefaultSettings>()
                     {
                         new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
                         new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},
                         new DefaultSettings{Key="UserId",Value=GlobalSetting.Instance.User.ID.ToString()}
                     };
 
-                    _defaultSettingsSQLiteService.SaveAll(TokenSettings);
-
-                    var asdasd = _defaultSettingsSQLiteService.getSettingsAll();
+                    _defaultSettingsSqLiteService.SaveAll(tokenSettings);
                 }
                 else
                 {
                     DialogService.WarningToastMessage("Email veya şifreniz hatalı! QQQ");
-                    IsBusy = false;
-                    return;
                 }
-
-                IsBusy = false;
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
-                IsBusy = false;
             }
+            
+            DoubleTapping.ResumeTap();
         }
     }
 }

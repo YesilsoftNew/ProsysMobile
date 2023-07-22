@@ -73,7 +73,7 @@
         HorizontalOptions="CenterAndExpand"
         VerticalOptions="CenterAndExpand"/>
     
-    <controlbuttons:CustomStandardImageButton 
+    <Image 
         Grid.Row="3" 
         Grid.Column="1" 
         x:Name="ItemImageButton"

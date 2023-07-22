@@ -39,7 +39,7 @@ namespace ProsysMobile.CustomControls.Other
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
-        public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable),
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected),
             typeof(bool),
             typeof(CustomCategoryGrid),
             default(bool),
@@ -75,10 +75,10 @@ namespace ProsysMobile.CustomControls.Other
             set => SetValue(ImageSourceProperty, value);
         }
         
-        public bool IsClickable
+        public bool IsSelected
         {
-            get => (bool)GetValue(IsClickableProperty);
-            set => SetValue(IsClickableProperty, value);
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
 
         public CustomCategoryGrid()
@@ -116,50 +116,41 @@ namespace ProsysMobile.CustomControls.Other
             {
                 ItemImage.HeightRequest = ImageHeight;
             }
-            else if (propertyName == IsClickableProperty.PropertyName)
+            else if (propertyName == IsSelectedProperty.PropertyName)
             {
-                if (IsClickable)
+                try
                 {
-                    MainGrid.GestureRecognizers.Add(new TapGestureRecognizer()
+                    if (IsSelected)
                     {
-                        Command = new Command(x =>
+                        Application.Current.Resources.TryGetValue("Gray5", out var grayColor);
+                        Application.Current.Resources.TryGetValue("Black3", out var blackColor);
+
+                        if (grayColor != null)
                         {
-                            try
-                            {
-                                if (ItemPancakeView.Border == null)
-                                {
-                                    Application.Current.Resources.TryGetValue("Gray5", out var grayColor);
-                                    Application.Current.Resources.TryGetValue("Black3", out var blackColor);
+                            ItemPancakeView.Border = new Border() { Thickness = 1, Color = (Color)grayColor };
+                        }
 
-                                    if (grayColor != null)
-                                    {
-                                        ItemPancakeView.Border = new Border() { Thickness = 1, Color = (Color)grayColor };
-                                    }
+                        if (blackColor != null)
+                        {
+                            ItemLabel.TextColor = (Color)blackColor;
+                        }
+                    }
+                    else
+                    {
+                        Application.Current.Resources.TryGetValue("Gray3", out var defaultColor);
 
-                                    if (blackColor != null)
-                                    {
-                                        ItemLabel.TextColor = (Color)blackColor;
-                                    }
-                                }
-                                else
-                                {
-                                    Application.Current.Resources.TryGetValue("Gray3", out var defaultColor);
-
-                                    ItemPancakeView.Border = null;
-                                    
-                                    if (defaultColor != null)
-                                    {
-                                        ItemLabel.TextColor = (Color)defaultColor;
-                                    }
-                                }
+                        ItemPancakeView.Border = null;
                         
-                            }
-                            catch (Exception ex)
-                            {
-                                ProsysLogger.Instance.CrashLog(ex);
-                            }
-                        })
-                    });  
+                        if (defaultColor != null)
+                        {
+                            ItemLabel.TextColor = (Color)defaultColor;
+                        }
+                    }
+            
+                }
+                catch (Exception ex)
+                {
+                    ProsysLogger.Instance.CrashLog(ex);
                 }
             }
         }

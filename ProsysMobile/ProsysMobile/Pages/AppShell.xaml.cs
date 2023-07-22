@@ -18,7 +18,7 @@ namespace ProsysMobile.Pages
         {
             InitializeComponent();
             
-            MessagingCenter.Subscribe<HomePageViewModel, string>(this, "xxx", (sender, arg) =>
+            MessagingCenter.Subscribe<HomePageViewModel, string>(this, "OpenFindPageForMainPageClickCategory", (sender, arg) =>
             {
                 try
                 {

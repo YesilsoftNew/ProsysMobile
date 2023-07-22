@@ -15,7 +15,7 @@
                          IsSetPanListener="True"
                          ios:Page.UseSafeArea="true"
                          mc:Ignorable="d"
-                         x:Class="ProsysMobile.Pages.Order.OrderDetail">
+                         x:Class="ProsysMobile.Pages.Order.OrderDetailPage">
 
     <backdrop:CustomBackdrop.PageContent>
         <ContentView>
@@ -54,28 +54,28 @@
                         Grid.Row="0"
                         WidthRequest="200"
                         HeightRequest="200"
-                        Source="http://yas.yesilsoft.net/Images/Spices.png"
+                        Source="{Binding ItemImage}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
                     <Label
                         Grid.Row="1"
                         Margin="0,20,0,0"
-                        Text="$2,66"
+                        Text="{Binding ItemPrice}"
                         Style="{DynamicResource Header4}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
                     <Label
                         Grid.Row="2"
-                        Text="SUNTAT Gehackte Tomaten"
+                        Text="{Binding ItemName}"
                         Style="{DynamicResource Header5}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
                     <Label
                         Grid.Row="3"
-                        Text="750 pcs"
+                        Text="{Binding ItemPieces}"
                         Style="{DynamicResource Label2}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
@@ -85,7 +85,8 @@
                         Orientation="Horizontal" 
                         Margin="0,24,0,0"
                         HorizontalOptions="FillAndExpand" 
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="FillAndExpand"
+                        HorizontalScrollBarVisibility="Never">
                 
                         <FlexLayout
                             x:Name="LstSubCategories"
@@ -148,7 +149,7 @@
                                 Grid.Row="1"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="StartAndExpand"
-                                Text="0"
+                                Text="{Binding ItemPurchaseQtyText}"
                                 FontSize="{DynamicResource Regular}"
                                 FontFamily="poppins_semibold"
                                 Keyboard="Numeric"
@@ -159,6 +160,7 @@
                         <Button
                                 Grid.Column="1"
                                 Text="Add Basket"
+                                Command="{Binding AddBasketClickCommand}"
                                 Style="{DynamicResource Button.Primary}"
                                 BackgroundColor="{DynamicResource Color5}"
                                 VerticalOptions="EndAndExpand"

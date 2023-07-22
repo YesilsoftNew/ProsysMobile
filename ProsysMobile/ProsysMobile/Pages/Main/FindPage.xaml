@@ -89,7 +89,7 @@
                                     ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
                                     ImageHeight="40"
                                     ImageWidth="40"
-                                    IsClickable="true"
+                                    IsSelected="{Binding IsSelected}"
                                     LabelStyle="{DynamicResource Label3}"
                                     Margin="0,0,24,0"
                                     RowSpacing="4"
@@ -229,7 +229,8 @@
                  SelectionMode="Single"
                  SelectedItem="{Binding SelectedBestseller}"
                  RemainingItemsThreshold="5"
-                 VerticalScrollBarVisibility="Always">
+                 VerticalScrollBarVisibility="Always"
+                 Margin="0,8,0,0">
                  
                  <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"

@@ -8,9 +8,13 @@ using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
+using ProsysMobile.ViewModels.Pages.Order;
+using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
@@ -22,7 +26,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private double _searchTime;
         private bool _isTimerWorking = false;
-        private List<int> selectedCategories = new List<int>();
+        private List<CategoryFilter> _selectedCategories = new List<CategoryFilter>();
+        private int? _mainPageClickedCategoryId = null;
 
         
         public FindPageViewModel(IItemCategoryService itemCategoryService)
@@ -41,6 +46,21 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ProsysLogger.Instance.CrashLog(ex);
                 }
             });
+            
+            MessagingCenter.Subscribe<HomePageViewModel, string>(this, "OpenFindPageForMainPageClickCategory", (sender, arg) =>
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(arg))
+                    {
+                        _mainPageClickedCategoryId = Convert.ToInt32(arg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ProsysLogger.Instance.CrashLog(ex);
+                }
+            });
         }
 
         private void PageLoad()
@@ -48,8 +68,29 @@ namespace ProsysMobile.ViewModels.Pages.Main
             GetCategoriesAndBindFromApi(
                 categoryId: Constants.MainCategoryId,
                 isSubCategory: false
-            );
-            
+             );
+
+            // if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
+            // {
+            //     Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
+            //         
+            //     _selectedCategories = new List<CategoryFilter>
+            //     {
+            //         new CategoryFilter()
+            //         {
+            //             Id = mainPageClickedCategoryId,
+            //             IsMain = true
+            //         }
+            //     };
+            //
+            //     GetCategoriesAndBindFromApi(
+            //         categoryId: mainPageClickedCategoryId,
+            //         isSubCategory: false
+            //     );
+            //         
+            //     CheckFilterAndBindShowItems();   
+            // }
+
             Bestsellers = new ObservableRangeCollection<Deneme>()
             {
                 new Deneme()
@@ -102,13 +143,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private string _search;
         public string Search { get => _search; set { _search = value; PropertyChanged(() => Search); } }
         
-        private ObservableRangeCollection<ItemCategory> _categories;
-        public ObservableRangeCollection<ItemCategory> Categories
+        private IList<ItemCategory> _categories;
+        public IList<ItemCategory> Categories
         {
             get
             {
                 if (_categories == null)
-                    _categories = new ObservableRangeCollection<ItemCategory>();
+                    _categories = new ObservableCollection<ItemCategory>();
 
                 return _categories;
             }
@@ -186,11 +227,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemCategory category)
                 {
-                    var isAnySelectedCategory = selectedCategories.Any(x => x == category.ID);
+                    category.IsSelected = !category.IsSelected;
 
-                    if (!isAnySelectedCategory)
+                    var selectedCategory = Categories.FirstOrDefault(x => x.ID == category.ID);
+
+                    selectedCategory = category;
+
+                    if (selectedCategory.IsSelected)
                     {
-                        selectedCategories = new List<int> { category.ID };
+                        _selectedCategories = new List<CategoryFilter>
+                        {
+                            new CategoryFilter()
+                            {
+                                Id = category.ID,
+                                IsMain = true
+                            }
+                        };
 
                         GetCategoriesAndBindFromApi(
                             categoryId: category.ID,
@@ -199,7 +251,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     }
                     else
                     {
-                        selectedCategories.Remove(category.ID);
+                        _selectedCategories = new List<CategoryFilter>();
                     }
                     
                     CheckFilterAndBindShowItems();
@@ -222,15 +274,21 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemCategory category)
                 {
-                    var isAnySelectedCategory = selectedCategories.Any(x => x == category.ID);
+                    var isAnySelectedCategory = _selectedCategories.Any(x => x.Id == category.ID);
 
                     if (!isAnySelectedCategory)
                     {
-                        selectedCategories.Add(category.ID);
+                        _selectedCategories = _selectedCategories.Where(x => x.IsMain).ToList();
+
+                        _selectedCategories.Add(new CategoryFilter()
+                        {
+                            Id = category.ID,
+                            IsMain = false
+                        });
                     }
                     else
                     {
-                        selectedCategories.Remove(category.ID);
+                        _selectedCategories = _selectedCategories.Where(x => x.IsMain).ToList();
                     }
 
                     CheckFilterAndBindShowItems();
@@ -251,8 +309,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                var b = SelectedBestseller;
-
+                var navigationModel = new NavigationModel<int>
+                {
+                    Model = SelectedBestseller.Id
+                };
+                
+                NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {
@@ -332,14 +394,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void CheckFilterAndBindShowItems()
         {
-            if (selectedCategories.Any() || !string.IsNullOrWhiteSpace(Search))
+            if (_selectedCategories.Any() || !string.IsNullOrWhiteSpace(Search))
             {
                 ShowBestsellers = false;
                 ShowItems = true;
             }
             else
             {
-                if (!selectedCategories.Any())
+                if (!_selectedCategories.Any())
                 {
                     ShowSubCategories = false;
                 }
@@ -353,10 +415,17 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         public class Deneme
         {
+            public int Id { get; set; } = 1;
             public string Name { get; set; }
             public string Price { get; set; }
             public string Pieces { get; set; }
             public string Image { get; set; }
+        }
+
+        public class CategoryFilter
+        {
+            public bool IsMain { get; set; }
+            public int Id { get; set; }
         }
     }
 }

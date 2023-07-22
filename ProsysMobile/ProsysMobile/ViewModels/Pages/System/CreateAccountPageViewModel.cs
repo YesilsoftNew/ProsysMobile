@@ -61,46 +61,54 @@ namespace ProsysMobile.ViewModels.Pages.System
         });
         #endregion
 
-        async Task GetUserSignUpAsync()
+        private async Task GetUserSignUpAsync()
         {
             try
             {
-                if (IsBusy) return;
-
-                IsBusy = true;
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
                     DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
-                    IsBusy = false;
+                    
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(FirstName))
                 {
                     DialogService.WarningToastMessage("Lütfen isminizi yazınız! QQQ");
-                    IsBusy = false;
+                    
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(Surname))
                 {
                     DialogService.WarningToastMessage("Lütfen soyisminizi yazınız! QQQ");
-                    IsBusy = false;
+
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(Email))
                 {
                     DialogService.WarningToastMessage("Lütfen email adresinizi yazınız! QQQ");
-                    IsBusy = false;
+                    
+                    DoubleTapping.ResumeTap();
+                    
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(CompanyCode))
                 {
                     DialogService.WarningToastMessage("Lütfen şirket kodunu yazınız! QQQ");
-                    IsBusy = false;
+                    
+                    DoubleTapping.ResumeTap();
+
                     return;
                 }
 
@@ -120,18 +128,17 @@ namespace ProsysMobile.ViewModels.Pages.System
                 else
                 {
                     DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
-                    IsBusy = false;
-                    return;
                 }
 
-                IsBusy = false;
             }
             catch (Exception ex)
             {
                 DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
+                
                 ProsysLogger.Instance.CrashLog(ex);
-                IsBusy = false;
             }
+            
+            DoubleTapping.ResumeTap();
         }
     }
 }

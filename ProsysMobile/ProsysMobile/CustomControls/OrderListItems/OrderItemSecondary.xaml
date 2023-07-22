@@ -22,7 +22,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="AUTO"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="AUTO"/>
         </Grid.ColumnDefinitions>
 
@@ -45,10 +45,10 @@
         </yummy:PancakeView>
 
         <Grid
-                  Grid.Column="1"
-                  HorizontalOptions="FillAndExpand"
-                  VerticalOptions="FillAndExpand"
-                  RowSpacing="3">
+            Grid.Column="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="3">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
@@ -57,35 +57,35 @@
             </Grid.RowDefinitions>
 
             <Label
-                        x:Name="ItemName"
-                        Grid.Row="0"
-                        Style="{DynamicResource Header3}"
-                        HorizontalOptions="StartAndExpand"
-                        VerticalOptions="FillAndExpand"/>
+                x:Name="ItemName"
+                Grid.Row="0"
+                Style="{DynamicResource Header3}"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="FillAndExpand"/>
 
             <Label
-                        x:Name="ItemPieces"
-                        Grid.Row="1"
-                        Style="{DynamicResource Label2}"
-                        HorizontalOptions="StartAndExpand"
-                        VerticalOptions="FillAndExpand"/>
+                x:Name="ItemPieces"
+                Grid.Row="1"
+                Style="{DynamicResource Label2}"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="FillAndExpand"/>
 
             <Label
-                        x:Name="ItemPrice"
-                        Grid.Row="2"
-                        Style="{DynamicResource Header4}"
-                        HorizontalOptions="Start"
-                        VerticalOptions="EndAndExpand"/>
+                x:Name="ItemPrice"
+                Grid.Row="2"
+                Style="{DynamicResource Header4}"
+                HorizontalOptions="Start"
+                VerticalOptions="EndAndExpand"/>
 
         </Grid>
 
-        <controlbuttons:CustomStandardImageButton 
-                  Grid.Column="2" 
-                  x:Name="ItemImageButton"
-                  Source="AddBasket"
-                  HorizontalOptions="End"
-                  VerticalOptions="EndAndExpand"
-                  Style="{DynamicResource ImageButton2}" />
+        <Image
+            Grid.Column="2" 
+            x:Name="ItemImageButton"
+            Source="AddBasket"
+            HorizontalOptions="End"
+            VerticalOptions="EndAndExpand"
+            Style="{DynamicResource ImageButton2}" />
 
     </Grid>
 
