@@ -7,6 +7,8 @@ using System.Windows.Input;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -17,9 +19,11 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         NavigationModel<int> _orderDetailPageViewModelViewParamModel;
 
-        public OrderDetailPageViewModel()
+        private readonly IItemDetailService _itemDetailService;
+        
+        public OrderDetailPageViewModel(IItemDetailService itemDetailService)
         {
-            
+            _itemDetailService = itemDetailService;
         }
         
         public override async Task InitializeAsync(object navigationData)
@@ -50,22 +54,8 @@ namespace ProsysMobile.ViewModels.Pages.Order
         private int _itemPurchaseQtyText;
         public int ItemPurchaseQtyText { get => _itemPurchaseQtyText; set { _itemPurchaseQtyText = value; PropertyChanged(() => ItemPurchaseQtyText); } }
         
-        private IList<ItemCategory> _categories;
-        public IList<ItemCategory> Categories
-        {
-            get
-            {
-                if (_categories == null)
-                    _categories = new ObservableCollection<ItemCategory>();
-
-                return _categories;
-            }
-            set
-            {
-                _categories = value;
-                PropertyChanged(() => Categories);
-            }
-        }
+        private string _categories;
+        public string Categories { get => _categories; set { _categories = value; PropertyChanged(() => Categories); } }
         
         #endregion
 
@@ -99,45 +89,53 @@ namespace ProsysMobile.ViewModels.Pages.Order
 
         private async void PageLoad()
         {
-            if (Debugger.IsAttached)
+            try
             {
-                ItemName = "SUNTAT Gehackte Tomaten";
-                ItemImage = "http://yas.yesilsoft.net/Images/Legumes.png";
-                ItemPieces = "750 pcs";
-                ItemPrice = "100 TL";
-                ItemPurchaseQtyText = 0;
-                
-                Categories = new List<ItemCategory>()
+                // if (Debugger.IsAttached)
+                // {
+                //     ItemName = "SUNTAT Gehackte Tomaten";
+                //     ItemImage = "http://yas.yesilsoft.net/Images/Legumes.png";
+                //     ItemPieces = "750 pcs";
+                //     ItemPrice = "100 TL";
+                //     ItemPurchaseQtyText = 0;
+                //     Categories = "Bakliyat>Buğday>Ekmek";
+                //     
+                //     return;
+                // }
+
+                if (_orderDetailPageViewModelViewParamModel?.Model != null)
                 {
-                    new ItemCategory()
+                    var itemId = _orderDetailPageViewModelViewParamModel.Model;
+
+                    var item = await _itemDetailService.GetDetail(itemId, enPriorityType.UserInitiated);
+
+                    if (item.ResponseData != null && item.IsSuccess)
                     {
-                        CategoryDesc = "Legumes",
-                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                    },
-                    new ItemCategory()
-                    {
-                        CategoryDesc = "Beverages",
-                        Image = "http://yas.yesilsoft.net/Images/Beverages.png"
-                    },
-                    new ItemCategory()
-                    {
-                        CategoryDesc = "Groceriesh",
-                        Image = "http://yas.yesilsoft.net/Images/Groceriesh.png"
-                    },
-                    new ItemCategory()
-                    {
-                        CategoryDesc = "Discount",
-                        Image = "http://yas.yesilsoft.net/Images/Discount.png"
-                    },
-                    new ItemCategory()
-                    {
-                        CategoryDesc = "Other",
-                        Image = "http://yas.yesilsoft.net/Images/Other.png"
+                        var responseModel = item.ResponseData;
+                
+                        ItemName = responseModel.Item.Name;
+                        ItemImage = responseModel.Item.Image;
+                        ItemPieces = responseModel.Item.Count;
+                        ItemPrice = responseModel.Item.Price;
+                        Categories = responseModel.Categories;
+                        ItemPurchaseQtyText = 0;
                     }
-                };
+                    else
+                    {
+                        DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                    }    
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
 
-
-                var itemId = _orderDetailPageViewModelViewParamModel.Model;
+                ProsysLogger.Instance.CrashLog(ex);
             }
         }
 

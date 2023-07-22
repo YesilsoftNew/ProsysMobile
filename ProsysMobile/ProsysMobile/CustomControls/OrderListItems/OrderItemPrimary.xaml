@@ -13,22 +13,37 @@
             <RowDefinition Height="AUTO"></RowDefinition>
       </Grid.RowDefinitions>
       
-      <yummy:PancakeView 
+      <AbsoluteLayout
             Grid.Row="0"
-            Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
-            CornerRadius="16"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="Start">
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+            <yummy:PancakeView 
+                  AbsoluteLayout.LayoutFlags="All" 
+                  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+                  CornerRadius="16"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="Start">
                             
-            <Image
-                  x:Name="ItemImage"
-                  WidthRequest="100"
-                  HeightRequest="100"
-                  Source="http://yas.yesilsoft.net/Images/Spices.png"
-                  HorizontalOptions="Start"
-                  VerticalOptions="FillAndExpand" />
+                  <Image
+                        x:Name="ItemImage"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Source="http://yas.yesilsoft.net/Images/Spices.png"
+                        HorizontalOptions="Start"
+                        VerticalOptions="FillAndExpand" />
                             
-      </yummy:PancakeView>
+            </yummy:PancakeView>
+
+            <Image 
+                  WidthRequest="35"
+                  HeightRequest="35"
+                  Source="BadgeAdd"
+                  AbsoluteLayout.LayoutFlags="PositionProportional"
+                  AbsoluteLayout.LayoutBounds="1,0,35,35" />
+
+      </AbsoluteLayout>
                         
       <Label
             x:Name="ItemPrice"

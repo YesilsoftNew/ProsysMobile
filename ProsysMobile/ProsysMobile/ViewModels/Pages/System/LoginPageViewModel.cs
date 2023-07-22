@@ -12,6 +12,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ProsysMobile.Models.CommonModels;
+using ProsysMobile.ViewModels.Pages.Order;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
@@ -51,8 +53,15 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
+                var navigationModel = new NavigationModel<int>
+                {
+                    Model = 1
+                };
+                
+                NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                
+                return;
                 await GetUserAuthAsync();
-
             }
             catch (Exception ex)
             {

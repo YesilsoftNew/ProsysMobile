@@ -161,6 +161,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Account.png" />
+    <BundleResource Include="Resources\BadgeAdd.png" />
+    <BundleResource Include="Resources\BadgeAdd@2x.png" />
+    <BundleResource Include="Resources\BadgeAdd@3x.png" />
     <BundleResource Include="Resources\CloseGreen@2x.png" />
     <BundleResource Include="Resources\CloseGreen@3x.png" />
     <BundleResource Include="Resources\CloseYellow@2x.png" />

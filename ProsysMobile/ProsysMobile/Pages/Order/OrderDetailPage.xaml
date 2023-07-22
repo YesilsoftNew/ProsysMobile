@@ -48,6 +48,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
                     <Image
@@ -80,43 +81,16 @@
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
-                    <ScrollView 
-                        Grid.Row="3" 
-                        Orientation="Horizontal" 
+                    <Label
+                        Grid.Row="4"
+                        Text="{Binding Categories}"
+                        Style="{DynamicResource Label2}"
                         Margin="0,24,0,0"
-                        HorizontalOptions="FillAndExpand" 
-                        VerticalOptions="FillAndExpand"
-                        HorizontalScrollBarVisibility="Never">
-                
-                        <FlexLayout
-                            x:Name="LstSubCategories"
-                            HeightRequest="24"
-                            Direction="Row"
-                            Wrap="NoWrap"
-                            BindableLayout.ItemsSource="{Binding Categories}"
-                            Margin="16,20,0,0"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
-            
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                        
-                                    <customContolsOther:CustomSubCategoryGrid
-                                        Text="{Binding CategoryDesc}"
-                                        Color="Blue"
-                                        Margin="0,0,16,0"
-                                        HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="FillAndExpand" />
-            
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                    
-                        </FlexLayout>
-            
-                    </ScrollView>
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="FillAndExpand"/>
                     
                     <Grid
-                        Grid.Row="4"
+                        Grid.Row="5"
                         ColumnSpacing="16"
                         Margin="16,40,16,0"
                         HorizontalOptions="FillAndExpand"

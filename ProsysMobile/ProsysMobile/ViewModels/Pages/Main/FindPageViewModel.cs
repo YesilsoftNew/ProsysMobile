@@ -13,6 +13,7 @@ using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
+using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Order;
 using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
@@ -22,7 +23,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
     public class FindPageViewModel : ViewModelBase
     {
         private IItemCategoryService _itemCategoryService;
-
+        private IItemsService _itemsService;
 
         private double _searchTime;
         private bool _isTimerWorking = false;
@@ -30,9 +31,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private int? _mainPageClickedCategoryId = null;
 
         
-        public FindPageViewModel(IItemCategoryService itemCategoryService)
+        public FindPageViewModel(IItemCategoryService itemCategoryService,IItemsService itemsService)
         {
             _itemCategoryService = itemCategoryService;
+            itemsService = itemsService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
@@ -63,34 +65,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
             });
         }
 
-        private void PageLoad()
+        private async void PageLoad()
         {
-            GetCategoriesAndBindFromApi(
-                categoryId: Constants.MainCategoryId,
-                isSubCategory: false
-             );
-
-            // if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
-            // {
-            //     Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
-            //         
-            //     _selectedCategories = new List<CategoryFilter>
-            //     {
-            //         new CategoryFilter()
-            //         {
-            //             Id = mainPageClickedCategoryId,
-            //             IsMain = true
-            //         }
-            //     };
-            //
-            //     GetCategoriesAndBindFromApi(
-            //         categoryId: mainPageClickedCategoryId,
-            //         isSubCategory: false
-            //     );
-            //         
-            //     CheckFilterAndBindShowItems();   
-            // }
-
             Bestsellers = new ObservableRangeCollection<Deneme>()
             {
                 new Deneme()
@@ -122,6 +98,33 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     Image = "http://yas.yesilsoft.net/Images/Legumes.png"
                 }
             };
+            
+            await GetCategoriesAndBindFromApi(
+                categoryId: Constants.MainCategoryId,
+                isSubCategory: false
+             );
+
+            if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
+            {
+                Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
+                    
+                _selectedCategories = new List<CategoryFilter>
+                {
+                    new CategoryFilter()
+                    {
+                        Id = mainPageClickedCategoryId,
+                        IsMain = true
+                    }
+                };
+            
+                GetCategoriesAndBindFromApi(
+                    categoryId: mainPageClickedCategoryId,
+                    isSubCategory: true
+                );
+                    
+                CheckFilterAndBindShowItems();   
+            }
+            
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -143,13 +146,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private string _search;
         public string Search { get => _search; set { _search = value; PropertyChanged(() => Search); } }
         
-        private IList<ItemCategory> _categories;
-        public IList<ItemCategory> Categories
+        private ObservableRangeCollection<ItemCategory> _categories;
+        public ObservableRangeCollection<ItemCategory> Categories
         {
             get
             {
                 if (_categories == null)
-                    _categories = new ObservableCollection<ItemCategory>();
+                    _categories = new ObservableRangeCollection<ItemCategory>();
 
                 return _categories;
             }
@@ -157,6 +160,23 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 _categories = value;
                 PropertyChanged(() => Categories);
+            }
+        }
+        
+        private ObservableRangeCollection<ItemCategory> _categoriesClone;
+        public ObservableRangeCollection<ItemCategory> CategoriesClone
+        {
+            get
+            {
+                if (_categoriesClone == null)
+                    _categoriesClone = new ObservableRangeCollection<ItemCategory>();
+
+                return _categoriesClone;
+            }
+            set
+            {
+                _categoriesClone = value;
+                PropertyChanged(() => CategoriesClone);
             }
         }
         
@@ -232,6 +252,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     var selectedCategory = Categories.FirstOrDefault(x => x.ID == category.ID);
 
                     selectedCategory = category;
+                    
 
                     if (selectedCategory.IsSelected)
                     {
@@ -361,7 +382,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             
         }
         
-        private async void GetCategoriesAndBindFromApi(int categoryId, bool isSubCategory)
+        private async Task GetCategoriesAndBindFromApi(int categoryId, bool isSubCategory)
         {
             try
             {
@@ -372,6 +393,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     if (!isSubCategory)
                     {
                         Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                        CategoriesClone = Categories;
                     }
                     else
                     {
