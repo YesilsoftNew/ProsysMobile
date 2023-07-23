@@ -34,7 +34,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         public FindPageViewModel(IItemCategoryService itemCategoryService,IItemsService itemsService)
         {
             _itemCategoryService = itemCategoryService;
-            itemsService = itemsService;
+            _itemsService = itemsService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
@@ -67,64 +67,75 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private async void PageLoad()
         {
-            Bestsellers = new ObservableRangeCollection<Deneme>()
+            try
             {
-                new Deneme()
+                IsBusy = true;
+                
+                Bestsellers = new ObservableRangeCollection<Deneme>()
                 {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                }
-            };
-            
-            await GetCategoriesAndBindFromApi(
-                categoryId: Constants.MainCategoryId,
-                isSubCategory: false
-             );
-
-            if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
-            {
-                Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
-                    
-                _selectedCategories = new List<CategoryFilter>
-                {
-                    new CategoryFilter()
+                    new Deneme()
                     {
-                        Id = mainPageClickedCategoryId,
-                        IsMain = true
+                        Price = "$2,66",
+                        Pieces = "500 pcs",
+                        Name = "Fruits banana 100% organic",
+                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                    },
+                    new Deneme()
+                    {
+                        Price = "$2,66",
+                        Pieces = "500 pcs",
+                        Name = "Fruits banana 100% organic",
+                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                    },
+                    new Deneme()
+                    {
+                        Price = "$2,66",
+                        Pieces = "500 pcs",
+                        Name = "Fruits banana 100% organic",
+                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                    },
+                    new Deneme()
+                    {
+                        Price = "$2,66",
+                        Pieces = "500 pcs",
+                        Name = "Fruits banana 100% organic",
+                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
                     }
                 };
-            
-                GetCategoriesAndBindFromApi(
-                    categoryId: mainPageClickedCategoryId,
-                    isSubCategory: true
-                );
-                    
-                CheckFilterAndBindShowItems();   
+                
+                await GetCategoriesAndBindFromApi(
+                    categoryId: Constants.MainCategoryId,
+                    isSubCategory: false
+                 );
+
+                if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
+                {
+                    if (Categories != null)
+                        Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
+
+                    _selectedCategories = new List<CategoryFilter>
+                    {
+                        new CategoryFilter()
+                        {
+                            Id = mainPageClickedCategoryId,
+                            IsMain = true
+                        }
+                    };
+                
+                    await GetCategoriesAndBindFromApi(
+                        categoryId: mainPageClickedCategoryId,
+                        isSubCategory: true
+                    );
+                        
+                    CheckFilterAndBindShowItems();   
+                }
             }
-            
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -239,20 +250,21 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
         
-        public ICommand MainCategoryClickCommand => new Command((sender) =>
+        public ICommand MainCategoryClickCommand => new Command(async (sender) =>
         {
             try
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
+                IsBusy = true;
+                
                 if (sender is ItemCategory category)
                 {
                     category.IsSelected = !category.IsSelected;
-
+                    
                     var selectedCategory = Categories.FirstOrDefault(x => x.ID == category.ID);
 
                     selectedCategory = category;
-                    
 
                     if (selectedCategory.IsSelected)
                     {
@@ -265,7 +277,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                             }
                         };
 
-                        GetCategoriesAndBindFromApi(
+                        await GetCategoriesAndBindFromApi(
                             categoryId: category.ID,
                             isSubCategory: true
                         );
@@ -283,7 +295,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
-            
+
+            IsBusy = false;
             DoubleTapping.ResumeTap();
         });
         
@@ -377,9 +390,33 @@ namespace ProsysMobile.ViewModels.Pages.Main
             });
         }
 
-        private void GetItemsAndBindFromApi()
+        private async void GetItemsAndBindFromApi()
         {
-            
+            try
+            {
+                IsBusy = true;
+
+                var selectedCategoriesStr = string.Join(",", _selectedCategories);
+                
+                var result = await _itemsService.GetItems(Search, selectedCategoriesStr, 0, enPriorityType.UserInitiated);
+
+                if (result.ResponseData != null && result.IsSuccess)
+                {
+                    //gelen item'ı list'e basma işlemi yapılacak.
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
         }
         
         private async Task GetCategoriesAndBindFromApi(int categoryId, bool isSubCategory)

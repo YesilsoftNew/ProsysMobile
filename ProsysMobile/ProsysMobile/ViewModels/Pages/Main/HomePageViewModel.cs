@@ -87,6 +87,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
+                IsBusy = true;
+                
                 var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
                 
                 if (result.ResponseData != null && result.IsSuccess)
@@ -105,6 +107,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            IsBusy = false;
         }
 
         #endregion

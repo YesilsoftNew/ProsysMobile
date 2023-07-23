@@ -53,14 +53,6 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                var navigationModel = new NavigationModel<int>
-                {
-                    Model = 1
-                };
-                
-                NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
-                
-                return;
                 await GetUserAuthAsync();
             }
             catch (Exception ex)
@@ -86,16 +78,18 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
+                IsBusy = true;
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-
+                var isError = false;
+                
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
                     DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
                     
                     DoubleTapping.ResumeTap();
 
-                    return;
+                    isError = true;
                 }
 
                 if (string.IsNullOrWhiteSpace(Email))
@@ -104,7 +98,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                     DoubleTapping.ResumeTap();
 
-                    return;
+                    isError = true;
                 }
 
                 if (string.IsNullOrWhiteSpace(Password))
@@ -113,54 +107,59 @@ namespace ProsysMobile.ViewModels.Pages.System
                    
                     DoubleTapping.ResumeTap();
 
-                    return;
+                    isError = true;
                 }
 
-                SignIn signIn = new SignIn();
-
-                signIn.Email = Email;
-                signIn.Password = Password;
-                signIn.DeviceGuid = Guid.NewGuid();
-                signIn.Token = string.Empty;
-
-                var result = await _signInService.SignIn(signIn, Models.CommonModels.Enums.enPriorityType.UserInitiated);
-
-                if (result.ResponseData != null && result.IsSuccess)
+                if (!isError)
                 {
-                    var jwt = result.ResponseData.SignIn.Token;
-                    var handler = new JwtSecurityTokenHandler();
-                    var token = handler.ReadJwtToken(jwt);
+                    SignIn signIn = new SignIn();
 
-                    GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
-                    GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
+                    signIn.Email = Email;
+                    signIn.Password = Password;
+                    signIn.DeviceGuid = Guid.NewGuid();
+                    signIn.Token = string.Empty;
 
-                    if (result.ResponseData.UserMobile != null)
+                    var result = await _signInService.SignIn(signIn, Models.CommonModels.Enums.enPriorityType.UserInitiated);
+
+                    if (result.ResponseData != null && result.IsSuccess)
                     {
-                        Database.SQLConnection.Insert(result.ResponseData.UserMobile, "OR REPLACE");
-                        GlobalSetting.Instance.User = result.ResponseData.UserMobile;
+                        var jwt = result.ResponseData.SignIn.Token;
+                        var handler = new JwtSecurityTokenHandler();
+                        var token = handler.ReadJwtToken(jwt);
+
+                        GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
+                        GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
+
+                        if (result.ResponseData.UserMobile != null)
+                        {
+                            Database.SQLConnection.Insert(result.ResponseData.UserMobile, "OR REPLACE");
+                            GlobalSetting.Instance.User = result.ResponseData.UserMobile;
+                        }
+
+                        await NavigationService.SetMainPageAsync<AppShellViewModel>();
+
+                        var tokenSettings = new List<DefaultSettings>()
+                        {
+                            new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
+                            new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},
+                            new DefaultSettings{Key="UserId",Value=GlobalSetting.Instance.User.ID.ToString()}
+                        };
+
+                        _defaultSettingsSqLiteService.SaveAll(tokenSettings);
                     }
-
-                    await NavigationService.SetMainPageAsync<AppShellViewModel>();
-
-                    var tokenSettings = new List<DefaultSettings>()
+                    else
                     {
-                        new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
-                        new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},
-                        new DefaultSettings{Key="UserId",Value=GlobalSetting.Instance.User.ID.ToString()}
-                    };
-
-                    _defaultSettingsSqLiteService.SaveAll(tokenSettings);
+                        DialogService.WarningToastMessage("Email veya şifreniz hatalı! QQQ");
+                    }    
                 }
-                else
-                {
-                    DialogService.WarningToastMessage("Email veya şifreniz hatalı! QQQ");
-                }
+                
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
             
+            IsBusy = false;
             DoubleTapping.ResumeTap();
         }
     }

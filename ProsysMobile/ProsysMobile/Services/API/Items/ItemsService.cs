@@ -28,7 +28,7 @@ namespace ProsysMobile.Services.API.Items
             throw new System.NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<ItemsSubDto>> GetDetail(string filter, string categoryIds, int page, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<ItemsSubDto>> GetItems(string filter, string categoryIds, int page, enPriorityType priorityType)
         {
             ServiceBaseResponse<ItemsSubDto> result = null;
             Task<ServiceBaseResponse<ItemsSubDto>> task = null;

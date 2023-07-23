@@ -15,6 +15,7 @@
       
       <AbsoluteLayout
             Grid.Row="0"
+            Padding="0,10,0,0"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand">
 
@@ -40,8 +41,9 @@
                   WidthRequest="35"
                   HeightRequest="35"
                   Source="BadgeAdd"
+                  Aspect="AspectFill"
                   AbsoluteLayout.LayoutFlags="PositionProportional"
-                  AbsoluteLayout.LayoutBounds="1,0,35,35" />
+                  AbsoluteLayout.LayoutBounds="1,0,40,40" />
 
       </AbsoluteLayout>
                         
