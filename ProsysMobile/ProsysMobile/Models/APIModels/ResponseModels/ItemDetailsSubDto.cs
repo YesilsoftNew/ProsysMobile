@@ -2,7 +2,7 @@
 {
     public class ItemDetailsSubDto
     {
-        public ItemsSubDto Item { get; set; } = new ItemsSubDto();
-        public string Categories { get; set; } = string.Empty;
+        public ItemsSubDto Item { get; set; }
+        public string Categories { get; set; }
     }
 }

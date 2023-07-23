@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.Items
     public interface IItemDetailEndpoint
     {
         [Get("/api/Items/ItemDetail")]
-        Task<ServiceBaseResponse<ItemDetailsSubDto>> GetItemDetail(int itemId, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<ItemDetailsSubDto>> GetItemDetail(int id, [Header("Authorization")] string authorization);
     }
 }

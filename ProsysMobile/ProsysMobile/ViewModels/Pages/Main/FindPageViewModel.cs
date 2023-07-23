@@ -24,6 +24,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
     {
         private IItemCategoryService _itemCategoryService;
         private IItemsService _itemsService;
+        private IBestsellersService _bestsellersService;
 
         private double _searchTime;
         private bool _isTimerWorking = false;
@@ -33,10 +34,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private int _listPage = 1;
 
         
-        public FindPageViewModel(IItemCategoryService itemCategoryService,IItemsService itemsService)
+        public FindPageViewModel(IItemCategoryService itemCategoryService,IItemsService itemsService, IBestsellersService bestsellersService)
         {
             _itemCategoryService = itemCategoryService;
             _itemsService = itemsService;
+            _bestsellersService = bestsellersService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
@@ -140,16 +142,16 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         }
         
-        private Deneme _selectedBestseller;
-        public Deneme SelectedBestseller { get => _selectedBestseller; set { _selectedBestseller = value; PropertyChanged(() => SelectedBestseller); } }
+        private ItemsSubDto _selectedBestseller;
+        public ItemsSubDto SelectedBestseller { get => _selectedBestseller; set { _selectedBestseller = value; PropertyChanged(() => SelectedBestseller); } }
         
-        private ObservableRangeCollection<Deneme> _bestsellers;
-        public ObservableRangeCollection<Deneme> Bestsellers
+        private ObservableRangeCollection<ItemsSubDto> _bestsellers;
+        public ObservableRangeCollection<ItemsSubDto> Bestsellers
         {
             get
             {
                 if (_bestsellers == null)
-                    _bestsellers = new ObservableRangeCollection<Deneme>();
+                    _bestsellers = new ObservableRangeCollection<ItemsSubDto>();
 
                 return _bestsellers;
             }
@@ -238,8 +240,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     Items.Clear();
 
                     GetItemsAndBindFromApi();
-                    
-                    CheckFilterAndBindShowItems();
                 }
                 
             }
@@ -252,7 +252,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
-        public ICommand SubCategoryClickCommand => new Command((sender) =>
+        public ICommand SubCategoryClickCommand => new Command(async (sender) =>
         {
             try
             {
@@ -281,9 +281,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     _isAllItemLoad = false;
                     Items.Clear();
 
-                    GetItemsAndBindFromApi();
-
-                    CheckFilterAndBindShowItems();
+                    await GetItemsAndBindFromApi();
                 }
                 
             }
@@ -345,43 +343,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
             try
             {
                 IsBusy = true;
-                
-                Bestsellers = new ObservableRangeCollection<Deneme>()
-                {
-                    new Deneme()
-                    {
-                        Price = "$2,66",
-                        Pieces = "500 pcs",
-                        Name = "Fruits banana 100% organic",
-                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                    },
-                    new Deneme()
-                    {
-                        Price = "$2,66",
-                        Pieces = "500 pcs",
-                        Name = "Fruits banana 100% organic",
-                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                    },
-                    new Deneme()
-                    {
-                        Price = "$2,66",
-                        Pieces = "500 pcs",
-                        Name = "Fruits banana 100% organic",
-                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                    },
-                    new Deneme()
-                    {
-                        Price = "$2,66",
-                        Pieces = "500 pcs",
-                        Name = "Fruits banana 100% organic",
-                        Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                    }
-                };
-                
+
                 await GetCategoriesAndBindFromApi(
                     categoryId: Constants.MainCategoryId,
                     isSubCategory: false
-                 );
+                );
+
+                await GetBestsellersAndBindFromApi();
 
                 if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
                 {
@@ -402,8 +370,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         isSubCategory: true
                     );
                         
-                    CheckFilterAndBindShowItems();
-                    
                     GetItemsAndBindFromApi();
                 }
             }
@@ -414,7 +380,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
             IsBusy = false;
         }
-        
+
         private void SearchTimer()
         {
             Device.StartTimer(TimeSpan.FromSeconds(0.1), () =>
@@ -424,11 +390,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 if (_searchTime <= 0.00)
                 {
                     _isAllItemLoad = false;
+
+                    var isNullSearch = string.IsNullOrWhiteSpace(Search);
+                    var isNotNullSearch = !string.IsNullOrWhiteSpace(Search);
                     
-                    ShowBestsellers = string.IsNullOrWhiteSpace(Search);
-                    ShowItems = !string.IsNullOrWhiteSpace(Search);
-                    
-                    if (!string.IsNullOrWhiteSpace(Search))
+                    ShowBestsellers = isNullSearch;
+                    ShowItems = isNotNullSearch;
+                    ShowEmptyText = false;
+
+                    if (!string.IsNullOrWhiteSpace(Search) || _selectedCategories.Any())
                     {
                         _listPage = 0;
                         Items.Clear();
@@ -438,8 +408,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                     _isTimerWorking = false;
                     
-                    CheckFilterAndBindShowItems();
-
                     return false;
                 }
 
@@ -449,7 +417,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             });
         }
 
-        private async void GetItemsAndBindFromApi()
+        private async Task GetItemsAndBindFromApi()
         {
             try
             {
@@ -460,18 +428,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     return;
                 }
                 
-                var selectedCategoriesStr = string.Join(",", _selectedCategories.Select(x => x.Id));
+                var selectedCategoryStr = _selectedCategories
+                    .OrderBy(x=> x.IsMain)
+                    .FirstOrDefault()?
+                    .Id
+                    .ToString();
                 
                 var result = await _itemsService.GetItems(
                     filter: Search,
-                    categoryIds: selectedCategoriesStr,
+                    categoryIds: selectedCategoryStr,
                     page: _listPage,
                     priorityType: enPriorityType.UserInitiated
                 );
 
                 if (result?.ResponseData != null && result.IsSuccess)
                 {
-                    if (result.ResponseData.Count + 2 < GlobalSetting.Instance.ListPageSize)
+                    if (result.ResponseData.Count < GlobalSetting.Instance.ListPageSize)
                         _isAllItemLoad = true;
                     
                     Items.AddRange(result.ResponseData);
@@ -482,6 +454,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
                 }
+                
+                CheckFilterAndBindShowItems();
             }
             catch (Exception ex)
             {
@@ -525,13 +499,36 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         }
 
+        private async Task GetBestsellersAndBindFromApi()
+        {
+            try
+            {
+                var result = await _bestsellersService.GetBestsellers(enPriorityType.UserInitiated);
+
+                if (result?.ResponseData != null && result.IsSuccess)
+                {
+                    Bestsellers = new ObservableRangeCollection<ItemsSubDto>(result.ResponseData);
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("En çok satanları getirirken bir hata oluştu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("En çok satanları getirirken bir hata oluştu!");
+
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        }
+        
         private void CheckFilterAndBindShowItems()
         {
             if (_selectedCategories.Any() || !string.IsNullOrWhiteSpace(Search))
             {
                 ShowBestsellers = false;
                 ShowItems = true;
-
+                
                 if (!Items.Any())
                 {
                     ShowEmptyText = true;
@@ -552,15 +549,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
         }
         
         #endregion
-
-        public class Deneme
-        {
-            public int Id { get; set; } = 1;
-            public string Name { get; set; }
-            public string Price { get; set; }
-            public string Pieces { get; set; }
-            public string Image { get; set; }
-        }
 
         public class CategoryFilter
         {
