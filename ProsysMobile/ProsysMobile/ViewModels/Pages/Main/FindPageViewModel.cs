@@ -142,9 +142,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         }
         
-        private ItemsSubDto _selectedBestseller;
-        public ItemsSubDto SelectedBestseller { get => _selectedBestseller; set { _selectedBestseller = value; PropertyChanged(() => SelectedBestseller); } }
-        
         private ObservableRangeCollection<ItemsSubDto> _bestsellers;
         public ObservableRangeCollection<ItemsSubDto> Bestsellers
         {
@@ -293,6 +290,31 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
+        public ICommand BestsellersClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                if (sender is ItemsSubDto item)
+                {
+                    var navigationModel = new NavigationModel<int>
+                    {
+                        Model = item.Id
+                    };
+                
+                    NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
+        });
+
         public ICommand ListItemsSelectionChangedCommand => new Command((sender) =>
         {
             try
