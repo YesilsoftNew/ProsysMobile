@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
@@ -7,6 +8,6 @@ namespace ProsysMobile.Services.API.Items
 {
     public interface IItemsService : IServiceBase<ServiceBaseResponse<ItemsSubDto>>
     {
-        Task<ServiceBaseResponse<ItemsSubDto>> GetItems(string filter, string categoryIds, int page, enPriorityType priorityType);
+        Task<ServiceBaseResponse<List<ItemsSubDto>>> GetItems(string filter, string categoryIds, int page, enPriorityType priorityType);
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Polly;
 using ProsysMobile.Endpoints.Items;
@@ -28,10 +29,10 @@ namespace ProsysMobile.Services.API.Items
             throw new System.NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<ItemsSubDto>> GetItems(string filter, string categoryIds, int page, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<List<ItemsSubDto>>> GetItems(string filter, string categoryIds, int page, enPriorityType priorityType)
         {
-            ServiceBaseResponse<ItemsSubDto> result = null;
-            Task<ServiceBaseResponse<ItemsSubDto>> task = null;
+            ServiceBaseResponse<List<ItemsSubDto>> result = null;
+            Task<ServiceBaseResponse<List<ItemsSubDto>>> task = null;
             Exception exception = null;
 
             try

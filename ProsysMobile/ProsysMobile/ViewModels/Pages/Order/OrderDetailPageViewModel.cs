@@ -91,20 +91,10 @@ namespace ProsysMobile.ViewModels.Pages.Order
         {
             try
             {
-                // if (Debugger.IsAttached)
-                // {
-                //     ItemName = "SUNTAT Gehackte Tomaten";
-                //     ItemImage = "http://yas.yesilsoft.net/Images/Legumes.png";
-                //     ItemPieces = "750 pcs";
-                //     ItemPrice = "100 TL";
-                //     ItemPurchaseQtyText = 0;
-                //     Categories = "Bakliyat>Buğday>Ekmek";
-                //     
-                //     return;
-                // }
-
                 if (_orderDetailPageViewModelViewParamModel?.Model != null)
                 {
+                    IsBusy = true;
+                    
                     var itemId = _orderDetailPageViewModelViewParamModel.Model;
 
                     var item = await _itemDetailService.GetDetail(itemId, enPriorityType.UserInitiated);
@@ -115,7 +105,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
                 
                         ItemName = responseModel.Item.Name;
                         ItemImage = responseModel.Item.Image;
-                        ItemPieces = responseModel.Item.Count;
+                        ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
                         Categories = responseModel.Categories;
                         ItemPurchaseQtyText = 0;
@@ -123,20 +113,28 @@ namespace ProsysMobile.ViewModels.Pages.Order
                     else
                     {
                         DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                        
+                        NavigationService.NavigatePopBackdropAsync();
                     }    
                 }
                 else
                 {
                     DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                    
+                    NavigationService.NavigatePopBackdropAsync();
                 }
                 
             }
             catch (Exception ex)
             {
                 DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                
+                NavigationService.NavigatePopBackdropAsync();
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            IsBusy = false;
         }
 
         #endregion

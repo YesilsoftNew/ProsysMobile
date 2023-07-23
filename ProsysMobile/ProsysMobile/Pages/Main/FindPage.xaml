@@ -225,9 +225,9 @@
                  x:Name="ListItems" 
                  Grid.Row="3" 
                  IsVisible="{Binding ShowItems}" 
-                 ItemsSource="{Binding Bestsellers}" 
+                 ItemsSource="{Binding Items}" 
                  SelectionMode="Single"
-                 SelectedItem="{Binding SelectedBestseller}"
+                 SelectedItem="{Binding SelectedItem}"
                  RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always"
                  Margin="0,8,0,0">
@@ -238,7 +238,7 @@
                                   Command="{Binding ListItemsSelectionChangedCommand}"/>
                     <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
                                   EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
-                                  Command="{Binding TireProductLists_RemainingItemsThresholdReachedCommand}"/>
+                                  Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
                 </CollectionView.Behaviors>
                  
                 <CollectionView.ItemTemplate>
@@ -272,6 +272,15 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+            <Label
+                Grid.Row="3" 
+                IsVisible="{Binding ShowEmptyText}"
+                Text="Herhangi bir kayıt bulunamadı!"
+                Style="{DynamicResource Label2}"
+                Margin="0,20,0,0"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand" />
             
         </Grid>
     </ContentPage.Content>

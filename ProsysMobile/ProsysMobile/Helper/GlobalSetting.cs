@@ -32,6 +32,8 @@ namespace ProsysMobile.Helper
         public string JWTToken { get; set; } = "";
         public DateTime JWTTokenExpireDate { get; set; }
         public USERMOBILE User { get; set; }
+        public int ListPageSize => 20;
+
         //public string WebAppLink => "http://sprov.wise-dynamic.com/";
         //public string WebAppLink => "http://apimigtest.wise-dynamic.com/";
         //public string WebAppLink => "https://appv2.wise-dynamic.com/";

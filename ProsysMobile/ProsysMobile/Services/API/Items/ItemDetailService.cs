@@ -48,12 +48,13 @@ namespace ProsysMobile.Services.API.Items
             catch (ApiException apiException)
             {
                 exception = apiException;
+                
                 ProsysLogger.Instance.CrashLog(exception);
-
             }
             catch (Exception ex)
             {
                 exception = ex;
+
                 ProsysLogger.Instance.CrashLog(exception);
             }
 
