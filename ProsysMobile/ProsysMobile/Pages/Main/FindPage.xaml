@@ -125,7 +125,7 @@
                         x:Name="LstSubCategories"
                         Direction="Row"
                         Wrap="NoWrap"
-                        BindableLayout.ItemsSource="{Binding Categories}"
+                        BindableLayout.ItemsSource="{Binding SubCategories}"
                         Margin="16,0,0,0"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">

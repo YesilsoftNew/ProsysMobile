@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
@@ -10,13 +9,12 @@ using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
-using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Order;
-using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
@@ -128,13 +126,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private ObservableRangeCollection<ItemCategory> _subCategories;
         public ObservableRangeCollection<ItemCategory> SubCategories
         {
-            get
-            {
-                if (_subCategories == null)
-                    _subCategories = new ObservableRangeCollection<ItemCategory>();
-
-                return _subCategories;
-            }
+            get => _subCategories ?? (_subCategories = new ObservableRangeCollection<ItemCategory>());
             set
             {
                 _subCategories = value;
@@ -180,13 +172,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (sender != null)
-                {
-                    _searchTime = 0.4;
+                if (sender == null) return;
+                
+                _searchTime = 0.4;
 
-                    if (!_isTimerWorking)
-                        SearchTimer();
-                }
+                if (!_isTimerWorking)
+                    SearchTimer();
             }
             catch (Exception ex)
             {
@@ -204,6 +195,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 
                 if (sender is ItemCategory category)
                 {
+                    if (_selectedCategories.Any() && _selectedCategories.FirstOrDefault(x=>x.IsMain).Id != category.ID)
+                    {
+                        Categories.ForEach(x => x.IsSelected = false);
+                    }
+                    
                     category.IsSelected = !category.IsSelected;
                     
                     var selectedCategory = Categories.FirstOrDefault(x => x.ID == category.ID);
@@ -236,7 +232,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     _isAllItemLoad = false;
                     Items.Clear();
 
-                    GetItemsAndBindFromApi();
+                    await GetItemsAndBindFromApi();
                 }
                 
             }
@@ -257,6 +253,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemCategory category)
                 {
+                    SubCategories.ForEach(x => x.IsSelected = false);
+
                     var isAnySelectedCategory = _selectedCategories.Any(x => x.Id == category.ID);
 
                     if (!isAnySelectedCategory)
@@ -315,10 +313,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
 
-        public ICommand ListItemsSelectionChangedCommand => new Command((sender) =>
+        public ICommand ListItemsSelectionChangedCommand => new Command(async (sender) =>
         {
             try
             {
+                IsBusy = true;
+                
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
                 var navigationModel = new NavigationModel<int>
@@ -326,13 +326,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     Model = SelectedItem.Id
                 };
                 
-                NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
 
+            IsBusy = false;
             SelectedItem = null;
             DoubleTapping.ResumeTap();
         });
@@ -377,6 +378,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     if (Categories != null)
                         Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
+                    
+                    Search = string.Empty;
 
                     _selectedCategories = new List<CategoryFilter>
                     {
@@ -392,7 +395,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         isSubCategory: true
                     );
                         
-                    GetItemsAndBindFromApi();
+                    await GetItemsAndBindFromApi();
                 }
             }
             catch (Exception ex)
@@ -418,7 +421,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     
                     ShowBestsellers = isNullSearch;
                     ShowItems = isNotNullSearch;
-                    ShowEmptyText = false;
 
                     if (!string.IsNullOrWhiteSpace(Search) || _selectedCategories.Any())
                     {
@@ -443,8 +445,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                IsBusy = true;
-
                 if (_isAllItemLoad)
                 {
                     return;
@@ -485,8 +485,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
-
-            IsBusy = false;
         }
         
         private async Task GetCategoriesAndBindFromApi(int categoryId, bool isSubCategory)
@@ -550,7 +548,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ShowBestsellers = false;
                 ShowItems = true;
-                
+                ShowEmptyText = false;
+
                 if (!Items.Any())
                 {
                     ShowEmptyText = true;

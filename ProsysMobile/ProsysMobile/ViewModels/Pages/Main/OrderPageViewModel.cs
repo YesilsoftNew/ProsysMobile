@@ -77,7 +77,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     Price = "$2,66",
                     Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
+                    Name = "Fruits banana 100%",
                     Image = "http://yas.yesilsoft.net/Images/Legumes.png"
                 },
                 new Deneme()

@@ -65,6 +65,7 @@
                 x:Name="ItemName"
                 Grid.Row="0"
                 Grid.Column="0"
+                MaxLines="1"
                 Grid.ColumnSpan="2"
                 Style="{DynamicResource Header3}"
                 HorizontalOptions="StartAndExpand"

@@ -71,35 +71,35 @@ namespace ProsysMobile.CustomControls.Other
             {
                 if (IsClickable)
                 {
-                    ItemMain.GestureRecognizers.Add(new TapGestureRecognizer()
-                    {
-                        Command = new Command(x =>
-                        {
-                            try
-                            {
-                                Application.Current.Resources.TryGetValue("Black3", out var blackColor);
-                                var clrBlackColor = (Color?)blackColor;
-
-                                if (ItemLabel.TextColor == Color)
-                                {
-                                    if (clrBlackColor != null)
-                                    {
-                                        ItemMain.Border = new Border() { Thickness = 1, Color = (Color)clrBlackColor };
-                                        ItemLabel.TextColor = (Color)clrBlackColor;
-                                    }
-                                }
-                                else
-                                {
-                                    ItemLabel.TextColor = Color;
-                                    ItemMain.Border = new Border() { Thickness = 1, Color = Color };
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                ProsysLogger.Instance.CrashLog(ex);
-                            }
-                        })
-                    });  
+                    // ItemMain.GestureRecognizers.Add(new TapGestureRecognizer()
+                    // {
+                    //     Command = new Command(x =>
+                    //     {
+                    //         try
+                    //         {
+                    //             Application.Current.Resources.TryGetValue("Black3", out var blackColor);
+                    //             var clrBlackColor = (Color?)blackColor;
+                    //
+                    //             if (ItemLabel.TextColor == Color)
+                    //             {
+                    //                 if (clrBlackColor != null)
+                    //                 {
+                    //                     ItemMain.Border = new Border() { Thickness = 1, Color = (Color)clrBlackColor };
+                    //                     ItemLabel.TextColor = (Color)clrBlackColor;
+                    //                 }
+                    //             }
+                    //             else
+                    //             {
+                    //                 ItemLabel.TextColor = Color;
+                    //                 ItemMain.Border = new Border() { Thickness = 1, Color = Color };
+                    //             }
+                    //         }
+                    //         catch (Exception ex)
+                    //         {
+                    //             ProsysLogger.Instance.CrashLog(ex);
+                    //         }
+                    //     })
+                    // });  
                 }
             }
         }

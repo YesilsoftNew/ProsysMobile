@@ -54,7 +54,7 @@
                         
                             <customContolsOther:CustomCategoryGrid
                                 Text="{Binding CategoryDesc}"
-                                ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
+                                ImageSource="{Binding Image}"
                                 ImageHeight="95"
                                 ImageWidth="95"
                                 LabelStyle="{DynamicResource Label2}"
