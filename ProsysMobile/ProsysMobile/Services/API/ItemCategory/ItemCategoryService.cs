@@ -32,19 +32,19 @@ namespace ProsysMobile.Services.API.ItemCategory
         public async Task<ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>>> ItemCategory(long mainCategoryId, enPriorityType priorityType)
         {
             ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>> result = null;
-            Task<ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>>> _task = null;
+            Task<ServiceBaseResponse<List<Models.APIModels.ResponseModels.ItemCategory>>> task = null;
             Exception exception = null;
 
             try
             {
-                var _api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                _task = _api.ItemCategory(mainCategoryId, "Bearer " + GlobalSetting.Instance.JWTToken);
+                var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
+                task = api.ItemCategory(mainCategoryId, "Bearer " + GlobalSetting.Instance.JWTToken);
 
                 result = await Policy
                           .Handle<ApiException>()
                           .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>
                           TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
-                          .ExecuteAsync(async () => await _task);
+                          .ExecuteAsync(async () => await task);
             }
             catch (ApiException apiException)
             {

@@ -55,6 +55,7 @@ namespace ProsysMobile.Droid.Renderer
         public void SetAppearance(BottomNavigationView bottomView, IShellAppearanceElement appearance)
         {
             bottomView.LabelVisibilityMode = LabelVisibilityMode.LabelVisibilityUnlabeled;
+            //bottomView.ItemRippleColor = Android.Content.Res.Configuration..ColorStateList(Color.Brown);
         }
     }
 

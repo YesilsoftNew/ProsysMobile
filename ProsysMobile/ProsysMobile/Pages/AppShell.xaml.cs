@@ -3,6 +3,7 @@ using ProsysMobile.Renderer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using ProsysMobile.ViewModels.Pages.Main;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,6 +17,18 @@ namespace ProsysMobile.Pages
         public AppShell()
         {
             InitializeComponent();
+            
+            MessagingCenter.Subscribe<HomePageViewModel, string>(this, "OpenFindPageForMainPageClickCategory", (sender, arg) =>
+            {
+                try
+                {
+                    Tabbar.CurrentItem = Tabbar.Items[1];
+                }
+                catch (Exception ex)
+                {
+                    ProsysLogger.Instance.CrashLog(ex);
+                }
+            });
         }
 
         private void TabBar_PropertyChanged(Object sender, PropertyChangedEventArgs e)

@@ -35,7 +35,7 @@ namespace ProsysMobile.iOS.Renderer
             }
             catch (Exception ex)
             {
-                WiseLogger.Instance.CrashLog(ex);
+                ProsysLogger.Instance.CrashLog(ex);
 
                 Console.WriteLine(ex);
             }

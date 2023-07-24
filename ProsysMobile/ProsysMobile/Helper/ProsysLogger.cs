@@ -29,20 +29,17 @@ namespace ProsysMobile.Helper
                 var methodName = new StackTrace(exception).GetFrame(0).GetMethod().Name;
                 var pageName = new StackTrace(exception).GetFrame(0).GetMethod().DeclaringType.FullName;
                 properties.Add("JWTToken", !String.IsNullOrWhiteSpace(GlobalSetting.Instance.JWTToken) ? GlobalSetting.Instance.JWTToken : "");
-                //TODO : MODELS - USER
-                //if (GlobalSetting.Instance.User != null)
-                //{
-                //    properties.Add("UserToken", GlobalSetting.Instance.User.Token);
-                //    properties.Add("FleetId", GlobalSetting.Instance.User.FleetGuid);
-                //    properties.Add("Userid", GlobalSetting.Instance.User.UserId.ToString());
-                //    properties.Add("Email", GlobalSetting.Instance.User.EMail);
-                //}
+                
+                if (GlobalSetting.Instance.User != null)
+                {
+                    properties.Add("UserId", GlobalSetting.Instance.User.ID.ToString());
+                }
 
                 properties.Add("DeviceId", !String.IsNullOrWhiteSpace(GlobalSetting.Instance.DeviceGuid) ? GlobalSetting.Instance.DeviceGuid : "");
                 properties.Add("Time", DateTime.Now.ToString());
                 properties.Add("MethodName", methodName);
                 properties.Add("PageName", pageName);
-                // TODO: Userid, DeviceId, Token, FleetId,
+                
                 Crashes.TrackError(exception, properties);
             }
             catch (Exception ex)

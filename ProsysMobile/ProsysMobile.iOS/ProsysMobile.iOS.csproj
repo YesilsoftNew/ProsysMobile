@@ -161,6 +161,19 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Account.png" />
+    <BundleResource Include="Resources\BadgeAdd.png" />
+    <BundleResource Include="Resources\BadgeAdd@2x.png" />
+    <BundleResource Include="Resources\BadgeAdd@3x.png" />
+    <BundleResource Include="Resources\CloseGreen@2x.png" />
+    <BundleResource Include="Resources\CloseGreen@3x.png" />
+    <BundleResource Include="Resources\CloseYellow@2x.png" />
+    <BundleResource Include="Resources\CloseYellow@3x.png" />
+    <BundleResource Include="Resources\SuccessGreen.png" />
+    <BundleResource Include="Resources\SuccessGreen@2x.png" />
+    <BundleResource Include="Resources\SuccessGreen@3x.png" />
+    <BundleResource Include="Resources\WarningYellow.png" />
+    <BundleResource Include="Resources\WarningYellow@2x.png" />
+    <BundleResource Include="Resources\WarningYellow@3x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Account%402x.png" />
@@ -169,6 +182,9 @@
     <BundleResource Include="Resources\Account%403x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\AddBasket.png" />
+    <BundleResource Include="Resources\AddBasket@2x.png" />
+    <BundleResource Include="Resources\AddBasket@3x.png" />
     <BundleResource Include="Resources\Close.png" />
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +194,17 @@
     <BundleResource Include="Resources\Close%403x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\CloseBlue.png" />
+    <BundleResource Include="Resources\CloseBlue@2x.png" />
+    <BundleResource Include="Resources\CloseBlue@3x.png" />
+    <BundleResource Include="Resources\CloseGreen.png" />
+    <BundleResource Include="Resources\CloseRed.png" />
+    <BundleResource Include="Resources\CloseRed@2x.png" />
+    <BundleResource Include="Resources\CloseRed@3x.png" />
+    <BundleResource Include="Resources\CloseYellow.png" />
+    <BundleResource Include="Resources\EntrySearch.png" />
+    <BundleResource Include="Resources\EntrySearch@2x.png" />
+    <BundleResource Include="Resources\EntrySearch@3x.png" />
     <BundleResource Include="Resources\Find.png" />
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +223,9 @@
     <BundleResource Include="Resources\Home%403x.png" />
   </ItemGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\nfoBlue.png" />
+    <BundleResource Include="Resources\nfoBlue@2x.png" />
+    <BundleResource Include="Resources\nfoBlue@3x.png" />
     <BundleResource Include="Resources\Order.png" />
   </ItemGroup>
   <ItemGroup>

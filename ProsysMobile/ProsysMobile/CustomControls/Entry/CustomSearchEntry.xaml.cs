@@ -156,7 +156,6 @@ namespace ProsysMobile.CustomControls.Entry
         private void ItemSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             Text = e.NewTextValue;
-            ItemBtnCancelSearch.IsVisible = string.IsNullOrWhiteSpace(e.NewTextValue) ? false : true;
 
             if (EntryTextChanged != null)
             {
@@ -185,28 +184,6 @@ namespace ProsysMobile.CustomControls.Entry
 
                 DoubleTapping.ResumeTap();
                 throw;
-            }
-        }
-        
-        /// <summary>
-        /// Cancel Button Clicked
-        /// </summary>
-        private void ItemBtnCancelSearch_Clicked(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
-                ItemSearch.Text = String.Empty;
-
-                DoubleTapping.ResumeTap();
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-
-                DoubleTapping.ResumeTap();
-                return;
             }
         }
     }

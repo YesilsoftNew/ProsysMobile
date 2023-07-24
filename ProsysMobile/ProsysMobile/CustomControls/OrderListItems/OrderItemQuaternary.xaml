@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemQuaternary"
+      xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
+      xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand"
+      RowSpacing="3"
+      ColumnSpacing="5">
+    
+      <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+      </Grid.RowDefinitions>
+      
+      <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="AUTO"></ColumnDefinition>
+      </Grid.ColumnDefinitions>
+              
+      <Label
+            x:Name="ItemName"
+            Grid.Row="0"
+            Grid.Column="0"
+            Text="-"
+            Margin="12,0,0,0"
+            Style="{DynamicResource Header3}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+      
+      <Label
+            x:Name="ItemPieces"
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="-"
+            Margin="12,0,0,0"
+            Style="{DynamicResource Label2}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+      
+      <Label
+            x:Name="ItemPrice"
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="-"
+            Margin="12,5,0,0"
+            Style="{DynamicResource Header4}"
+            HorizontalOptions="Start"
+            VerticalOptions="EndAndExpand"/>
+      
+      <controlbuttons:CustomStandardImageButton 
+            Grid.Column="1" 
+            Grid.Row="0" 
+            Grid.RowSpan="3"
+            x:Name="ItemImageButton"
+            Margin="0,0,12,0"
+            Source="AddBasket"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="EndAndExpand"
+            Style="{DynamicResource ImageButton2}" />
+      
+      
+      <controlOther:CustomLine
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,5,0,0" />
+      
+</Grid>

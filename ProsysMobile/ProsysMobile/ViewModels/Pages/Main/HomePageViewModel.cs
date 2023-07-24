@@ -1,35 +1,30 @@
-﻿using MvvmHelpers.Commands;
-using ProsysMobile.Helper;
-using ProsysMobile.Models.CommonModels.SQLiteModels;
+﻿using ProsysMobile.Helper;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
-using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
-using ProsysMobile.ViewModels.Pages.System;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
+using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Models.CommonModels.Enums;
+using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class HomePageViewModel : ViewModelBase
     {
         private IItemCategoryService _itemCategoryService;
-        private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
-        private IUserMobileSQLiteService _userSQLiteService;
 
-        public HomePageViewModel( IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSQLiteService, IItemCategoryService itemCategoryService)
+        public HomePageViewModel(IItemCategoryService itemCategoryService)
         {
-            _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
-            _userSQLiteService = userSQLiteService;
             _itemCategoryService = itemCategoryService;
 
-            Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
+            Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", (sender, arg) =>
             {
                 try
                 {
-                    if (TOOLS.ToInt(arg) == 0)
-                        onload();
+                    if (TOOLS.ToInt(arg) == (int)enTabBarItem.HomePage)
+                        PageLoad();
                 }
                 catch (Exception ex)
                 {
@@ -38,55 +33,83 @@ namespace ProsysMobile.ViewModels.Pages.Main
             });
         }
 
-        public override Task InitializeAsync(object navigationData)
-        {
-            return base.InitializeAsync(navigationData);
-        }
-
-        async Task onload()
-        {
-            var result = await _itemCategoryService.ItemCategory(-1, Models.CommonModels.Enums.enPriorityType.UserInitiated);
-
-            if (result.ResponseData != null && result.IsSuccess)
-            {
-                
-            }
-            else
-            {
-                
-            }
-        }
-
         #region Propertys
+        private ObservableRangeCollection<ItemCategory> _categories;
+        public ObservableRangeCollection<ItemCategory> Categories
+        {
+            get
+            {
+                if (_categories == null)
+                    _categories = new ObservableRangeCollection<ItemCategory>();
 
+                return _categories;
+            }
+            set
+            {
+                _categories = value;
+                PropertyChanged(() => Categories);
+            }
+        }
         #endregion
 
         #region Commands
-        public ICommand LogoutClickCommand => new Command(async () =>
+
+        public ICommand CategoryClickCommand => new MvvmHelpers.Commands.Command<object>( (sender) =>
         {
             try
             {
-                //user bilgilerini siliyorum
-                _userSQLiteService.DeleteUser(GlobalSetting.Instance.User);
-                GlobalSetting.Instance.User = null;
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                //TODO: BURASIAYARLANACAK
-                DefaultSettings defaultSettings = _defaultSettingsSQLiteService.getSettings("UserId");
-                DefaultSettings defaultSettingss = _defaultSettingsSQLiteService.getSettings("UserTokenExpiredDate");
-                DefaultSettings defaultSettingsss = _defaultSettingsSQLiteService.getSettings("UserToken");
-
-                _defaultSettingsSQLiteService.Delete(defaultSettings);
-                _defaultSettingsSQLiteService.Delete(defaultSettingss);
-                _defaultSettingsSQLiteService.Delete(defaultSettingsss);
-
-                //login sayfasına atıyorum
-                await NavigationService.SetMainPageAsync<LoginPageViewModel>();
+                var category = sender as ItemCategory;
+                
+                MessagingCenter.Send<HomePageViewModel, string>(this, "OpenFindPageForMainPageClickCategory", category.ID.ToString());
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+
+            DoubleTapping.ResumeTap();
         });
+
+        #endregion
+
+        #region Methods
+
+        private void PageLoad()
+        {
+            GetCategoryAndBindFromApi(
+                categoryId: Constants.MainCategoryId
+            );
+        }
+        
+        private async void GetCategoryAndBindFromApi(int categoryId)
+        {
+            try
+            {
+                IsBusy = true;
+                
+                var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
+                
+                if (result.ResponseData != null && result.IsSuccess)
+                {
+                    Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            IsBusy = false;
+        }
 
         #endregion
 

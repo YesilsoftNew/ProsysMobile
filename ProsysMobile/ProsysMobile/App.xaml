@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProsysMobile.App">
     <Application.Resources>
+        <ResourceDictionary Source="Themes/Customs/Entries.xaml" />
+        <ResourceDictionary Source="Themes/Customs/Page.xaml" />
         <ResourceDictionary Source="Themes/Customs/Backdrop.xaml" />
         <ResourceDictionary Source="Themes/Customs/Borders.xaml" />
         <ResourceDictionary Source="Themes/Customs/Buttons.xaml" />

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemSecondary"
+      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+      xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
+      xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand">
+
+    <Grid.RowDefinitions>
+        <RowDefinition Height="1*"></RowDefinition>
+        <RowDefinition Height="AUTO"></RowDefinition>
+    </Grid.RowDefinitions>
+
+    <Grid
+            Grid.Row="0"
+            ColumnSpacing="22"
+            Margin="16,16,16,0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="AUTO"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="AUTO"/>
+        </Grid.ColumnDefinitions>
+
+        <yummy:PancakeView 
+                  Grid.Column="0"
+                  Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+                  CornerRadius="16"
+                  VerticalOptions="StartAndExpand"
+                  HorizontalOptions="Start">
+
+            <Image
+                        x:Name="ItemImage"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Aspect="AspectFit"
+                        Source="http://yas.yesilsoft.net/Images/Spices.png"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="CenterAndExpand" />
+
+        </yummy:PancakeView>
+
+        <Grid
+            Grid.Column="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="3">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="1*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Label
+                x:Name="ItemName"
+                Grid.Row="0"
+                Style="{DynamicResource Header3}"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="FillAndExpand"/>
+
+            <Label
+                x:Name="ItemPieces"
+                Grid.Row="1"
+                Style="{DynamicResource Label2}"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="FillAndExpand"/>
+
+            <Label
+                x:Name="ItemPrice"
+                Grid.Row="2"
+                Style="{DynamicResource Header4}"
+                HorizontalOptions="Start"
+                VerticalOptions="EndAndExpand"/>
+
+        </Grid>
+
+        <Image
+            Grid.Column="2" 
+            x:Name="ItemImageButton"
+            Source="AddBasket"
+            HorizontalOptions="End"
+            VerticalOptions="EndAndExpand"
+            Style="{DynamicResource ImageButton2}" />
+
+    </Grid>
+
+    <controlOther:CustomLine Grid.Row="1" Margin="0,8,0,0"/>
+
+</Grid>

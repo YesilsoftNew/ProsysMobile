@@ -6,14 +6,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+             xmlns:customBars="clr-namespace:ProsysMobile.CustomControls.Bar"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Account"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid
+            Style="{DynamicResource MainGrid}">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <customBars:CustomPageBarPrimary 
+                Grid.Row="0"
+                Text="Account" />
+                
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

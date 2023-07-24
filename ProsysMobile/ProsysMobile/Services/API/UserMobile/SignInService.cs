@@ -31,18 +31,18 @@ namespace ProsysMobile.Services.API.UserMobile
         public async Task<ServiceBaseResponse<AuthenticationResponseModel>> SignIn(SignIn signIn, enPriorityType priorityType)
         {
             ServiceBaseResponse<AuthenticationResponseModel> result = null;
-            Task<ServiceBaseResponse<AuthenticationResponseModel>> _task = null;
+            Task<ServiceBaseResponse<AuthenticationResponseModel>> task = null;
             Exception exception = null;
 
             try
             {
-                var _api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                _task = _api.SignIn(signIn);
+                var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
+                task = api.SignIn(signIn);
                 result = await Policy
                           .Handle<ApiException>()
                           .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>
                           TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)))
-                          .ExecuteAsync(async () => await _task);
+                          .ExecuteAsync(async () => await task);
             }
             catch (ApiException apiException)
             {

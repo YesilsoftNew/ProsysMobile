@@ -5,6 +5,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:controlentries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+             xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
@@ -14,9 +15,8 @@
     <ContentPage.Content>
         <Grid VerticalOptions="StartAndExpand"
               HorizontalOptions="FillAndExpand"
-              Margin="16,5,16,5" 
-              BackgroundColor="{DynamicResource White1}"
-              RowSpacing="24">
+              Margin="16,0,16,0" 
+              BackgroundColor="{DynamicResource White1}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -31,9 +31,15 @@
                    Source="Logo"
                    Aspect="AspectFit"
                    VerticalOptions="Fill" 
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   Margin="0,5,0,0"/>
 
-            <Grid Grid.Row="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid 
+                Grid.Row="1" 
+                VerticalOptions="FillAndExpand" 
+                HorizontalOptions="FillAndExpand" 
+                Margin="0,5,0,0">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -43,15 +49,14 @@
                        Text="Welcome" 
                        VerticalOptions="FillAndExpand"
                        HorizontalOptions="StartAndExpand"
-                       HorizontalTextAlignment="Start"
-                       Margin="0,12,0,4"/>
+                       HorizontalTextAlignment="Start"/>
 
                 <Label Grid.Row="1"
                        Text="To register, please fill in the information."
                        VerticalOptions="FillAndExpand"
                        HorizontalOptions="StartAndExpand" 
                        HorizontalTextAlignment="Start" 
-                       Margin="0,4,0,12"/>
+                       Margin="0,8,0,0"/>
 
             </Grid>
 
@@ -59,47 +64,60 @@
             <controlentries:CustomEntryPrimary Grid.Row="2" 
                                                Title="Email" 
                                                Text="{Binding Email}"
-                                               Margin="0,16,0,12"/>
+                                               Margin="0,35,0,0"/>
 
             <controlentries:CustomEntryPrimary Grid.Row="3" 
                                                Title="Password" 
                                                Text="{Binding Password}"
                                                DisabledImageSource="EyeOff"
                                                IsPassword="True" 
-                                               Margin="0,12,0,0"/>
+                                               Margin="0,24,0,0"/>
 
             <Button Grid.Row="4"
                     Text="Sign in"
                     IsEnabled="True" 
                     Command="{Binding LoginClickCommand}"
                     Style="{DynamicResource Button.Primary}" 
+                    Margin="0,20,0,0"
                     VerticalOptions="Start" 
                     HorizontalOptions="FillAndExpand" />
 
-            <Grid Grid.Row="5" VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand" ColumnSpacing="0">
+            <Grid 
+                Grid.Row="5" 
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                ColumnSpacing="0"
+                Margin="0,24,0,0">
+                
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0" 
-                   Text="Don't have an account?" 
-                   Style="{DynamicResource Description1}"
-                   VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="EndAndExpand"
-                   HorizontalTextAlignment="End"/>
+                <Label 
+                    Grid.Column="0" 
+                    Text="Don't have an account?" 
+                    Style="{DynamicResource Description1}"
+                    VerticalOptions="CenterAndExpand" 
+                    HorizontalOptions="EndAndExpand"
+                    HorizontalTextAlignment="End" />
 
-                <Label Grid.Column="1"
-                       Text="Register"
-                       Style="{DynamicResource Link1}"
-                       Margin="5,0,0,0"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="StartAndExpand"
-                       HorizontalTextAlignment="Start">
+                <!-- TODO DEĞİŞÇEK TIKLANINCA AKSİYON OLAN HALİ İLE -->
+                <Label 
+                    Grid.Column="1"
+                    Text="Register"
+                    Style="{DynamicResource Link1}"
+                    Margin="5,0,0,0"
+                    VerticalOptions="CenterAndExpand"
+                    HorizontalOptions="StartAndExpand"
+                    HorizontalTextAlignment="Start">
+                    
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding RegisterClickCommand}"/>
                     </Label.GestureRecognizers>
+                    
                 </Label>
+                
             </Grid>
 
         </Grid>

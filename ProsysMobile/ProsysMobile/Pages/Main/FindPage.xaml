@@ -6,14 +6,290 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
+             xmlns:converters="clr-namespace:ProsysMobile.Converters"
+             xmlns:controlEntries="clr-namespace:ProsysMobile.CustomControls.Entry"                       
+             xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
+             xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
+             xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CollectionViewSelectionChangedEventArgsConverter x:Key="CollectionViewSelectionChangedEventArgsConverter" />
+            <converters:CollectionViewRemainingItemsThresholdReachedEventArgsConverter x:Key="CollectionViewRemainingItemsThresholdReachedEventArgsConverter" />
+            <converters:TextChangedEventArgsConverter x:Key="TextChangedEventArgsConverter" />
+            <converters:ClickedEventArgsConverter x:Key="ClickedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Find"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid
+            Margin="0,16,0,0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <entries:CustomSearchEntry 
+                Grid.Row="0"
+                Margin="16,0,16,0"
+                Text="{Binding Search}"
+                Placeholder="Search here QQQ"
+                ImageSource="EntrySearch"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                
+                <controlEntries:CustomSearchEntry.Behaviors>
+                    
+                    <behaviors:EventToCommandBehavior 
+                        EventName="EntryTextChanged"
+                        EventArgsConverter="{StaticResource TextChangedEventArgsConverter}"
+                        Command="{Binding SearchEntryTextChangedCommand}"/>
+                    
+                </controlEntries:CustomSearchEntry.Behaviors>
+                
+            </entries:CustomSearchEntry>
+
+            <ScrollView 
+                Grid.Row="1" 
+                Orientation="Horizontal" 
+                Margin="0,20,0,0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                HorizontalScrollBarVisibility="Never">
+                
+                <StackLayout 
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand">
+
+                    <FlexLayout
+                        x:Name="LstCategories"
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        BindableLayout.ItemsSource="{Binding Categories}"
+                        Margin="16,0,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Fill">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <customContolsOther:CustomCategoryGrid
+                                    Text="{Binding CategoryDesc}"
+                                    ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
+                                    ImageHeight="40"
+                                    ImageWidth="40"
+                                    IsSelected="{Binding IsSelected}"
+                                    LabelStyle="{DynamicResource Label3}"
+                                    Margin="0,0,24,0"
+                                    RowSpacing="4"
+                                    HorizontalOptions="FillAndExpand" 
+                                    VerticalOptions="FillAndExpand">
+                                    
+                                    <customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
+                                            CommandParameter="{Binding .}" />
+                                    </customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                    
+                                </customContolsOther:CustomCategoryGrid>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </StackLayout>
+
+            </ScrollView>
+
+            <ScrollView 
+                Grid.Row="2" 
+                IsVisible="{Binding ShowSubCategories}"
+                Orientation="Horizontal"
+                Margin="0,8,0,0"
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand"
+                HorizontalScrollBarVisibility="Never">
+
+                <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                    <FlexLayout
+                        x:Name="LstSubCategories"
+                        Direction="Row"
+                        Wrap="NoWrap"
+                        BindableLayout.ItemsSource="{Binding SubCategories}"
+                        Margin="16,0,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <customContolsOther:CustomSubCategoryGrid
+                                    Text="{Binding CategoryDesc}"
+                                    Color="Blue"
+                                    Margin="0,0,16,0"
+                                    IsClickable="true"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    
+                                    <customContolsOther:CustomSubCategoryGrid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference LstSubCategories}, Path=BindingContext.SubCategoryClickCommand}" 
+                                            CommandParameter="{Binding .}" />
+                                    </customContolsOther:CustomSubCategoryGrid.GestureRecognizers>
+                                    
+                                </customContolsOther:CustomSubCategoryGrid>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </FlexLayout>
+                </StackLayout>
+
+            </ScrollView>
+
+            <Grid
+                Grid.Row="3"
+                Margin="0,30,0,0"
+                IsVisible="{Binding ShowBestsellers}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Text="Bestsellers"
+                    Style="{DynamicResource Caption2}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="16,0,0,0" />
+
+                <ScrollView
+                    Grid.Row="1" 
+                    Orientation="Horizontal" 
+                    HorizontalOptions="FillAndExpand" 
+                    VerticalOptions="FillAndExpand"
+                    HorizontalScrollBarVisibility="Never">
+                    
+                    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                        
+                        <FlexLayout 
+                            x:Name="LstBestseller"
+                            Direction="Row"
+                            Wrap="NoWrap"
+                            AlignContent="Start"
+                            AlignItems="Start"
+                            JustifyContent="SpaceAround"
+                            BindableLayout.ItemsSource="{Binding Bestsellers}"
+                            Margin="16,0,11,0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <customControlsOrders:OrderItemPrimary
+                                        NameText="{Binding Name}"
+                                        PiecesText="{Binding Pieces}"
+                                        PriceText="{Binding Price}"
+                                        ImageSource="{Binding Image}"
+                                        Margin="0,0,5,0"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        
+                                        <customControlsOrders:OrderItemPrimary.GestureRecognizers>
+                                            <TapGestureRecognizer 
+                                                Command="{Binding Source={x:Reference LstBestseller}, Path=BindingContext.BestsellersClickCommand}" 
+                                                CommandParameter="{Binding .}" />
+                                        </customControlsOrders:OrderItemPrimary.GestureRecognizers>
+                                    
+                                    </customControlsOrders:OrderItemPrimary>
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </FlexLayout>
+                        
+                    </StackLayout>
+
+                </ScrollView>
+ 
+            </Grid>
+
+             <CollectionView 
+                 x:Name="ListItems" 
+                 Grid.Row="3" 
+                 IsVisible="{Binding ShowItems}" 
+                 ItemsSource="{Binding Items}" 
+                 SelectionMode="Single"
+                 SelectedItem="{Binding SelectedItem}"
+                 RemainingItemsThreshold="5"
+                 VerticalScrollBarVisibility="Always"
+                 Margin="0,8,0,0">
+                 
+                 <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                  EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                  Command="{Binding ListItemsSelectionChangedCommand}"/>
+                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
+                                  EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
+                                  Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
+                </CollectionView.Behaviors>
+                 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <customControlsOrders:OrderItemSecondary
+                            NameText="{Binding Name}"
+                            PiecesText="{Binding Pieces}"
+                            PriceText="{Binding Price}"
+                            ImageSource="{Binding Image}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                        </customControlsOrders:OrderItemSecondary>
+                            
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <Label
+                Grid.Row="3"
+                IsVisible="{Binding ShowEmptyText}"
+                Text="Herhangi bir kayıt bulunamadı!"
+                Style="{DynamicResource Label2}"
+                Margin="0,20,0,0"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand" />
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

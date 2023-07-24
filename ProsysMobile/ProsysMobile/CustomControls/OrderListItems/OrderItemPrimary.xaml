@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms"
+      xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+      x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemPrimary"
+      xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+      HorizontalOptions="FillAndExpand"
+      VerticalOptions="FillAndExpand">
+    
+      <Grid.RowDefinitions>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
+      </Grid.RowDefinitions>
+      
+      <AbsoluteLayout
+            Grid.Row="0"
+            Padding="0,10,0,0"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+
+            <yummy:PancakeView 
+                  AbsoluteLayout.LayoutFlags="All" 
+                  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+                  CornerRadius="16"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="Start">
+                            
+                  <Image
+                        x:Name="ItemImage"
+                        WidthRequest="100"
+                        HeightRequest="100"
+                        Source="http://yas.yesilsoft.net/Images/Spices.png"
+                        HorizontalOptions="Start"
+                        VerticalOptions="FillAndExpand" />
+                            
+            </yummy:PancakeView>
+
+            <Image 
+                  WidthRequest="35"
+                  HeightRequest="35"
+                  Source="BadgeAdd"
+                  Aspect="AspectFill"
+                  AbsoluteLayout.LayoutFlags="PositionProportional"
+                  AbsoluteLayout.LayoutBounds="1,0,40,40" />
+
+      </AbsoluteLayout>
+                        
+      <Label
+            x:Name="ItemPrice"
+            Grid.Row="1"
+            Text="-"
+            Style="{DynamicResource Header3}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+                        
+      <Label
+            x:Name="ItemName"
+            Grid.Row="2"
+            Text="-"
+            Style="{DynamicResource Description2}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+                        
+      <Label
+            x:Name="ItemPieces"
+            Grid.Row="3"
+            Text="-"
+            Style="{DynamicResource Description3}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+      
+</Grid>
