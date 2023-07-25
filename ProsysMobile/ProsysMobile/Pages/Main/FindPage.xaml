@@ -40,25 +40,47 @@
                 <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <entries:CustomSearchEntry 
+            <Grid
                 Grid.Row="0"
-                Margin="16,0,16,0"
-                Text="{Binding Search}"
-                Placeholder="Search here QQQ"
-                ImageSource="EntrySearch"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 
-                <controlEntries:CustomSearchEntry.Behaviors>
-                    
-                    <behaviors:EventToCommandBehavior 
-                        EventName="EntryTextChanged"
-                        EventArgsConverter="{StaticResource TextChangedEventArgsConverter}"
-                        Command="{Binding SearchEntryTextChangedCommand}"/>
-                    
-                </controlEntries:CustomSearchEntry.Behaviors>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="AUTO"/>
+                </Grid.ColumnDefinitions>
                 
-            </entries:CustomSearchEntry>
+                <entries:CustomSearchEntry 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="16,0,16,0"
+                    Text="{Binding Search}"
+                    Placeholder="Search here QQQ"
+                    ImageSource="EntrySearch"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                
+                    <controlEntries:CustomSearchEntry.Behaviors>
+                    
+                        <behaviors:EventToCommandBehavior 
+                            EventName="EntryTextChanged"
+                            EventArgsConverter="{StaticResource TextChangedEventArgsConverter}"
+                            Command="{Binding SearchEntryTextChangedCommand}"/>
+                    
+                    </controlEntries:CustomSearchEntry.Behaviors>
+                
+                </entries:CustomSearchEntry>
+                
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="CHNG"
+                    IsVisible="{Binding ShowChangeItemListDesignButton}"
+                    Command="{Binding ChangeListDesignButtonClickCommand}"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                
+            </Grid>
 
             <ScrollView 
                 Grid.Row="1" 
@@ -229,11 +251,10 @@
  
             </Grid>
 
-             <CollectionView 
-                 x:Name="ListItems" 
+            <CollectionView 
                  Grid.Row="3" 
-                 IsVisible="{Binding ShowItems}" 
-                 ItemsSource="{Binding Items}" 
+                 IsVisible="{Binding ShowItemsPrimary}" 
+                 ItemsSource="{Binding ItemsPrimary}" 
                  SelectionMode="Single"
                  SelectedItem="{Binding SelectedItem}"
                  RemainingItemsThreshold="5"
@@ -280,6 +301,117 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            
+            <CollectionView 
+                 Grid.Row="3" 
+                 IsVisible="{Binding ShowItemsSecondary}" 
+                 ItemsSource="{Binding ItemsSecondary}" 
+                 SelectionMode="Single"
+                 SelectedItem="{Binding SelectedItem}"
+                 RemainingItemsThreshold="5"
+                 VerticalScrollBarVisibility="Always"
+                 Margin="0,8,0,0">
+                 
+                 <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                  EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                  Command="{Binding ListItemsSelectionChangedCommand}"/>
+                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
+                                  EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
+                                  Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
+                </CollectionView.Behaviors>
+                 
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             Span="2" />
+                        </CollectionView.ItemsLayout>
+                        
+                        <customControlsOrders:OrderItemTertiary
+                            NameText="{Binding Name}"
+                            PiecesText="{Binding Pieces}"
+                            PriceText="{Binding Price}"
+                            ImageSource="{Binding Image}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                        </customControlsOrders:OrderItemTertiary>
+                            
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <!-- <CollectionView  -->
+            <!--      Grid.Row="3"  -->
+            <!--      IsVisible="{Binding ShowItemsTertiary}"  -->
+            <!--      ItemsSource="{Binding ItemsTertiary}"  -->
+            <!--      SelectionMode="Single" -->
+            <!--      SelectedItem="{Binding SelectedItem}" -->
+            <!--      RemainingItemsThreshold="5" -->
+            <!--      VerticalScrollBarVisibility="Always" -->
+            <!--      Margin="0,8,0,0"> -->
+            <!--       -->
+            <!--      <CollectionView.Behaviors> -->
+            <!--         <behaviors:EventToCommandBehavior EventName="SelectionChanged" -->
+            <!--                       EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}" -->
+            <!--                       Command="{Binding ListItemsSelectionChangedCommand}"/> -->
+            <!--         <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached"  -->
+            <!--                       EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}" -->
+            <!--                       Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/> -->
+            <!--     </CollectionView.Behaviors> -->
+            <!--       -->
+            <!--     <CollectionView.ItemTemplate> -->
+            <!--         <DataTemplate> -->
+            <!--              -->
+            <!--             <CollectionView.ItemsLayout> -->
+            <!--                 <GridItemsLayout Orientation="Vertical" -->
+            <!--                                  Span="2" /> -->
+            <!--             </CollectionView.ItemsLayout> -->
+            <!--              -->
+            <!--             <customControlsOrders:OrderItemQuaternary -->
+            <!--                 NameText="{Binding Name}" -->
+            <!--                 PiecesText="{Binding Pieces}" -->
+            <!--                 PriceText="{Binding Price}" -->
+            <!--                 HorizontalOptions="FillAndExpand" -->
+            <!--                 VerticalOptions="FillAndExpand"> -->
+            <!--                  -->
+            <!--                 <VisualStateManager.VisualStateGroups> -->
+            <!--                     <VisualStateGroup Name="CommonStates"> -->
+            <!--                         <VisualState Name="Selected"> -->
+            <!--                             <VisualState.Setters> -->
+            <!--                                 <Setter Property="BackgroundColor" Value="Transparent" /> -->
+            <!--                             </VisualState.Setters> -->
+            <!--                         </VisualState> -->
+            <!--                         <VisualState x:Name="Normal"> -->
+            <!--                             <VisualState.Setters> -->
+            <!--                                 <Setter Property="BackgroundColor" Value="Transparent" /> -->
+            <!--                             </VisualState.Setters> -->
+            <!--                         </VisualState> -->
+            <!--                     </VisualStateGroup> -->
+            <!--                 </VisualStateManager.VisualStateGroups> -->
+            <!--                  -->
+            <!--             </customControlsOrders:OrderItemQuaternary> -->
+            <!--                  -->
+            <!--         </DataTemplate> -->
+            <!--     </CollectionView.ItemTemplate> -->
+            <!-- </CollectionView> -->
             
             <Label
                 Grid.Row="3"

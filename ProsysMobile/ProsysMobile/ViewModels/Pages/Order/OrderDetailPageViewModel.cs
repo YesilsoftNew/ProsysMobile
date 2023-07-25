@@ -8,6 +8,7 @@ using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
@@ -17,7 +18,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
     public class OrderDetailPageViewModel: ViewModelBase
     {
         
-        NavigationModel<int> _orderDetailPageViewModelViewParamModel;
+        NavigationModel<OrderDetailPageViewParamModel> _orderDetailPageViewModelViewParamModel;
 
         private readonly IItemDetailService _itemDetailService;
         
@@ -28,8 +29,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         public override async Task InitializeAsync(object navigationData)
         {
-
-            if (navigationData != null && navigationData is NavigationModel<int> navigationModel)
+            if (navigationData != null && navigationData is NavigationModel<OrderDetailPageViewParamModel> navigationModel)
                 _orderDetailPageViewModelViewParamModel = navigationModel;
             else
                 throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ToastMessagePageViewParamModel!");
@@ -95,7 +95,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
                 {
                     IsBusy = true;
                     
-                    var itemId = _orderDetailPageViewModelViewParamModel.Model;
+                    var itemId = _orderDetailPageViewModelViewParamModel.Model.ItemId;
 
                     var item = await _itemDetailService.GetDetail(itemId, enPriorityType.UserInitiated);
 
