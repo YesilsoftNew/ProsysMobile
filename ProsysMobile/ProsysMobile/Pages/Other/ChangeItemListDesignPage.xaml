@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<backdrop:CustomBackdrop xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                         xmlns:backdrop="clr-namespace:ProsysMobile.Models"
+                         xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
+                         xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
+                         xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
+                         xmlns:effects="clr-namespace:ProsysMobile.Renderer"
+                         xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+                         Style="{DynamicResource Customs.Backdrop.Backdrop}"
+                         IsSetPanListener="True"
+                         ios:Page.UseSafeArea="true"
+                         mc:Ignorable="d"
+                         x:Class="ProsysMobile.Pages.Other.ChangeItemListDesignPage">
+   
+        <backdrop:CustomBackdrop.PageContent>
+        <ContentView>
+
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <controlbars:CustomBackDropToolbarPrimary 
+                    Grid.Row="0"
+                    Title="Change List Detail QQQ">
+                    <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
+                    </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
+                </controlbars:CustomBackDropToolbarPrimary>
+
+                <Grid
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    ColumnSpacing="16"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="16">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button
+                        Grid.Column="0"
+                        Text="1. LIST"
+                        Command="{Binding ListDesign1ClickCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    
+                    <Button
+                        Grid.Column="1"
+                        Text="2. LIST"
+                        Command="{Binding ListDesign2ClickCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    
+                    <Button
+                        Grid.Column="2"
+                        Text="3. LIST"
+                        Command="{Binding ListDesign3ClickCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    
+                </Grid>
+
+            </Grid>
+
+        </ContentView>
+    </backdrop:CustomBackdrop.PageContent>
+    
+</backdrop:CustomBackdrop>
