@@ -108,7 +108,7 @@
 
                                 <customContolsOther:CustomCategoryGrid
                                     Text="{Binding CategoryDesc}"
-                                    ImageSource="http://yas.yesilsoft.net/Images/Spices.png"
+                                    ImageSource="{Binding Image}"
                                     ImageHeight="40"
                                     ImageWidth="40"
                                     IsSelected="{Binding IsSelected}"
