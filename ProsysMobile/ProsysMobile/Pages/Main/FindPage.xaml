@@ -16,7 +16,7 @@
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:CollectionViewSelectionChangedEventArgsConverter x:Key="CollectionViewSelectionChangedEventArgsConverter" />
@@ -25,7 +25,7 @@
             <converters:ClickedEventArgsConverter x:Key="ClickedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <Grid
             Margin="0,16,0,0"
@@ -44,12 +44,12 @@
                 Grid.Row="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="AUTO"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <entries:CustomSearchEntry 
                     Grid.Row="0"
                     Grid.Column="0"
@@ -59,18 +59,18 @@
                     ImageSource="EntrySearch"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
-                
+
                     <controlEntries:CustomSearchEntry.Behaviors>
-                    
+
                         <behaviors:EventToCommandBehavior 
                             EventName="EntryTextChanged"
                             EventArgsConverter="{StaticResource TextChangedEventArgsConverter}"
                             Command="{Binding SearchEntryTextChangedCommand}"/>
-                    
+
                     </controlEntries:CustomSearchEntry.Behaviors>
-                
+
                 </entries:CustomSearchEntry>
-                
+
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
@@ -79,7 +79,7 @@
                     Command="{Binding ChangeListDesignButtonClickCommand}"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
-                
+
             </Grid>
 
             <ScrollView 
@@ -89,7 +89,7 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 HorizontalScrollBarVisibility="Never">
-                
+
                 <StackLayout 
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand">
@@ -117,13 +117,13 @@
                                     RowSpacing="4"
                                     HorizontalOptions="FillAndExpand" 
                                     VerticalOptions="FillAndExpand">
-                                    
+
                                     <customContolsOther:CustomCategoryGrid.GestureRecognizers>
                                         <TapGestureRecognizer 
                                             Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
                                             CommandParameter="{Binding .}" />
                                     </customContolsOther:CustomCategoryGrid.GestureRecognizers>
-                                    
+
                                 </customContolsOther:CustomCategoryGrid>
 
                             </DataTemplate>
@@ -162,13 +162,13 @@
                                     IsClickable="true"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
-                                    
+
                                     <customContolsOther:CustomSubCategoryGrid.GestureRecognizers>
                                         <TapGestureRecognizer 
                                             Command="{Binding Source={x:Reference LstSubCategories}, Path=BindingContext.SubCategoryClickCommand}" 
                                             CommandParameter="{Binding .}" />
                                     </customContolsOther:CustomSubCategoryGrid.GestureRecognizers>
-                                    
+
                                 </customContolsOther:CustomSubCategoryGrid>
 
                             </DataTemplate>
@@ -205,9 +205,9 @@
                     HorizontalOptions="FillAndExpand" 
                     VerticalOptions="FillAndExpand"
                     HorizontalScrollBarVisibility="Never">
-                    
+
                     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                        
+
                         <FlexLayout 
                             x:Name="LstBestseller"
                             Direction="Row"
@@ -231,24 +231,24 @@
                                         Margin="0,0,5,0"
                                         HorizontalOptions="FillAndExpand"
                                         VerticalOptions="FillAndExpand">
-                                        
+
                                         <customControlsOrders:OrderItemPrimary.GestureRecognizers>
                                             <TapGestureRecognizer 
                                                 Command="{Binding Source={x:Reference LstBestseller}, Path=BindingContext.BestsellersClickCommand}" 
                                                 CommandParameter="{Binding .}" />
                                         </customControlsOrders:OrderItemPrimary.GestureRecognizers>
-                                    
+
                                     </customControlsOrders:OrderItemPrimary>
 
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
 
                         </FlexLayout>
-                        
+
                     </StackLayout>
 
                 </ScrollView>
- 
+
             </Grid>
 
             <CollectionView 
@@ -260,8 +260,8 @@
                  RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always"
                  Margin="0,8,0,0">
-                 
-                 <CollectionView.Behaviors>
+
+                <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
                                   EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
                                   Command="{Binding ListItemsSelectionChangedCommand}"/>
@@ -269,10 +269,10 @@
                                   EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
                                   Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
                 </CollectionView.Behaviors>
-                 
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        
+
                         <customControlsOrders:OrderItemSecondary
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
@@ -280,7 +280,7 @@
                             ImageSource="{Binding Image}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
-                            
+
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup Name="CommonStates">
                                     <VisualState Name="Selected">
@@ -295,13 +295,13 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                         </customControlsOrders:OrderItemSecondary>
-                            
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
+
             <CollectionView 
                  Grid.Row="3" 
                  IsVisible="{Binding ShowItemsSecondary}" 
@@ -311,8 +311,8 @@
                  RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always"
                  Margin="0,8,0,0">
-                 
-                 <CollectionView.Behaviors>
+
+                <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
                                   EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
                                   Command="{Binding ListItemsSelectionChangedCommand}"/>
@@ -320,15 +320,14 @@
                                   EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
                                   Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
                 </CollectionView.Behaviors>
-                 
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                             Span="2" />
+                </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Vertical"
-                                             Span="2" />
-                        </CollectionView.ItemsLayout>
-                        
                         <customControlsOrders:OrderItemTertiary
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
@@ -336,7 +335,7 @@
                             ImageSource="{Binding Image}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
-                            
+
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup Name="CommonStates">
                                     <VisualState Name="Selected">
@@ -351,13 +350,13 @@
                                     </VisualState>
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
-                            
+
                         </customControlsOrders:OrderItemTertiary>
-                            
+
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            
+
             <!-- <CollectionView  -->
             <!--      Grid.Row="3"  -->
             <!--      IsVisible="{Binding ShowItemsTertiary}"  -->
@@ -412,7 +411,7 @@
             <!--         </DataTemplate> -->
             <!--     </CollectionView.ItemTemplate> -->
             <!-- </CollectionView> -->
-            
+
             <Label
                 Grid.Row="3"
                 IsVisible="{Binding ShowEmptyText}"
@@ -421,7 +420,7 @@
                 Margin="0,20,0,0"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand" />
-            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
