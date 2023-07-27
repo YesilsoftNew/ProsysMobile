@@ -357,60 +357,55 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- <CollectionView  -->
-            <!--      Grid.Row="3"  -->
-            <!--      IsVisible="{Binding ShowItemsTertiary}"  -->
-            <!--      ItemsSource="{Binding ItemsTertiary}"  -->
-            <!--      SelectionMode="Single" -->
-            <!--      SelectedItem="{Binding SelectedItem}" -->
-            <!--      RemainingItemsThreshold="5" -->
-            <!--      VerticalScrollBarVisibility="Always" -->
-            <!--      Margin="0,8,0,0"> -->
-            <!--       -->
-            <!--      <CollectionView.Behaviors> -->
-            <!--         <behaviors:EventToCommandBehavior EventName="SelectionChanged" -->
-            <!--                       EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}" -->
-            <!--                       Command="{Binding ListItemsSelectionChangedCommand}"/> -->
-            <!--         <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached"  -->
-            <!--                       EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}" -->
-            <!--                       Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/> -->
-            <!--     </CollectionView.Behaviors> -->
-            <!--       -->
-            <!--     <CollectionView.ItemTemplate> -->
-            <!--         <DataTemplate> -->
-            <!--              -->
-            <!--             <CollectionView.ItemsLayout> -->
-            <!--                 <GridItemsLayout Orientation="Vertical" -->
-            <!--                                  Span="2" /> -->
-            <!--             </CollectionView.ItemsLayout> -->
-            <!--              -->
-            <!--             <customControlsOrders:OrderItemQuaternary -->
-            <!--                 NameText="{Binding Name}" -->
-            <!--                 PiecesText="{Binding Pieces}" -->
-            <!--                 PriceText="{Binding Price}" -->
-            <!--                 HorizontalOptions="FillAndExpand" -->
-            <!--                 VerticalOptions="FillAndExpand"> -->
-            <!--                  -->
-            <!--                 <VisualStateManager.VisualStateGroups> -->
-            <!--                     <VisualStateGroup Name="CommonStates"> -->
-            <!--                         <VisualState Name="Selected"> -->
-            <!--                             <VisualState.Setters> -->
-            <!--                                 <Setter Property="BackgroundColor" Value="Transparent" /> -->
-            <!--                             </VisualState.Setters> -->
-            <!--                         </VisualState> -->
-            <!--                         <VisualState x:Name="Normal"> -->
-            <!--                             <VisualState.Setters> -->
-            <!--                                 <Setter Property="BackgroundColor" Value="Transparent" /> -->
-            <!--                             </VisualState.Setters> -->
-            <!--                         </VisualState> -->
-            <!--                     </VisualStateGroup> -->
-            <!--                 </VisualStateManager.VisualStateGroups> -->
-            <!--                  -->
-            <!--             </customControlsOrders:OrderItemQuaternary> -->
-            <!--                  -->
-            <!--         </DataTemplate> -->
-            <!--     </CollectionView.ItemTemplate> -->
-            <!-- </CollectionView> -->
+            <CollectionView
+                 Grid.Row="3"
+                 IsVisible="{Binding ShowItemsTertiary}"
+                 ItemsSource="{Binding ItemsTertiary}"
+                 SelectionMode="Single"
+                 SelectedItem="{Binding SelectedItem}"
+                 RemainingItemsThreshold="5"
+                 VerticalScrollBarVisibility="Always"
+                 Margin="0,8,0,0">
+            
+                 <CollectionView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                  EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                  Command="{Binding ListItemsSelectionChangedCommand}"/>
+                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached"
+                                  EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
+                                  Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
+                </CollectionView.Behaviors>
+            
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+            
+                        <customControlsOrders:OrderItemQuaternary
+                            NameText="{Binding Name}"
+                            PiecesText="{Binding Pieces}"
+                            PriceText="{Binding Price}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+            
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Transparent" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+            
+                        </customControlsOrders:OrderItemQuaternary>
+            
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
 
             <Label
                 Grid.Row="3"

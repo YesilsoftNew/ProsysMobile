@@ -27,9 +27,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private IBestsellersService _bestsellersService;
 
         private double _searchTime;
-        private bool _isTimerWorking = false;
+        private bool _isTimerWorking;
         private List<CategoryFilter> _selectedCategories = new List<CategoryFilter>();
-        private int? _mainPageClickedCategoryId = null;
+        private int? _mainPageClickedCategoryId;
         private bool _isAllItemLoad;
         private int _listPage = 1;
         private enItemListType _currentItemListType;
@@ -323,7 +323,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         Model = new OrderDetailPageViewParamModel {ItemId = item.Id }
                     };
                 
-                    NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                    await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
                 }
                 
             }
@@ -656,6 +656,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 ShowItemsPrimary = itemListType == enItemListType.Primary;
                 ShowItemsSecondary = itemListType == enItemListType.Secondary;
                 ShowItemsTertiary = itemListType == enItemListType.Tertiary;
+                
+                _currentItemListType = itemListType;
             }
             catch (Exception ex)
             {
@@ -696,9 +698,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                var navigationModel = new NavigationModel<int>
+                var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
                 {
-                    Model = SelectedItem.Id
+                    Model = new OrderDetailPageViewParamModel
+                    {
+                        ItemId = SelectedItem.Id
+                    }
                 };
                 
                 await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);

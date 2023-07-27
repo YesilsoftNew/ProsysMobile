@@ -29,6 +29,7 @@
         Grid.ColumnSpan="2"
         Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
         CornerRadius="16"
+        Margin="0,16,0,0"
         VerticalOptions="StartAndExpand"
         HorizontalOptions="CenterAndExpand">
                             
