@@ -21,7 +21,7 @@
         VerticalOptions="CenterAndExpand"
         Style="{DynamicResource Header7}" />
     
-    <buttons:CustomButtonLabelPrimary
+    <buttons:CustomStandardButtonSecondary
         x:Name="ItemButton"
         Grid.Column="1"
         HorizontalOptions="EndAndExpand"

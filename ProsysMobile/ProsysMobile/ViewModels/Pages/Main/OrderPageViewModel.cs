@@ -112,7 +112,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             public string Price { get; set; }
             public string Pieces { get; set; }
             public string Image { get; set; }
-            public string Amount { get; set; } = "100";
+            public string Amount { get; set; } = "100 Piece";
         }
     }
 }

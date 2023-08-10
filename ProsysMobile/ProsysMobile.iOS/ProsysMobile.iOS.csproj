@@ -171,6 +171,9 @@
     <BundleResource Include="Resources\CloseGreen@3x.png" />
     <BundleResource Include="Resources\CloseYellow@2x.png" />
     <BundleResource Include="Resources\CloseYellow@3x.png" />
+    <BundleResource Include="Resources\DepotBlack.png" />
+    <BundleResource Include="Resources\DepotBlack@2x.png" />
+    <BundleResource Include="Resources\DepotBlack@3x.png" />
     <BundleResource Include="Resources\DoubleView.png" />
     <BundleResource Include="Resources\DoubleView@2x.png" />
     <BundleResource Include="Resources\DoubleView@3x.png" />

@@ -5,7 +5,6 @@
                     x:Class="ProsysMobile.Themes.Images">
     
     <Style x:Key="Image1" TargetType="Image">
-        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="WidthRequest" Value="24" />
         <Setter Property="HeightRequest" Value="24" />
     </Style>

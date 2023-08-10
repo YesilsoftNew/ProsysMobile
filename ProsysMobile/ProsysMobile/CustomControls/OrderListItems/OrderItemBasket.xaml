@@ -93,7 +93,7 @@
                 Grid.Column="1"
                 ColumnSpacing="3"
                 VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand">
+                HorizontalOptions="EndAndExpand">
                 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="AUTO"></ColumnDefinition>
@@ -105,14 +105,14 @@
                     Source="DepotBlack"
                     Style="{DynamicResource Image1}"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="CenterAndExpand" />
+                    VerticalOptions="EndAndExpand" />
                 
                 <Label
                     x:Name="ItemAmount"
                     Grid.Column="1"
                     Style="{DynamicResource Label5}"
                     HorizontalOptions="StartAndExpand"
-                    VerticalOptions="CenterAndExpand"></Label>
+                    VerticalOptions="EndAndExpand"></Label>
                 
             </Grid>
             

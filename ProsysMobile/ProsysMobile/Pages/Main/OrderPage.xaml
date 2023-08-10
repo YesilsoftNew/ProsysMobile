@@ -32,32 +32,32 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <customBars:CustomPageBarPrimary 
+            <customBars:CustomPageBarPrimary
                 Grid.Row="0"
                 TitleText="Basket"
                 ButtonText="Apply Basket"/>
-                
-            <CollectionView 
-                x:Name="ListBasketItems" 
-                Grid.Row="1" 
-                IsVisible="{Binding ShowBasketItems}" 
-                ItemsSource="{Binding BasketItems}" 
-                SelectionMode="Single" 
-                RemainingItemsThreshold="5" 
+            
+            <CollectionView
+                x:Name="ListBasketItems"
+                Grid.Row="1"
+                IsVisible="{Binding ShowBasketItems}"
+                ItemsSource="{Binding BasketItems}"
+                SelectionMode="Single"
+                RemainingItemsThreshold="5"
                 VerticalScrollBarVisibility="Always">
-             
+            
                 <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
                                                       EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
                                                       Command="{Binding TireProductListSelectionChangedCommand}"/>
-                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
+                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached"
                                                       EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
                                                       Command="{Binding TireProductLists_RemainingItemsThresholdReachedCommand}"/>
                 </CollectionView.Behaviors>
-
+            
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                
+            
                         <customControlsOrders:OrderItemBasket
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
@@ -66,7 +66,7 @@
                             AmountText="{Binding Amount}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand" />
-                        
+            
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
