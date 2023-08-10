@@ -50,6 +50,14 @@
         <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
     </Style>
 
+    <Style x:Key="Link2" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Color5}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
+    </Style>
+    
     <Style x:Key="Header2" TargetType="Label">
         <Setter Property="TextColor" Value="{DynamicResource Black3}" />
         <Setter Property="FontFamily" Value="poppins_semi_bold" />
@@ -143,6 +151,13 @@
         <Setter Property="TextColor" Value="{DynamicResource White1}" />
         <Setter Property="FontFamily" Value="poppins_semibold" />
         <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+    
+    <Style x:Key="Label6" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black1}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Small}" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
     </Style>
 

@@ -171,6 +171,15 @@
     <BundleResource Include="Resources\CloseGreen@3x.png" />
     <BundleResource Include="Resources\CloseYellow@2x.png" />
     <BundleResource Include="Resources\CloseYellow@3x.png" />
+    <BundleResource Include="Resources\DoubleView.png" />
+    <BundleResource Include="Resources\DoubleView@2x.png" />
+    <BundleResource Include="Resources\DoubleView@3x.png" />
+    <BundleResource Include="Resources\NoPictureView.png" />
+    <BundleResource Include="Resources\NoPictureView@2x.png" />
+    <BundleResource Include="Resources\NoPictureView@3x.png" />
+    <BundleResource Include="Resources\SingleView.png" />
+    <BundleResource Include="Resources\SingleView@2x.png" />
+    <BundleResource Include="Resources\SingleView@3x.png" />
     <BundleResource Include="Resources\SuccessGreen.png" />
     <BundleResource Include="Resources\SuccessGreen@2x.png" />
     <BundleResource Include="Resources\SuccessGreen@3x.png" />

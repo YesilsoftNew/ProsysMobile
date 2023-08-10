@@ -21,7 +21,7 @@
             
             <customBars:CustomPageBarPrimary 
                 Grid.Row="0"
-                Text="Account" />
+                TitleText="Account" />
                 
         </Grid>
     </ContentPage.Content>

@@ -34,7 +34,8 @@
             
             <customBars:CustomPageBarPrimary 
                 Grid.Row="0"
-                Text="Basket" />
+                TitleText="Basket"
+                ButtonText="Apply Basket"/>
                 
             <CollectionView 
                 x:Name="ListBasketItems" 

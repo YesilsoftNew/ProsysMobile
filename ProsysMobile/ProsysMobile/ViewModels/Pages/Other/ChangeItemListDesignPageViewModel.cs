@@ -1,9 +1,11 @@
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
@@ -28,51 +30,31 @@ namespace ProsysMobile.ViewModels.Pages.Other
 
         #region Properties
 
-        
+        private ObservableRangeCollection<ItemListType> _listTypes;
+        public ObservableRangeCollection<ItemListType> ListTypes
+        {
+            get => _listTypes ?? (_listTypes = new ObservableRangeCollection<ItemListType>());
+            set
+            {
+                _listTypes = value;
+                PropertyChanged(() => ListTypes);
+            }
+        }
 
         #endregion
 
         #region Command
 
-        public ICommand ListDesign1ClickCommand => new Command(() =>
+        public ICommand ListTypeClickCommand => new Command((sender) =>
         {
             try
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                SetAndClosePage(enItemListType.Primary);
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-            
-            DoubleTapping.ResumeTap();
-        });
-        
-        public ICommand ListDesign2ClickCommand => new Command(() =>
-        {
-            try
-            {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
-                SetAndClosePage(enItemListType.Secondary);
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-            
-            DoubleTapping.ResumeTap();
-        });
-        
-        public ICommand ListDesign3ClickCommand => new Command(() =>
-        {
-            try
-            {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
-                SetAndClosePage(enItemListType.Tertiary);
+                if (sender is ItemListType itemListType)
+                {
+                    SetAndClosePage(itemListType.EnItemListType);
+                }
             }
             catch (Exception ex)
             {
@@ -88,7 +70,27 @@ namespace ProsysMobile.ViewModels.Pages.Other
 
         private void PageLoad()
         {
-            
+            ListTypes = new ObservableRangeCollection<ItemListType>
+            {
+                new ItemListType
+                {
+                    EnItemListType = enItemListType.Primary,
+                    Image = "SingleView",
+                    Label = "Single View"
+                },
+                new ItemListType
+                {
+                    EnItemListType = enItemListType.Secondary,
+                    Image = "DoubleView",
+                    Label = "Double View"
+                },
+                new ItemListType
+                {
+                    EnItemListType = enItemListType.Tertiary,
+                    Image = "NoPictureView",
+                    Label = "No Picture View"
+                },
+            };
         }
 
         private async void SetAndClosePage(enItemListType itemListType)
