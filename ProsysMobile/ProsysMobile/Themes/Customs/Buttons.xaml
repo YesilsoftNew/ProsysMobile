@@ -25,6 +25,5 @@
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="HeightRequest" Value="44" />
     </Style>
-    
 
 </ResourceDictionary>

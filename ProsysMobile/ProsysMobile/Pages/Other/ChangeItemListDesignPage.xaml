@@ -21,7 +21,7 @@
         <backdrop:CustomBackdrop.PageContent>
         <ContentView>
 
-            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}">
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGridSecondary}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -40,35 +40,78 @@
                     Grid.Column="0"
                     ColumnSpacing="16"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    Margin="16">
+                    VerticalOptions="FillAndExpand">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="AUTO"/>
                     </Grid.ColumnDefinitions>
 
-                    <Button
-                        Grid.Column="0"
-                        Text="1. LIST"
-                        Command="{Binding ListDesign1ClickCommand}"
+                    <StackLayout
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand" />
-                    
-                    <Button
-                        Grid.Column="1"
-                        Text="2. LIST"
-                        Command="{Binding ListDesign2ClickCommand}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand" />
-                    
-                    <Button
-                        Grid.Column="2"
-                        Text="3. LIST"
-                        Command="{Binding ListDesign3ClickCommand}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand" />
+                        VerticalOptions="FillAndExpand">
+                        
+                            <FlexLayout
+                                x:Name="LstItemListType"
+                                Direction="Column"
+                                Wrap="NoWrap"
+                                BindableLayout.ItemsSource="{Binding ListTypes}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <Grid
+                                            RowSpacing="0"
+                                            ColumnSpacing="10"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand">
+                                            
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="AUTO"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Image
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="CenterAndExpand"
+                                                Margin="10,13"
+                                                Source="{Binding Image}"
+                                                Style="{DynamicResource Image1}" />
+                                            
+                                            <Label
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                HorizontalOptions="StartAndExpand"
+                                                VerticalOptions="CenterAndExpand"
+                                                Text="{Binding Label}"
+                                                Style="{DynamicResource Label6}" />
+                                            
+                                            <customContolsOther:CustomLine
+                                                Grid.Row="1" 
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2" />
+                                            
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference LstItemListType}, Path=BindingContext.ListTypeClickCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Grid.GestureRecognizers>
+                                            
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        
+                    </StackLayout>
                     
                 </Grid>
 

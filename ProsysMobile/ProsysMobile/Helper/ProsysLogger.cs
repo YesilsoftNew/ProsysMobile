@@ -9,10 +9,7 @@ namespace ProsysMobile.Helper
     public class ProsysLogger
     {
         private static readonly ProsysLogger _instance = new ProsysLogger();
-        public static ProsysLogger Instance
-        {
-            get { return _instance; }
-        }
+        public static ProsysLogger Instance => _instance;
 
         /// <summary>
         /// Error Log
