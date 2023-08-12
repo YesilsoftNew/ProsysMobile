@@ -1,5 +1,6 @@
 ﻿using System;
-
+using System.Globalization;
+using System.Threading;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -13,10 +14,29 @@ namespace ProsysMobile.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            var ci = new CultureInfo("tr-TR")
+            {
+                DateTimeFormat =
+                {
+                    DateSeparator = "/",
+                    ShortDatePattern = "dd/MM/yyyy"
+                },
+                NumberFormat =
+                {
+                    NumberDecimalSeparator = ".",
+                    NumberGroupSeparator = ","
+                }
+            };
+
+            Thread.CurrentThread.CurrentCulture = ci;
+            Thread.CurrentThread.CurrentUICulture = ci;
+            
             base.OnCreate(savedInstanceState);
 
             UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this);
+
+            RequestedOrientation = ScreenOrientation.Portrait;
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

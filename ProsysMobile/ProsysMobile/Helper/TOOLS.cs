@@ -252,5 +252,19 @@ namespace ProsysMobile.Helper
                 return false;
             }
         }
+
+        public static string GetErrorMessageWithErrorCode(string errCode)
+        {
+            var errMessage = string.Empty;
+            
+            switch (errCode)
+            {
+                case "NO_STOCK":
+                    errMessage = "Stokta ürün kalmadı!";
+                    break;
+            }
+
+            return errMessage;
+        }
     }
 }

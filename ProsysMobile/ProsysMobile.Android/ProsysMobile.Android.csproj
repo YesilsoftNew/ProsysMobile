@@ -153,6 +153,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-hdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-hdpi\SuccessGreen.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Trash.png" />
     <AndroidResource Include="Resources\drawable-hdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-ldpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BadgeAdd.png" />
@@ -169,6 +170,7 @@
     <AndroidResource Include="Resources\drawable-ldpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-ldpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-ldpi\SuccessGreen.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\Trash.png" />
     <AndroidResource Include="Resources\drawable-ldpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-mdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BadgeAdd.png" />
@@ -185,6 +187,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-mdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-mdpi\SuccessGreen.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Trash.png" />
     <AndroidResource Include="Resources\drawable-mdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BadgeAdd.png" />
@@ -201,6 +204,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\SuccessGreen.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Trash.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BadgeAdd.png" />
@@ -217,6 +221,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\SuccessGreen.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Trash.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\BadgeAdd.png" />
@@ -233,6 +238,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\SuccessGreen.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Trash.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\values\styles.xml" />
     <AndroidResource Include="Resources\values\colors.xml" />

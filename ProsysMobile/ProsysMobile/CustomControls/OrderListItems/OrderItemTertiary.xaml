@@ -43,16 +43,23 @@
                             
     </yummy:PancakeView>
     
-    <Label
-        x:Name="ItemName"
+    <ScrollView
         Grid.Row="1"
         Grid.Column="0"
         Grid.ColumnSpan="2"
-        Text="-"
-        Style="{DynamicResource Header6}"
-        HorizontalTextAlignment="Center"
-        HorizontalOptions="CenterAndExpand"
-        VerticalOptions="FillAndExpand"/>
+        Margin="6,0"
+        Orientation="Horizontal"
+        HorizontalScrollBarVisibility="Never">
+        
+        <Label
+            x:Name="ItemName"
+            Text="-"
+            Style="{DynamicResource Header6}"
+            HorizontalTextAlignment="Center"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="FillAndExpand"/>
+        
+    </ScrollView>
     
     <Label
         x:Name="ItemPieces"

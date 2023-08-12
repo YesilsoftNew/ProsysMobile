@@ -38,12 +38,26 @@ namespace ProsysMobile.CustomControls.Bar
             set => SetValue(ButtonTextProperty, value);
         }
         
+        public static readonly BindableProperty ButtonIsVisibleProperty = BindableProperty.Create(
+            nameof(ButtonIsVisible),
+            typeof(bool),
+            typeof(CustomPageBarPrimary),
+            false,
+            BindingMode.TwoWay);
+        
+        public bool ButtonIsVisible
+        {
+            get => (bool)GetValue(ButtonIsVisibleProperty);
+            set => SetValue(ButtonIsVisibleProperty, value);
+        }
+        
         public CustomPageBarPrimary()
         {
             InitializeComponent();
 
             ItemTitle.Text = TitleText;
             ItemButton.Text = ButtonText;
+            ItemButton.IsVisible = ButtonIsVisible;
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
@@ -54,6 +68,8 @@ namespace ProsysMobile.CustomControls.Bar
                 ItemTitle.Text = TitleText;
             else if (propertyName == ButtonTextProperty.PropertyName)
                 ItemButton.Text = ButtonText;
+            else if (propertyName == ButtonIsVisibleProperty.PropertyName)
+                ItemButton.IsVisible = ButtonIsVisible;
         }
     }
 }
