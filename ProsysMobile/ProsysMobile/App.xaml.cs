@@ -34,7 +34,7 @@ using Xamarin.Forms;
 
 namespace ProsysMobile
 {
-    public partial class App : Application
+    public partial class App
     {
         public static string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
 

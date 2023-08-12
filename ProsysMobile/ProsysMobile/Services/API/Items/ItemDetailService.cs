@@ -28,7 +28,7 @@ namespace ProsysMobile.Services.API.Items
             throw new System.NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<ItemDetailsSubDto>> GetDetail(int itemId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<ItemDetailsSubDto>> GetDetail(int itemId,int userId, enPriorityType priorityType)
         {
             ServiceBaseResponse<ItemDetailsSubDto> result = null;
             Task<ServiceBaseResponse<ItemDetailsSubDto>> task = null;
@@ -37,7 +37,7 @@ namespace ProsysMobile.Services.API.Items
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.GetItemDetail(itemId, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.GetItemDetail(itemId, userId, "Bearer " + GlobalSetting.Instance.JWTToken);
                 
                 result = await Policy
                     .Handle<ApiException>()

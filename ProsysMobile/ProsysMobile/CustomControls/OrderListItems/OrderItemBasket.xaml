@@ -60,16 +60,36 @@
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-
-            <Label
-                x:Name="ItemName"
+            
+            <Grid
                 Grid.Row="0"
                 Grid.Column="0"
-                MaxLines="1"
                 Grid.ColumnSpan="2"
-                Style="{DynamicResource Header3}"
-                HorizontalOptions="StartAndExpand"
-                VerticalOptions="FillAndExpand"/>
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Label
+                    x:Name="ItemName"
+                    Grid.Column="0"
+                    Style="{DynamicResource Header3}"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                
+                <controlbuttons:CustomStandardImageButton
+                    x:Name="TrashButton"
+                    Grid.Column="1"
+                    Source="Trash"
+                    Style="{DynamicResource ImageButton3}"
+                    ImageButtonClicked="ImageButton_OnClicked"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                
+            </Grid>
 
             <Label
                 x:Name="ItemPieces"
@@ -78,7 +98,7 @@
                 Grid.ColumnSpan="2"
                 Style="{DynamicResource Label2}"
                 HorizontalOptions="StartAndExpand"
-                VerticalOptions="FillAndExpand"/>
+                VerticalOptions="FillAndExpand" />
 
             <Label
                 x:Name="ItemPrice"
@@ -92,7 +112,7 @@
                 Grid.Row="2"
                 Grid.Column="1"
                 ColumnSpacing="3"
-                VerticalOptions="FillAndExpand"
+                VerticalOptions="End"
                 HorizontalOptions="EndAndExpand">
                 
                 <Grid.ColumnDefinitions>
@@ -105,14 +125,14 @@
                     Source="DepotBlack"
                     Style="{DynamicResource Image1}"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="EndAndExpand" />
+                    VerticalOptions="CenterAndExpand" />
                 
                 <Label
                     x:Name="ItemAmount"
                     Grid.Column="1"
                     Style="{DynamicResource Label5}"
                     HorizontalOptions="StartAndExpand"
-                    VerticalOptions="EndAndExpand"></Label>
+                    VerticalOptions="CenterAndExpand"></Label>
                 
             </Grid>
             

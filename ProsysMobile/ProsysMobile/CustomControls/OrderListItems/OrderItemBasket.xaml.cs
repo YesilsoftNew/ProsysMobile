@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Input;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -36,6 +39,13 @@ namespace ProsysMobile.CustomControls.OrderListItems
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
+        public static readonly BindableProperty DeleteCommandProperty = BindableProperty.Create(nameof(DeleteCommand),
+            typeof(Command),
+            typeof(OrderItemBasket),
+            default(Command),
+            Xamarin.Forms.BindingMode.TwoWay);
+
+
         public string PriceText
         {
             get => (string)GetValue(PriceTextProperty);
@@ -64,6 +74,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
         {
             get => (string)GetValue(AmountTextProperty);
             set => SetValue(AmountTextProperty, value);
+        }
+        
+        public ICommand DeleteCommand
+        {
+            get => (ICommand)GetValue(DeleteCommandProperty);
+            set => SetValue(DeleteCommandProperty, value);
         }
         
         public OrderItemBasket()
@@ -101,6 +117,30 @@ namespace ProsysMobile.CustomControls.OrderListItems
             {
                 ItemAmount.Text = AmountText;
             }
+            else if (propertyName == DeleteCommandProperty.PropertyName)
+            {
+                DeleteCommand = DeleteCommand;
+            }
+        }
+
+        private async void ImageButton_OnClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                await TrashButton.ScaleTo(.8, 100, Easing.CubicIn);
+                
+                DeleteCommand?.Execute(1);
+                
+                await TrashButton.ScaleTo(1, 100, Easing.CubicOut);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
         }
     }
 }
