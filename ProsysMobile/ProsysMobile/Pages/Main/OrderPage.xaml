@@ -9,7 +9,6 @@
              xmlns:customBars="clr-namespace:ProsysMobile.CustomControls.Bar"
              xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
              xmlns:converters="clr-namespace:ProsysMobile.Converters"
-             xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
              xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
@@ -21,8 +20,6 @@
         <ResourceDictionary>
             <converters:CollectionViewSelectionChangedEventArgsConverter x:Key="CollectionViewSelectionChangedEventArgsConverter" />
             <converters:CollectionViewRemainingItemsThresholdReachedEventArgsConverter x:Key="CollectionViewRemainingItemsThresholdReachedEventArgsConverter" />
-            <converters:TextChangedEventArgsConverter x:Key="TextChangedEventArgsConverter" />
-            <converters:ClickedEventArgsConverter x:Key="ClickedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -39,7 +36,8 @@
                 Grid.Row="0"
                 TitleText="Basket"
                 ButtonIsVisible="{Binding ShowBasketItems}"
-                ButtonText="Apply Basket"/>
+                ButtonCommand="{Binding ShowBasketClickCommand}"
+                ButtonText="Complete Order"/>
             
             <CollectionView
                 x:Name="ListBasketItems"

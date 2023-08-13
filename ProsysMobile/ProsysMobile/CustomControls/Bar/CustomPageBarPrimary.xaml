@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <Grid xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:buttons="clr-namespace:ProsysMobile.CustomControls.Button;assembly=ProsysMobile"
-
              x:Class="ProsysMobile.CustomControls.Bar.CustomPageBarPrimary"
              Padding="16,21"
              HorizontalOptions="FillAndExpand"
@@ -11,7 +8,7 @@
     
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="*"></ColumnDefinition>
-        <ColumnDefinition Width="AUTO"></ColumnDefinition>
+        <ColumnDefinition Width="auto"></ColumnDefinition>
     </Grid.ColumnDefinitions>
     
     <Label
@@ -21,11 +18,11 @@
         VerticalOptions="CenterAndExpand"
         Style="{DynamicResource Header7}" />
     
-    <buttons:CustomStandardButtonSecondary
+    <Button
         x:Name="ItemButton"
         Grid.Column="1"
-        HorizontalOptions="EndAndExpand"
-        VerticalOptions="CenterAndExpand"
-        Style="{DynamicResource Link2}" />
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand"
+        Style="{DynamicResource Button.Outline}"/>
     
 </Grid>

@@ -161,5 +161,12 @@
         <Setter Property="FontSize" Value="{DynamicResource Small}" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
     </Style>
+    
+    <Style x:Key="Header8" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray3}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
 
 </ResourceDictionary>

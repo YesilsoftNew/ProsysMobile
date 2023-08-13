@@ -11,6 +11,7 @@ using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.OrderDetails;
+using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Order;
 using Xamarin.Forms;
 
@@ -125,6 +126,30 @@ namespace ProsysMobile.ViewModels.Pages.Main
             IsBusy = false;
             DoubleTapping.ResumeTap();
         });
+        
+        public ICommand ShowBasketClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
+                {
+                    Model = new OrderDetailPageViewParamModel()
+                };
+                
+                await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
+        });
 
         public ICommand ListBasketSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
 
@@ -215,15 +240,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
         
                 IsBusy = true;
 
-                var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
+                var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
                 {
-                    Model = new OrderDetailPageViewParamModel
+                    Model = new ItemDetailPageViewParamModel
                     {
                         ItemId = SelectedItem.Id
                     }
                 };
                 
-                await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {
