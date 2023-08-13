@@ -100,12 +100,16 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     {
                         var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
 
-                        DialogService.ErrorToastMessage(!string.IsNullOrWhiteSpace(errMessageWithErrCode)
-                            ? errMessageWithErrCode
-                            : "Ürün sepete eklenemedi!");
+                        if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
+                        {
+                            DialogService.WarningToastMessage(errMessageWithErrCode);
+                        }
+                        else
+                        {
+                            DialogService.ErrorToastMessage("Ürün sepete eklenemedi!");
+                        }
                     }    
                 }
-                
             }
             catch (Exception ex)
             {

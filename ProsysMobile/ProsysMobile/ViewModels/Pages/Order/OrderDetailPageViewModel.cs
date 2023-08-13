@@ -5,7 +5,9 @@ using MvvmHelpers;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Services.API.Orders;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -16,11 +18,14 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         NavigationModel<OrderDetailPageViewParamModel> _orderDetailPageViewModelViewParamModel;
 
-        private bool _isAllItemLoad;
-        private int _listPage;
+        private readonly IGetOrderAmountService _getOrderAmountService;
+        private readonly ISaveOrderService _saveOrderService;
+        private int _orderId = 0;
         
-        public OrderDetailPageViewModel()
+        public OrderDetailPageViewModel(IGetOrderAmountService getOrderAmountService, ISaveOrderService saveOrderService)
         {
+            _getOrderAmountService = getOrderAmountService;
+            _saveOrderService = saveOrderService;
         }
         
         public override async Task InitializeAsync(object navigationData)
@@ -41,22 +46,22 @@ namespace ProsysMobile.ViewModels.Pages.Order
         private string _itemPrice;
         public string ItemPrice { get => _itemPrice; set { _itemPrice = value; PropertyChanged(() => ItemPrice); } }
         
-        private decimal _grossTotal;
-        public decimal GrossTotal { get => _grossTotal; set { _grossTotal = value; PropertyChanged(() => GrossTotal); } }
+        private string _grossTotal;
+        public string GrossTotal { get => _grossTotal; set { _grossTotal = value; PropertyChanged(() => GrossTotal); } }
         
-        private decimal _netTotal;
-        public decimal NetTotal { get => _netTotal; set { _netTotal = value; PropertyChanged(() => NetTotal); } }
+        private string _netTotal;
+        public string NetTotal { get => _netTotal; set { _netTotal = value; PropertyChanged(() => NetTotal); } }
         
-        private decimal _vatTotal;
-        public decimal VatTotal { get => _vatTotal; set { _vatTotal = value; PropertyChanged(() => VatTotal); } }
+        private string _vatTotal;
+        public string VatTotal { get => _vatTotal; set { _vatTotal = value; PropertyChanged(() => VatTotal); } }
         
-        private ItemsSubDto _selectedItem;
-        public ItemsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
+        private OrderDetailsSubDto _selectedItem;
+        public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
         
-        private ObservableRangeCollection<ItemsSubDto> _basketItems;
-        public ObservableRangeCollection<ItemsSubDto> BasketItems
+        private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
+        public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
         {
-            get => _basketItems ?? (_basketItems = new ObservableRangeCollection<ItemsSubDto>());
+            get => _basketItems ?? (_basketItems = new ObservableRangeCollection<OrderDetailsSubDto>());
             set
             {
                 _basketItems = value;
@@ -73,43 +78,34 @@ namespace ProsysMobile.ViewModels.Pages.Order
             try
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
-                var isError = false;
-
-                // if (string.IsNullOrWhiteSpace(ItemPurchaseQtyText) || ItemPurchaseQtyText.StartsWith("0") || ItemPurchaseQtyText.Contains("-") || !IsInteger(ItemPurchaseQtyText))
-                // {
-                //     DialogService.WarningToastMessage("Geçersiz adet!");
-                //     isError = true;
-                // }
-                //
-                // if (!isError)
-                // {
-                //     IsBusy = true;
-                //
-                //     var response = await _saveOrderDetailService.SaveOrderDetail(new OrderDetailsParam
-                //     {
-                //         UserId = GlobalSetting.Instance.User.ID,
-                //         ItemId = ItemId,
-                //         Amount = int.Parse(ItemPurchaseQtyText)
-                //     }, enPriorityType.UserInitiated);
-                //
-                //     if (response.IsSuccess)
-                //     {
-                //     
-                //         DialogService.SuccessToastMessage("Ürün sepete eklendi!");
-                //     
-                //         NavigationService.NavigatePopBackdropAsync();
-                //     }
-                //     else
-                //     {
-                //         var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
-                //
-                //         DialogService.ErrorToastMessage(!string.IsNullOrWhiteSpace(errMessageWithErrCode)
-                //             ? errMessageWithErrCode
-                //             : "Ürün sepete eklenemedi!");
-                //     }    
-                // }
                 
+                IsBusy = true;
+
+                var response = await _saveOrderService.SaveOrder(
+                    orderId: _orderId,
+                    enPriorityType.UserInitiated);
+
+                if (response.IsSuccess)
+                {
+                    _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = true;
+                
+                    DialogService.SuccessToastMessage("Sepet onaylandı!");
+                
+                    SetAndClosePage(isSaveBasket: true);
+                }
+                else
+                {
+                    var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
+
+                    if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
+                    {
+                        DialogService.WarningToastMessage(errMessageWithErrCode);
+                    }
+                    else
+                    {
+                        DialogService.ErrorToastMessage("Sepet onaylanmadı!");
+                    }
+                }    
             }
             catch (Exception ex)
             {
@@ -121,73 +117,20 @@ namespace ProsysMobile.ViewModels.Pages.Order
             IsBusy = false;
             DoubleTapping.ResumeTap();
         });
-        
+
         public ICommand ListItemsSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
 
-        public ICommand ListItemsRemainingItemsThresholdReachedCommand => new Command(async (sender) => RemainingItemsThresholdReachedCommand(sender));
-
-        
         #endregion
 
         #region Methods
 
-        private async void PageLoad()
+        private void PageLoad()
         {
             try
             {
-                BasketItems.Add(new ItemsSubDto
-                {
-                    Id = 0,
-                    CategoryId = 0,
-                    Name = "null",
-                    Pieces = "null",
-                    Price = "null",
-                    CurrencyType = "null",
-                    Image = "null",
-                    Amount = "null"
-                });
-
-                VatTotal = new decimal(23.55);
-                GrossTotal = new decimal(23.55);
-                NetTotal = new decimal(23.55);
-                BackdropTitle = "Order Detail (7)";
-                return;
-                
-                _isAllItemLoad = false;
-                _listPage = 0;
-                BasketItems.Clear();
-                GetItemsAndBindFromApi();
-                
                 if (_orderDetailPageViewModelViewParamModel?.Model != null)
                 {
-                    IsBusy = true;
-                    
-                    var itemId = 22;
-
-                    // var item = await _itemDetailService.GetDetail(
-                    //     itemId,
-                    //     GlobalSetting.Instance.User.ID,
-                    //     enPriorityType.UserInitiated
-                    // );
-                    //
-                    // if (item.ResponseData != null && item.IsSuccess)
-                    // {
-                    //     var responseModel = item.ResponseData;
-                    //
-                    //     ItemId = responseModel.Item.Id;
-                    //     ItemName = responseModel.Item.Name;
-                    //     ItemImage = responseModel.Item.Image;
-                    //     ItemPieces = responseModel.Item.Pieces;
-                    //     ItemPrice = responseModel.Item.Price;
-                    //     Categories = responseModel.Categories;
-                    //     ItemPurchaseQtyText = responseModel.Item.Amount ?? "0";
-                    // }
-                    // else
-                    // {
-                    //     DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
-                    //     
-                    //     NavigationService.NavigatePopBackdropAsync();
-                    // }    
+                    GetOrderAmountAndBindFromApi();
                 }
                 else
                 {
@@ -205,11 +148,9 @@ namespace ProsysMobile.ViewModels.Pages.Order
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
-            
-            IsBusy = false;
         }
 
-        private async void ItemsListClick(object sender)
+        private void ItemsListClick(object sender)
         {
             try
             {
@@ -224,65 +165,57 @@ namespace ProsysMobile.ViewModels.Pages.Order
             DoubleTapping.ResumeTap();
         }
         
-        private void RemainingItemsThresholdReachedCommand(object sender)
+        private async void GetOrderAmountAndBindFromApi()
         {
             try
             {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
                 IsBusy = true;
-                
-                GetItemsAndBindFromApi();
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-            
-            IsBusy = false;
-            DoubleTapping.ResumeTap();
-        }
 
-        private async void GetItemsAndBindFromApi()
-        {
-            try
-            {
-                if (_isAllItemLoad)
+                var result = await _getOrderAmountService.GetOrderAmount(
+                    userId: GlobalSetting.Instance.User.ID,
+                    priorityType: enPriorityType.UserInitiated
+                );
+                
+                if (result?.ResponseData != null && result.IsSuccess)
                 {
-                    return;
-                }
-                
-                IsBusy = true;
+                    var responseModel = result.ResponseData;
 
-                // var result = await _itemsService.GetItems(
-                //     filter: Search,
-                //     categoryIds: selectedCategoryStr,
-                //     page: _listPage,
-                //     priorityType: enPriorityType.UserInitiated
-                // );
-                //
-                // if (result?.ResponseData != null && result.IsSuccess)
-                // {
-                //     if (result.ResponseData.Count < GlobalSetting.Instance.ListPageSize)
-                //         _isAllItemLoad = true;
-                //
-                //     Items.AddRange(result.ResponseData);
-                //     
-                //     _listPage++;
-                // }
-                // else
-                // {
-                //     DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
-                // }
+                    BasketItems = _orderDetailPageViewModelViewParamModel.Model.BasketItems;
+                    VatTotal = responseModel.VatTotal;
+                    GrossTotal = responseModel.GrossTotal;
+                    NetTotal = responseModel.NetTotal;
+                    BackdropTitle = "Order Detail" + $" ({BasketItems.Count})";
+                    _orderId = responseModel.OrderId;
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Ürün bilgilerini getiriken bir hata oluştu!");
+                }
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                DialogService.ErrorToastMessage("Ürün bilgilerini getiriken bir hata oluştu!");
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
             
             IsBusy = false;
+        }
+        
+        private async void SetAndClosePage(bool isSaveBasket)
+        {
+            try
+            {
+                _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = isSaveBasket;
+                
+                await NavigationService.NavigatePopBackdropAsync();
+                
+                _orderDetailPageViewModelViewParamModel.ClosedPageEventCommand.Execute(_orderDetailPageViewModelViewParamModel.Model);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
         }
 
         #endregion

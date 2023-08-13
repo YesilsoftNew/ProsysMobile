@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Polly;
-using ProsysMobile.Endpoints.OrderDetails;
+using ProsysMobile.Endpoints.Orders;
 using ProsysMobile.Handler;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
@@ -10,25 +10,25 @@ using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Selector;
 using Refit;
 
-namespace ProsysMobile.Services.API.OrderDetails
+namespace ProsysMobile.Services.API.Orders
 {
-    public class SaveOrderDetailService : ISaveOrderDetailService
+    public class SaveOrderService : ISaveOrderService
     {
-        private readonly IApiRequest<ISaveOrderDetailEndpoint> _request;
-        private readonly IApiRequestSelector<ISaveOrderDetailEndpoint> _apiRequestSelector;
+        private readonly IApiRequest<ISaveOrderEndpoint> _request;
+        private readonly IApiRequestSelector<ISaveOrderEndpoint> _apiRequestSelector;
 
-        public SaveOrderDetailService(IApiRequest<ISaveOrderDetailEndpoint> request, IApiRequestSelector<ISaveOrderDetailEndpoint> apiRequestSelector)
+        public SaveOrderService(IApiRequest<ISaveOrderEndpoint> request, IApiRequestSelector<ISaveOrderEndpoint> apiRequestSelector)
         {
             _request = request;
             _apiRequestSelector = apiRequestSelector;
         }
-        
+
         public Task<ServiceBaseResponse<EmptyResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, enPriorityType priorityType)
         {
             ServiceBaseResponse<EmptyResponseModel> result = null;
             Task<ServiceBaseResponse<EmptyResponseModel>> task;
@@ -37,7 +37,8 @@ namespace ProsysMobile.Services.API.OrderDetails
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.SaveOrderDetail(orderDetailsParam, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.SaveOrder(orderId ,"Bearer " + GlobalSetting.Instance.JWTToken);
+                
                 result = await Policy
                     .Handle<ApiException>()
                     .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>
@@ -47,12 +48,13 @@ namespace ProsysMobile.Services.API.OrderDetails
             catch (ApiException apiException)
             {
                 exception = apiException;
+                
                 ProsysLogger.Instance.CrashLog(exception);
-
             }
             catch (Exception ex)
             {
                 exception = ex;
+
                 ProsysLogger.Instance.CrashLog(exception);
             }
 

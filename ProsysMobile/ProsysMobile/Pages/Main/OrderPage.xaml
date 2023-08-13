@@ -46,16 +46,12 @@
                 ItemsSource="{Binding BasketItems}"
                 SelectedItem="{Binding SelectedItem}"
                 SelectionMode="Single"
-                RemainingItemsThreshold="5"
                 VerticalScrollBarVisibility="Always">
             
                 <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
                                                       EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
                                                       Command="{Binding ListBasketSelectionChangedCommand}"/>
-                    <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached"
-                                                      EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
-                                                      Command="{Binding ListBasketRemainingItemsThresholdReachedCommand}"/>
                 </CollectionView.Behaviors>
             
                 <CollectionView.ItemTemplate>
