@@ -21,9 +21,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
     {
         private readonly IGetOrderDetailService _getOrderDetailService;
         private readonly IDeleteOrderDetailService _deleteOrderDetailService;
-        
-        private bool _isAllItemLoad;
-        private int _listPage;
 
         public OrderPageViewModel(IGetOrderDetailService getOrderDetailService, IDeleteOrderDetailService deleteOrderDetailService)
         {
@@ -45,8 +42,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
-            _isAllItemLoad = false;
-            _listPage = 0;
             BasketItems.Clear();
             GetBasketItemsAndBindFromApi();
         }
@@ -101,12 +96,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         priorityType: enPriorityType.UserInitiated
                     );
 
-                    if (result.IsSuccess && result.ResponseData)
+                    if (result.IsSuccess)
                     {
                         DialogService.SuccessToastMessage("Ürün sepetten silindi!");
 
-                        _isAllItemLoad = false;
-                        _listPage = 0;
                         BasketItems.Clear();
                         GetBasketItemsAndBindFromApi();
                     }
@@ -135,7 +128,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
                 {
-                    Model = new OrderDetailPageViewParamModel()
+                    Model = new OrderDetailPageViewParamModel
+                    {
+                        BasketItems = BasketItems
+                    },
+                    ClosedPageEventCommand = OrderDetailClosedEventCommand 
                 };
                 
                 await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
@@ -152,8 +149,40 @@ namespace ProsysMobile.ViewModels.Pages.Main
         });
 
         public ICommand ListBasketSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
+        
+        public ICommand ItemDetailClosedEventCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!(sender is ItemDetailPageViewParamModel model)) return;
 
-        public ICommand ListBasketRemainingItemsThresholdReachedCommand => new Command((sender) => RemainingItemsThresholdReachedCommand(sender));
+                if (!model.IsAddItem) return;
+                
+                BasketItems.Clear();
+                GetBasketItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
+        public ICommand OrderDetailClosedEventCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!(sender is OrderDetailPageViewParamModel model)) return;
+
+                if (!model.IsSaveBasket) return;
+                
+                BasketItems.Clear();
+                GetBasketItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
         
         #endregion
 
@@ -163,11 +192,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (_isAllItemLoad)
-                {
-                    return;
-                }
-
                 IsBusy = true;
                 
                 var result = await _getOrderDetailService.GetOrderDetail(
@@ -177,12 +201,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (result?.ResponseData != null && result.IsSuccess)
                 {
-                    if (result.ResponseData.Count < GlobalSetting.Instance.ListPageSize)
-                        _isAllItemLoad = true;
-
                     BasketItems.AddRange(result.ResponseData);
-
-                    _listPage++;
 
                     InitializePage(!result.ResponseData.Any(), !result.ResponseData.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
                 }
@@ -205,14 +224,26 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             if (isError)
             {
-                ShowBasketItems = false;
-                ShowEmptyMsg = true;
+                if (ShowBasketItems)
+                {
+                    ShowBasketItems = false;
+                }
+                if (!ShowEmptyMsg)
+                {
+                    ShowEmptyMsg = true;
+                }
                 EmptyMsg = errMessage;
             }
             else
             {
-                ShowBasketItems = true;
-                ShowEmptyMsg = false;
+                if (!ShowBasketItems)
+                {
+                    ShowBasketItems = true;
+                }
+                if (ShowEmptyMsg)
+                {
+                    ShowEmptyMsg = false;
+                }
             }
         }
 
@@ -245,7 +276,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     Model = new ItemDetailPageViewParamModel
                     {
                         ItemId = SelectedItem.Id
-                    }
+                    },
+                    ClosedPageEventCommand = ItemDetailClosedEventCommand
                 };
                 
                 await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);

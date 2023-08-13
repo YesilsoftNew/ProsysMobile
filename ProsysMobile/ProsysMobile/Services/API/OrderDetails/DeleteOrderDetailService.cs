@@ -23,15 +23,15 @@ namespace ProsysMobile.Services.API.OrderDetails
             _apiRequestSelector = apiRequestSelector;
         }
 
-        public Task<ServiceBaseResponse<bool>> Get(ApiFilterRequestModel apiFilterRequestModel)
+        public Task<ServiceBaseResponse<EmptyResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<bool>> DeleteOrderDetail(int orderDetailId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<EmptyResponseModel>> DeleteOrderDetail(int orderDetailId, enPriorityType priorityType)
         {
-            ServiceBaseResponse<bool> result = null;
-            Task<ServiceBaseResponse<bool>> task;
+            ServiceBaseResponse<EmptyResponseModel> result = null;
+            Task<ServiceBaseResponse<EmptyResponseModel>> task;
             Exception exception;
 
             try

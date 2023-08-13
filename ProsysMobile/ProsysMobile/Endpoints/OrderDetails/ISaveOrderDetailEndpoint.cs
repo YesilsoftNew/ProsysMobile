@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.OrderDetails
     public interface ISaveOrderDetailEndpoint
     {
         [Post("/api/OrderDetails/SaveOrderDetail")]
-        Task<ServiceBaseResponse<bool>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, [Header("Authorization")] string authorization);
     }
 }

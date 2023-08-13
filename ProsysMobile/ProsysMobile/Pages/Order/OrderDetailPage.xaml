@@ -57,7 +57,7 @@
                     <CollectionView 
                         x:Name="ListItems"
                         Grid.Row="0" 
-                        ItemsSource="{Binding Items}" 
+                        ItemsSource="{Binding BasketItems}" 
                         SelectionMode="Single"
                         SelectedItem="{Binding SelectedItem}"
                         RemainingItemsThreshold="5"
@@ -67,9 +67,6 @@
                             <behaviors:EventToCommandBehavior EventName="SelectionChanged"
                                           EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
                                           Command="{Binding ListItemsSelectionChangedCommand}"/>
-                            <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
-                                          EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
-                                          Command="{Binding ListItemsRemainingItemsThresholdReachedCommand}"/>
                         </CollectionView.Behaviors>
 
                         <CollectionView.ItemTemplate>
@@ -77,8 +74,9 @@
 
                                 <orderListItems:OrderItemQuaternary
                                     NameText="{Binding Name}"
-                                    PiecesText="{Binding Pieces}"
+                                    PiecesText="{Binding StockCount}"
                                     PriceText="{Binding Price}"
+                                    IsVisibleMarketImage="False"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
 

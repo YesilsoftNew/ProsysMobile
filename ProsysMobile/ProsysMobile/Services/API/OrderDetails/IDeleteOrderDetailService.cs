@@ -5,8 +5,8 @@ using ProsysMobile.Services.Base;
 
 namespace ProsysMobile.Services.API.OrderDetails
 {
-    public interface IDeleteOrderDetailService : IServiceBase<ServiceBaseResponse<bool>>
+    public interface IDeleteOrderDetailService : IServiceBase<ServiceBaseResponse<EmptyResponseModel>>
     {
-        Task<ServiceBaseResponse<bool>> DeleteOrderDetail(int orderDetailId, enPriorityType priorityType);
+        Task<ServiceBaseResponse<EmptyResponseModel>> DeleteOrderDetail(int orderDetailId, enPriorityType priorityType);
     }
 }
