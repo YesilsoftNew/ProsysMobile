@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -51,6 +51,19 @@ namespace ProsysMobile.CustomControls.Bar
             set => SetValue(ButtonIsVisibleProperty, value);
         }
         
+        public static readonly BindableProperty ButtonCommandProperty = BindableProperty.Create(
+            nameof(ButtonCommand),
+            typeof(ICommand),
+            typeof(CustomPageBarPrimary),
+            default(ICommand),
+            BindingMode.TwoWay);
+        
+        public ICommand ButtonCommand
+        {
+            get => (ICommand)GetValue(ButtonCommandProperty);
+            set => SetValue(ButtonCommandProperty, value);
+        }
+        
         public CustomPageBarPrimary()
         {
             InitializeComponent();
@@ -70,6 +83,8 @@ namespace ProsysMobile.CustomControls.Bar
                 ItemButton.Text = ButtonText;
             else if (propertyName == ButtonIsVisibleProperty.PropertyName)
                 ItemButton.IsVisible = ButtonIsVisible;
+            else if (propertyName == ButtonCommandProperty.PropertyName)
+                ItemButton.Command = ButtonCommand;
         }
     }
 }
