@@ -1,15 +1,13 @@
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
-using ProsysMobile.Services.API.Items;
+using ProsysMobile.Services.API.Orders;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -20,11 +18,14 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         NavigationModel<OrderDetailPageViewParamModel> _orderDetailPageViewModelViewParamModel;
 
-        private readonly IItemDetailService _itemDetailService;
+        private readonly IGetOrderAmountService _getOrderAmountService;
+        private readonly ISaveOrderService _saveOrderService;
+        private int _orderId = 0;
         
-        public OrderDetailPageViewModel(IItemDetailService itemDetailService)
+        public OrderDetailPageViewModel(IGetOrderAmountService getOrderAmountService, ISaveOrderService saveOrderService)
         {
-            _itemDetailService = itemDetailService;
+            _getOrderAmountService = getOrderAmountService;
+            _saveOrderService = saveOrderService;
         }
         
         public override async Task InitializeAsync(object navigationData)
@@ -32,90 +33,104 @@ namespace ProsysMobile.ViewModels.Pages.Order
             if (navigationData != null && navigationData is NavigationModel<OrderDetailPageViewParamModel> navigationModel)
                 _orderDetailPageViewModelViewParamModel = navigationModel;
             else
-                throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ToastMessagePageViewParamModel!");
+                throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type OrderDetailPageViewModel!");
 
             PageLoad();
         }
 
         #region Propertys
         
-        private string _itemName;
-        public string ItemName { get => _itemName; set { _itemName = value; PropertyChanged(() => ItemName); } }
+        private string _backdropTitle = "Order Detail (-)";
+        public string BackdropTitle { get => _backdropTitle; set { _backdropTitle = value; PropertyChanged(() => BackdropTitle); } }
         
         private string _itemPrice;
         public string ItemPrice { get => _itemPrice; set { _itemPrice = value; PropertyChanged(() => ItemPrice); } }
         
-        private string _itemPieces;
-        public string ItemPieces { get => _itemPieces; set { _itemPieces = value; PropertyChanged(() => ItemPieces); } }
+        private string _grossTotal;
+        public string GrossTotal { get => _grossTotal; set { _grossTotal = value; PropertyChanged(() => GrossTotal); } }
         
-        private string _itemImage;
-        public string ItemImage { get => _itemImage; set { _itemImage = value; PropertyChanged(() => ItemImage); } }
+        private string _netTotal;
+        public string NetTotal { get => _netTotal; set { _netTotal = value; PropertyChanged(() => NetTotal); } }
         
-        private int _itemPurchaseQtyText;
-        public int ItemPurchaseQtyText { get => _itemPurchaseQtyText; set { _itemPurchaseQtyText = value; PropertyChanged(() => ItemPurchaseQtyText); } }
+        private string _vatTotal;
+        public string VatTotal { get => _vatTotal; set { _vatTotal = value; PropertyChanged(() => VatTotal); } }
         
-        private string _categories;
-        public string Categories { get => _categories; set { _categories = value; PropertyChanged(() => Categories); } }
+        private OrderDetailsSubDto _selectedItem;
+        public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
+        
+        private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
+        public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
+        {
+            get => _basketItems ?? (_basketItems = new ObservableRangeCollection<OrderDetailsSubDto>());
+            set
+            {
+                _basketItems = value;
+                PropertyChanged(() => BasketItems);
+            }
+        }
         
         #endregion
 
         #region Commands
 
-        public ICommand AddBasketClickCommand => new Command(async () =>
+        public ICommand ApplyOrderClickCommand => new Command(async () =>
         {
             try
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                
+                IsBusy = true;
 
-                if (ItemPurchaseQtyText == 0)
+                var response = await _saveOrderService.SaveOrder(
+                    orderId: _orderId,
+                    enPriorityType.UserInitiated);
+
+                if (response.IsSuccess)
                 {
-                    
+                    _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = true;
+                
+                    DialogService.SuccessToastMessage("Sepet onaylandı!");
+                
+                    SetAndClosePage(isSaveBasket: true);
                 }
                 else
                 {
-                    
-                }
+                    var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
+
+                    if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
+                    {
+                        DialogService.WarningToastMessage(errMessageWithErrCode);
+                    }
+                    else
+                    {
+                        DialogService.ErrorToastMessage("Sepet onaylanmadı!");
+                    }
+                }    
             }
             catch (Exception ex)
             {
+                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                
                 ProsysLogger.Instance.CrashLog(ex);
             }
-            
+
+            IsBusy = false;
             DoubleTapping.ResumeTap();
         });
+
+        public ICommand ListItemsSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
+
         #endregion
 
         #region Methods
 
-        private async void PageLoad()
+        private void PageLoad()
         {
             try
             {
                 if (_orderDetailPageViewModelViewParamModel?.Model != null)
                 {
-                    IsBusy = true;
-                    
-                    var itemId = _orderDetailPageViewModelViewParamModel.Model.ItemId;
-
-                    var item = await _itemDetailService.GetDetail(itemId, enPriorityType.UserInitiated);
-
-                    if (item.ResponseData != null && item.IsSuccess)
-                    {
-                        var responseModel = item.ResponseData;
-                
-                        ItemName = responseModel.Item.Name;
-                        ItemImage = responseModel.Item.Image;
-                        ItemPieces = responseModel.Item.Pieces;
-                        ItemPrice = responseModel.Item.Price;
-                        Categories = responseModel.Categories;
-                        ItemPurchaseQtyText = 0;
-                    }
-                    else
-                    {
-                        DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
-                        
-                        NavigationService.NavigatePopBackdropAsync();
-                    }    
+                    GetOrderAmountAndBindFromApi();
                 }
                 else
                 {
@@ -133,8 +148,74 @@ namespace ProsysMobile.ViewModels.Pages.Order
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
+        }
+
+        private void ItemsListClick(object sender)
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            SelectedItem = null;
+            DoubleTapping.ResumeTap();
+        }
+        
+        private async void GetOrderAmountAndBindFromApi()
+        {
+            try
+            {
+                IsBusy = true;
+
+                var result = await _getOrderAmountService.GetOrderAmount(
+                    userId: GlobalSetting.Instance.User.ID,
+                    priorityType: enPriorityType.UserInitiated
+                );
+                
+                if (result?.ResponseData != null && result.IsSuccess)
+                {
+                    var responseModel = result.ResponseData;
+
+                    BasketItems = _orderDetailPageViewModelViewParamModel.Model.BasketItems;
+                    VatTotal = responseModel.VatTotal;
+                    GrossTotal = responseModel.GrossTotal;
+                    NetTotal = responseModel.NetTotal;
+                    BackdropTitle = "Order Detail" + $" ({BasketItems.Count})";
+                    _orderId = responseModel.OrderId;
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Ürün bilgilerini getiriken bir hata oluştu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Ürün bilgilerini getiriken bir hata oluştu!");
+
+                ProsysLogger.Instance.CrashLog(ex);
+            }
             
             IsBusy = false;
+        }
+        
+        private async void SetAndClosePage(bool isSaveBasket)
+        {
+            try
+            {
+                _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = isSaveBasket;
+                
+                await NavigationService.NavigatePopBackdropAsync();
+                
+                _orderDetailPageViewModelViewParamModel.ClosedPageEventCommand.Execute(_orderDetailPageViewModelViewParamModel.Model);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
         }
 
         #endregion

@@ -13,6 +13,7 @@ using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.Services.API.Items;
+using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Order;
 using ProsysMobile.ViewModels.Pages.Other;
 using Xamarin.Forms;
@@ -69,12 +70,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
             });
         }
-
-        public override Task InitializeAsync(object navigationData)
-        {
-            return base.InitializeAsync(navigationData);
-        }
-
+        
         #region Propertys
 
         private bool _showChangeItemListDesignButton;
@@ -318,12 +314,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemsSubDto item)
                 {
-                    var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
+                    var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
                     {
-                        Model = new OrderDetailPageViewParamModel {ItemId = item.Id }
+                        Model = new ItemDetailPageViewParamModel { ItemId = item.Id },
+                        ClosedPageEventCommand = ItemDetailClosedEventCommand
                     };
                 
-                    await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                    await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
                 }
                 
             }
@@ -333,6 +330,29 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             
             DoubleTapping.ResumeTap();
+        });
+        
+        public ICommand ItemDetailClosedEventCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!(sender is ItemDetailPageViewParamModel model)) return;
+
+                if (!model.IsAddItem) return;
+                
+                _listPage = 0;
+                _isAllItemLoad = false;
+                UpdateItemsList(
+                    resultResponseData: null,
+                    clearList: true
+                );
+
+                await GetItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
         });
 
         public ICommand ListItemsSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
@@ -694,26 +714,24 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                IsBusy = true;
-                
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
+                var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
                 {
-                    Model = new OrderDetailPageViewParamModel
+                    Model = new ItemDetailPageViewParamModel
                     {
-                        ItemId = SelectedItem.Id
-                    }
+                        ItemId = SelectedItem.Id,
+                    },
+                    ClosedPageEventCommand = ItemDetailClosedEventCommand
                 };
                 
-                await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
 
-            IsBusy = false;
             SelectedItem = null;
             DoubleTapping.ResumeTap();
         }

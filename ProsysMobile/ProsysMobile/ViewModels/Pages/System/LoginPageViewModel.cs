@@ -8,6 +8,7 @@ using ProsysMobile.ViewModels.Base;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
@@ -112,7 +113,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (!isError)
                 {
-                    SignIn signIn = new SignIn();
+                    var signIn = new SignIn();
 
                     signIn.Email = Email;
                     signIn.Password = Password;
@@ -126,9 +127,10 @@ namespace ProsysMobile.ViewModels.Pages.System
                         var jwt = result.ResponseData.SignIn.Token;
                         var handler = new JwtSecurityTokenHandler();
                         var token = handler.ReadJwtToken(jwt);
-
+                        var expiredDateString = token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value.ToString();
+                        
                         GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
-                        GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
+                        GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
 
                         if (result.ResponseData.UserMobile != null)
                         {
@@ -156,6 +158,8 @@ namespace ProsysMobile.ViewModels.Pages.System
             }
             catch (Exception ex)
             {
+                DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
+
                 ProsysLogger.Instance.CrashLog(ex);
             }
             

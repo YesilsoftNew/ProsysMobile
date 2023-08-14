@@ -7,9 +7,10 @@
                          xmlns:backdrop="clr-namespace:ProsysMobile.Models"
                          xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
                          xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
-                         xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
-                         xmlns:effects="clr-namespace:ProsysMobile.Renderer"
+                         xmlns:converters="clr-namespace:ProsysMobile.Converters"
+                         xmlns:others="clr-namespace:ProsysMobile.CustomControls.Other"
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         xmlns:orderListItems="clr-namespace:ProsysMobile.CustomControls.OrderListItems;assembly=ProsysMobile"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
                          IsSetPanListener="True"
@@ -17,10 +18,17 @@
                          mc:Ignorable="d"
                          x:Class="ProsysMobile.Pages.Order.OrderDetailPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CollectionViewSelectionChangedEventArgsConverter x:Key="CollectionViewSelectionChangedEventArgsConverter" />
+            <converters:CollectionViewRemainingItemsThresholdReachedEventArgsConverter x:Key="CollectionViewRemainingItemsThresholdReachedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <backdrop:CustomBackdrop.PageContent>
         <ContentView>
 
-            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}">
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGridSecondary}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
@@ -28,7 +36,7 @@
 
                 <controlbars:CustomBackDropToolbarPrimary 
                     Grid.Row="0"
-                    Title="Item Detail QQQ">
+                    Title="{Binding BackdropTitle}">
                     <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
                         <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
                     </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
@@ -37,108 +45,164 @@
                 <Grid
                     Grid.Row="1"
                     Grid.Column="0"
-                    RowSpacing="16"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    Margin="16">
+                    VerticalOptions="FillAndExpand">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <Image
-                        Grid.Row="0"
-                        WidthRequest="200"
-                        HeightRequest="200"
-                        Source="{Binding ItemImage}"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="FillAndExpand"/>
+                    <CollectionView 
+                        x:Name="ListItems"
+                        Grid.Row="0" 
+                        ItemsSource="{Binding BasketItems}" 
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedItem}"
+                        RemainingItemsThreshold="5"
+                        VerticalScrollBarVisibility="Always">
+
+                        <CollectionView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                          EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                          Command="{Binding ListItemsSelectionChangedCommand}"/>
+                        </CollectionView.Behaviors>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+                                <orderListItems:OrderItemQuaternary
+                                    NameText="{Binding Name}"
+                                    PiecesText="{Binding StockCount}"
+                                    PriceText="{Binding Price}"
+                                    IsVisibleMarketImage="False"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup Name="CommonStates">
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+
+                                </orderListItems:OrderItemQuaternary>
+
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                     
-                    <Label
-                        Grid.Row="1"
-                        Margin="0,20,0,0"
-                        Text="{Binding ItemPrice}"
-                        Style="{DynamicResource Header4}"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="FillAndExpand"/>
-                    
-                    <Label
-                        Grid.Row="2"
-                        Text="{Binding ItemName}"
-                        Style="{DynamicResource Header5}"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="FillAndExpand"/>
-                    
-                    <Label
-                        Grid.Row="3"
-                        Text="{Binding ItemPieces}"
-                        Style="{DynamicResource Label2}"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="FillAndExpand"/>
-                    
-                    <Label
-                        Grid.Row="4"
-                        Text="{Binding Categories}"
-                        Style="{DynamicResource Label2}"
-                        Margin="0,24,0,0"
-                        HorizontalOptions="StartAndExpand"
-                        VerticalOptions="FillAndExpand"/>
+                    <others:CustomLine 
+                        Grid.Row="1" />
                     
                     <Grid
-                        Grid.Row="5"
-                        ColumnSpacing="16"
-                        Margin="16,40,16,0"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="18,8"
+                        RowSpacing="3"
+                        ColumnSpacing="0"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="EndAndExpand">
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
                         
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="auto"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
-                        <Grid
+                        
+                        <Label 
+                            Grid.Row="1"
                             Grid.Column="0"
-                            RowSpacing="0"
+                            Text="Gross Total"
+                            Style="{DynamicResource Header8}"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        
+                        <Label 
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding GrossTotal}"
+                            Style="{DynamicResource Header5}"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        
+                        <Label 
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Text="VAT Total"
+                            Style="{DynamicResource Header8}"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        
+                        <Label 
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="{Binding VatTotal}"
+                            Style="{DynamicResource Header5}"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="FillAndExpand" />
+                        
+                        <Grid
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Margin="0,12,0,0"
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="CenterAndExpand">
+                            VerticalOptions="FillAndExpand">
                             
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
+                                <RowDefinition Height="auto"></RowDefinition>
                             </Grid.RowDefinitions>
-
-                            <Label
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"></ColumnDefinition>
+                                <ColumnDefinition Width="6*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label 
                                 Grid.Row="0"
-                                Text="Order Amount (Piece)"
-                                Style="{DynamicResource Caption1}"
+                                Grid.Column="0"
+                                Text="Net Total"
+                                Style="{DynamicResource Header8}"
                                 HorizontalOptions="StartAndExpand"
                                 VerticalOptions="FillAndExpand" />
                             
-                            <effects:CustomEntry
+                            <Label 
                                 Grid.Row="1"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="StartAndExpand"
-                                Text="{Binding ItemPurchaseQtyText}"
-                                FontSize="{DynamicResource Regular}"
-                                FontFamily="poppins_semibold"
-                                Keyboard="Numeric"
-                                Placeholder="Write"/>
+                                Grid.Column="0"
+                                Text="{Binding NetTotal}"
+                                Style="{DynamicResource Header5}"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="FillAndExpand" />
                             
-                        </Grid>
-                        
-                        <Button
+                            <Button
                                 Grid.Column="1"
-                                Text="Add Basket"
-                                Command="{Binding AddBasketClickCommand}"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Text="Apply Basket"
+                                Command="{Binding ApplyOrderClickCommand}"
                                 Style="{DynamicResource Button.Primary}"
                                 BackgroundColor="{DynamicResource Color5}"
-                                VerticalOptions="EndAndExpand"
+                                VerticalOptions="FillAndExpand"
                                 HorizontalOptions="FillAndExpand"/>
+                            
+                        </Grid>
                         
                     </Grid>
                     

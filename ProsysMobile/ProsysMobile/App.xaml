@@ -12,5 +12,6 @@
         <ResourceDictionary Source="Themes/Colors.xaml" />
         <ResourceDictionary Source="Themes/FontSizes.xaml" />
         <ResourceDictionary Source="Themes/LightTheme.xaml" />
+        <ResourceDictionary Source="Themes/Images.xaml" />
     </Application.Resources>
 </Application>

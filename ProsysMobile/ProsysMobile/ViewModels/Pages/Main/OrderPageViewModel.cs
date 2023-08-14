@@ -1,18 +1,31 @@
 ﻿using System;
+using System.Linq;
 using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Helper;
+using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
+using ProsysMobile.Services.API.OrderDetails;
+using ProsysMobile.ViewModels.Pages.Item;
+using ProsysMobile.ViewModels.Pages.Order;
+using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class OrderPageViewModel : ViewModelBase
     {
+        private readonly IGetOrderDetailService _getOrderDetailService;
+        private readonly IDeleteOrderDetailService _deleteOrderDetailService;
 
-        public OrderPageViewModel()
+        public OrderPageViewModel(IGetOrderDetailService getOrderDetailService, IDeleteOrderDetailService deleteOrderDetailService)
         {
+            _getOrderDetailService = getOrderDetailService;
+            _deleteOrderDetailService = deleteOrderDetailService;
             Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
                 try
@@ -29,28 +42,31 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
+            BasketItems.Clear();
             GetBasketItemsAndBindFromApi();
         }
 
-        public override Task InitializeAsync(object navigationData)
-        {
-            return base.InitializeAsync(navigationData);
-        }
-
         #region Propertys
-        private bool _showBasketItems = true;
+        
+        private OrderDetailsSubDto _selectedItem;
+        public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
+        
+        private bool _showBasketItems;
         public bool ShowBasketItems { get => _showBasketItems; set { _showBasketItems = value; PropertyChanged(() => ShowBasketItems); } }
 
-        private bool _showEmptyMsg = false;
+        private bool _showEmptyMsg;
         public bool ShowEmptyMsg { get => _showEmptyMsg; set { _showEmptyMsg = value; PropertyChanged(() => ShowEmptyMsg); } }
         
-        private ObservableRangeCollection<Deneme> _basketItems;
-        public ObservableRangeCollection<Deneme> BasketItems
+        private string _emptyMsg;
+        public string EmptyMsg { get => _emptyMsg; set { _emptyMsg = value; PropertyChanged(() => EmptyMsg); } }
+        
+        private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
+        public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
         {
             get
             {
                 if (_basketItems == null)
-                    _basketItems = new ObservableRangeCollection<Deneme>();
+                    _basketItems = new ObservableRangeCollection<OrderDetailsSubDto>();
 
                 return _basketItems;
             }
@@ -65,54 +81,218 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Commands
         
+        public ICommand DeleteItemClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                IsBusy = true;
+
+                if (sender is OrderDetailsSubDto orderDetailsSubDto)
+                {
+                    var result = await _deleteOrderDetailService.DeleteOrderDetail(
+                        orderDetailId: orderDetailsSubDto.OrderDetailId,
+                        priorityType: enPriorityType.UserInitiated
+                    );
+
+                    if (result.IsSuccess)
+                    {
+                        DialogService.SuccessToastMessage("Ürün sepetten silindi!");
+
+                        BasketItems.Clear();
+                        GetBasketItemsAndBindFromApi();
+                    }
+                    else
+                    {
+                        DialogService.WarningToastMessage("Ürün sepetten silinemedi!");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
+        });
+        
+        public ICommand ShowBasketClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                var navigationModel = new NavigationModel<OrderDetailPageViewParamModel>
+                {
+                    Model = new OrderDetailPageViewParamModel
+                    {
+                        BasketItems = BasketItems
+                    },
+                    ClosedPageEventCommand = OrderDetailClosedEventCommand 
+                };
+                
+                await NavigationService.NavigateToBackdropAsync<OrderDetailPageViewModel>(navigationModel);
+            }
+            catch (Exception ex)
+            {
+                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
+        });
+
+        public ICommand ListBasketSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
+        
+        public ICommand ItemDetailClosedEventCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!(sender is ItemDetailPageViewParamModel model)) return;
+
+                if (!model.IsAddItem) return;
+                
+                BasketItems.Clear();
+                GetBasketItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
+        public ICommand OrderDetailClosedEventCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!(sender is OrderDetailPageViewParamModel model)) return;
+
+                if (!model.IsSaveBasket) return;
+                
+                BasketItems.Clear();
+                GetBasketItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
         #endregion
 
         #region Methods
 
-        private void GetBasketItemsAndBindFromApi()
+        private async void GetBasketItemsAndBindFromApi()
         {
-            BasketItems = new ObservableRangeCollection<Deneme>()
+            try
             {
-                new Deneme()
+                IsBusy = true;
+                
+                var result = await _getOrderDetailService.GetOrderDetail(
+                    userId: GlobalSetting.Instance.User.ID,
+                    priorityType: enPriorityType.UserInitiated
+                );
+
+                if (result?.ResponseData != null && result.IsSuccess)
                 {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100%",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
-                },
-                new Deneme()
-                {
-                    Price = "$2,66",
-                    Pieces = "500 pcs",
-                    Name = "Fruits banana 100% organic",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png"
+                    BasketItems.AddRange(result.ResponseData);
+
+                    InitializePage(!result.ResponseData.Any(), !result.ResponseData.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
                 }
-            };
+                else
+                {
+                    InitializePage(true, "Ürünleri getiriken bir hata oluştu!");
+                }
+            }
+            catch (Exception ex)
+            {
+                InitializePage(true, "Bir hata oluştu!");
+
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
         }
 
+        private void InitializePage(bool isError, string errMessage = "")
+        {
+            if (isError)
+            {
+                if (ShowBasketItems)
+                {
+                    ShowBasketItems = false;
+                }
+                if (!ShowEmptyMsg)
+                {
+                    ShowEmptyMsg = true;
+                }
+                EmptyMsg = errMessage;
+            }
+            else
+            {
+                if (!ShowBasketItems)
+                {
+                    ShowBasketItems = true;
+                }
+                if (ShowEmptyMsg)
+                {
+                    ShowEmptyMsg = false;
+                }
+            }
+        }
+
+        private void RemainingItemsThresholdReachedCommand(object sender)
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                GetBasketItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
+        }
+        
+        private async void ItemsListClick(object sender)
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+        
+                IsBusy = true;
+
+                var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
+                {
+                    Model = new ItemDetailPageViewParamModel
+                    {
+                        ItemId = SelectedItem.Id
+                    },
+                    ClosedPageEventCommand = ItemDetailClosedEventCommand
+                };
+                
+                await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        
+            IsBusy = false;
+            SelectedItem = null;
+            DoubleTapping.ResumeTap();
+        }
+        
         #endregion
         
-        public class Deneme
-        {
-            public string Name { get; set; }
-            public string Price { get; set; }
-            public string Pieces { get; set; }
-            public string Image { get; set; }
-            public string Amount { get; set; } = "100";
-        }
     }
 }

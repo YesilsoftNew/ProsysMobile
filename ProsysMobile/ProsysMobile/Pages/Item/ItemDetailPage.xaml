@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<backdrop:CustomBackdrop xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+                         xmlns:backdrop="clr-namespace:ProsysMobile.Models"
+                         xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
+                         xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
+                         xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
+                         xmlns:effects="clr-namespace:ProsysMobile.Renderer"
+                         xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+                         Style="{DynamicResource Customs.Backdrop.Backdrop}"
+                         IsSetPanListener="True"
+                         ios:Page.UseSafeArea="true"
+                         mc:Ignorable="d"
+                         x:Class="ProsysMobile.Pages.Item.ItemDetailPage">
+
+    <backdrop:CustomBackdrop.PageContent>
+        <ContentView>
+
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <controlbars:CustomBackDropToolbarPrimary 
+                    Grid.Row="0"
+                    Title="Item Detail QQQ">
+                    <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
+                    </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
+                </controlbars:CustomBackDropToolbarPrimary>
+
+                <Grid
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    RowSpacing="16"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="16">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Image
+                        Grid.Row="0"
+                        WidthRequest="200"
+                        HeightRequest="200"
+                        Source="{Binding ItemImage}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                    
+                    <Label
+                        Grid.Row="1"
+                        Margin="0,20,0,0"
+                        Text="{Binding ItemPrice}"
+                        Style="{DynamicResource Header4}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                    
+                    <Label
+                        Grid.Row="2"
+                        Text="{Binding ItemName}"
+                        Style="{DynamicResource Header5}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                    
+                    <Label
+                        Grid.Row="3"
+                        Text="{Binding ItemPieces}"
+                        Style="{DynamicResource Label2}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                    
+                    <Label
+                        Grid.Row="4"
+                        Text="{Binding Categories}"
+                        Style="{DynamicResource Label2}"
+                        Margin="0,24,0,0"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                    
+                    <Grid
+                        Grid.Row="5"
+                        ColumnSpacing="16"
+                        Margin="16,40,16,0"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
+                        
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid
+                            Grid.Column="0"
+                            RowSpacing="0"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="CenterAndExpand">
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <Label
+                                Grid.Row="0"
+                                Text="Order Amount (Piece)"
+                                Style="{DynamicResource Caption1}"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="FillAndExpand" />
+                            
+                            <effects:CustomEntry
+                                Grid.Row="1"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="StartAndExpand"
+                                Text="{Binding ItemPurchaseQtyText}"
+                                FontSize="{DynamicResource Regular}"
+                                FontFamily="poppins_semibold"
+                                Keyboard="Numeric"
+                                Placeholder="Write"/>
+                            
+                        </Grid>
+                        
+                        <Button
+                                Grid.Column="1"
+                                Text="Add Basket"
+                                Command="{Binding AddBasketClickCommand}"
+                                Style="{DynamicResource Button.Primary}"
+                                BackgroundColor="{DynamicResource Color5}"
+                                VerticalOptions="EndAndExpand"
+                                HorizontalOptions="FillAndExpand"/>
+                        
+                    </Grid>
+                    
+                </Grid>
+
+            </Grid>
+
+        </ContentView>
+    </backdrop:CustomBackdrop.PageContent>
+
+</backdrop:CustomBackdrop>

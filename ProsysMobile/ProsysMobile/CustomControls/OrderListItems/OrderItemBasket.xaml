@@ -60,16 +60,36 @@
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-
-            <Label
-                x:Name="ItemName"
+            
+            <Grid
                 Grid.Row="0"
                 Grid.Column="0"
-                MaxLines="1"
                 Grid.ColumnSpan="2"
-                Style="{DynamicResource Header3}"
-                HorizontalOptions="StartAndExpand"
-                VerticalOptions="FillAndExpand"/>
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Label
+                    x:Name="ItemName"
+                    Grid.Column="0"
+                    Style="{DynamicResource Header3}"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                
+                <controlbuttons:CustomStandardImageButton
+                    x:Name="TrashButton"
+                    Grid.Column="1"
+                    Source="Trash"
+                    Style="{DynamicResource ImageButton3}"
+                    ImageButtonClicked="ImageButton_OnClicked"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                
+            </Grid>
 
             <Label
                 x:Name="ItemPieces"
@@ -78,7 +98,7 @@
                 Grid.ColumnSpan="2"
                 Style="{DynamicResource Label2}"
                 HorizontalOptions="StartAndExpand"
-                VerticalOptions="FillAndExpand"/>
+                VerticalOptions="FillAndExpand" />
 
             <Label
                 x:Name="ItemPrice"
@@ -88,44 +108,33 @@
                 HorizontalOptions="Start"
                 VerticalOptions="EndAndExpand"/>
             
-            <yummy:PancakeView 
+            <Grid
                 Grid.Row="2"
                 Grid.Column="1"
-                Border="{yummy:BorderMarkup Color={DynamicResource TransparentColor} }"
-                CornerRadius="8"
-                BackgroundColor="{DynamicResource Color5}"
-                Padding="4,7"
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand">
-
-                <Grid
-                    RowSpacing="6"
+                ColumnSpacing="3"
+                VerticalOptions="End"
+                HorizontalOptions="EndAndExpand">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Image
+                    Grid.Column="0"
+                    Source="DepotBlack"
+                    Style="{DynamicResource Image1}"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <Label
-                        Grid.Row="0"
-                        Text="Order Amount (Piece)"
-                        Style="{DynamicResource Label4}"
-                        HorizontalOptions="StartAndExpand"
-                        VerticalOptions="CenterAndExpand" />
-                    
-                    <Label
-                        x:Name="ItemAmount"
-                        Grid.Row="1"
-                        Text="2"
-                        Style="{DynamicResource Label5}"
-                        HorizontalOptions="StartAndExpand"
-                        VerticalOptions="CenterAndExpand" />
-                    
-                </Grid>
-
-            </yummy:PancakeView>
+                    VerticalOptions="CenterAndExpand" />
+                
+                <Label
+                    x:Name="ItemAmount"
+                    Grid.Column="1"
+                    Style="{DynamicResource Label5}"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="CenterAndExpand"></Label>
+                
+            </Grid>
             
         </Grid>
 
