@@ -48,7 +48,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Image
@@ -86,7 +86,7 @@
                         Text="{Binding Categories}"
                         Style="{DynamicResource Label2}"
                         Margin="0,24,0,0"
-                        HorizontalOptions="StartAndExpand"
+                        HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
                     <Grid
@@ -94,7 +94,7 @@
                         ColumnSpacing="16"
                         Margin="16,40,16,0"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="EndAndExpand">
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>

@@ -51,7 +51,7 @@
             HorizontalOptions="Start"
             VerticalOptions="EndAndExpand"/>
       
-      <controlbuttons:CustomStandardImageButton 
+      <Image 
             Grid.Column="1" 
             Grid.Row="0" 
             Grid.RowSpan="3"
@@ -60,7 +60,7 @@
             Source="AddBasket"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="EndAndExpand"
-            Style="{DynamicResource ImageButton2}" />
+            Style="{DynamicResource Image2}" />
       
       
       <controlOther:CustomLine
