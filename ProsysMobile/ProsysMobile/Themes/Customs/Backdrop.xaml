@@ -18,7 +18,7 @@
 
     <Style x:Key="Customs.Backdrop.MainGrid" TargetType="Grid">
         <Setter Property="BackgroundColor" Value="{DynamicResource White1}" />
-        <Setter Property="VerticalOptions" Value="EndAndExpand" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="Padding" Value="0,0,0,60" />
         <Setter Property="RowSpacing" Value="0" />

@@ -103,20 +103,17 @@
                     HorizontalTextAlignment="End" />
 
                 <!-- TODO DEĞİŞÇEK TIKLANINCA AKSİYON OLAN HALİ İLE -->
-                <Label 
+                <controlbuttons:CustomStandardButtonSecondary 
                     Grid.Column="1"
                     Text="Register"
                     Style="{DynamicResource Link1}"
                     Margin="5,0,0,0"
+                    Command="{Binding RegisterClickCommand}"
                     VerticalOptions="CenterAndExpand"
                     HorizontalOptions="StartAndExpand"
                     HorizontalTextAlignment="Start">
                     
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding RegisterClickCommand}"/>
-                    </Label.GestureRecognizers>
-                    
-                </Label>
+                </controlbuttons:CustomStandardButtonSecondary>
                 
             </Grid>
 
