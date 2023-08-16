@@ -7,7 +7,7 @@
                          xmlns:backdrop="clr-namespace:ProsysMobile.Models"
                          xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
                          xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
-                         xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
+                         xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry;assembly=ProsysMobile"
                          xmlns:effects="clr-namespace:ProsysMobile.Renderer"
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
@@ -92,7 +92,7 @@
                     <Grid
                         Grid.Row="5"
                         ColumnSpacing="16"
-                        Margin="16,40,16,0"
+                        Margin="8,40,8,0"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="EndAndExpand">
                         
@@ -101,35 +101,14 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
 
-                        <Grid
+                        <entries:CustomEntryPrimary
                             Grid.Column="0"
-                            RowSpacing="0"
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="CenterAndExpand">
-                            
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-
-                            <Label
-                                Grid.Row="0"
-                                Text="Order Amount (Piece)"
-                                Style="{DynamicResource Caption1}"
-                                HorizontalOptions="StartAndExpand"
-                                VerticalOptions="FillAndExpand" />
-                            
-                            <effects:CustomEntry
-                                Grid.Row="1"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="StartAndExpand"
-                                Text="{Binding ItemPurchaseQtyText}"
-                                FontSize="{DynamicResource Regular}"
-                                FontFamily="poppins_semibold"
-                                Keyboard="Numeric"
-                                Placeholder="Write"/>
-                            
-                        </Grid>
+                            VerticalOptions="FillAndExpand"
+                            Title="Order Amount (Piece)"
+                            Text="{Binding ItemPurchaseQtyText}"
+                            Keyboard="Numeric"
+                            Placeholder="Write" />
                         
                         <Button
                                 Grid.Column="1"

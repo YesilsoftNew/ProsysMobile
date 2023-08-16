@@ -46,7 +46,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             GetBasketItemsAndBindFromApi();
         }
 
-        #region Propertys
+        #region Properties
         
         private OrderDetailsSubDto _selectedItem;
         public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
@@ -100,8 +100,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     {
                         DialogService.SuccessToastMessage("Ürün sepetten silindi!");
 
-                        BasketItems.Clear();
-                        GetBasketItemsAndBindFromApi();
+                        BasketItems.Remove(orderDetailsSubDto);
+
+                        if (!BasketItems.Any())
+                        {
+                            InitializePage(
+                                isError: true,
+                                errMessage: "Sepette ürün bulunamadı!"
+                            );
+                        }
                     }
                     else
                     {

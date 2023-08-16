@@ -6,6 +6,7 @@ using ProsysMobile.Models.CommonModels.SQLiteModels;
 using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using System;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
@@ -84,10 +85,11 @@ namespace ProsysMobile.ViewModels.Pages.System
                                 var jwt = result.ResponseData.SignIn.Token;
                                 var handler = new JwtSecurityTokenHandler();
                                 var token = handler.ReadJwtToken(jwt);
-                        
+                                var expiredDateString = token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value;
+                                
                                 GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
-                                GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value);
-                        
+                                GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                                
                                 userTokenDefaultSetting.Key = "UserToken";
                                 userTokenDefaultSetting.Value = GlobalSetting.Instance.JWTToken;
 
