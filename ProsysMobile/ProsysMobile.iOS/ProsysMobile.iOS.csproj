@@ -164,6 +164,9 @@
     <BundleResource Include="Resources\BadgeAdd.png" />
     <BundleResource Include="Resources\BadgeAdd@2x.png" />
     <BundleResource Include="Resources\BadgeAdd@3x.png" />
+    <BundleResource Include="Resources\BidiLogo.png" />
+    <BundleResource Include="Resources\BidiLogo@2x.png" />
+    <BundleResource Include="Resources\BidiLogo@3x.png" />
     <BundleResource Include="Resources\ChangeItemListType.png" />
     <BundleResource Include="Resources\ChangeItemListType@2x.png" />
     <BundleResource Include="Resources\ChangeItemListType@3x.png" />
@@ -177,6 +180,9 @@
     <BundleResource Include="Resources\DoubleView.png" />
     <BundleResource Include="Resources\DoubleView@2x.png" />
     <BundleResource Include="Resources\DoubleView@3x.png" />
+    <BundleResource Include="Resources\Logo.png" />
+    <BundleResource Include="Resources\Logo@2x.png" />
+    <BundleResource Include="Resources\Logo@3x.png" />
     <BundleResource Include="Resources\NoPictureView.png" />
     <BundleResource Include="Resources\NoPictureView@2x.png" />
     <BundleResource Include="Resources\NoPictureView@3x.png" />

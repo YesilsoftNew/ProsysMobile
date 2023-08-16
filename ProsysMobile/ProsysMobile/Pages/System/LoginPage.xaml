@@ -28,10 +28,11 @@
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0"
-                   Source="Logo"
+                   Source="BidiLogo"
                    Aspect="AspectFit"
                    VerticalOptions="Fill" 
                    HorizontalOptions="Center"
+                   Style="{DynamicResource Image4}"
                    Margin="0,5,0,0"/>
 
             <Grid 

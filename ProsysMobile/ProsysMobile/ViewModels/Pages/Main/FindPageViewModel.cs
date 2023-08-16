@@ -33,7 +33,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private int? _mainPageClickedCategoryId;
         private bool _isAllItemLoad;
         private int _listPage = 1;
-        private enItemListType _currentItemListType;
+        private enItemListType _currentItemListType = enItemListType.Primary;
 
         
         public FindPageViewModel(IItemCategoryService itemCategoryService,IItemsService itemsService, IBestsellersService bestsellersService)
@@ -339,15 +339,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 if (!(sender is ItemDetailPageViewParamModel model)) return;
 
                 if (!model.IsAddItem) return;
-                
-                _listPage = 0;
-                _isAllItemLoad = false;
-                UpdateItemsList(
-                    resultResponseData: null,
-                    clearList: true
-                );
 
-                await GetItemsAndBindFromApi();
+                if (ShowBestsellers)
+                {
+                    GetBestsellersAndBindFromApi();
+                }
+                else
+                {
+                    _listPage = 0;
+                    _isAllItemLoad = false;
+                    UpdateItemsList(
+                        resultResponseData: null,
+                        clearList: true
+                    );
+                    
+                    await GetItemsAndBindFromApi();
+                }
             }
             catch (Exception ex)
             {
@@ -408,8 +415,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 IsBusy = true;
 
-                _currentItemListType = enItemListType.Primary;
-                
                 await GetCategoriesAndBindFromApi(
                     categoryId: Constants.MainCategoryId,
                     isSubCategory: false
@@ -466,6 +471,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ChangeShowItemVisibility(isNotNullSearch);
                     ShowChangeItemListDesignButton = isNotNullSearch;
 
+                    if (!string.IsNullOrWhiteSpace(Search))
+                    {
+                        _selectedCategories.Clear();
+                        ShowSubCategories = false;
+                    }
+                    
                     if (!string.IsNullOrWhiteSpace(Search) || _selectedCategories.Any())
                     {
                         _listPage = 0;
