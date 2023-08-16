@@ -24,217 +24,227 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid
-            Style="{DynamicResource MainGrid}">
+        
+        <RefreshView
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            Command="{Binding OrderListRefreshCommand}" 
+            IsRefreshing="{Binding IsRefreshingOrderList}">
             
-            <Grid.RowDefinitions>
-                <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            
-            <customBars:CustomPageBarPrimary
-                Grid.Row="0"
-                TitleText="Basket"
-                ButtonIsVisible="{Binding ShowBasketItems}"
-                ButtonCommand="{Binding ShowBasketClickCommand}"
-                ButtonText="Complete Order"/>
-            
-            <CollectionView
-                x:Name="ListBasketItems"
-                Grid.Row="1"
-                IsVisible="{Binding ShowBasketItems}"
-                ItemsSource="{Binding BasketItems}"
-                SelectedItem="{Binding SelectedItem}"
-                SelectionMode="Single"
-                VerticalScrollBarVisibility="Always">
-            
-                <CollectionView.Behaviors>
-                    <behaviors:EventToCommandBehavior EventName="SelectionChanged"
-                                                      EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
-                                                      Command="{Binding ListBasketSelectionChangedCommand}"/>
-                </CollectionView.Behaviors>
-            
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-            
-                            <Grid 
-                                  HorizontalOptions="FillAndExpand"
-                                  VerticalOptions="FillAndExpand">
+            <Grid
+                Style="{DynamicResource MainGrid}">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <customBars:CustomPageBarPrimary
+                    Grid.Row="0"
+                    TitleText="Basket"
+                    ButtonIsVisible="{Binding ShowBasketItems}"
+                    ButtonCommand="{Binding ShowBasketClickCommand}"
+                    ButtonText="Complete Order"/>
+                
+                <CollectionView
+                    x:Name="ListBasketItems"
+                    Grid.Row="1"
+                    IsVisible="{Binding ShowBasketItems}"
+                    ItemsSource="{Binding BasketItems}"
+                    SelectedItem="{Binding SelectedItem}"
+                    SelectionMode="Single"
+                    VerticalScrollBarVisibility="Always">
+                
+                    <CollectionView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                                          EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                                          Command="{Binding ListBasketSelectionChangedCommand}"/>
+                    </CollectionView.Behaviors>
+                
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                
+                                <Grid 
+                                      HorizontalOptions="FillAndExpand"
+                                      VerticalOptions="FillAndExpand">
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="1*"></RowDefinition>
-                                    <RowDefinition Height="AUTO"></RowDefinition>
-                                </Grid.RowDefinitions>
-
-                                <Grid
-                                    Grid.Row="0"
-                                    ColumnSpacing="22"
-                                    Margin="16,16,16,0"
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="FillAndExpand">
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="AUTO"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <yummy:PancakeView 
-                                        Grid.Column="0"
-                                        Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
-                                        CornerRadius="16"
-                                        VerticalOptions="StartAndExpand"
-                                        HorizontalOptions="Start">
-
-                                        <Image
-                                            x:Name="ItemImage"
-                                            WidthRequest="100"
-                                            HeightRequest="100"
-                                            Aspect="AspectFit"
-                                            Source="{Binding Image}"
-                                            HorizontalOptions="CenterAndExpand"
-                                            VerticalOptions="CenterAndExpand" />
-
-                                    </yummy:PancakeView>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*"></RowDefinition>
+                                        <RowDefinition Height="AUTO"></RowDefinition>
+                                    </Grid.RowDefinitions>
 
                                     <Grid
-                                        Grid.Column="1"
+                                        Grid.Row="0"
+                                        ColumnSpacing="22"
+                                        Margin="16,16,16,0"
                                         HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="FillAndExpand"
-                                        RowSpacing="3"
-                                        ColumnSpacing="20">
-                                        
+                                        VerticalOptions="FillAndExpand">
+
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="AUTO"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="AUTO"></RowDefinition>
-                                            <RowDefinition Height="AUTO"></RowDefinition>
-                                            <RowDefinition Height="*"></RowDefinition>
-                                        </Grid.RowDefinitions>
-                                        
-                                        <Grid
-                                            Grid.Row="0"
+                                        <yummy:PancakeView 
                                             Grid.Column="0"
-                                            Grid.ColumnSpan="2"
+                                            Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+                                            CornerRadius="16"
+                                            VerticalOptions="StartAndExpand"
+                                            HorizontalOptions="Start">
+
+                                            <Image
+                                                x:Name="ItemImage"
+                                                WidthRequest="100"
+                                                HeightRequest="100"
+                                                Aspect="AspectFit"
+                                                Source="{Binding Image}"
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="CenterAndExpand" />
+
+                                        </yummy:PancakeView>
+
+                                        <Grid
+                                            Grid.Column="1"
                                             HorizontalOptions="FillAndExpand"
-                                            VerticalOptions="FillAndExpand">
+                                            VerticalOptions="FillAndExpand"
+                                            RowSpacing="3"
+                                            ColumnSpacing="20">
                                             
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
                                                 <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                <ColumnDefinition Width="*"></ColumnDefinition>
                                             </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="AUTO"></RowDefinition>
+                                                <RowDefinition Height="AUTO"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
                                             
-                                            <Label
-                                                x:Name="ItemName"
+                                            <Grid
+                                                Grid.Row="0"
                                                 Grid.Column="0"
-                                                MaxLines="2"
-                                                Text="{Binding Name}"
-                                                Style="{DynamicResource Header3}"
-                                                HorizontalOptions="StartAndExpand"
-                                                VerticalOptions="FillAndExpand" />
-                                            
-                                            <controlbuttons:CustomStandardImageButton
-                                                x:Name="TrashButton"
-                                                Grid.Column="1"
-                                                Source="Trash"
-                                                Style="{DynamicResource ImageButton3}"
+                                                Grid.ColumnSpan="2"
                                                 HorizontalOptions="FillAndExpand"
                                                 VerticalOptions="FillAndExpand">
                                                 
-                                                <controlbuttons:CustomStandardImageButton.Behaviors>
-                                                    <behaviors:EventToCommandBehavior 
-                                                        Command="{Binding Source={x:Reference ListBasketItems}, Path=BindingContext.DeleteItemClickCommand}" 
-                                                        CommandParameter="{Binding .}" EventName="ImageButtonClicked"/>
-                                                </controlbuttons:CustomStandardImageButton.Behaviors>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
                                                 
-                                            </controlbuttons:CustomStandardImageButton>
-                                            
-                                        </Grid>
+                                                <Label
+                                                    x:Name="ItemName"
+                                                    Grid.Column="0"
+                                                    MaxLines="2"
+                                                    Text="{Binding Name}"
+                                                    Style="{DynamicResource Header3}"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="FillAndExpand" />
+                                                
+                                                <controlbuttons:CustomStandardImageButton
+                                                    x:Name="TrashButton"
+                                                    Grid.Column="1"
+                                                    Source="Trash"
+                                                    Style="{DynamicResource ImageButton3}"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="FillAndExpand">
+                                                    
+                                                    <controlbuttons:CustomStandardImageButton.Behaviors>
+                                                        <behaviors:EventToCommandBehavior 
+                                                            Command="{Binding Source={x:Reference ListBasketItems}, Path=BindingContext.DeleteItemClickCommand}" 
+                                                            CommandParameter="{Binding .}" EventName="ImageButtonClicked"/>
+                                                    </controlbuttons:CustomStandardImageButton.Behaviors>
+                                                    
+                                                </controlbuttons:CustomStandardImageButton>
+                                                
+                                            </Grid>
 
-                                        <Label
-                                            x:Name="ItemPieces"
-                                            Grid.Row="1"
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="2"
-                                            Text="{Binding StockCount}"
-                                            Style="{DynamicResource Label2}"
-                                            HorizontalOptions="StartAndExpand"
-                                            VerticalOptions="FillAndExpand" />
-
-                                        <Label
-                                            x:Name="ItemPrice"
-                                            Grid.Row="2"
-                                            Grid.Column="0"
-                                            Text="{Binding Price}"
-                                            Style="{DynamicResource Header4}"
-                                            HorizontalOptions="Start"
-                                            VerticalOptions="EndAndExpand"/>
-                                        
-                                        <Grid
-                                            Grid.Row="2"
-                                            Grid.Column="1"
-                                            ColumnSpacing="3"
-                                            VerticalOptions="End"
-                                            HorizontalOptions="EndAndExpand">
-                                            
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                            </Grid.ColumnDefinitions>
-                                            
-                                            <Image
-                                                Grid.Column="0"
-                                                Source="DepotBlack"
-                                                Style="{DynamicResource Image1}"
-                                                HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="CenterAndExpand" />
-                                            
                                             <Label
-                                                x:Name="ItemAmount"
-                                                Grid.Column="1"
-                                                Style="{DynamicResource Label5}"
-                                                Text="{Binding Amount}"
+                                                x:Name="ItemPieces"
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Grid.ColumnSpan="2"
+                                                Text="{Binding StockCount}"
+                                                Style="{DynamicResource Label2}"
                                                 HorizontalOptions="StartAndExpand"
-                                                VerticalOptions="CenterAndExpand"></Label>
+                                                VerticalOptions="FillAndExpand" />
+
+                                            <Label
+                                                x:Name="ItemPrice"
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Text="{Binding Price}"
+                                                Style="{DynamicResource Header4}"
+                                                HorizontalOptions="Start"
+                                                VerticalOptions="EndAndExpand"/>
+                                            
+                                            <Grid
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                ColumnSpacing="3"
+                                                VerticalOptions="End"
+                                                HorizontalOptions="EndAndExpand">
+                                                
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                                </Grid.ColumnDefinitions>
+                                                
+                                                <Image
+                                                    Grid.Column="0"
+                                                    Source="DepotBlack"
+                                                    Style="{DynamicResource Image1}"
+                                                    HorizontalOptions="FillAndExpand"
+                                                    VerticalOptions="CenterAndExpand" />
+                                                
+                                                <Label
+                                                    x:Name="ItemAmount"
+                                                    Grid.Column="1"
+                                                    Style="{DynamicResource Label5}"
+                                                    Text="{Binding Amount}"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    VerticalOptions="CenterAndExpand"></Label>
+                                                
+                                            </Grid>
                                             
                                         </Grid>
-                                        
+
                                     </Grid>
 
+                                    <controlOther:CustomLine Grid.Row="1" Margin="0,8,0,0"/>
+
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup Name="CommonStates">
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    
                                 </Grid>
-
-                                <controlOther:CustomLine Grid.Row="1" Margin="0,8,0,0"/>
-
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Selected">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="Transparent" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState x:Name="Normal">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="Transparent" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
-                                
-                            </Grid>
+                
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                
+                <Label
+                    Grid.Row="1"
+                    Text="{Binding EmptyMsg}"
+                    IsVisible="{Binding ShowEmptyMsg}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand" />
+                
+            </Grid>
             
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            
-            <Label
-                Grid.Row="1"
-                Text="{Binding EmptyMsg}"
-                IsVisible="{Binding ShowEmptyMsg}"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand" />
-            
-        </Grid>
+        </RefreshView>
+        
     </ContentPage.Content>
 </ContentPage>

@@ -51,6 +51,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private OrderDetailsSubDto _selectedItem;
         public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
         
+        private bool _isRefreshingOrderList;
+        public bool IsRefreshingOrderList { get => _isRefreshingOrderList; set { _isRefreshingOrderList = value; PropertyChanged(() => IsRefreshingOrderList); } }
+            
         private bool _showBasketItems;
         public bool ShowBasketItems { get => _showBasketItems; set { _showBasketItems = value; PropertyChanged(() => ShowBasketItems); } }
 
@@ -80,6 +83,21 @@ namespace ProsysMobile.ViewModels.Pages.Main
         #endregion
 
         #region Commands
+
+        public ICommand OrderListRefreshCommand => new Command(async () =>
+        {
+            try
+            {
+                IsRefreshingOrderList = false;
+
+                BasketItems.Clear();
+                GetBasketItemsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
         
         public ICommand DeleteItemClickCommand => new Command(async (sender) =>
         {
