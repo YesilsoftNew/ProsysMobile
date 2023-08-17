@@ -38,7 +38,7 @@
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <Grid
@@ -128,7 +128,6 @@
                                     
                                     <yummy:PancakeView
                                         IsVisible="{Binding IsNotSelected}"
-                                        Border="{yummy:BorderMarkup Color=Red, Thickness=3 }"
                                         HorizontalOptions="FillAndExpand"
                                         VerticalOptions="FillAndExpand">
                                         
@@ -155,7 +154,6 @@
                                     </yummy:PancakeView>
                                     
                                     <yummy:PancakeView
-                                        Border="{yummy:BorderMarkup Color= Blue, Thickness=3 }"
                                         IsVisible="{Binding IsSelected}"
                                         HorizontalOptions="FillAndExpand"
                                         VerticalOptions="FillAndExpand">

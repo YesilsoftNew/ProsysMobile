@@ -44,7 +44,9 @@ namespace ProsysMobile.iOS.Renderer
         private async void OnTabbarControllerItemSelected(object sender, UITabBarSelectionEventArgs eventArgs)
         {
             if (_page?.CurrentPage?.Navigation != null && _page.CurrentPage.Navigation.NavigationStack.Count > 0)
+            {
                 await _page.CurrentPage.Navigation.PopToRootAsync();
+            }
         }
     }
 }
