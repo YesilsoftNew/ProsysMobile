@@ -209,10 +209,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     if (_selectedCategories.Any() && _selectedCategories.FirstOrDefault(x=>x.IsMain).Id != category.ID)
                     {
-                        Categories.ForEach(x => x.IsSelected = false);
+                        foreach (var categoryItem in Categories)
+                        {
+                            categoryItem.IsNotSelected = true;
+                            categoryItem.IsSelected = false;
+                        }
                     }
                     
                     category.IsSelected = !category.IsSelected;
+                    category.IsNotSelected = !category.IsNotSelected;
                     
                     var selectedCategory = Categories.FirstOrDefault(x => x.ID == category.ID);
 

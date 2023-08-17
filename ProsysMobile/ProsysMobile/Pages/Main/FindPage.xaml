@@ -13,6 +13,7 @@
              xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
              xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -121,25 +122,67 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
 
-                                <customContolsOther:CustomCategoryGrid
-                                    Text="{Binding CategoryDesc}"
-                                    ImageSource="{Binding Image}"
-                                    ImageHeight="40"
-                                    ImageWidth="40"
-                                    IsSelected="{Binding IsSelected}"
-                                    LabelStyle="{DynamicResource Label3}"
-                                    Margin="0,0,24,0"
-                                    RowSpacing="4"
-                                    HorizontalOptions="FillAndExpand" 
+                                <Grid
+                                    HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
+                                    
+                                    <yummy:PancakeView
+                                        IsVisible="{Binding IsNotSelected}"
+                                        Border="{yummy:BorderMarkup Color=Red, Thickness=3 }"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        
+                                        <customContolsOther:CustomCategoryGrid
+                                            Text="{Binding CategoryDesc}"
+                                            ImageSource="{Binding Image}"
+                                            ImageHeight="40"
+                                            ImageWidth="40"
+                                            IsSelected="False"
+                                            LabelStyle="{DynamicResource Label3}"
+                                            Margin="0,0,24,0"
+                                            RowSpacing="4"
+                                            HorizontalOptions="FillAndExpand" 
+                                            VerticalOptions="FillAndExpand">
 
-                                    <customContolsOther:CustomCategoryGrid.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                            Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
-                                            CommandParameter="{Binding .}" />
-                                    </customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                            <customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
+                                                    CommandParameter="{Binding .}" />
+                                            </customContolsOther:CustomCategoryGrid.GestureRecognizers>
 
-                                </customContolsOther:CustomCategoryGrid>
+                                        </customContolsOther:CustomCategoryGrid>
+                                        
+                                    </yummy:PancakeView>
+                                    
+                                    <yummy:PancakeView
+                                        Border="{yummy:BorderMarkup Color= Blue, Thickness=3 }"
+                                        IsVisible="{Binding IsSelected}"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        
+                                        <customContolsOther:CustomCategoryGrid
+                                            Text="{Binding CategoryDesc}"
+                                            ImageSource="{Binding Image}"
+                                            ImageHeight="40"
+                                            ImageWidth="40"
+                                            IsSelected="True"
+                                            LabelStyle="{DynamicResource Label3}"
+                                            Margin="0,0,24,0"
+                                            RowSpacing="4"
+                                            HorizontalOptions="FillAndExpand" 
+                                            VerticalOptions="FillAndExpand">
+
+                                            <customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                                <TapGestureRecognizer 
+                                                    Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
+                                                    CommandParameter="{Binding .}" />
+                                            </customContolsOther:CustomCategoryGrid.GestureRecognizers>
+
+                                        </customContolsOther:CustomCategoryGrid>
+                                        
+                                    </yummy:PancakeView>
+                                    
+                                </Grid>
 
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
