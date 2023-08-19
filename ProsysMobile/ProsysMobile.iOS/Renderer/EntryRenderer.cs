@@ -24,21 +24,18 @@ namespace ProsysMobile.iOS.Renderer
             {
                 try
                 {
-                    this.Control.LeftView = new UIView(new CGRect(0, 0, 8, this.Control.Frame.Height));
-                    this.Control.RightView = new UIView(new CGRect(0, 0, 8, this.Control.Frame.Height));
-                    this.Control.LeftViewMode = UITextFieldViewMode.Always;
-                    this.Control.RightViewMode = UITextFieldViewMode.Always;
+                    Control.LeftView = new UIView(new CGRect(0, 0, 8, this.Control.Frame.Height));
+                    Control.RightView = new UIView(new CGRect(0, 0, 8, this.Control.Frame.Height));
+                    Control.LeftViewMode = UITextFieldViewMode.Always;
+                    Control.RightViewMode = UITextFieldViewMode.Always;
 
-                    this.Control.BorderStyle = UITextBorderStyle.None;
-                    this.Element.HeightRequest = 44;
+                    Control.BorderStyle = UITextBorderStyle.None;
+                    Element.HeightRequest = 22;
                 }
                 catch (Exception ex)
                 {
                     ProsysLogger.Instance.CrashLog(ex);
-
-                    return;
                 }
-                
             }
         }
     }

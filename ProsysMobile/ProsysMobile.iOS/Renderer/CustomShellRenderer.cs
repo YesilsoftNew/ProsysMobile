@@ -37,18 +37,25 @@ namespace ProsysMobile.iOS.Renderer
 
         }
 
+        private bool hasSetAppearance = false;
+        
         public void SetAppearance(UITabBarController controller, ShellAppearance appearance)
         {
-            UITabBar myTabBar = controller.TabBar;
-
-            if (myTabBar.Items != null)
+            if (!hasSetAppearance)
             {
-                foreach (UITabBarItem item in myTabBar.Items)
+                UITabBar myTabBar = controller.TabBar;
+
+                if (myTabBar.Items != null)
                 {
-                    item.Title = null;
-                    item.ImageInsets = new UIEdgeInsets(10, 0, 0, 0);
+                    foreach (UITabBarItem item in myTabBar.Items)
+                    {
+                        item.Title = null;
+                        item.ImageInsets = new UIEdgeInsets(10, 0, 0, 0);
+                    }
+                    // The same logic if you have itemThree, itemFour....
                 }
-                //The same logic if you have itemThree, itemFour....
+
+                hasSetAppearance = true;
             }
         }
         public void UpdateLayout(UITabBarController controller)
