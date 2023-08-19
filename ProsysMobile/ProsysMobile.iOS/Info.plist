@@ -21,12 +21,14 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>14.0</string>
 	<key>CFBundleDisplayName</key>
 	<string>Bidi Feinkost</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.yesilsoft.bidi.feinkost</string>
+	<string>com.yesilsoft.prosysmobilekuru</string>
 	<key>CFBundleVersion</key>
+	<string>1.0</string>
+	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
