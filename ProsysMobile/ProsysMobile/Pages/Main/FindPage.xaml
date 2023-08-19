@@ -108,7 +108,7 @@
 
                 <StackLayout 
                     VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand">
+                    HorizontalOptions="FillAndExpand" Padding="1">
 
                     <FlexLayout
                         x:Name="LstCategories"
@@ -125,63 +125,27 @@
                                 <Grid
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
-                                    
-                                    <yummy:PancakeView
-                                        IsVisible="{Binding IsNotSelected}"
-                                        Border="{yummy:BorderMarkup Color=Red, Thickness=3 }"
-                                        HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="FillAndExpand">
-                                        
-                                        <customContolsOther:CustomCategoryGrid
+
+                                    <customContolsOther:CustomCategoryGrid
                                             Text="{Binding CategoryDesc}"
                                             ImageSource="{Binding Image}"
                                             ImageHeight="40"
                                             ImageWidth="40"
-                                            IsSelected="False"
+                                            IsSelected="{Binding IsSelected}"
                                             LabelStyle="{DynamicResource Label3}"
                                             Margin="0,0,24,0"
                                             RowSpacing="4"
                                             HorizontalOptions="FillAndExpand" 
                                             VerticalOptions="FillAndExpand">
 
-                                            <customContolsOther:CustomCategoryGrid.GestureRecognizers>
-                                                <TapGestureRecognizer 
+                                        <customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                            <TapGestureRecognizer 
                                                     Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
                                                     CommandParameter="{Binding .}" />
-                                            </customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                        </customContolsOther:CustomCategoryGrid.GestureRecognizers>
 
-                                        </customContolsOther:CustomCategoryGrid>
-                                        
-                                    </yummy:PancakeView>
-                                    
-                                    <yummy:PancakeView
-                                        Border="{yummy:BorderMarkup Color= Blue, Thickness=3 }"
-                                        IsVisible="{Binding IsSelected}"
-                                        HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="FillAndExpand">
-                                        
-                                        <customContolsOther:CustomCategoryGrid
-                                            Text="{Binding CategoryDesc}"
-                                            ImageSource="{Binding Image}"
-                                            ImageHeight="40"
-                                            ImageWidth="40"
-                                            IsSelected="True"
-                                            LabelStyle="{DynamicResource Label3}"
-                                            Margin="0,0,24,0"
-                                            RowSpacing="4"
-                                            HorizontalOptions="FillAndExpand" 
-                                            VerticalOptions="FillAndExpand">
+                                    </customContolsOther:CustomCategoryGrid>
 
-                                            <customContolsOther:CustomCategoryGrid.GestureRecognizers>
-                                                <TapGestureRecognizer 
-                                                    Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.MainCategoryClickCommand}" 
-                                                    CommandParameter="{Binding .}" />
-                                            </customContolsOther:CustomCategoryGrid.GestureRecognizers>
-
-                                        </customContolsOther:CustomCategoryGrid>
-                                        
-                                    </yummy:PancakeView>
-                                    
                                 </Grid>
 
                             </DataTemplate>
