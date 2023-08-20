@@ -22,7 +22,7 @@
 
                 <controlbars:CustomBackDropToolbarPrimary 
                     Grid.Row="0"
-                    Title="New Account QQQ">
+                    Title="New Account">
                     <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
                         <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
                     </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
@@ -46,27 +46,27 @@
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="0" 
-                       Title="FirstName QQQ"
+                       Title="FirstName"
                        Text="{Binding FirstName}"/>
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="1" 
-                       Title="Surname QQQ"
+                       Title="Surname"
                        Text="{Binding Surname}"/>
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="2" 
-                       Title="CompanyCode QQQ"
+                       Title="CompanyCode"
                        Text="{Binding CompanyCode}"/>
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="3" 
-                       Title="Email QQQ"
+                       Title="Email"
                        Text="{Binding Email}"/>
 
                     <Button 
                         Grid.Row="4"
-                        Text="Sign up QQQ"
+                        Text="Sign up"
                         Command="{Binding RegisterClickCommand}"
                         Style="{DynamicResource Button.Primary}" 
                         VerticalOptions="FillAndExpand" 

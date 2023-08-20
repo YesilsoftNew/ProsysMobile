@@ -23,7 +23,7 @@
             <yummy:PancakeView 
                   AbsoluteLayout.LayoutFlags="All" 
                   AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+                  Border="{yummy:BorderMarkup Color={StaticResource Gray5}, Thickness=1 }"
                   CornerRadius="16"
                   VerticalOptions="FillAndExpand"
                   HorizontalOptions="Start">

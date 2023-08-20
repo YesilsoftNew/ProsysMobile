@@ -56,6 +56,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _itemPurchaseQtyText;
         public string ItemPurchaseQtyText { get => _itemPurchaseQtyText; set { _itemPurchaseQtyText = value; PropertyChanged(() => ItemPurchaseQtyText); } }
         
+        private string _itemPurchaseQtyTitle = "Order Amount (-)";
+        public string ItemPurchaseQtyTitle { get => _itemPurchaseQtyTitle; set { _itemPurchaseQtyTitle = value; PropertyChanged(() => ItemPurchaseQtyTitle); } }
+        
         private string _categories;
         public string Categories { get => _categories; set { _categories = value; PropertyChanged(() => Categories); } }
         
@@ -152,6 +155,13 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemPrice = responseModel.Item.Price;
                         Categories = responseModel.Categories;
                         ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
+                        
+                        var orderAmountWithUnitDesc = "Order Amount";
+                        if (!string.IsNullOrWhiteSpace(responseModel?.Item?.UnitDesc))
+                        {
+                            orderAmountWithUnitDesc += $" ({responseModel.Item.UnitDesc})";
+                        }
+                        ItemPurchaseQtyTitle = orderAmountWithUnitDesc;
                     }
                     else
                     {

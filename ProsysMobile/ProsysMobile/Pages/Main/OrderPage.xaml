@@ -87,7 +87,7 @@
 
                                         <yummy:PancakeView 
                                             Grid.Column="0"
-                                            Border="{yummy:BorderMarkup Color={DynamicResource Gray5}, Thickness=1 }"
+                                            Border="{yummy:BorderMarkup Color={StaticResource Gray5}, Thickness=1 }"
                                             CornerRadius="16"
                                             VerticalOptions="StartAndExpand"
                                             HorizontalOptions="Start">

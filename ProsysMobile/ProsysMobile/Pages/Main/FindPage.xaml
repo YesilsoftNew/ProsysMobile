@@ -29,10 +29,8 @@
 
     <ContentPage.Content>
         <Grid
-            Margin="0,16,0,0"
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
-            RowSpacing="0">
+            Style="{DynamicResource MainGrid}"
+            Margin="0,16,0,16">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
@@ -57,7 +55,7 @@
                     Grid.Column="0"
                     Margin="16,0,16,0"
                     Text="{Binding Search}"
-                    Placeholder="Search here QQQ"
+                    Placeholder="Search here"
                     ImageSource="EntrySearch"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">

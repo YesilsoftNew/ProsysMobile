@@ -93,17 +93,20 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
+                    result.ResponseData.Insert(0, Constants.ItemCategoryAll);
+                    
                     Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                    
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu!");
                 }
 
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu!");
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
