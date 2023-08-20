@@ -50,7 +50,7 @@ namespace ProsysMobile.iOS.Renderer
                 var myTabBar = controller.TabBar;
 
                 var topBorder = new UIView(new CGRect(0, -10, myTabBar.Frame.Width, 1));
-                topBorder.BackgroundColor = ColorExtensions.FromHexString("#A5A5A5");;
+                topBorder.BackgroundColor = ColorExtensions.FromHexString("#D3D3D3");;
                 myTabBar.AddSubview(topBorder);
                 
                 if (myTabBar.Items != null)

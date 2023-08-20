@@ -36,6 +36,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             true,
             Xamarin.Forms.BindingMode.TwoWay);
         
+        public static readonly BindableProperty UnitPriceTextProperty = BindableProperty.Create(nameof(UnitPriceText),
+            typeof(string),
+            typeof(OrderItemQuaternary),
+            default(string),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
         public string PriceText
         {
             get => (string)GetValue(PriceTextProperty);
@@ -60,6 +66,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(IsVisibleMarketImageProperty, value);
         }
         
+        public string UnitPriceText
+        {
+            get => (string)GetValue(UnitPriceTextProperty);
+            set => SetValue(UnitPriceTextProperty, value);
+        }
+        
         public OrderItemQuaternary()
         {
             InitializeComponent();
@@ -68,6 +80,8 @@ namespace ProsysMobile.CustomControls.OrderListItems
             ItemName.Text = NameText;
             ItemPieces.Text = PiecesText;
             ItemImageButton.IsVisible = IsVisibleMarketImage;
+            ItemUnitPrice.Text = UnitPriceText;
+            ItemUnitPrice.IsVisible = false;
         }
         
         protected override void OnPropertyChanged(string propertyName = null)
@@ -89,6 +103,11 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == IsVisibleMarketImageProperty.PropertyName)
             {
                 ItemImageButton.IsVisible = IsVisibleMarketImage;
+            }
+            else if (propertyName == UnitPriceTextProperty.PropertyName)
+            {
+                ItemUnitPrice.IsVisible = !string.IsNullOrWhiteSpace(UnitPriceText);
+                ItemUnitPrice.Text = UnitPriceText;
             }
         }
     }
