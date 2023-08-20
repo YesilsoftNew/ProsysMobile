@@ -14,6 +14,7 @@
             <RowDefinition Height="AUTO"></RowDefinition>
             <RowDefinition Height="AUTO"></RowDefinition>
             <RowDefinition Height="AUTO"></RowDefinition>
+            <RowDefinition Height="AUTO"></RowDefinition>
       </Grid.RowDefinitions>
       
       <Grid.ColumnDefinitions>
@@ -36,6 +37,16 @@
             Grid.Row="1"
             Grid.Column="0"
             Text="-"
+            Margin="12,0,0,4"
+            Style="{DynamicResource Label2}"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand"/>
+      
+      <Label
+            x:Name="ItemUnitPrice"
+            Grid.Row="2"
+            Grid.Column="0"
+            Text="-"
             Margin="12,0,0,0"
             Style="{DynamicResource Label2}"
             HorizontalOptions="Start"
@@ -43,10 +54,10 @@
       
       <Label
             x:Name="ItemPrice"
-            Grid.Row="2"
+            Grid.Row="3"
             Grid.Column="0"
             Text="-"
-            Margin="12,5,0,0"
+            Margin="12,2,0,0"
             Style="{DynamicResource Header4}"
             HorizontalOptions="Start"
             VerticalOptions="EndAndExpand"/>
@@ -54,7 +65,7 @@
       <Image 
             Grid.Column="1" 
             Grid.Row="0" 
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             x:Name="ItemImageButton"
             Margin="0,0,12,0"
             Source="AddBasket"
@@ -64,7 +75,7 @@
       
       
       <controlOther:CustomLine
-            Grid.Row="3"
+            Grid.Row="4"
             Grid.Column="0"
             Grid.ColumnSpan="2"
             Margin="0,5,0,0" />

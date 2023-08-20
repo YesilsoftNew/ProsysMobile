@@ -8,7 +8,7 @@ using Xamarin.Forms.Xaml;
 namespace ProsysMobile.CustomControls.Entry
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomEntryPrimary : PancakeView
+    public partial class CustomEntryPrimary
     {
 
         /// <summary>

@@ -9,6 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     x:Name="xBackDropPage"
+    HasKeyboardOffset="False"
     mc:Ignorable="d" Padding="0,20,0,0">
     
     <popup:PopupPage.Animation>
