@@ -26,7 +26,7 @@
 
                 <controlbars:CustomBackDropToolbarPrimary 
                     Grid.Row="0"
-                    Title="Item Detail QQQ">
+                    Title="Item Detail">
                     <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
                         <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
                     </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
@@ -103,7 +103,7 @@
                             Grid.Column="0"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
-                            Title="Order Amount (Piece)"
+                            Title="{Binding ItemPurchaseQtyTitle}"
                             Text="{Binding ItemPurchaseQtyText}"
                             Keyboard="Numeric"
                             Placeholder="Write" />

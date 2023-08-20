@@ -1,4 +1,8 @@
-﻿using ProsysMobile.Renderer;
+﻿using System;
+using CoreAnimation;
+using CoreGraphics;
+using ProsysMobile.Helper;
+using ProsysMobile.Renderer;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -43,8 +47,12 @@ namespace ProsysMobile.iOS.Renderer
         {
             if (!hasSetAppearance)
             {
-                UITabBar myTabBar = controller.TabBar;
+                var myTabBar = controller.TabBar;
 
+                var topBorder = new UIView(new CGRect(0, -10, myTabBar.Frame.Width, 1));
+                topBorder.BackgroundColor = ColorExtensions.FromHexString("#A5A5A5");;
+                myTabBar.AddSubview(topBorder);
+                
                 if (myTabBar.Items != null)
                 {
                     foreach (UITabBarItem item in myTabBar.Items)
@@ -52,7 +60,6 @@ namespace ProsysMobile.iOS.Renderer
                         item.Title = null;
                         item.ImageInsets = new UIEdgeInsets(10, 0, 0, 0);
                     }
-                    // The same logic if you have itemThree, itemFour....
                 }
 
                 hasSetAppearance = true;
@@ -62,5 +69,36 @@ namespace ProsysMobile.iOS.Renderer
         {
 
         }
+        
+        
     }
+    
+    public static class ColorExtensions
+    {
+        public static UIColor FromHexString(string hex)
+        {
+            try
+            {
+                hex = hex.TrimStart('#');
+
+                if (hex.Length == 6)
+                {
+                    int red = int.Parse(hex.Substring(0, 2), System.Globalization.NumberStyles.HexNumber);
+                    int green = int.Parse(hex.Substring(2, 2), System.Globalization.NumberStyles.HexNumber);
+                    int blue = int.Parse(hex.Substring(4, 2), System.Globalization.NumberStyles.HexNumber);
+
+                    return UIColor.FromRGB(red, green, blue);
+                }
+
+                throw new ArgumentException("Invalid hex color code", nameof(hex));
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+                
+                throw new ArgumentException("Invalid hex color code", nameof(hex));
+            }
+        }
+    }
+
 }

@@ -14,5 +14,6 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public string CurrencyType { get; set; }
         public string Image { get; set; }
         public string Amount { get; set; } = string.Empty;
+        public string UnitDesc { get; set; } = string.Empty;
     }
 }

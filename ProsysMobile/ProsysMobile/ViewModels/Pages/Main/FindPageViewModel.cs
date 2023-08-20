@@ -111,17 +111,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         }
 
-        private ObservableRangeCollection<ItemCategory> _categoriesClone;
-        public ObservableRangeCollection<ItemCategory> CategoriesClone
-        {
-            get => _categoriesClone ?? (_categoriesClone = new ObservableRangeCollection<ItemCategory>());
-            set
-            {
-                _categoriesClone = value;
-                PropertyChanged(() => CategoriesClone);
-            }
-        }
-
         private ObservableRangeCollection<ItemCategory> _subCategories;
         public ObservableRangeCollection<ItemCategory> SubCategories
         {
@@ -210,8 +199,16 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender != null && sender is ItemCategory category)
                 {
-                    if (_selectedCategories.Any() && _selectedCategories.FirstOrDefault(x => x.IsMain).Id != category.ID)
-                        Categories.FirstOrDefault(x => x.IsSelected == true).IsSelected = false;
+                    if (_selectedCategories.Any() &&
+                        _selectedCategories.FirstOrDefault(x => x.IsMain).Id != category.ID)
+                    {
+                        var findCategory = Categories.FirstOrDefault(x => x.IsSelected);
+
+                        if (findCategory != null)
+                        {
+                            findCategory.IsSelected = false;
+                        }
+                    }
 
                     category.IsSelected = !category.IsSelected;
 
@@ -469,6 +466,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                     if (!string.IsNullOrWhiteSpace(Search))
                     {
+                        Categories.Where(x => x.IsSelected).ForEach(x => x.IsSelected = false);
                         _selectedCategories.Clear();
                         ShowSubCategories = false;
                     }
@@ -582,8 +580,19 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     if (!isSubCategory)
                     {
+                        result.ResponseData.Insert(0, Constants.ItemCategoryAll);
+
                         Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
-                        CategoriesClone = Categories;
+                        
+                        foreach (var selectedCategory in _selectedCategories)
+                        {
+                            var category = Categories.FirstOrDefault(x => x.ID == selectedCategory.Id);
+
+                            if (category != null)
+                            {
+                                category.IsSelected = true;
+                            }
+                        }
                     }
                     else
                     {
@@ -593,12 +602,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu!");
                 }
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu! QQQ");
+                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu!");
 
                 ProsysLogger.Instance.CrashLog(ex);
             }

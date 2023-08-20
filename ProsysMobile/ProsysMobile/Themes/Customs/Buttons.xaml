@@ -23,6 +23,18 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>
     
+    <Style x:Key="Button.OutlineSecondary" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{DynamicResource White1}" />
+        <Setter Property="TextColor" Value="{DynamicResource Color5}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="Padding" Value="22,3" />
+        <Setter Property="BorderWidth" Value="1" />
+        <Setter Property="BorderColor" Value="{DynamicResource Color5}" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+    </Style>
+    
     <Style x:Key="ImageButton1" TargetType="ImageButton">
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="WidthRequest" Value="24" />

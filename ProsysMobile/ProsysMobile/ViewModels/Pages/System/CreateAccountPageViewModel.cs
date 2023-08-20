@@ -69,7 +69,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
-                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
+                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz!");
                     
                     DoubleTapping.ResumeTap();
 
@@ -78,7 +78,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(FirstName))
                 {
-                    DialogService.WarningToastMessage("Lütfen isminizi yazınız! QQQ");
+                    DialogService.WarningToastMessage("Lütfen isminizi yazınız!");
                     
                     DoubleTapping.ResumeTap();
 
@@ -87,7 +87,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(Surname))
                 {
-                    DialogService.WarningToastMessage("Lütfen soyisminizi yazınız! QQQ");
+                    DialogService.WarningToastMessage("Lütfen soyisminizi yazınız!");
 
                     DoubleTapping.ResumeTap();
 
@@ -96,7 +96,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(Email))
                 {
-                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız! QQQ");
+                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız!");
                     
                     DoubleTapping.ResumeTap();
                     
@@ -105,7 +105,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(CompanyCode))
                 {
-                    DialogService.WarningToastMessage("Lütfen şirket kodunu yazınız! QQQ");
+                    DialogService.WarningToastMessage("Lütfen şirket kodunu yazınız!");
                     
                     DoubleTapping.ResumeTap();
 
@@ -122,18 +122,18 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
-                    DialogService.SuccessToastMessage("Talebiniz gönderildi! QQQ");
+                    DialogService.SuccessToastMessage("Talebiniz gönderildi!");
                     NavigationService.NavigatePopBackdropAsync();
                 }
                 else
                 {
-                    DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
+                    DialogService.WarningToastMessage("Bir hata oluştu!");
                 }
 
             }
             catch (Exception ex)
             {
-                DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
+                DialogService.WarningToastMessage("Bir hata oluştu!");
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }

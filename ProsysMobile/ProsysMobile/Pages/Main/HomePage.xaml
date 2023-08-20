@@ -15,8 +15,7 @@
     <ContentPage.Content>
         
         <Grid
-            HorizontalOptions="FillAndExpand"
-            VerticalOptions="FillAndExpand"
+            Style="{DynamicResource MainGrid}"
             Margin="0,16,0,16">
             
             <Grid.RowDefinitions>

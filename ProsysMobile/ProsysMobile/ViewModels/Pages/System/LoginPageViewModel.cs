@@ -86,7 +86,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                 
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
-                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz! QQQ");
+                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz!");
                     
                     DoubleTapping.ResumeTap();
 
@@ -95,7 +95,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(Email))
                 {
-                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız! QQQ");
+                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız!");
 
                     DoubleTapping.ResumeTap();
 
@@ -104,7 +104,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(Password))
                 {
-                    DialogService.WarningToastMessage("Lütfen şifrenizi yazınız! QQQ");
+                    DialogService.WarningToastMessage("Lütfen şifrenizi yazınız!");
                    
                     DoubleTapping.ResumeTap();
 
@@ -151,14 +151,14 @@ namespace ProsysMobile.ViewModels.Pages.System
                     }
                     else
                     {
-                        DialogService.WarningToastMessage("Email veya şifreniz hatalı! QQQ");
+                        DialogService.WarningToastMessage("Email veya şifreniz hatalı!");
                     }    
                 }
                 
             }
             catch (Exception ex)
             {
-                DialogService.WarningToastMessage("Bir hata oluştu! QQQ");
+                DialogService.WarningToastMessage("Bir hata oluştu!");
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
