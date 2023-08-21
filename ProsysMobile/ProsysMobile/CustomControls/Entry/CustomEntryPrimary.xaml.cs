@@ -251,6 +251,11 @@ namespace ProsysMobile.CustomControls.Entry
         /// Entry Focused
         /// </summary>
         public event EventHandler<FocusEventArgs> EntryFocused;
+        
+        /// <summary>
+        /// Entry Un Focused
+        /// </summary>
+        public event EventHandler<FocusEventArgs> EntryUnFocused;
 
         /// <summary>
         /// Entry Text Change
@@ -303,10 +308,24 @@ namespace ProsysMobile.CustomControls.Entry
         {
             try
             {
-                if (EntryFocused != null)
-                {
-                    EntryFocused(sender, e);
-                }
+                EntryFocused?.Invoke(sender, e);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        }
+        
+        /// <summary>
+        /// On UnFocused Entry
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void OnEntryUnFocused(object sender, FocusEventArgs e)
+        {
+            try
+            {
+                EntryUnFocused?.Invoke(sender, e);
             }
             catch (Exception ex)
             {

@@ -27,8 +27,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <CodesignKey>Apple Distribution: Emrullah Altintop (3KSXXU34FD)</CodesignKey>
-    <CodesignProvision>BidiFeinkost</CodesignProvision>
+    <CodesignKey>Apple Development: Emrullah Altintop (FG486WQAXB)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.yesilsoft.prosysmobilekuru</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -38,8 +38,8 @@
     <WarningLevel>4</WarningLevel>
     <MtouchLink>SdkOnly</MtouchLink>
     <MtouchArch>x86_64</MtouchArch>
-    <CodesignKey>Apple Distribution: Emrullah Altintop (3KSXXU34FD)</CodesignKey>
-    <CodesignProvision>BidiFeinkost</CodesignProvision>
+    <CodesignKey>Apple Development: Emrullah Altintop (FG486WQAXB)</CodesignKey>
+    <CodesignProvision>iOS Team Provisioning Profile: com.yesilsoft.prosysmobilekuru</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,12 +50,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>Apple Distribution: Emrullah Altintop (3KSXXU34FD)</CodesignKey>
+    <CodesignKey>Apple Development: Emrullah Altintop (FG486WQAXB)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>None</MtouchLink>
     <MtouchInterpreter>-all</MtouchInterpreter>
-    <CodesignProvision>BidiFeinkost</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.yesilsoft.prosysmobilekuru</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -64,10 +64,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>Apple Distribution: Emrullah Altintop (3KSXXU34FD)</CodesignKey>
+    <CodesignKey>Apple Development: Emrullah Altintop (FG486WQAXB)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchLink>SdkOnly</MtouchLink>
-    <CodesignProvision>BidiFeinkost</CodesignProvision>
+    <CodesignProvision>Automatic</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -154,17 +154,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\ProsysMobile\ProsysMobile.csproj">
-      <Project>{139F945F-4B1C-4C41-A763-C8CBE7BF0048}</Project>
+      <Project>{792FEE93-862B-4399-BAAF-D0C8CBD8E547}</Project>
       <Name>ProsysMobile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Helper\" />
     <Folder Include="test\" />
   </ItemGroup>
   <ItemGroup>
