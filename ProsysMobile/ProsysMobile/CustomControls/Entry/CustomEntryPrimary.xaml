@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Row="0" Grid.Column="0" Margin="16,8,0,0" x:Name="ItemLabel" Style="{DynamicResource Caption1}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
-        <effects:CustomEntry Grid.Row="1" Grid.Column="0" x:Name="ItemEntry" Focused="OnEntryFocused" TextChanged="OnEntryTextChanged" Style="{DynamicResource TextField1}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
+        <effects:CustomEntry Grid.Row="1" Grid.Column="0" x:Name="ItemEntry" Focused="OnEntryFocused" Unfocused="OnEntryUnFocused" TextChanged="OnEntryTextChanged" Style="{DynamicResource TextField1}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"/>
         <controlbuttons:CustomStandardImageButton Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" x:Name="ItemImage" WidthRequest="22" HeightRequest="22" Pressed="ItemImage_Pressed" Released="ItemImage_Released"  HorizontalOptions="End" VerticalOptions="CenterAndExpand"/>
     </Grid>
 </yummy:PancakeView>

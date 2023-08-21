@@ -13,6 +13,7 @@
                          IsSetPanListener="True"
                          ios:Page.UseSafeArea="true"
                          mc:Ignorable="d"
+                         x:Name="Content"
                          x:Class="ProsysMobile.Pages.Item.ItemDetailPage">
 
     <backdrop:CustomBackdrop.PageContent>
@@ -105,6 +106,8 @@
                             VerticalOptions="FillAndExpand"
                             Title="{Binding ItemPurchaseQtyTitle}"
                             Text="{Binding ItemPurchaseQtyText}"
+                            EntryFocused="OnEntryFocused"
+                            EntryUnFocused="OnEntryUnfocused"
                             Keyboard="Numeric"
                             Placeholder="Write" />
                         
