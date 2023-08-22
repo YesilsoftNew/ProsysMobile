@@ -106,8 +106,6 @@
                             VerticalOptions="FillAndExpand"
                             Title="{Binding ItemPurchaseQtyTitle}"
                             Text="{Binding ItemPurchaseQtyText}"
-                            EntryFocused="OnEntryFocused"
-                            EntryUnFocused="OnEntryUnfocused"
                             Keyboard="Numeric"
                             Placeholder="Write" />
                         
