@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using ProsysMobile.CustomControls.Backdrop;
 using ProsysMobile.Helper;
+using ProsysMobile.Models;
+using ProsysMobile.Renderer;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
 using Xamarin.Forms.Xaml;

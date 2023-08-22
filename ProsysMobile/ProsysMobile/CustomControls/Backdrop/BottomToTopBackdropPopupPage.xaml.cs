@@ -5,6 +5,7 @@ using Rg.Plugins.Popup.Services;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using ProsysMobile.CustomControls.Entry;
 using ProsysMobile.Pages.System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -40,6 +41,56 @@ namespace ProsysMobile.CustomControls.Backdrop
             SetPanListener();
 
             Indictor.IsVisible = IndictorVisible;
+        }
+        
+        protected override void OnAppearing()
+        {
+            if (Device.RuntimePlatform == Device.iOS && ViewContent.Content is ContentView _contentView)
+                LoopContentPage(_contentView.Content);
+
+            base.OnAppearing();
+        }
+
+        private void LoopContentPage(dynamic obj)
+        {
+            if (obj is Grid grd)
+            {
+                foreach (var grdItem in grd.Children)
+                {
+                    if (grdItem is CustomEntryPrimary gridChildEntry)
+                    {
+                        gridChildEntry.EntryFocused += Keyboard_EntryFocused;
+                        gridChildEntry.EntryUnFocused += Keyboard_EntryUnFocused;
+                    }
+                    else
+                        LoopContentPage(grdItem);
+                }
+            }
+
+            if (obj is StackLayout stc)
+            {
+                foreach (var stcItem in stc.Children)
+                {
+                    if (stcItem is CustomEntryPrimary stcChildEntry)
+                    {
+                        stcChildEntry.EntryFocused += Keyboard_EntryFocused;
+                        stcChildEntry.EntryUnFocused += Keyboard_EntryUnFocused;
+                    }
+                    else
+                        LoopContentPage(stcItem);
+                }
+            }
+        }
+
+        private void Keyboard_EntryUnFocused(object sender, FocusEventArgs e)
+        {
+            Content.TranslationY = 0;
+        }
+
+        private void Keyboard_EntryFocused(object sender, FocusEventArgs e)
+        {
+            var keyboardHeight = 240;
+            Content.TranslationY = -keyboardHeight;
         }
 
         /// <summary>
