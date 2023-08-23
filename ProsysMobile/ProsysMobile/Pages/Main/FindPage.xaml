@@ -13,7 +13,6 @@
              xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
              xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">

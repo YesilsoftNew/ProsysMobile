@@ -177,5 +177,30 @@
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
+    
+    <Style x:Key="Label8" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray7}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="VerticalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
 
+    <Style x:Key="Label9" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black4}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Tiny}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
+    </Style>
+    
+    <Style x:Key="Label10" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Black4}" />
+        <Setter Property="FontFamily" Value="poppins_medium" />
+        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <!--<Setter Property="VerticalTextAlignment" Value="Center" />-->
+    </Style>
+    
 </ResourceDictionary>
