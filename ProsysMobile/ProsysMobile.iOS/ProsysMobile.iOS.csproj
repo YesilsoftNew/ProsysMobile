@@ -179,6 +179,9 @@
     <BundleResource Include="Resources\ChangeItemListType.png" />
     <BundleResource Include="Resources\ChangeItemListType@2x.png" />
     <BundleResource Include="Resources\ChangeItemListType@3x.png" />
+    <BundleResource Include="Resources\ChevronRight.png" />
+    <BundleResource Include="Resources\ChevronRight@2x.png" />
+    <BundleResource Include="Resources\ChevronRight@3x.png" />
     <BundleResource Include="Resources\CloseGreen@2x.png" />
     <BundleResource Include="Resources\CloseGreen@3x.png" />
     <BundleResource Include="Resources\CloseYellow@2x.png" />
@@ -196,6 +199,9 @@
     <BundleResource Include="Resources\NoPictureView.png" />
     <BundleResource Include="Resources\NoPictureView@2x.png" />
     <BundleResource Include="Resources\NoPictureView@3x.png" />
+    <BundleResource Include="Resources\Settings.png" />
+    <BundleResource Include="Resources\Settings@2x.png" />
+    <BundleResource Include="Resources\Settings@3x.png" />
     <BundleResource Include="Resources\SingleView.png" />
     <BundleResource Include="Resources\SingleView@2x.png" />
     <BundleResource Include="Resources\SingleView@3x.png" />

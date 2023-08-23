@@ -25,12 +25,12 @@
     
     <Style x:Key="Button.OutlineSecondary" TargetType="Button">
         <Setter Property="BackgroundColor" Value="{DynamicResource White1}" />
-        <Setter Property="TextColor" Value="{DynamicResource Color5}" />
-        <Setter Property="FontFamily" Value="poppins_medium" />
-        <Setter Property="FontSize" Value="{DynamicResource Regular}" />
-        <Setter Property="Padding" Value="22,3" />
+        <Setter Property="TextColor" Value="{DynamicResource Gray7}" />
+        <Setter Property="FontFamily" Value="poppins_semi_bold" />
+        <Setter Property="FontSize" Value="{DynamicResource Small}" />
         <Setter Property="BorderWidth" Value="1" />
-        <Setter Property="BorderColor" Value="{DynamicResource Color5}" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BorderColor" Value="{DynamicResource Gray7}" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
     </Style>

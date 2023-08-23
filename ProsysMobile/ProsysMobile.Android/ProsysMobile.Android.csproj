@@ -149,6 +149,8 @@
     <AndroidResource Include="Resources\drawable-hdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-hdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-hdpi\BidiLogo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-hdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-hdpi\CloseGreen.png" />
     <AndroidResource Include="Resources\drawable-hdpi\CloseRed.png" />
@@ -159,6 +161,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-hdpi\nfoBlue.png" />
     <AndroidResource Include="Resources\drawable-hdpi\NoPictureView.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Settings.png" />
     <AndroidResource Include="Resources\drawable-hdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-hdpi\SuccessGreen.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Trash.png" />
@@ -166,6 +169,8 @@
     <AndroidResource Include="Resources\drawable-ldpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BidiLogo.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-ldpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-ldpi\CloseGreen.png" />
     <AndroidResource Include="Resources\drawable-ldpi\CloseRed.png" />
@@ -176,6 +181,7 @@
     <AndroidResource Include="Resources\drawable-ldpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-ldpi\nfoBlue.png" />
     <AndroidResource Include="Resources\drawable-ldpi\NoPictureView.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\Settings.png" />
     <AndroidResource Include="Resources\drawable-ldpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-ldpi\SuccessGreen.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Trash.png" />
@@ -183,6 +189,8 @@
     <AndroidResource Include="Resources\drawable-mdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BidiLogo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-mdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-mdpi\CloseGreen.png" />
     <AndroidResource Include="Resources\drawable-mdpi\CloseRed.png" />
@@ -193,6 +201,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-mdpi\nfoBlue.png" />
     <AndroidResource Include="Resources\drawable-mdpi\NoPictureView.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Settings.png" />
     <AndroidResource Include="Resources\drawable-mdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-mdpi\SuccessGreen.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Trash.png" />
@@ -200,6 +209,8 @@
     <AndroidResource Include="Resources\drawable-xhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BidiLogo.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\CloseGreen.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\CloseRed.png" />
@@ -210,6 +221,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nfoBlue.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\NoPictureView.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Settings.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\SuccessGreen.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Trash.png" />
@@ -217,6 +229,8 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BidiLogo.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\CloseGreen.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\CloseRed.png" />
@@ -227,6 +241,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\nfoBlue.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\NoPictureView.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Settings.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\SuccessGreen.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Trash.png" />
@@ -235,6 +250,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\CloseGreen.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\CloseRed.png" />
@@ -245,6 +261,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\nfoBlue.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\NoPictureView.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Settings.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\SingleView.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\SuccessGreen.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Trash.png" />
