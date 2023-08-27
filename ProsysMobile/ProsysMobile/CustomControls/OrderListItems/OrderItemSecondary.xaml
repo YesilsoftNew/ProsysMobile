@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
       x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemSecondary"
       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-      xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
       xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
       HorizontalOptions="FillAndExpand"
       VerticalOptions="FillAndExpand">
@@ -78,14 +77,14 @@
                 VerticalOptions="EndAndExpand"/>
 
         </Grid>
-
-        <Image
+        
+        <ImageButton
             Grid.Column="2" 
             x:Name="ItemImageButton"
-            Source="AddBasket"
+            Clicked="ItemImageButton_OnClicked"
             HorizontalOptions="End"
-            VerticalOptions="EndAndExpand"
-            Style="{DynamicResource ImageButton2}" />
+            VerticalOptions="StartAndExpand"
+            Style="{DynamicResource ImageButton4}" />
 
     </Grid>
 

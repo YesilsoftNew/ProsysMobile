@@ -271,6 +271,7 @@
             </Grid>
 
             <CollectionView 
+                x:Name="ItemListPrimary"
                  Grid.Row="3" 
                  IsVisible="{Binding ShowItemsPrimary}" 
                  ItemsSource="{Binding ItemsPrimary}" 
@@ -297,6 +298,9 @@
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
+                            IsFavorite="{Binding IsFavorite}"
+                            FavoriteCommand="{Binding Source={x:Reference ItemListPrimary}, Path=BindingContext.FavoriteClickCommand}"
+                            FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -352,6 +356,9 @@
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
+                            IsFavorite="{Binding IsFavorite}"
+                            FavoriteCommand="{Binding Source={x:Reference ItemListPrimary}, Path=BindingContext.FavoriteClickCommand}"
+                            FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -402,6 +409,9 @@
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
+                            IsFavorite="{Binding IsFavorite}"
+                            FavoriteCommand="{Binding Source={x:Reference ItemListPrimary}, Path=BindingContext.FavoriteClickCommand}"
+                            FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
             

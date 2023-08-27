@@ -3,17 +3,15 @@
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                          xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                         xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
                          xmlns:backdrop="clr-namespace:ProsysMobile.Models"
                          xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
                          xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry;assembly=ProsysMobile"
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
                          IsSetPanListener="True"
-                         ios:Page.UseSafeArea="true"
                          mc:Ignorable="d"
-                         x:Name="Content"
                          x:Class="ProsysMobile.Pages.Item.ItemDetailPage">
 
     <backdrop:CustomBackdrop.PageContent>
@@ -26,11 +24,12 @@
                 </Grid.RowDefinitions>
 
                 <controlbars:CustomBackDropToolbarPrimary 
+                    x:Name="Content"
                     Grid.Row="0"
                     Title="Item Detail">
-                    <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
-                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
-                    </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
+                    <controlbars:CustomBackDropToolbarPrimary.Behaviors>
+                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference Content}}" EventName="ItemButtonCloseClicked"/>
+                    </controlbars:CustomBackDropToolbarPrimary.Behaviors>
                 </controlbars:CustomBackDropToolbarPrimary>
 
                 <Grid
@@ -50,13 +49,32 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Image
+                    <AbsoluteLayout
                         Grid.Row="0"
-                        WidthRequest="200"
-                        HeightRequest="200"
-                        Source="{Binding ItemImage}"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="FillAndExpand"/>
+                        VerticalOptions="FillAndExpand"
+                        HorizontalOptions="CenterAndExpand">
+                
+                        <Image
+                            WidthRequest="200"
+                            HeightRequest="200"
+                            Aspect="AspectFill"
+                            Source="{Binding ItemImage}"
+                            AbsoluteLayout.LayoutFlags="All"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand" />
+
+                        <ImageButton
+                            x:Name="ItemImageButton"
+                            Aspect="AspectFit"
+                            Source="{Binding FavoriteImageSource}"
+                            Margin="0,6,9,0"
+                            Command="{Binding FavoriteClickCommand}"
+                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                            AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
+                            Style="{DynamicResource ImageButton4}" />
+                
+                    </AbsoluteLayout>
                     
                     <Label
                         Grid.Row="1"

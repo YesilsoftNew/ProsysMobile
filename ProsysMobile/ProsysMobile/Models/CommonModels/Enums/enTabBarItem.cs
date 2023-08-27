@@ -5,7 +5,7 @@ namespace ProsysMobile.Models.CommonModels.Enums
         HomePage = 0,
         FindPage = 1,
         OrderPage = 2,
-        AccountPage = 3
-            
+        FavoritePage = 3,
+        AccountPage = 4
     }
 }

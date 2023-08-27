@@ -62,16 +62,16 @@
             HorizontalOptions="Start"
             VerticalOptions="EndAndExpand"/>
       
-      <Image 
+      <ImageButton
             Grid.Column="1" 
             Grid.Row="0" 
             Grid.RowSpan="4"
             x:Name="ItemImageButton"
-            Margin="0,0,12,0"
-            Source="AddBasket"
+            Margin="0,16,12,0"
+            Clicked="ItemImageButton_OnClicked"
             HorizontalOptions="FillAndExpand"
-            VerticalOptions="EndAndExpand"
-            Style="{DynamicResource Image2}" />
+            VerticalOptions="StartAndExpand"
+            Style="{DynamicResource ImageButton4}" />
       
       
       <controlOther:CustomLine

@@ -192,6 +192,9 @@
     <BundleResource Include="Resources\DoubleView.png" />
     <BundleResource Include="Resources\DoubleView@2x.png" />
     <BundleResource Include="Resources\DoubleView@3x.png" />
+    <BundleResource Include="Resources\Favorite.png" />
+    <BundleResource Include="Resources\Favorite@2x.png" />
+    <BundleResource Include="Resources\Favorite@3x.png" />
     <BundleResource Include="Resources\LaunchScreen.storyboard" />
     <BundleResource Include="Resources\Logo.png" />
     <BundleResource Include="Resources\Logo@2x.png" />
@@ -199,6 +202,9 @@
     <BundleResource Include="Resources\NoPictureView.png" />
     <BundleResource Include="Resources\NoPictureView@2x.png" />
     <BundleResource Include="Resources\NoPictureView@3x.png" />
+    <BundleResource Include="Resources\SelectedFavorite.png" />
+    <BundleResource Include="Resources\SelectedFavorite@2x.png" />
+    <BundleResource Include="Resources\SelectedFavorite@3x.png" />
     <BundleResource Include="Resources\Settings.png" />
     <BundleResource Include="Resources\Settings@2x.png" />
     <BundleResource Include="Resources\Settings@3x.png" />
@@ -211,6 +217,9 @@
     <BundleResource Include="Resources\Trash.png" />
     <BundleResource Include="Resources\Trash@2x.png" />
     <BundleResource Include="Resources\Trash@3x.png" />
+    <BundleResource Include="Resources\UnSelectedFavorite.png" />
+    <BundleResource Include="Resources\UnSelectedFavorite@2x.png" />
+    <BundleResource Include="Resources\UnSelectedFavorite@3x.png" />
     <BundleResource Include="Resources\WarningYellow.png" />
     <BundleResource Include="Resources\WarningYellow@2x.png" />
     <BundleResource Include="Resources\WarningYellow@3x.png" />

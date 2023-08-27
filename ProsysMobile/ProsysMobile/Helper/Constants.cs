@@ -5,6 +5,7 @@ namespace ProsysMobile.Helper
     public static class Constants
     {
         public static int MainCategoryId = -1;
+        
         public static ItemCategory ItemCategoryAll = new ItemCategory
         {
             ID = 0,
@@ -14,5 +15,9 @@ namespace ProsysMobile.Helper
             RecordState = null,
             IsSelected = false
         };
+
+        public static string UnSelectedFavoriteImageSource = "UnSelectedFavorite";
+        public static string SelectedFavoriteImageSource = "SelectedFavorite";
+
     }
 }

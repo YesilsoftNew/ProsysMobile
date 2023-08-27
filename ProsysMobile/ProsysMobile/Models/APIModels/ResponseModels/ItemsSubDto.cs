@@ -1,10 +1,18 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
 namespace ProsysMobile.Models.APIModels.ResponseModels
 {
-    public class ItemsSubDto
+    public class ItemsSubDto : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        
         public int Id { get; set;}
         public int CategoryId { get; set;}
         public string Name { get; set; }
@@ -15,5 +23,8 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public string Image { get; set; }
         public string Amount { get; set; } = string.Empty;
         public string UnitDesc { get; set; } = string.Empty;
+
+        private bool _isFavorite;
+        public bool IsFavorite { get => _isFavorite; set { _isFavorite = value; OnPropertyChanged(); } }
     }
 }

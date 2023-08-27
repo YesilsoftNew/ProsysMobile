@@ -4,17 +4,13 @@
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                          xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                         xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
                          xmlns:backdrop="clr-namespace:ProsysMobile.Models"
                          xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
-                         xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
                          xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
-                         xmlns:effects="clr-namespace:ProsysMobile.Renderer"
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
                          IsSetPanListener="True"
-                         ios:Page.UseSafeArea="true"
                          mc:Ignorable="d"
                          x:Class="ProsysMobile.Pages.Other.ChangeItemListDesignPage">
    

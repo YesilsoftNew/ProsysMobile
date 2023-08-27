@@ -51,5 +51,17 @@
         <Setter Property="WidthRequest" Value="32" />
         <Setter Property="HeightRequest" Value="32" />
     </Style>
+    
+    <Style x:Key="ImageButton4" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="39" />
+        <Setter Property="HeightRequest" Value="39" />
+    </Style>
+    
+    <Style x:Key="ImageButton5" TargetType="ImageButton">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
+    </Style>
 
 </ResourceDictionary>

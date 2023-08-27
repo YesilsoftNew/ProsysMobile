@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,7 +13,7 @@ namespace ProsysMobile.CustomControls.OrderListItems
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderItemTertiary
     {
-public static readonly BindableProperty PriceTextProperty = BindableProperty.Create(nameof(PriceText),
+        public static readonly BindableProperty PriceTextProperty = BindableProperty.Create(nameof(PriceText),
             typeof(string),
             typeof(OrderItemTertiary),
             default(string),
@@ -35,6 +36,25 @@ public static readonly BindableProperty PriceTextProperty = BindableProperty.Cre
             typeof(OrderItemTertiary),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty IsFavoriteProperty = BindableProperty.Create(nameof(IsFavorite),
+            typeof(bool),
+            typeof(OrderItemSecondary),
+            default(bool),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty FavoriteCommandProperty = BindableProperty.Create(nameof(FavoriteCommand),
+            typeof(ICommand),
+            typeof(OrderItemSecondary),
+            default(ICommand),
+            BindingMode.TwoWay);
+        
+        public static BindableProperty FavoriteCommandParameterProperty = BindableProperty.CreateAttached(
+            nameof(FavoriteCommandParameter),
+            typeof(object),
+            typeof(OrderItemSecondary),
+            null,
+            BindingMode.TwoWay);
         
         public string PriceText
         {
@@ -60,6 +80,24 @@ public static readonly BindableProperty PriceTextProperty = BindableProperty.Cre
             set => SetValue(ImageSourceProperty, value);
         }
         
+        public bool IsFavorite
+        {
+            get => (bool)GetValue(IsFavoriteProperty);
+            set => SetValue(IsFavoriteProperty, value);
+        }
+        
+        public ICommand FavoriteCommand
+        {
+            get => (Command)GetValue(FavoriteCommandProperty);
+            set => SetValue(FavoriteCommandProperty, value);
+        }
+        
+        public object FavoriteCommandParameter
+        {
+            get => GetValue(FavoriteCommandParameterProperty);
+            set => SetValue(FavoriteCommandParameterProperty, value);
+        }
+        
         public OrderItemTertiary()
         {
             InitializeComponent();
@@ -68,6 +106,7 @@ public static readonly BindableProperty PriceTextProperty = BindableProperty.Cre
             ItemName.Text = NameText;
             ItemPieces.Text = PiecesText;
             ItemImage.Source = ImageSource;
+            ItemImageButton.Source = Constants.UnSelectedFavoriteImageSource;
         }
         
         protected override void OnPropertyChanged(string propertyName = null)
@@ -90,6 +129,15 @@ public static readonly BindableProperty PriceTextProperty = BindableProperty.Cre
             {
                 ItemImage.Source = ImageSource;
             }
+            else if (propertyName == IsFavoriteProperty.PropertyName)
+            {
+                ItemImageButton.Source = IsFavorite ? Constants.SelectedFavoriteImageSource : Constants.UnSelectedFavoriteImageSource;
+            }
+        }
+        
+        private void ItemImageButton_OnClicked(object sender, EventArgs e)
+        {
+            FavoriteCommand?.Execute(FavoriteCommandParameter);
         }
     }
 }
