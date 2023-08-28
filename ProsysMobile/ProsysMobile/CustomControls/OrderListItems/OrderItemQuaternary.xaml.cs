@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
+using ProsysMobile.Helper;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -30,7 +31,7 @@ namespace ProsysMobile.CustomControls.OrderListItems
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
         
-        public static readonly BindableProperty IsVisibleMarketImageProperty = BindableProperty.Create(nameof(IsVisibleMarketImage),
+        public static readonly BindableProperty IsVisibleFavoriteImageProperty = BindableProperty.Create(nameof(IsVisibleFavoriteImage),
             typeof(bool),
             typeof(OrderItemQuaternary),
             true,
@@ -41,6 +42,25 @@ namespace ProsysMobile.CustomControls.OrderListItems
             typeof(OrderItemQuaternary),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty IsFavoriteProperty = BindableProperty.Create(nameof(IsFavorite),
+            typeof(bool),
+            typeof(OrderItemSecondary),
+            default(bool),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty FavoriteCommandProperty = BindableProperty.Create(nameof(FavoriteCommand),
+            typeof(ICommand),
+            typeof(OrderItemSecondary),
+            default(ICommand),
+            BindingMode.TwoWay);
+        
+        public static BindableProperty FavoriteCommandParameterProperty = BindableProperty.CreateAttached(
+            nameof(FavoriteCommandParameter),
+            typeof(object),
+            typeof(OrderItemSecondary),
+            null,
+            BindingMode.TwoWay);
         
         public string PriceText
         {
@@ -60,16 +80,34 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(PiecesTextProperty, value);
         }
         
-        public bool IsVisibleMarketImage
+        public bool IsVisibleFavoriteImage
         {
-            get => (bool)GetValue(IsVisibleMarketImageProperty);
-            set => SetValue(IsVisibleMarketImageProperty, value);
+            get => (bool)GetValue(IsVisibleFavoriteImageProperty);
+            set => SetValue(IsVisibleFavoriteImageProperty, value);
         }
         
         public string UnitPriceText
         {
             get => (string)GetValue(UnitPriceTextProperty);
             set => SetValue(UnitPriceTextProperty, value);
+        }
+        
+        public bool IsFavorite
+        {
+            get => (bool)GetValue(IsFavoriteProperty);
+            set => SetValue(IsFavoriteProperty, value);
+        }
+        
+        public ICommand FavoriteCommand
+        {
+            get => (Command)GetValue(FavoriteCommandProperty);
+            set => SetValue(FavoriteCommandProperty, value);
+        }
+        
+        public object FavoriteCommandParameter
+        {
+            get => GetValue(FavoriteCommandParameterProperty);
+            set => SetValue(FavoriteCommandParameterProperty, value);
         }
         
         public OrderItemQuaternary()
@@ -79,7 +117,8 @@ namespace ProsysMobile.CustomControls.OrderListItems
             ItemPrice.Text = PriceText;
             ItemName.Text = NameText;
             ItemPieces.Text = PiecesText;
-            ItemImageButton.IsVisible = IsVisibleMarketImage;
+            ItemImageButton.Source = Constants.UnSelectedFavoriteImageSource;
+            ItemImageButton.IsVisible = IsVisibleFavoriteImage;
             ItemUnitPrice.Text = UnitPriceText;
             ItemUnitPrice.IsVisible = false;
         }
@@ -100,15 +139,26 @@ namespace ProsysMobile.CustomControls.OrderListItems
             {
                 ItemPieces.Text = PiecesText;
             }
-            else if (propertyName == IsVisibleMarketImageProperty.PropertyName)
+            else if (propertyName == IsVisibleFavoriteImageProperty.PropertyName)
             {
-                ItemImageButton.IsVisible = IsVisibleMarketImage;
+                ItemImageButton.IsVisible = IsVisibleFavoriteImage;
             }
             else if (propertyName == UnitPriceTextProperty.PropertyName)
             {
                 ItemUnitPrice.IsVisible = !string.IsNullOrWhiteSpace(UnitPriceText);
                 ItemUnitPrice.Text = UnitPriceText;
             }
+            else if (propertyName == IsFavoriteProperty.PropertyName)
+            {
+                ItemImageButton.Source = IsFavorite
+                    ? Constants.SelectedFavoriteImageSource
+                    : Constants.UnSelectedFavoriteImageSource;
+            }
+        }
+        
+        private void ItemImageButton_OnClicked(object sender, EventArgs e)
+        {
+            FavoriteCommand?.Execute(FavoriteCommandParameter);
         }
     }
 }

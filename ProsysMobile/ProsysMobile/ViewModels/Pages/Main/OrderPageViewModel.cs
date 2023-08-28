@@ -54,14 +54,17 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private bool _isRefreshingOrderList;
         public bool IsRefreshingOrderList { get => _isRefreshingOrderList; set { _isRefreshingOrderList = value; PropertyChanged(() => IsRefreshingOrderList); } }
             
-        private bool _showBasketItems;
-        public bool ShowBasketItems { get => _showBasketItems; set { _showBasketItems = value; PropertyChanged(() => ShowBasketItems); } }
+        private bool _showOrderDetail;
+        public bool ShowOrderDetail { get => _showOrderDetail; set { _showOrderDetail = value; PropertyChanged(() => ShowOrderDetail); } }
 
         private bool _showEmptyMsg;
         public bool ShowEmptyMsg { get => _showEmptyMsg; set { _showEmptyMsg = value; PropertyChanged(() => ShowEmptyMsg); } }
         
         private string _emptyMsg;
         public string EmptyMsg { get => _emptyMsg; set { _emptyMsg = value; PropertyChanged(() => EmptyMsg); } }
+        
+        private string _netTotal;
+        public string NetTotal { get => _netTotal; set { _netTotal = value; PropertyChanged(() => NetTotal); } }
         
         private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
         public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
@@ -224,11 +227,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     priorityType: enPriorityType.UserInitiated
                 );
 
-                if (result?.ResponseData != null && result.IsSuccess)
+                if (result?.ResponseData != null && result.IsSuccess && result.ResponseData.OrderDetailsSubDtos.Any())
                 {
-                    BasketItems.AddRange(result.ResponseData);
+                    BasketItems.AddRange(result.ResponseData.OrderDetailsSubDtos);
+                    NetTotal = result.ResponseData.NetTotal;
 
-                    InitializePage(!result.ResponseData.Any(), !result.ResponseData.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
+                    InitializePage(!result.ResponseData.OrderDetailsSubDtos.Any(), !result.ResponseData.OrderDetailsSubDtos.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
                 }
                 else
                 {
@@ -249,9 +253,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             if (isError)
             {
-                if (ShowBasketItems)
+                if (ShowOrderDetail)
                 {
-                    ShowBasketItems = false;
+                    ShowOrderDetail = false;
                 }
                 if (!ShowEmptyMsg)
                 {
@@ -261,9 +265,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             else
             {
-                if (!ShowBasketItems)
+                if (!ShowOrderDetail)
                 {
-                    ShowBasketItems = true;
+                    ShowOrderDetail = true;
                 }
                 if (ShowEmptyMsg)
                 {

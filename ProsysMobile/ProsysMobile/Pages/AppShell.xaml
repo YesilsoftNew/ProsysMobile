@@ -21,15 +21,6 @@
     TabBarIsVisible="True"
     NavBarIsVisible="False">
 
-    <!--  FlyoutBehavior=Disabled  -->
-
-
-    <!--<Shell.MenuItemTemplate>
-        <DataTemplate>
-            <Label Text="asfsasfas" />
-        </DataTemplate>
-    </Shell.MenuItemTemplate>-->
-
     <TabBar
         x:Name="Tabbar"
         PropertyChanged="TabBar_PropertyChanged">
@@ -51,7 +42,14 @@
             </ShellContent>
         </Tab>
 
-        <Tab Icon="Account" TabIndex="3">
+        
+        <Tab Icon="Favorite" TabIndex="3">
+            <ShellContent>
+                <mainPages:FavoritePage />
+            </ShellContent>
+        </Tab>
+
+        <Tab Icon="Account" TabIndex="4">
             <ShellContent>
                 <mainPages:AccountPage />
             </ShellContent>

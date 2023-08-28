@@ -8,6 +8,6 @@ namespace ProsysMobile.Services.API.Items
 {
     public interface IItemsService : IServiceBase<ServiceBaseResponse<ItemsSubDto>>
     {
-        Task<ServiceBaseResponse<List<ItemsSubDto>>> GetItems(string filter, string categoryIds, int page, enPriorityType priorityType);
+        Task<ServiceBaseResponse<List<ItemsSubDto>>> GetItems(int userId, string filter, string categoryIds, bool? isFavorite, int page, enPriorityType priorityType);
     }
 }

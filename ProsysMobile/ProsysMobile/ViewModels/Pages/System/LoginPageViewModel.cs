@@ -120,7 +120,10 @@ namespace ProsysMobile.ViewModels.Pages.System
                     signIn.DeviceGuid = Guid.NewGuid();
                     signIn.Token = string.Empty;
 
-                    var result = await _signInService.SignIn(signIn, Models.CommonModels.Enums.enPriorityType.UserInitiated);
+                    var result = await _signInService.SignIn(
+                        signIn,
+                        Models.CommonModels.Enums.enPriorityType.UserInitiated
+                    );
 
                     if (result.ResponseData != null && result.IsSuccess)
                     {

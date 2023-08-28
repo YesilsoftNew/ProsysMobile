@@ -23,10 +23,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class FindPageViewModel : ViewModelBase
     {
-        private IItemCategoryService _itemCategoryService;
-        private IItemsService _itemsService;
-        private IBestsellersService _bestsellersService;
-
+        private readonly IItemCategoryService _itemCategoryService;
+        private readonly IItemsService _itemsService;
+        private readonly IBestsellersService _bestsellersService;
+        private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
+        
         private double _searchTime;
         private bool _isTimerWorking;
         private List<CategoryFilter> _selectedCategories = new List<CategoryFilter>();
@@ -36,11 +37,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private enItemListType _currentItemListType = enItemListType.Primary;
 
 
-        public FindPageViewModel(IItemCategoryService itemCategoryService, IItemsService itemsService, IBestsellersService bestsellersService)
+        public FindPageViewModel(IItemCategoryService itemCategoryService, IItemsService itemsService, IBestsellersService bestsellersService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
         {
             _itemCategoryService = itemCategoryService;
             _itemsService = itemsService;
             _bestsellersService = bestsellersService;
+            _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
@@ -189,6 +191,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
 
+        
+        
         public ICommand MainCategoryClickCommand => new Command(async (sender) =>
         {
             try
@@ -398,6 +402,46 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
 
+        public ICommand FavoriteClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                IsBusy = true;
+
+                if (sender is ItemsSubDto item)
+                {
+
+                    var result = await _saveUserMobileFavoriteItemsService.SaveUserMobileFavoriteItems(
+                        userId: GlobalSetting.Instance.User.ID,
+                        itemId: item.Id,
+                        isFavorite: !item.IsFavorite,
+                        enPriorityType.UserInitiated
+                    );
+
+                    if (result.IsSuccess)
+                    {
+                        item.IsFavorite = !item.IsFavorite;
+                    }
+                    else
+                    {
+                        DialogService.WarningToastMessage("Ürün favorilere eklenemedi.");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+                
+                DialogService.WarningToastMessage("Bir hata oluştu.");
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
+        });
+        
         #endregion
 
         #region Methods
@@ -509,8 +553,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     .ToString();
 
                 var result = await _itemsService.GetItems(
+                    userId: GlobalSetting.Instance.User.ID,
                     filter: Search,
                     categoryIds: selectedCategoryStr,
+                    isFavorite: null,
                     page: _listPage,
                     priorityType: enPriorityType.UserInitiated
                 );

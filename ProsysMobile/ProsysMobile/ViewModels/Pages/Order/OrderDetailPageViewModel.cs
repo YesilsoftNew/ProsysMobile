@@ -55,6 +55,9 @@ namespace ProsysMobile.ViewModels.Pages.Order
         private string _vatTotal;
         public string VatTotal { get => _vatTotal; set { _vatTotal = value; PropertyChanged(() => VatTotal); } }
         
+        private string _deposit;
+        public string Deposit { get => _deposit; set { _deposit = value; PropertyChanged(() => Deposit); } }
+        
         private OrderDetailsSubDto _selectedItem;
         public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
         
@@ -184,6 +187,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
                     VatTotal = responseModel.VatTotal;
                     GrossTotal = responseModel.GrossTotal;
                     NetTotal = responseModel.NetTotal;
+                    Deposit = "5 TELE";
                     BackdropTitle = "Order Detail" + $" ({BasketItems.Count})";
                     _orderId = responseModel.OrderId;
                 }

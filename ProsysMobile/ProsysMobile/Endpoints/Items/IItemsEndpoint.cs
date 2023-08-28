@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.Items
     public interface IItemsEndpoint
     {
         [Get("/api/Items/Items")]
-        Task<ServiceBaseResponse<List<ItemsSubDto>>> GetItems(string filter, string categoryIds, int page, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<List<ItemsSubDto>>> GetItems(int userId, string filter, string categoryIds, bool? isFavorite, int page, [Header("Authorization")] string authorization);
     }
 }

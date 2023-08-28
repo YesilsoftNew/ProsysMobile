@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
+using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
@@ -16,14 +17,18 @@ namespace ProsysMobile.ViewModels.Pages.Item
     public class ItemDetailPageViewModel: ViewModelBase
     {
         NavigationModel<ItemDetailPageViewParamModel> _itemDetailPageViewModelViewParamModel;
-
+        private ItemDetailsSubDto _itemDetailsSubDto;
+        private bool _firstOpenIsFavorite;
+        
         private readonly IItemDetailService _itemDetailService;
         private readonly ISaveOrderDetailService _saveOrderDetailService;
+        private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
         
-        public ItemDetailPageViewModel(IItemDetailService itemDetailService, ISaveOrderDetailService saveOrderDetailService)
+        public ItemDetailPageViewModel(IItemDetailService itemDetailService, ISaveOrderDetailService saveOrderDetailService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
         {
             _itemDetailService = itemDetailService;
             _saveOrderDetailService = saveOrderDetailService;
+            _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
         }
         
         public override async Task InitializeAsync(object navigationData)
@@ -61,6 +66,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
         
         private string _categories;
         public string Categories { get => _categories; set { _categories = value; PropertyChanged(() => Categories); } }
+        
+        private string _favoriteImageSource;
+        public string FavoriteImageSource { get => _favoriteImageSource; set { _favoriteImageSource = value; PropertyChanged(() => FavoriteImageSource); } }
         
         #endregion
 
@@ -124,6 +132,65 @@ namespace ProsysMobile.ViewModels.Pages.Item
             IsBusy = false;
             DoubleTapping.ResumeTap();
         });
+        
+        public ICommand FavoriteClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                IsBusy = true;
+
+                if (_itemDetailsSubDto != null)
+                {
+
+                    var result = await _saveUserMobileFavoriteItemsService.SaveUserMobileFavoriteItems(
+                        userId: GlobalSetting.Instance.User.ID,
+                        itemId: _itemDetailsSubDto.Item.Id,
+                        isFavorite: !_itemDetailsSubDto.Item.IsFavorite,
+                        enPriorityType.UserInitiated
+                    );
+
+                    if (result.IsSuccess)
+                    {
+                        _itemDetailsSubDto.Item.IsFavorite = !_itemDetailsSubDto.Item.IsFavorite;
+                        
+                        FavoriteImageSource = _itemDetailsSubDto.Item.IsFavorite
+                            ? Constants.SelectedFavoriteImageSource
+                            : Constants.UnSelectedFavoriteImageSource;
+                    }
+                    else
+                    {
+                        DialogService.WarningToastMessage("Ürün favorilere eklenemedi.");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+                
+                DialogService.WarningToastMessage("Bir hata oluştu.");
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
+        });
+        
+        public ICommand PreviousClickedCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                SetAndClosePage(_firstOpenIsFavorite != _itemDetailsSubDto.Item.IsFavorite);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+                
+                DialogService.WarningToastMessage("Bir hata oluştu.");
+            }
+        });
+        
         #endregion
 
         #region Methods
@@ -148,6 +215,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     {
                         var responseModel = item.ResponseData;
 
+                        _itemDetailsSubDto = responseModel;
+                        _firstOpenIsFavorite = responseModel.Item.IsFavorite;
+                        
                         ItemId = responseModel.Item.Id;
                         ItemName = responseModel.Item.Name;
                         ItemImage = responseModel.Item.Image;
@@ -155,6 +225,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemPrice = responseModel.Item.Price;
                         Categories = responseModel.Categories;
                         ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
+                        FavoriteImageSource = responseModel.Item.IsFavorite
+                            ? Constants.SelectedFavoriteImageSource
+                            : Constants.UnSelectedFavoriteImageSource;
                         
                         var orderAmountWithUnitDesc = "Order Amount";
                         if (!string.IsNullOrWhiteSpace(responseModel?.Item?.UnitDesc))

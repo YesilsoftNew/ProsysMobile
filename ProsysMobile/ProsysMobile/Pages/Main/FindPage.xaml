@@ -271,6 +271,7 @@
             </Grid>
 
             <CollectionView 
+                x:Name="ItemListPrimary"
                  Grid.Row="3" 
                  IsVisible="{Binding ShowItemsPrimary}" 
                  ItemsSource="{Binding ItemsPrimary}" 
@@ -297,6 +298,9 @@
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
+                            IsFavorite="{Binding IsFavorite}"
+                            FavoriteCommand="{Binding Source={x:Reference ItemListPrimary}, Path=BindingContext.FavoriteClickCommand}"
+                            FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -322,6 +326,7 @@
             </CollectionView>
 
             <CollectionView 
+                x:Name="ItemListSecondary"
                  Grid.Row="3" 
                  IsVisible="{Binding ShowItemsSecondary}" 
                  ItemsSource="{Binding ItemsSecondary}" 
@@ -352,6 +357,9 @@
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
+                            IsFavorite="{Binding IsFavorite}"
+                            FavoriteCommand="{Binding Source={x:Reference ItemListSecondary}, Path=BindingContext.FavoriteClickCommand}"
+                            FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
 
@@ -377,6 +385,7 @@
             </CollectionView>
 
             <CollectionView
+                x:Name="ItemListTertiary"
                  Grid.Row="3"
                  IsVisible="{Binding ShowItemsTertiary}"
                  ItemsSource="{Binding ItemsTertiary}"
@@ -402,6 +411,9 @@
                             NameText="{Binding Name}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
+                            IsFavorite="{Binding IsFavorite}"
+                            FavoriteCommand="{Binding Source={x:Reference ItemListTertiary}, Path=BindingContext.FavoriteClickCommand}"
+                            FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
             

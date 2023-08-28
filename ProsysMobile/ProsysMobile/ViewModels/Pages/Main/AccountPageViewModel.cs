@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -136,8 +137,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             var user = GlobalSetting.Instance.User;
 
-            CustomerName = "Test Test";
-            CustomerNameFirstChar = "TT";
+            CustomerName = !string.IsNullOrWhiteSpace(user.CUSTOMERNAME) ? user.CUSTOMERNAME : "-";
+            CustomerNameFirstChar = CustomerName.First().ToString();
             Email = user.EMAIL;
         }
 
