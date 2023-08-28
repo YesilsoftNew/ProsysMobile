@@ -227,12 +227,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     priorityType: enPriorityType.UserInitiated
                 );
 
-                if (result?.ResponseData != null && result.IsSuccess)
+                if (result?.ResponseData != null && result.IsSuccess && result.ResponseData.OrderDetailsSubDtos.Any())
                 {
-                    BasketItems.AddRange(result.ResponseData);
-                    NetTotal = "5 TELE";
+                    BasketItems.AddRange(result.ResponseData.OrderDetailsSubDtos);
+                    NetTotal = result.ResponseData.NetTotal;
 
-                    InitializePage(!result.ResponseData.Any(), !result.ResponseData.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
+                    InitializePage(!result.ResponseData.OrderDetailsSubDtos.Any(), !result.ResponseData.OrderDetailsSubDtos.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
                 }
                 else
                 {

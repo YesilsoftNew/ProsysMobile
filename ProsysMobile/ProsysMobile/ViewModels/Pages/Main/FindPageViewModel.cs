@@ -556,6 +556,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     userId: GlobalSetting.Instance.User.ID,
                     filter: Search,
                     categoryIds: selectedCategoryStr,
+                    isFavorite: null,
                     page: _listPage,
                     priorityType: enPriorityType.UserInitiated
                 );

@@ -23,7 +23,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class FavoritePageViewModel : ViewModelBase
     {
-        private IItemsService _itemsService;
+        private readonly IItemsService _itemsService;
+        private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
 
         private double _searchTime;
         private bool _isTimerWorking;
@@ -32,9 +33,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private enItemListType _currentItemListType = enItemListType.Primary;
 
 
-        public FavoritePageViewModel(IItemsService itemsService)
+        public FavoritePageViewModel(IItemsService itemsService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
         {
             _itemsService = itemsService;
+            _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
@@ -51,9 +53,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
         }
 
         #region Propertys
-
-        private bool _showChangeItemListDesignButton;
-        public bool ShowChangeItemListDesignButton { get => _showChangeItemListDesignButton; set { _showChangeItemListDesignButton = value; PropertyChanged(() => ShowChangeItemListDesignButton); } }
 
         private bool _showEmptyText;
         public bool ShowEmptyText { get => _showEmptyText; set { _showEmptyText = value; PropertyChanged(() => ShowEmptyText); } }
@@ -206,6 +205,47 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
 
+        public ICommand FavoriteClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                IsBusy = true;
+
+                if (sender is ItemsSubDto item)
+                {
+                    var result = await _saveUserMobileFavoriteItemsService.SaveUserMobileFavoriteItems(
+                        userId: GlobalSetting.Instance.User.ID,
+                        itemId: item.Id,
+                        isFavorite: !item.IsFavorite,
+                        enPriorityType.UserInitiated
+                    );
+
+                    if (result.IsSuccess)
+                    {
+                        item.IsFavorite = !item.IsFavorite;
+                        
+                        RemoveItemsList(item);
+                    }
+                    else
+                    {
+                        DialogService.WarningToastMessage("Ürün favorilere eklenemedi.");
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+                
+                DialogService.WarningToastMessage("Bir hata oluştu.");
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
+        });
+
         #endregion
 
         #region Methods
@@ -217,11 +257,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 IsBusy = true;
 
                 _listPage = 0;
+                _isAllItemLoad = false;
                 UpdateItemsList(
                     resultResponseData: null,
                     clearList: true
                 );
-                GetItemsAndBindFromApi();
+                await GetItemsAndBindFromApi();
             }
             catch (Exception ex)
             {
@@ -241,21 +282,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     _isAllItemLoad = false;
 
-                    var isNotNullSearch = !string.IsNullOrWhiteSpace(Search);
+                    _listPage = 0;
+                    UpdateItemsList(
+                        resultResponseData: null,
+                        clearList: true
+                    );
 
-                    ChangeShowItemVisibility(isNotNullSearch);
-                    ShowChangeItemListDesignButton = isNotNullSearch;
-
-                    if (!string.IsNullOrWhiteSpace(Search))
-                    {
-                        _listPage = 0;
-                        UpdateItemsList(
-                            resultResponseData: null,
-                            clearList: true
-                        );
-
-                        GetItemsAndBindFromApi();
-                    }
+                    GetItemsAndBindFromApi();
 
                     _isTimerWorking = false;
 
@@ -284,6 +317,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     filter: Search,
                     categoryIds: selectedCategoryStr,
                     page: _listPage,
+                    isFavorite: true,
                     priorityType: enPriorityType.UserInitiated
                 );
 
@@ -341,29 +375,47 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 ProsysLogger.Instance.CrashLog(ex);
             }
         }
+        
+        private void RemoveItemsList(ItemsSubDto removeItem)
+        {
+            try
+            {
+                switch (_currentItemListType)
+                {
+                    case enItemListType.Primary:
+                        ItemsPrimary.Remove(removeItem);
+                        break;
+                    case enItemListType.Secondary:
+                        ItemsSecondary.Remove(removeItem);
+                        break;
+                    case enItemListType.Tertiary:
+                        ItemsTertiary.Remove(removeItem);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        }
 
         private void CheckFilterAndBindShowItems()
         {
-            if (!string.IsNullOrWhiteSpace(Search))
+            ShowEmptyText = false;
+
+            var currentList = GetCurrentItemsList();
+
+            if (!currentList.Any())
             {
-                ChangeShowItemVisibility(true);
-                ShowChangeItemListDesignButton = true;
-                ShowEmptyText = false;
+                ChangeShowItemVisibility(false);
 
-                var currentList = GetCurrentItemsList();
-
-                if (!currentList.Any())
-                {
-                    ShowEmptyText = true;
-                    ChangeShowItemVisibility(false);
-                    ShowChangeItemListDesignButton = false;
-                }
+                ShowEmptyText = true;
             }
             else
             {
-                ChangeShowItemVisibility(false);
-                ShowChangeItemListDesignButton = false;
-                ShowEmptyText = false;
+                ChangeShowItemVisibility(true);
             }
         }
 
@@ -393,31 +445,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 ShowItemsTertiary = itemListType == enItemListType.Tertiary;
 
                 _currentItemListType = itemListType;
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
-        }
-
-        private void ChangeShowItemVisibility(bool value)
-        {
-            try
-            {
-                switch (_currentItemListType)
-                {
-                    case enItemListType.Primary:
-                        ShowItemsPrimary = value;
-                        break;
-                    case enItemListType.Secondary:
-                        ShowItemsSecondary = value;
-                        break;
-                    case enItemListType.Tertiary:
-                        ShowItemsTertiary = value;
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
             }
             catch (Exception ex)
             {
@@ -468,6 +495,31 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
             IsBusy = false;
             DoubleTapping.ResumeTap();
+        }
+        
+        private void ChangeShowItemVisibility(bool value)
+        {
+            try
+            {
+                switch (_currentItemListType)
+                {
+                    case enItemListType.Primary:
+                        ShowItemsPrimary = value;
+                        break;
+                    case enItemListType.Secondary:
+                        ShowItemsSecondary = value;
+                        break;
+                    case enItemListType.Tertiary:
+                        ShowItemsTertiary = value;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
         }
 
         private ObservableRangeCollection<ItemsSubDto> GetCurrentItemsList()

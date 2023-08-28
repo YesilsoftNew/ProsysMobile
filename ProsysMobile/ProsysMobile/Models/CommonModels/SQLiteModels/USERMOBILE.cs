@@ -1,4 +1,5 @@
-﻿using ProsysMobile.Models.CommonModels.SQLiteModels.Base;
+﻿using System.Text.Json.Serialization;
+using ProsysMobile.Models.CommonModels.SQLiteModels.Base;
 
 namespace ProsysMobile.Models.CommonModels.SQLiteModels
 {
@@ -9,5 +10,8 @@ namespace ProsysMobile.Models.CommonModels.SQLiteModels
         public string COMPANYCODE { get; set; }
         public string PHONE { get; set; }
         public bool ISAPPROVE { get; set; }
+        [JsonPropertyName("CUSTOMERDESC")]
+        public string CUSTOMERNAME { get; set; }
+
     }
 }

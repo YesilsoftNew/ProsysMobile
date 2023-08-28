@@ -6,8 +6,8 @@ using ProsysMobile.Services.Base;
 
 namespace ProsysMobile.Services.API.OrderDetails
 {
-    public interface IGetOrderDetailService : IServiceBase<ServiceBaseResponse<OrderDetailsSubDto>>
+    public interface IGetOrderDetailService : IServiceBase<ServiceBaseResponse<OrderSubDto>>
     {
-        Task<ServiceBaseResponse<List<OrderDetailsSubDto>>> GetOrderDetail(int userId, enPriorityType priorityType);
+        Task<ServiceBaseResponse<OrderSubDto>> GetOrderDetail(int userId, enPriorityType priorityType);
     }
 }

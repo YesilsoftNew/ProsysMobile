@@ -24,15 +24,15 @@ namespace ProsysMobile.Services.API.OrderDetails
             _apiRequestSelector = apiRequestSelector;
         }
         
-        public Task<ServiceBaseResponse<OrderDetailsSubDto>> Get(ApiFilterRequestModel apiFilterRequestModel)
+        public Task<ServiceBaseResponse<OrderSubDto>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<List<OrderDetailsSubDto>>> GetOrderDetail(int userId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<OrderSubDto>> GetOrderDetail(int userId, enPriorityType priorityType)
         {
-            ServiceBaseResponse<List<OrderDetailsSubDto>> result = null;
-            Task<ServiceBaseResponse<List<OrderDetailsSubDto>>> task;
+            ServiceBaseResponse<OrderSubDto> result = null;
+            Task<ServiceBaseResponse<OrderSubDto>> task;
             Exception exception;
 
             try

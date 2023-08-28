@@ -10,6 +10,7 @@
                          xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
+                         BackgroundClickedCommand="{Binding PreviousClickedCommand}"
                          IsSetPanListener="True"
                          mc:Ignorable="d"
                          x:Class="ProsysMobile.Pages.Item.ItemDetailPage">
@@ -24,11 +25,11 @@
                 </Grid.RowDefinitions>
 
                 <controlbars:CustomBackDropToolbarPrimary 
-                    x:Name="Content"
+                    x:Name="Header"
                     Grid.Row="0"
                     Title="Item Detail">
                     <controlbars:CustomBackDropToolbarPrimary.Behaviors>
-                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference Content}}" EventName="ItemButtonCloseClicked"/>
+                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference Header}}" EventName="ItemButtonCloseClicked"/>
                     </controlbars:CustomBackDropToolbarPrimary.Behaviors>
                 </controlbars:CustomBackDropToolbarPrimary>
 
