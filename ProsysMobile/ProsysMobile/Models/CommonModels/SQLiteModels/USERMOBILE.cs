@@ -5,13 +5,13 @@ namespace ProsysMobile.Models.CommonModels.SQLiteModels
 {
     public class USERMOBILE : Entity
     {
-        public string EMAIL { get; set; }
-        public string PASSWORD { get; set; }
-        public string COMPANYCODE { get; set; }
-        public string PHONE { get; set; }
-        public bool ISAPPROVE { get; set; }
-        [JsonPropertyName("CUSTOMERDESC")]
-        public string CUSTOMERNAME { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string CompanyCode { get; set; }
+        public string Phone { get; set; }
+        public bool IsApprove { get; set; }
+        [JsonPropertyName("CustomerDesc")]
+        public string CustomerName { get; set; }
 
     }
 }

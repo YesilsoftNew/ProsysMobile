@@ -227,7 +227,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     priorityType: enPriorityType.UserInitiated
                 );
 
-                if (result?.ResponseData != null && result.IsSuccess && result.ResponseData.OrderDetailsSubDtos.Any())
+                if (result?.ResponseData != null && result.IsSuccess)
                 {
                     BasketItems.AddRange(result.ResponseData.OrderDetailsSubDtos);
                     NetTotal = result.ResponseData.NetTotal;

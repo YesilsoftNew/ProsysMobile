@@ -137,9 +137,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             var user = GlobalSetting.Instance.User;
 
-            CustomerName = !string.IsNullOrWhiteSpace(user.CUSTOMERNAME) ? user.CUSTOMERNAME : "-";
+            CustomerName = !string.IsNullOrWhiteSpace(user.CustomerName) ? user.CustomerName : "-";
             CustomerNameFirstChar = CustomerName.First().ToString();
-            Email = user.EMAIL;
+            Email = user.Email;
         }
 
         #endregion
