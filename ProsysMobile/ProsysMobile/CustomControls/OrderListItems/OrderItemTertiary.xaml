@@ -25,19 +25,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="AUTO"></RowDefinition>
-            <RowDefinition Height="AUTO"></RowDefinition>
-            <RowDefinition Height="AUTO"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        
+
         <yummy:PancakeView 
             Grid.Row="0"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
             Border="{yummy:BorderMarkup Color={StaticResource Gray5}, Thickness=1 }"
             CornerRadius="16"
             Margin="0,16,0,0"
@@ -69,60 +60,53 @@
             
         </yummy:PancakeView>
         
-        <ScrollView
+        <Grid
             Grid.Row="1"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
             Margin="6,0"
-            Orientation="Horizontal"
-            HorizontalScrollBarVisibility="Never">
-            
-            <Label
-                x:Name="ItemName"
-                Text="-"
-                Style="{DynamicResource Header6}"
-                HorizontalTextAlignment="Center"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="FillAndExpand"/>
-            
-        </ScrollView>
-        
-        <Label
-            x:Name="ItemPieces"
-            Grid.Row="2"
-            Grid.Column="0"
-            Grid.ColumnSpan="2"
-            Text="-"
-            Style="{DynamicResource Label2}"
-            Margin="0,0,0,6"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="FillAndExpand"/>
-        
-        <Label
-            x:Name="ItemPrice"
-            Grid.Row="3"
-            Grid.Column="0"
-            Text="-"
-            Style="{DynamicResource Header4}"
-            HorizontalOptions="CenterAndExpand"
-            VerticalOptions="CenterAndExpand"/>
-        
-        <yummy:PancakeView 
-            Grid.Row="3" 
-            Grid.Column="1" 
-            Border="{yummy:BorderMarkup Color={StaticResource Color5}, Thickness=1 }"
-            CornerRadius="8"
-            Padding="22,3"
+            HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand">
-                                
+            RowSpacing="5">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <ScrollView
+                Grid.Row="0"
+                Orientation="Horizontal"
+                HorizontalScrollBarVisibility="Never">
+            
+                <Label
+                    x:Name="ItemName"
+                    Text="-"
+                    Style="{DynamicResource Header6}"
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="StartAndExpand"
+                    VerticalOptions="FillAndExpand"/>
+            
+            </ScrollView>
+        
             <Label
-                Text="Add"
-                Style="{DynamicResource Label7}"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand" />
-                                
-        </yummy:PancakeView>
+                x:Name="ItemPieces"
+                Grid.Row="1"
+                Text="-"
+                Style="{DynamicResource Label2}"
+                Margin="0,0,0,6"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="FillAndExpand"/>
+        
+            <Label
+                x:Name="ItemPrice"
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="-"
+                Style="{DynamicResource Header4}"
+                HorizontalOptions="StartAndExpand"
+                VerticalOptions="CenterAndExpand"/>
+            
+        </Grid>
         
     </Grid>
     

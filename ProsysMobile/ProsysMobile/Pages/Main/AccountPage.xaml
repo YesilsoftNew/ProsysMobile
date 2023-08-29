@@ -179,7 +179,7 @@
                 
                 <Button
                     Grid.Row="2"
-                    Text="Çıkış Yap"
+                    Text="Sign Out"
                     Style="{DynamicResource Button.OutlineSecondary}"
                     Margin="32,24"
                     Command="{Binding LogoutClickCommand}"

@@ -187,7 +187,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
                     VatTotal = responseModel.VatTotal;
                     GrossTotal = responseModel.GrossTotal;
                     NetTotal = responseModel.NetTotal;
-                    Deposit = "5 TELE";
+                    Deposit = responseModel.Deposit;
                     BackdropTitle = "Order Detail" + $" ({BasketItems.Count})";
                     _orderId = responseModel.OrderId;
                 }

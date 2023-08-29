@@ -28,6 +28,7 @@
     <Color x:Key="Gray5">#D3D3D3</Color>
     <Color x:Key="Gray6">#D9D9D9</Color>
     <Color x:Key="Gray7">#515151</Color>
+    <Color x:Key="Gray8">#EFEFEF</Color>
     
     <Color x:Key="TransparentColor">Transparent</Color>
 

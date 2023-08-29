@@ -6,5 +6,6 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public string GrossTotal { get; set; } = string.Empty;
         public string VatTotal { get; set; } = string.Empty;
         public string NetTotal { get; set; } = string.Empty;
+        public string Deposit { get; set; } = string.Empty;
     }
 }

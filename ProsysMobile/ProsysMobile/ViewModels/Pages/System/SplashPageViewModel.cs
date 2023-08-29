@@ -73,8 +73,8 @@ namespace ProsysMobile.ViewModels.Pages.System
                             
                             SignIn signIn = new SignIn();
 
-                            signIn.Email = user.EMAIL;
-                            signIn.Password = user.PASSWORD;
+                            signIn.Email = user.Email;
+                            signIn.Password = user.Password;
                             signIn.DeviceGuid = Guid.NewGuid();
                             signIn.Token = string.Empty;
                         
