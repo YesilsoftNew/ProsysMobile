@@ -461,6 +461,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
                 {
+                    Categories.ForEach(x => x.IsSelected = false);
+                    
                     if (Categories != null)
                         Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
 
@@ -480,6 +482,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         isSubCategory: true
                     );
 
+                    _isAllItemLoad = false;
+                    _listPage = 0;
+                    UpdateItemsList(
+                        resultResponseData: null,
+                        clearList: true
+                    );
                     await GetItemsAndBindFromApi();
                 }
             }
@@ -620,6 +628,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
+                if (isSubCategory)
+                {
+                    return;
+                }
+                
                 var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
 
                 if (result.ResponseData != null && result.IsSuccess)
