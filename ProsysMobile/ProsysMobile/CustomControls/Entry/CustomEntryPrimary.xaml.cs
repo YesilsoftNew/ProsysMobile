@@ -13,6 +13,20 @@ namespace ProsysMobile.CustomControls.Entry
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CustomEntryPrimary
     {
+        /// <summary>
+        /// PlaceholderProperty Property
+        /// Entry PlaceholderProperty
+        /// </summary>
+        public static readonly BindableProperty IsFocusAndSelectTextProperty = BindableProperty.Create(nameof(IsFocusAndSelectText), typeof(bool), typeof(CustomEntryPrimary), default(string), Xamarin.Forms.BindingMode.TwoWay);
+
+        /// <summary>
+        /// Text
+        /// </summary>
+        public bool IsFocusAndSelectText
+        {
+            get => (bool)GetValue(IsFocusAndSelectTextProperty);
+            set => SetValue(IsFocusAndSelectTextProperty, value);
+        }
 
         /// <summary>
         /// ReturnCommandParameter
@@ -425,6 +439,19 @@ namespace ProsysMobile.CustomControls.Entry
                 else if (propertyName == IsPasswordProperty.PropertyName)
                 {
                     ItemEntry.IsPassword = IsPassword;
+                }
+                else if (propertyName == IsFocusAndSelectTextProperty.PropertyName)
+                {
+                    if (IsFocusAndSelectText)
+                    {
+                        ItemEntry.Focus();
+                        ItemEntry.CursorPosition = 0;
+                        ItemEntry.SelectionLength = ItemEntry.Text.Length;
+                    }
+                    else
+                    {
+                        ItemEntry.Unfocus();
+                    }
                 }
             }
             catch (Exception ex)

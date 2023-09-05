@@ -123,6 +123,7 @@
                             Grid.Column="0"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
+                            IsFocusAndSelectText="{Binding IsFocusAndSelectText}"
                             Title="{Binding ItemPurchaseQtyTitle}"
                             Text="{Binding ItemPurchaseQtyText}"
                             Keyboard="Numeric"
