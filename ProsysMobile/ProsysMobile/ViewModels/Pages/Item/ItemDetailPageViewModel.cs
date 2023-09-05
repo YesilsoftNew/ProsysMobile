@@ -70,6 +70,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _favoriteImageSource;
         public string FavoriteImageSource { get => _favoriteImageSource; set { _favoriteImageSource = value; PropertyChanged(() => FavoriteImageSource); } }
         
+        private bool _isFocusAndSelectText;
+        public bool IsFocusAndSelectText { get => _isFocusAndSelectText; set { _isFocusAndSelectText = value; PropertyChanged(() => IsFocusAndSelectText); } }
+        
         #endregion
 
         #region Commands
@@ -80,9 +83,11 @@ namespace ProsysMobile.ViewModels.Pages.Item
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
+                var itemPurchaseQtyTextTrimValue = ItemPurchaseQtyText.TrimStart('0');
+                
                 var isError = false;
 
-                if (string.IsNullOrWhiteSpace(ItemPurchaseQtyText) || ItemPurchaseQtyText.StartsWith("0") || ItemPurchaseQtyText.Contains("-") || !IsInteger(ItemPurchaseQtyText))
+                if (string.IsNullOrWhiteSpace(itemPurchaseQtyTextTrimValue) || itemPurchaseQtyTextTrimValue.Contains("-") || !IsInteger(itemPurchaseQtyTextTrimValue))
                 {
                     DialogService.WarningToastMessage("Geçersiz adet!");
                     isError = true;
@@ -96,7 +101,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     {
                         UserId = GlobalSetting.Instance.User.ID,
                         ItemId = ItemId,
-                        Amount = int.Parse(ItemPurchaseQtyText)
+                        Amount = int.Parse(itemPurchaseQtyTextTrimValue)
                     }, enPriorityType.UserInitiated);
 
                     if (response.IsSuccess)
@@ -246,7 +251,8 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     
                     NavigationService.NavigatePopBackdropAsync();
                 }
-                
+
+                IsFocusAndSelectText = true;
             }
             catch (Exception ex)
             {
