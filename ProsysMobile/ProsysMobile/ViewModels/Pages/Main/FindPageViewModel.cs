@@ -14,7 +14,6 @@ using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Item;
-using ProsysMobile.ViewModels.Pages.Order;
 using ProsysMobile.ViewModels.Pages.Other;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -452,6 +451,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 IsBusy = true;
 
+                _selectedCategories.Clear();
+                Search = string.Empty;
+                CheckFilterAndBindShowItems();
+                
                 await GetCategoriesAndBindFromApi(
                     categoryId: Constants.MainCategoryId,
                     isSubCategory: false
@@ -489,6 +492,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         clearList: true
                     );
                     await GetItemsAndBindFromApi();
+                    
+                    _mainPageClickedCategoryId = null;
                 }
             }
             catch (Exception ex)
