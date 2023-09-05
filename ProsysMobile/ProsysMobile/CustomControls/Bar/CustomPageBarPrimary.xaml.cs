@@ -25,43 +25,17 @@ namespace ProsysMobile.CustomControls.Bar
             set => SetValue(TitleTextProperty, value);
         }
         
-        public static readonly BindableProperty ButtonTextProperty = BindableProperty.Create(
-            nameof(ButtonText),
+        public static readonly BindableProperty SecondaryTextProperty = BindableProperty.Create(
+            nameof(SecondaryText),
             typeof(string),
             typeof(CustomPageBarPrimary),
             string.Empty,
             BindingMode.TwoWay);
 
-        public string ButtonText
+        public string SecondaryText
         {
-            get => (string)GetValue(ButtonTextProperty);
-            set => SetValue(ButtonTextProperty, value);
-        }
-        
-        public static readonly BindableProperty ButtonIsVisibleProperty = BindableProperty.Create(
-            nameof(ButtonIsVisible),
-            typeof(bool),
-            typeof(CustomPageBarPrimary),
-            false,
-            BindingMode.TwoWay);
-        
-        public bool ButtonIsVisible
-        {
-            get => (bool)GetValue(ButtonIsVisibleProperty);
-            set => SetValue(ButtonIsVisibleProperty, value);
-        }
-        
-        public static readonly BindableProperty ButtonCommandProperty = BindableProperty.Create(
-            nameof(ButtonCommand),
-            typeof(ICommand),
-            typeof(CustomPageBarPrimary),
-            default(ICommand),
-            BindingMode.TwoWay);
-        
-        public ICommand ButtonCommand
-        {
-            get => (ICommand)GetValue(ButtonCommandProperty);
-            set => SetValue(ButtonCommandProperty, value);
+            get => (string)GetValue(SecondaryTextProperty);
+            set => SetValue(SecondaryTextProperty, value);
         }
         
         public CustomPageBarPrimary()
@@ -69,8 +43,8 @@ namespace ProsysMobile.CustomControls.Bar
             InitializeComponent();
 
             ItemTitle.Text = TitleText;
-            ItemButton.Text = ButtonText;
-            ItemButton.IsVisible = ButtonIsVisible;
+            ItemTitle2.Text = SecondaryText;
+            ItemTitle2.IsVisible = !string.IsNullOrWhiteSpace(SecondaryText);
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
@@ -79,12 +53,11 @@ namespace ProsysMobile.CustomControls.Bar
             
             if (propertyName == TitleTextProperty.PropertyName)
                 ItemTitle.Text = TitleText;
-            else if (propertyName == ButtonTextProperty.PropertyName)
-                ItemButton.Text = ButtonText;
-            else if (propertyName == ButtonIsVisibleProperty.PropertyName)
-                ItemButton.IsVisible = ButtonIsVisible;
-            else if (propertyName == ButtonCommandProperty.PropertyName)
-                ItemButton.Command = ButtonCommand;
+            else if (propertyName == SecondaryTextProperty.PropertyName)
+            {
+                ItemTitle2.Text = SecondaryText;
+                ItemTitle2.IsVisible = !string.IsNullOrWhiteSpace(SecondaryText);
+            }
         }
     }
 }

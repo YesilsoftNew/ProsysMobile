@@ -18,11 +18,12 @@
         VerticalOptions="CenterAndExpand"
         Style="{DynamicResource Header7}" />
     
-    <Button
-        x:Name="ItemButton"
+    <Label
+        x:Name="ItemTitle2"
         Grid.Column="1"
-        HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand"
-        Style="{DynamicResource Button.Outline}"/>
+        Style="{DynamicResource Header2}"
+        Padding="0"
+        HorizontalOptions="EndAndExpand"
+        VerticalOptions="CenterAndExpand" />
     
 </Grid>

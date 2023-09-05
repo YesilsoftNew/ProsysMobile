@@ -66,6 +66,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private string _netTotal;
         public string NetTotal { get => _netTotal; set { _netTotal = value; PropertyChanged(() => NetTotal); } }
         
+        private string _orderNo;
+        public string OrderNo { get => _orderNo; set { _orderNo = value; PropertyChanged(() => OrderNo); } }
+        
         private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
         public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
         {
@@ -231,6 +234,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     BasketItems.AddRange(result.ResponseData.OrderDetailsSubDtos);
                     NetTotal = result.ResponseData.NetTotal;
+                    OrderNo = result.ResponseData.OrderNo;
 
                     InitializePage(!result.ResponseData.OrderDetailsSubDtos.Any(), !result.ResponseData.OrderDetailsSubDtos.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
                 }

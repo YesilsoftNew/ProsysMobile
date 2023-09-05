@@ -41,7 +41,8 @@
                 
                 <customBars:CustomPageBarPrimary
                     Grid.Row="0"
-                    TitleText="Basket"/>
+                    TitleText="Basket"
+                    SecondaryText="{Binding OrderNo}" />
                 
                 <Grid
                     Grid.Row="1"
