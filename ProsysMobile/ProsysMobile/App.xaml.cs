@@ -58,7 +58,7 @@ namespace ProsysMobile
                 System.Diagnostics.Debug.WriteLine($"Token: {args.Token}");
             };
         }
-
+        
         private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
         {
             GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet ? true : false;

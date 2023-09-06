@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Plugin.FirebasePushNotification;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProsysMobile.Pages.System
@@ -9,6 +10,11 @@ namespace ProsysMobile.Pages.System
         public LoginPage()
         {
             InitializeComponent();
+
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (source, args) =>
+            {
+                DisplayAlert("Notification", $"Data: {args.Data["myData"]}", "OK");
+            };
         }
     }
 }
