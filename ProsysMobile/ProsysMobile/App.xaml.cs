@@ -10,6 +10,7 @@ using System.IO;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Plugin.FirebasePushNotification;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -51,6 +52,11 @@ namespace ProsysMobile
 
             GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet ? true : false;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+
+            CrossFirebasePushNotification.Current.OnTokenRefresh +=  (source, args) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"Token: {args.Token}");
+            };
         }
 
         private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
