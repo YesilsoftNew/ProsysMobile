@@ -79,23 +79,23 @@
                     
                     <Label
                         Grid.Row="1"
-                        Margin="0,20,0,0"
-                        Text="{Binding ItemPrice}"
-                        Style="{DynamicResource Header4}"
-                        HorizontalOptions="CenterAndExpand"
-                        VerticalOptions="FillAndExpand"/>
-                    
-                    <Label
-                        Grid.Row="2"
                         Text="{Binding ItemName}"
                         Style="{DynamicResource Header5}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
                     <Label
-                        Grid.Row="3"
+                        Grid.Row="2"
                         Text="{Binding ItemPieces}"
                         Style="{DynamicResource Label2}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                    
+                    <Label
+                        Grid.Row="3"
+                        Margin="0,20,0,0"
+                        Text="{Binding ItemPrice}"
+                        Style="{DynamicResource Header9}"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     

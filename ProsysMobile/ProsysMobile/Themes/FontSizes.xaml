@@ -16,6 +16,7 @@
     <x:Int16 x:Key="Title1">48</x:Int16>
     <x:Int16 x:Key="Title2">32</x:Int16>
     <x:Int16 x:Key="Title3">24</x:Int16>
+    <x:Int16 x:Key="Title4">20</x:Int16>
     <x:Int16 x:Key="Large">18</x:Int16>
     <x:Int16 x:Key="Regular">16</x:Int16>
     <x:Int16 x:Key="Small">14</x:Int16>
