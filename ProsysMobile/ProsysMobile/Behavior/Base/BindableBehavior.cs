@@ -8,7 +8,7 @@ namespace ProsysMobile.Behavior.Base
         public T AssociatedObject { get; private set; }
 
         protected override void OnAttachedTo(T visualElement)
-        {
+        { 
             base.OnAttachedTo(visualElement);
 
             AssociatedObject = visualElement;
