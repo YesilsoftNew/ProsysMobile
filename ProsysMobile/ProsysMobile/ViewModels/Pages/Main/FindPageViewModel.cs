@@ -34,6 +34,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private bool _isAllItemLoad;
         private int _listPage = 1;
         private enItemListType _currentItemListType = enItemListType.Primary;
+        private ItemCategory _itemCategoryAll = Constants.ItemCategoryAll;
 
 
         public FindPageViewModel(IItemCategoryService itemCategoryService, IItemsService itemsService, IBestsellersService bestsellersService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
@@ -452,6 +453,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 IsBusy = true;
 
                 _selectedCategories.Clear();
+                _itemCategoryAll.IsSelected = false;
                 Search = string.Empty;
                 CheckFilterAndBindShowItems();
                 
@@ -644,7 +646,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 {
                     if (!isSubCategory)
                     {
-                        result.ResponseData.Insert(0, Constants.ItemCategoryAll);
+                        result.ResponseData.Insert(0, _itemCategoryAll);
 
                         Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
                         
