@@ -5,6 +5,7 @@
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>1</integer>
+		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
@@ -26,7 +27,7 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.yesilsoft.prosysmobilekuru</string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>2.5</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
@@ -40,11 +41,5 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<false/>
 </dict>
 </plist>
