@@ -37,7 +37,7 @@ namespace ProsysMobile.Services.API.UserDevices
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.SaveUserDevices(userDevice, "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Ik11aGFtbWV0LmRlcmVnb3p1QGhvdG1haWwuY29tIiwiR3VpZCI6IjgzODRjZTc4LWYyMjEtNGEwNi04YzRhLTY5ZTc2ODFjNTI1MCIsIkV4cGlyZWREYXRlVGltZSI6IjkvMTEvMjAyMyA0OjQ0OjM5IFBNIiwibmJmIjoxNjk0MzUzNDc5LCJleHAiOjE2OTQ0Mzk4NzksImlhdCI6MTY5NDM1MzQ3OX0.jcLT6QFgYjxCiq5F2YHqbu6GHEmRRjLgV1EY-tP-6zM");
+                task = api.SaveUserDevices(userDevice, "Bearer " + GlobalSetting.Instance.JWTToken);
                 
                 result = await Policy
                     .Handle<ApiException>()

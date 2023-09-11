@@ -44,22 +44,6 @@ namespace ProsysMobile.ViewModels.Pages.System
                 Email = "test@test.com";
                 Password = "Test.1193";
             }
-            
-            var result = _saveUserDevicesService.SaveUserDevices(new UserDevices
-            {
-                UserId = 2,
-                LastLoginUserId = 2,
-                LastLoginDateTime = DateTime.Now,
-                Manufacturer = DeviceInfo.Manufacturer,
-                Model = DeviceInfo.Model,
-                Name = DeviceInfo.Name,
-                Version = DeviceInfo.VersionString,
-                Platform = DeviceInfo.Platform.ToString(),
-                AppVersion = VersionTracking.CurrentVersion,
-                PushToken = CrossFirebasePushNotification.Current?.Token ?? "",
-                Timezone = "null",
-                RecordDate = DateTime.Now
-            }, enPriorityType.UserInitiated);
 
             return base.InitializeAsync(navigationData);
         }
@@ -174,6 +158,8 @@ namespace ProsysMobile.ViewModels.Pages.System
                         };
 
                         _defaultSettingsSqLiteService.SaveAll(tokenSettings);
+                        
+                        _saveUserDevicesService.SaveUserDevices(TOOLS.GetUserDevices(GlobalSetting.Instance?.User?.ID ?? -1), enPriorityType.UserInitiated);
                     }
                     else
                     {

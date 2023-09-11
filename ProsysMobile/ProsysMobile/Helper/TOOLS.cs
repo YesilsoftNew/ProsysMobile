@@ -7,11 +7,15 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
+using Plugin.FirebasePushNotification;
+using ProsysMobile.Models.APIModels.ResponseModels;
+using Xamarin.Essentials;
 
 namespace ProsysMobile.Helper
 {
     public static class TOOLS
     {
+        
         public static string GenerateUniqueString()
         {
             string _unqStr = string.Empty; Random rnd = new Random();
@@ -265,6 +269,25 @@ namespace ProsysMobile.Helper
             }
 
             return errMessage;
+        }
+
+        public static UserDevices GetUserDevices(int userId)
+        {
+            return new UserDevices
+            {
+                UserId = userId,
+                LastLoginUserId = userId,
+                LastLoginDateTime = DateTime.Now,
+                Manufacturer = DeviceInfo.Manufacturer,
+                Model = DeviceInfo.Model,
+                Name = DeviceInfo.Name,
+                Version = DeviceInfo.VersionString,
+                Platform = DeviceInfo.Platform.ToString(),
+                AppVersion = VersionTracking.CurrentVersion,
+                PushToken = CrossFirebasePushNotification.Current?.Token ?? "",
+                Timezone = string.Empty,
+                RecordDate = DateTime.Now
+            };
         }
     }
 }

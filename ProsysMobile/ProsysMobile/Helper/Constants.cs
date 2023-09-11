@@ -1,4 +1,7 @@
+using System;
+using Plugin.FirebasePushNotification;
 using ProsysMobile.Models.APIModels.ResponseModels;
+using Xamarin.Essentials;
 
 namespace ProsysMobile.Helper
 {
@@ -18,6 +21,6 @@ namespace ProsysMobile.Helper
 
         public static string UnSelectedFavoriteImageSource = "UnSelectedFavorite";
         public static string SelectedFavoriteImageSource = "SelectedFavorite";
-
+        
     }
 }
