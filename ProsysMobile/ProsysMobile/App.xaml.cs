@@ -17,6 +17,8 @@ using ProsysMobile.Handler;
 using ProsysMobile.Services.API.UserDevices;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
+using Plugin.LocalNotification;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
 [assembly: ExportFont("poppins_black_italic.ttf", Alias = "poppins_black_italic")]
@@ -125,6 +127,50 @@ namespace ProsysMobile
                 ProsysLogger.Instance.CrashLog(ex);
             }
             #endregion
+
+            Random random = new Random();
+
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            {
+                try
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        if (p.Data.ContainsKey("body") && p.Data.ContainsKey("title"))
+                        {
+                            var notification = new NotificationRequest
+                            {
+                                BadgeNumber = 1,
+                                Description = p.Data["body"].ToString(),
+                                Title = p.Data["title"].ToString(),
+                                NotificationId = random.Next(1, int.MaxValue)
+                            };
+
+                            LocalNotificationCenter.Current.Show(notification);
+                        }
+                    }
+                    else
+                    {
+                        if (p.Data.ContainsKey("aps.alert.title") && p.Data.ContainsKey("aps.alert.body"))
+                        {
+                            var notification = new NotificationRequest
+                            {
+                                BadgeNumber = 1,
+                                Description = p.Data["aps.alert.body"].ToString(),
+                                Title = p.Data["aps.alert.title"].ToString(),
+                                NotificationId = random.Next(1, int.MaxValue)
+                            };
+
+                            LocalNotificationCenter.Current.Show(notification);
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    DoubleTapping.ResumeTap();
+                }
+
+            };
         }
 
         protected override void OnSleep()

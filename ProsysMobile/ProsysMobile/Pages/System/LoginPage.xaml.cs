@@ -11,10 +11,10 @@ namespace ProsysMobile.Pages.System
         {
             InitializeComponent();
 
-            CrossFirebasePushNotification.Current.OnNotificationReceived += (source, args) =>
-            {
-                DisplayAlert("Notification", $"Data: {args.Data["myData"]}", "OK");
-            };
+            //CrossFirebasePushNotification.Current.OnNotificationReceived += (source, args) =>
+            //{
+            //    DisplayAlert("Notification", $"Data: {args.Data["myData"]}", "OK");
+            //};
         }
     }
 }
