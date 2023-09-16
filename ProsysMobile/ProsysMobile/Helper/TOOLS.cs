@@ -15,7 +15,6 @@ namespace ProsysMobile.Helper
 {
     public static class TOOLS
     {
-        
         public static string GenerateUniqueString()
         {
             string _unqStr = string.Empty; Random rnd = new Random();

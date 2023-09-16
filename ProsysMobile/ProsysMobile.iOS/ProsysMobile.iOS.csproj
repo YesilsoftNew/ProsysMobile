@@ -86,6 +86,7 @@
     <Compile Include="Renderer\EntryRenderer.cs" />
     <Compile Include="Renderer\FrameRenderer.cs" />
     <Compile Include="Renderer\GradientColorStackRenderer.cs" />
+    <Compile Include="Renderer\iOSLocalNotification.cs" />
     <Compile Include="Renderer\MainPageRenderer.cs" />
     <Compile Include="Renderer\RoundedCornerStackLayoutRenderer.cs" />
     <Compile Include="Renderer\TintImageEffect.cs" />
