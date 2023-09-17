@@ -67,14 +67,14 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _itemPurchaseQtyTitle = "Order Amount (-)";
         public string ItemPurchaseQtyTitle { get => _itemPurchaseQtyTitle; set { _itemPurchaseQtyTitle = value; PropertyChanged(() => ItemPurchaseQtyTitle); } }
         
-        private ObservableRangeCollection<Category> _categories;
-        public ObservableRangeCollection<Category> Categories
+        private ObservableRangeCollection<Tag> _tags;
+        public ObservableRangeCollection<Tag> Tags
         {
-            get => _categories ?? (_categories = new ObservableRangeCollection<Category>());
+            get => _tags ?? (_tags = new ObservableRangeCollection<Tag>());
             set
             {
-                _categories = value;
-                PropertyChanged(() => Categories);
+                _tags = value;
+                PropertyChanged(() => Tags);
             }
         }
         
@@ -236,7 +236,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemImage = responseModel.Item.Image;
                         ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
-                        Categories = new ObservableRangeCollection<Category>(GetCategories(responseModel.Item));
+                        Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
                         ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
                         FavoriteImageSource = responseModel.Item.IsFavorite
                             ? Constants.SelectedFavoriteImageSource
@@ -298,47 +298,6 @@ namespace ProsysMobile.ViewModels.Pages.Item
             }
         }
 
-        private List<Category> GetCategories(ItemsSubDto item)
-        {
-            var categories = new List<Category>();
-            
-            if (string.IsNullOrWhiteSpace(item.Tag1Text))
-            {
-                categories.Add(new Category
-                {
-                    Name = item.Tag1Text,
-                    Color = item.Tag1Color
-                });
-            }
-            if (string.IsNullOrWhiteSpace(item.Tag2Text))
-            {
-                categories.Add(new Category
-                {
-                    Name = item.Tag2Text,
-                    Color = item.Tag2Color
-                });
-            }
-            if (string.IsNullOrWhiteSpace(item.Tag3Text))
-            {
-                categories.Add(new Category
-                {
-                    Name = item.Tag3Text,
-                    Color = item.Tag3Color
-                });
-            }
-
-            if (string.IsNullOrWhiteSpace(item.Tag4Text))
-            {
-                categories.Add(new Category
-                {
-                    Name = item.Tag4Text,
-                    Color = item.Tag4Color
-                });
-            }
-
-            return categories;
-        }
-        
         #endregion
         
     }

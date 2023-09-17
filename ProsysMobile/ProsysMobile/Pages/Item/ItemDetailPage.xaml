@@ -112,10 +112,10 @@
                             VerticalOptions="FillAndExpand">
                             
                             <FlexLayout
-                                x:Name="LstSubCategories"
+                                x:Name="LstSubTags"
                                 Direction="Row"
                                 Wrap="NoWrap"
-                                BindableLayout.ItemsSource="{Binding Categories}"
+                                BindableLayout.ItemsSource="{Binding Tags}"
                                 Margin="16,20,0,0"
                                 HorizontalOptions="FillAndExpand"
                                 VerticalOptions="FillAndExpand">
@@ -124,7 +124,7 @@
                                     <DataTemplate>
                         
                                         <customContolsOther:CustomSubCategoryGrid
-                                            Text="{Binding Text}"
+                                            Text="{Binding Name}"
                                             Color="{Binding Color}"
                                             Margin="0,0,16,0"
                                             HorizontalOptions="FillAndExpand"
