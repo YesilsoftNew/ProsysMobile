@@ -10,6 +10,7 @@ using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Base;
+using ProsysMobile.ViewModels.Pages.Other;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Item
@@ -191,6 +192,30 @@ namespace ProsysMobile.ViewModels.Pages.Item
                 
                 DialogService.WarningToastMessage("Bir hata oluştu.");
             }
+        });
+
+        public ICommand ImageClickCommand => new Command((sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                
+                var model = new NavigationModel<BigImagePageViewParamModel>()
+                {
+                    Model = new BigImagePageViewParamModel
+                    {
+                        Source = ItemImage
+                    },
+                };
+
+                NavigationService.NavigateToBackdropAsync<BigImagePageViewModel>(model);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
         });
         
         #endregion

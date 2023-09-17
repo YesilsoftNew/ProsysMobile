@@ -55,10 +55,11 @@
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="CenterAndExpand">
                 
-                        <Image
+                        <ImageButton
                             WidthRequest="200"
                             HeightRequest="200"
                             Aspect="AspectFill"
+                            Command="{Binding ImageClickCommand}"
                             Source="{Binding ItemImage}"
                             AbsoluteLayout.LayoutFlags="All"
                             AbsoluteLayout.LayoutBounds="0,0,1,1"
