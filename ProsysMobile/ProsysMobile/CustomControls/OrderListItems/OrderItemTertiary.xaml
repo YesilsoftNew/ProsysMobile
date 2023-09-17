@@ -44,8 +44,41 @@
                     Source="http://yas.yesilsoft.net/Images/Spices.png"
                     Aspect="AspectFill"
                     HeightRequest="180"
-                    AbsoluteLayout.LayoutFlags="All"
+                    AbsoluteLayout.LayoutFlags="All" 
                     AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                
+                <Grid
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center"
+                    AbsoluteLayout.LayoutFlags="PositionProportional" 
+                    AbsoluteLayout.LayoutBounds="0,1,AutoSize,AutoSize"
+                    RowSpacing="6"
+                    Margin="0,0,0,10">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <controlOther:CustomTag
+                        x:Name="Tag1"
+                        Grid.Row="0" />
+                    
+                    <controlOther:CustomTag
+                        x:Name="Tag2"
+                        Grid.Row="1" />
+                    
+                    <controlOther:CustomTag
+                        x:Name="Tag3"
+                        Grid.Row="2" />
+                    
+                    <controlOther:CustomTag
+                        x:Name="Tag4"
+                        Grid.Row="3" />
+                    
+                </Grid>
 
                 <ImageButton
                     x:Name="ItemImageButton"
