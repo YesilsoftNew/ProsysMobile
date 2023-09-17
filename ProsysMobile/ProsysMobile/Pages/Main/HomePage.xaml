@@ -7,78 +7,145 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
-             xmlns:customContolsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
     
     <ContentPage.Content>
         
+                
         <Grid
             Style="{DynamicResource MainGrid}"
-            Margin="0,16,0,16">
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="0">
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
             
             <Label
                 Grid.Row="0"
                 Text="Categories"
-                Style="{DynamicResource Caption2}"
+                Style="{DynamicResource Label2}"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="16,0,0,0" />
+            
+                <StackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                        
+                    <FlexLayout 
+                        x:Name="LstCategories" 
+                        Direction="Row"
+                        Wrap="Wrap"
+                        AlignContent="Start"
+                        AlignItems="Center"
+                        JustifyContent="Start"
+                        BindableLayout.ItemsSource="{Binding Categories}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Margin="0,6,0,0">
+                    
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                            
+                                <customContolsOther:CustomCategoryGrid
+                                    Text="{Binding CategoryDesc}"
+                                    ImageSource="{Binding Image}"
+                                    ImageHeight="95"
+                                    ImageWidth="95"
+                                    LabelStyle="{DynamicResource Label2}"
+                                    FlexLayout.Basis="33.33%"
+                                    RowSpacing="6"
+                                    Padding="0,0,0,24"
+                                    HorizontalOptions="CenterAndExpand" 
+                                    VerticalOptions="FillAndExpand">
+                                    
+                                    <customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.CategoryClickCommand}" 
+                                            CommandParameter="{Binding .}" />
+                                    </customContolsOther:CustomCategoryGrid.GestureRecognizers>
+                                    
+                                </customContolsOther:CustomCategoryGrid>
+                            
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                
+                    </FlexLayout>
+                    
+                </StackLayout>
+                
+                
+            <Label
+                Grid.Row="2"
+                Text="Deals"
+                Style="{DynamicResource Header2}"
+                Padding="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 Margin="16,0,0,0" />
             
             <ScrollView
-                Grid.Row="1"
-                HorizontalOptions="CenterAndExpand"
+                Grid.Row="3"
+                HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
+            
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    
+                    <FlexLayout 
+                        x:Name="Deals" 
+                        Direction="Row"
+                        Wrap="Wrap"
+                        AlignContent="Start"
+                        AlignItems="Center"
+                        JustifyContent="Start"
+                        BindableLayout.ItemsSource="{Binding Deals}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand">
+                    
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                            
+                                <customControlsOrders:OrderItemTertiary
+                                    NameText="{Binding Name}"
+                                    PiecesText="{Binding Pieces}"
+                                    PriceText="{Binding Price}"
+                                    ImageSource="{Binding Image}"
+                                    IsFavorite="{Binding IsFavorite}"
+                                    FlexLayout.Basis="50%"
+                                    FavoriteCommand="{Binding Source={x:Reference Deals}, Path=BindingContext.FavoriteClickCommand}"
+                                    FavoriteCommandParameter="{Binding .}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    
+                                    <customControlsOrders:OrderItemTertiary.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                            Command="{Binding Source={x:Reference Deals}, Path=BindingContext.DealsClickCommand}" 
+                                            CommandParameter="{Binding .}" />
+                                    </customControlsOrders:OrderItemTertiary.GestureRecognizers>
+
+                                </customControlsOrders:OrderItemTertiary>
+                            
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
                 
-                <FlexLayout 
-                    x:Name="LstCategories" 
-                    Direction="Row"
-                    Wrap="Wrap"
-                    AlignContent="Start"
-                    AlignItems="Center"
-                    JustifyContent="Start"
-                    BindableLayout.ItemsSource="{Binding Categories}"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    Margin="0,6,0,0">
-                
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
+                    </FlexLayout>
                         
-                            <customContolsOther:CustomCategoryGrid
-                                Text="{Binding CategoryDesc}"
-                                ImageSource="{Binding Image}"
-                                ImageHeight="95"
-                                ImageWidth="95"
-                                LabelStyle="{DynamicResource Label2}"
-                                FlexLayout.Basis="33.33%"
-                                RowSpacing="6"
-                                Padding="0,0,0,24"
-                                HorizontalOptions="CenterAndExpand" 
-                                VerticalOptions="FillAndExpand">
-                                
-                                <customContolsOther:CustomCategoryGrid.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding Source={x:Reference LstCategories}, Path=BindingContext.CategoryClickCommand}" 
-                                        CommandParameter="{Binding .}" />
-                                </customContolsOther:CustomCategoryGrid.GestureRecognizers>
-                                
-                            </customContolsOther:CustomCategoryGrid>
-                        
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                
-                </FlexLayout>
+                </StackLayout>
                 
             </ScrollView>
             
-        </Grid>
-      
+    </Grid>
+        
     </ContentPage.Content>
 </ContentPage>

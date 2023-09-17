@@ -408,8 +408,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                IsBusy = true;
-
                 if (sender is ItemsSubDto item)
                 {
 
@@ -438,7 +436,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 DialogService.WarningToastMessage("Bir hata oluştu.");
             }
 
-            IsBusy = false;
             DoubleTapping.ResumeTap();
         });
         
