@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace ProsysMobile.Models.APIModels.ResponseModels
 {
@@ -23,6 +24,15 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public string Image { get; set; }
         public string Amount { get; set; } = string.Empty;
         public string UnitDesc { get; set; } = string.Empty;
+        
+        public string Tag1Text { get; set; } = string.Empty;
+        public string Tag2Text { get; set; } = string.Empty;
+        public string Tag3Text { get; set; } = string.Empty;
+        public string Tag4Text { get; set; } = string.Empty;
+        public Color Tag1Color { get; set; }
+        public Color Tag2Color { get; set; }
+        public Color Tag3Color { get; set; }
+        public Color Tag4Color { get; set; }
 
         private bool _isFavorite;
         public bool IsFavorite { get => _isFavorite; set { _isFavorite = value; OnPropertyChanged(); } }

@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.Services.API.OrderDetails;
@@ -64,8 +67,16 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _itemPurchaseQtyTitle = "Order Amount (-)";
         public string ItemPurchaseQtyTitle { get => _itemPurchaseQtyTitle; set { _itemPurchaseQtyTitle = value; PropertyChanged(() => ItemPurchaseQtyTitle); } }
         
-        private string _categories;
-        public string Categories { get => _categories; set { _categories = value; PropertyChanged(() => Categories); } }
+        private ObservableRangeCollection<Category> _categories;
+        public ObservableRangeCollection<Category> Categories
+        {
+            get => _categories ?? (_categories = new ObservableRangeCollection<Category>());
+            set
+            {
+                _categories = value;
+                PropertyChanged(() => Categories);
+            }
+        }
         
         private string _favoriteImageSource;
         public string FavoriteImageSource { get => _favoriteImageSource; set { _favoriteImageSource = value; PropertyChanged(() => FavoriteImageSource); } }
@@ -225,7 +236,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemImage = responseModel.Item.Image;
                         ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
-                        Categories = responseModel.Categories;
+                        Categories = new ObservableRangeCollection<Category>(GetCategories(responseModel.Item));
                         ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
                         FavoriteImageSource = responseModel.Item.IsFavorite
                             ? Constants.SelectedFavoriteImageSource
@@ -286,7 +297,49 @@ namespace ProsysMobile.ViewModels.Pages.Item
                 ProsysLogger.Instance.CrashLog(ex);
             }
         }
+
+        private List<Category> GetCategories(ItemsSubDto item)
+        {
+            var categories = new List<Category>();
+            
+            if (string.IsNullOrWhiteSpace(item.Tag1Text))
+            {
+                categories.Add(new Category
+                {
+                    Name = item.Tag1Text,
+                    Color = item.Tag1Color
+                });
+            }
+            if (string.IsNullOrWhiteSpace(item.Tag2Text))
+            {
+                categories.Add(new Category
+                {
+                    Name = item.Tag2Text,
+                    Color = item.Tag2Color
+                });
+            }
+            if (string.IsNullOrWhiteSpace(item.Tag3Text))
+            {
+                categories.Add(new Category
+                {
+                    Name = item.Tag3Text,
+                    Color = item.Tag3Color
+                });
+            }
+
+            if (string.IsNullOrWhiteSpace(item.Tag4Text))
+            {
+                categories.Add(new Category
+                {
+                    Name = item.Tag4Text,
+                    Color = item.Tag4Color
+                });
+            }
+
+            return categories;
+        }
         
         #endregion
+        
     }
 }
