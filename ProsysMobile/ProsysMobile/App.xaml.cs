@@ -127,6 +127,7 @@ namespace ProsysMobile
 
         protected override void OnSleep()
         {
+            Console.WriteLine("test");
         }
 
         protected override void OnResume()
