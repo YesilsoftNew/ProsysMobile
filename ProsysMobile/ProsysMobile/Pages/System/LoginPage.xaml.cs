@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Plugin.FirebasePushNotification;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProsysMobile.Pages.System

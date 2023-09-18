@@ -10,8 +10,17 @@ using System.IO;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Microsoft.IdentityModel.Tokens;
+using Plugin.FirebasePushNotification;
+using ProsysMobile.Endpoints.UserDevices;
+using ProsysMobile.Handler;
+using ProsysMobile.Services.API.UserDevices;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using Device = Xamarin.Forms.Device;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.EventArgs;
+using ProsysMobile.Services.Dialog;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
 [assembly: ExportFont("poppins_black_italic.ttf", Alias = "poppins_black_italic")]
@@ -37,7 +46,6 @@ namespace ProsysMobile
     public partial class App
     {
         public static string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
-
         public App()
         {
             InitializeComponent();
@@ -52,7 +60,7 @@ namespace ProsysMobile
             GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet ? true : false;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
-
+        
         private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
         {
             GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet ? true : false;

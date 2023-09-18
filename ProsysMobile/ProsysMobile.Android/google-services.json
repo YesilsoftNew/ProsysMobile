@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1096956301902",
+    "project_id": "prosysmobile-b573d",
+    "storage_bucket": "prosysmobile-b573d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096956301902:android:84fede3ee276d5af02691f",
+        "android_client_info": {
+          "package_name": "com.yesilsoft.prosysmobilekuru"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096956301902-67dpitu005e3annfms3bl5r50j8b1qq9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKkourrOEzJNFZxtWShlYbtADtxcBBeeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096956301902-67dpitu005e3annfms3bl5r50j8b1qq9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

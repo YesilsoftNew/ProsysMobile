@@ -10,25 +10,74 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
+using Plugin.FirebasePushNotification;
+using Plugin.LocalNotification;
+using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Services.API.UserDevices;
 using ProsysMobile.Services.API.UserMobile;
+using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
 {
     public class SplashPageViewModel : ViewModelBase
     {
-        private IDefaultSettingsSQLiteService _defaultSettingsSQLiteService;
-        private IUserMobileSQLiteService _userSQLiteService;
-        private ISignInService _signInService;
+        private readonly ISaveUserDevicesService _saveUserDevicesService;
+        private readonly IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
+        private readonly IUserMobileSQLiteService _userSqLiteService;
+        private readonly ISignInService _signInService;
+        
+        private int count = 0;
 
-        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService)
+        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
         {
-            _defaultSettingsSQLiteService = defaultSettingsSQLiteService;
-            _userSQLiteService = userSqLiteService;
+            _defaultSettingsSqLiteService = defaultSettingsSQLiteService;
+            _userSqLiteService = userSqLiteService;
             _signInService = signInService;
+            _saveUserDevicesService = saveUserDevicesService;
         }
 
         public override Task InitializeAsync(object navigationData)
         {
+            CrossFirebasePushNotification.Current.Subscribe("general");
+            CrossFirebasePushNotification.Current.OnTokenRefresh +=  (source, args) =>
+            {
+                GlobalSetting.Instance.FirebaseNotificationToken = args?.Token ?? "";
+            };
+            
+            var random = new Random();
+
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            {
+                try
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        if (p.Data.ContainsKey("body") && p.Data.ContainsKey("title"))
+                        {
+                            var notification = new NotificationRequest
+                            {
+                                BadgeNumber = 1,
+                                Description = p.Data["body"].ToString(),
+                                Title = p.Data["title"].ToString(),
+                                NotificationId = random.Next(1, int.MaxValue)
+                            };
+
+                            LocalNotificationCenter.Current.Show(notification);
+                        }
+                    }
+                    else
+                    {
+                        count++;
+                    }
+                }
+                catch (Exception)
+                {
+                    DoubleTapping.ResumeTap();
+                }
+
+            };
+            
             GoToLoginPage();
 
             return base.InitializeAsync(navigationData);
@@ -37,24 +86,20 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                USERMOBILE user;
-                
                 await Task.Delay(3000);
 
-                DefaultSettings userDefaultSetting = _defaultSettingsSQLiteService.getSettings("UserId");
-
-                //var aasddfs = _defaultSettingsSQLiteService.getSettingsAll();
-
+                var userDefaultSetting = _defaultSettingsSqLiteService.getSettings("UserId");
+                
                 if (!(userDefaultSetting is null))
                 {
-                    user = _userSQLiteService.GetUser(TOOLS.ToLong(userDefaultSetting.Value));
-                    
+                    var user = _userSqLiteService.GetUser(TOOLS.ToLong(userDefaultSetting.Value));
+
                     if (user != null)
                     {
                         GlobalSetting.Instance.User = user;
                     
-                        DefaultSettings userTokenDefaultSetting = _defaultSettingsSQLiteService.getSettings("UserToken");
-                        DefaultSettings userTokenExpiredDateDefaultSetting = _defaultSettingsSQLiteService.getSettings("UserTokenExpiredDate");
+                        DefaultSettings userTokenDefaultSetting = _defaultSettingsSqLiteService.getSettings("UserToken");
+                        DefaultSettings userTokenExpiredDateDefaultSetting = _defaultSettingsSqLiteService.getSettings("UserTokenExpiredDate");
                     
                         if (userTokenDefaultSetting != null)
                         {
@@ -93,17 +138,19 @@ namespace ProsysMobile.ViewModels.Pages.System
                                 userTokenDefaultSetting.Key = "UserToken";
                                 userTokenDefaultSetting.Value = GlobalSetting.Instance.JWTToken;
 
-                                _defaultSettingsSQLiteService.Save(userTokenDefaultSetting);
+                                _defaultSettingsSqLiteService.Save(userTokenDefaultSetting);
 
                                 userTokenExpiredDateDefaultSetting.Key = "UserTokenExpiredDate";
                                 userTokenExpiredDateDefaultSetting.Value = TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate);
 
-                                _defaultSettingsSQLiteService.Save(userTokenExpiredDateDefaultSetting);
+                                _defaultSettingsSqLiteService.Save(userTokenExpiredDateDefaultSetting);
                             }
                             #endregion
                         }
-                    
+
                         await NavigationService.SetMainPageAsync<AppShellViewModel>();
+                        
+                        _saveUserDevicesService.SaveUserDevices(TOOLS.GetUserDevices(GlobalSetting.Instance?.User?.ID ?? -1), enPriorityType.UserInitiated);
                     }
                     else
                         await NavigationService.SetMainPageAsync<LoginPageViewModel>();

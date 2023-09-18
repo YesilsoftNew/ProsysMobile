@@ -5,8 +5,11 @@ using ProsysMobile.ViewModels.Base;
 using System;
 using System.Windows.Input;
 using MvvmHelpers;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.iOSOption;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using Xamarin.CommunityToolkit.Converters;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
@@ -54,7 +57,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Commands
 
-        public ICommand CategoryClickCommand => new MvvmHelpers.Commands.Command<object>( (sender) =>
+        public ICommand CategoryClickCommand => new Command<object>( (sender) =>
         {
             try
             {
@@ -70,6 +73,35 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
 
             DoubleTapping.ResumeTap();
+        });
+        
+        public ICommand Allahbalaniversinmumtazcommand => new Command<object>( (sender) =>
+        {
+            DependencyService.Get<ILocalNotification>().ShowNotification("Başlık", "Bildirim metni");
+
+            
+            return;
+            var notification = new NotificationRequest
+            {
+                BadgeNumber = 1,
+                Description = "hepsi manyak",
+                Title = "allah belanı versin mümtaz",
+                NotificationId = 1,
+                iOS = new iOSOptions
+                {
+                    HideForegroundAlert = true,
+                    PlayForegroundSound = true,
+                    PresentAsBanner = true,
+                    ShowInNotificationCenter = true,
+                    ApplyBadgeValue = true,
+                    Priority = iOSPriority.Passive,
+                    RelevanceScore = 0,
+                    SummaryArgument = null,
+                    SummaryArgumentCount = 0
+                }
+            };
+
+            LocalNotificationCenter.Current.Show(notification);
         });
 
         #endregion
@@ -96,7 +128,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     result.ResponseData.Insert(0, Constants.ItemCategoryAll);
                     
                     Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
-                    
                 }
                 else
                 {
