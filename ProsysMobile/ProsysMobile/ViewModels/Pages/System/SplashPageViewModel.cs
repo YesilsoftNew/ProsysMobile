@@ -26,8 +26,6 @@ namespace ProsysMobile.ViewModels.Pages.System
         private readonly IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
         private readonly IUserMobileSQLiteService _userSqLiteService;
         private readonly ISignInService _signInService;
-        
-        private int count = 0;
 
         public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
         {
@@ -39,45 +37,6 @@ namespace ProsysMobile.ViewModels.Pages.System
 
         public override Task InitializeAsync(object navigationData)
         {
-            CrossFirebasePushNotification.Current.Subscribe("general");
-            CrossFirebasePushNotification.Current.OnTokenRefresh +=  (source, args) =>
-            {
-                GlobalSetting.Instance.FirebaseNotificationToken = args?.Token ?? "";
-            };
-            
-            var random = new Random();
-
-            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
-            {
-                try
-                {
-                    if (Device.RuntimePlatform == Device.Android)
-                    {
-                        if (p.Data.ContainsKey("body") && p.Data.ContainsKey("title"))
-                        {
-                            var notification = new NotificationRequest
-                            {
-                                BadgeNumber = 1,
-                                Description = p.Data["body"].ToString(),
-                                Title = p.Data["title"].ToString(),
-                                NotificationId = random.Next(1, int.MaxValue)
-                            };
-
-                            LocalNotificationCenter.Current.Show(notification);
-                        }
-                    }
-                    else
-                    {
-                        count++;
-                    }
-                }
-                catch (Exception)
-                {
-                    DoubleTapping.ResumeTap();
-                }
-
-            };
-            
             GoToLoginPage();
 
             return base.InitializeAsync(navigationData);

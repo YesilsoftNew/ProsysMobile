@@ -86,7 +86,6 @@
     <Compile Include="Renderer\EntryRenderer.cs" />
     <Compile Include="Renderer\FrameRenderer.cs" />
     <Compile Include="Renderer\GradientColorStackRenderer.cs" />
-    <Compile Include="Renderer\iOSLocalNotification.cs" />
     <Compile Include="Renderer\MainPageRenderer.cs" />
     <Compile Include="Renderer\RoundedCornerStackLayoutRenderer.cs" />
     <Compile Include="Renderer\TintImageEffect.cs" />
@@ -155,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Plugin.FirebasePushNotification" Version="3.4.35" />
+    <PackageReference Include="Plugin.LocalNotification" Version="5.2.0" />
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />

@@ -24,12 +24,12 @@
                 <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
             
-            <Button 
-                Grid.Row="2" 
-                Margin="0,0,0,0" 
-                Command="{Binding Allahbalaniversinmumtazcommand}" 
-                Text="allahbalanıversinmumtaz" />
-
+            <Button
+                Grid.Row="2"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Text="allahbelanı"
+                Command="{Binding Allahbalaniversinmumtazcommand}"></Button>
             
             <Label
                 Grid.Row="0"

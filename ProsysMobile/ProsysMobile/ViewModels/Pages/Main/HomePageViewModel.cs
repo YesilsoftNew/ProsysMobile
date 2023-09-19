@@ -6,7 +6,6 @@ using System;
 using System.Windows.Input;
 using MvvmHelpers;
 using Plugin.LocalNotification;
-using Plugin.LocalNotification.iOSOption;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using Xamarin.CommunityToolkit.Converters;
@@ -74,36 +73,24 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
             DoubleTapping.ResumeTap();
         });
+
         
         public ICommand Allahbalaniversinmumtazcommand => new Command<object>( (sender) =>
         {
-            DependencyService.Get<ILocalNotification>().ShowNotification("Başlık", "Bildirim metni");
+            var random = new Random();
 
-            
-            return;
             var notification = new NotificationRequest
             {
                 BadgeNumber = 1,
-                Description = "hepsi manyak",
-                Title = "allah belanı versin mümtaz",
-                NotificationId = 1,
-                iOS = new iOSOptions
-                {
-                    HideForegroundAlert = true,
-                    PlayForegroundSound = true,
-                    PresentAsBanner = true,
-                    ShowInNotificationCenter = true,
-                    ApplyBadgeValue = true,
-                    Priority = iOSPriority.Passive,
-                    RelevanceScore = 0,
-                    SummaryArgument = null,
-                    SummaryArgumentCount = 0
-                }
+                Description = "aaa",
+                Title = "aaa",
+                NotificationId = random.Next(1, int.MaxValue)
             };
 
-            LocalNotificationCenter.Current.Show(notification);
+            NotificationCenter.Current.Show(notification);
         });
 
+        
         #endregion
 
         #region Methods

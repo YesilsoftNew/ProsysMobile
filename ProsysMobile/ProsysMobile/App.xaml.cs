@@ -19,7 +19,6 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using Plugin.LocalNotification;
-using Plugin.LocalNotification.EventArgs;
 using ProsysMobile.Services.Dialog;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
@@ -122,6 +121,57 @@ namespace ProsysMobile
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            #endregion
+
+            #region Notification
+
+            CrossFirebasePushNotification.Current.Subscribe("general");
+            CrossFirebasePushNotification.Current.OnTokenRefresh +=  (source, args) =>
+            {
+                GlobalSetting.Instance.FirebaseNotificationToken = args?.Token ?? "";
+            };
+            
+            var random = new Random();
+
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            {
+                try
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        if (p.Data.ContainsKey("body") && p.Data.ContainsKey("title"))
+                        {
+                            var notification = new NotificationRequest
+                            {
+                                BadgeNumber = 1,
+                                Description = p.Data["body"].ToString(),
+                                Title = p.Data["title"].ToString(),
+                                NotificationId = random.Next(1, int.MaxValue)
+                            };
+
+                            NotificationCenter.Current.Show(notification);
+                        }
+                    }
+                    else
+                    {
+                        var notification = new NotificationRequest
+                        {
+                            BadgeNumber = 1,
+                            Description = "",
+                            Title = "",
+                            NotificationId = random.Next(1, int.MaxValue)
+                        };
+
+                        NotificationCenter.Current.Show(notification);   
+                    }
+                }
+                catch (Exception)
+                {
+                    DoubleTapping.ResumeTap();
+                }
+
+            };
+
             #endregion
         }
 
