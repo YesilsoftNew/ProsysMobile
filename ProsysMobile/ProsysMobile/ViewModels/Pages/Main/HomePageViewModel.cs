@@ -3,6 +3,8 @@ using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.ViewModels.Base;
 using System;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -19,24 +21,30 @@ namespace ProsysMobile.ViewModels.Pages.Main
     {
         private readonly IItemCategoryService _itemCategoryService;
         private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
+        private readonly IDealItemsService _dealItemsService;
 
-        public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
+        private bool _isAllItemLoad;
+        private int _listPage = 0;
+        private int openCount = 0;
+        
+        public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IDealItemsService dealItemsService)
         {
             _itemCategoryService = itemCategoryService;
             _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
+            _dealItemsService = dealItemsService;
 
-            Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", (sender, arg) =>
-            {
-                try
-                {
-                    if (TOOLS.ToInt(arg) == (int)enTabBarItem.HomePage)
-                        PageLoad();
-                }
-                catch (Exception ex)
-                {
-                    ProsysLogger.Instance.CrashLog(ex);
-                }
-            });
+           MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
+           {
+               try
+               {
+                   if (TOOLS.ToInt(arg) == (int)enTabBarItem.HomePage)
+                       PageLoad();
+               }
+               catch (Exception ex)
+               {
+                   ProsysLogger.Instance.CrashLog(ex);
+               }
+           });
         }
 
         #region Propertys
@@ -74,6 +82,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 PropertyChanged(() => Deals);
             }
         }
+        
+        private ItemsSubDto _selectedDeal;
+        public ItemsSubDto SelectedDeal { get => _selectedDeal; set { _selectedDeal = value; PropertyChanged(() => SelectedDeal); } }
         
         #endregion
 
@@ -134,7 +145,32 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
-        public ICommand DealsClickCommand => new Command(async (sender) => ItemsListClick(sender));
+        public ICommand DealsClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                
+                var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
+                {
+                    Model = new ItemDetailPageViewParamModel
+                    {
+                        ItemId = SelectedDeal.Id,
+                    },
+                    ClosedPageEventCommand = ItemDetailClosedEventCommand
+                };
+
+                await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            SelectedDeal = null;
+            DoubleTapping.ResumeTap();
+        });
 
         public ICommand ItemDetailClosedEventCommand => new Command(async (sender) =>
         {
@@ -144,6 +180,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (!model.IsAddItem) return;
 
+                _listPage = 0;
+                _isAllItemLoad = false;
                 Deals.Clear();
                 GetDealsAndBindFromApi();
             }
@@ -151,6 +189,25 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+        });
+        
+        public ICommand ListDealsRemainingThresholdReachedCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                IsBusy = true;
+
+                GetDealsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
         });
         
         #endregion
@@ -163,6 +220,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 categoryId: Constants.MainCategoryId
             );
 
+            _listPage = 0;
+            _isAllItemLoad = false;
+            Deals = new ObservableRangeCollection<ItemsSubDto>();
             GetDealsAndBindFromApi();
         }
         
@@ -199,90 +259,39 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private async void GetDealsAndBindFromApi()
         {
-            Deals = new ObservableRangeCollection<ItemsSubDto>
-            {
-                new ItemsSubDto
-                {
-                    Id = 0,
-                    CategoryId = 0,
-                    Name = "null",
-                    Pieces = "null",
-                    Price = "null",
-                    CurrencyType = "null",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png",
-                    Amount = "null",
-                    UnitDesc = "null",
-                    IsFavorite = false
-                },
-                new ItemsSubDto
-                {
-                    Id = 1,
-                    CategoryId = 2,
-                    Name = "Karpuz",
-                    Pieces = "3 dolar",
-                    Price = "3 dolar",
-                    CurrencyType = "null",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png",
-                    Amount = "null",
-                    UnitDesc = "null",
-                    IsFavorite = false
-                },
-                new ItemsSubDto
-                {
-                    Id = 1,
-                    CategoryId = 2,
-                    Name = "Karpuz",
-                    Pieces = "3 dolar",
-                    Price = "3 dolar",
-                    CurrencyType = "null",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png",
-                    Amount = "null",
-                    UnitDesc = "null",
-                    IsFavorite = false
-                },
-                new ItemsSubDto
-                {
-                    Id = 1,
-                    CategoryId = 2,
-                    Name = "Karpuz",
-                    Pieces = "3 dolar",
-                    Price = "3 dolar",
-                    CurrencyType = "null",
-                    Image = "http://yas.yesilsoft.net/Images/Legumes.png",
-                    Amount = "null",
-                    UnitDesc = "null",
-                    IsFavorite = false
-                }
-            };
-        }
-        
-        private async void ItemsListClick(object sender)
-        {
             try
             {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
-                if (sender is ItemsSubDto item)
+                if (_isAllItemLoad)
                 {
-                    var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
-                    {
-                        Model = new ItemDetailPageViewParamModel
-                        {
-                            ItemId = item.Id,
-                        },
-                        ClosedPageEventCommand = ItemDetailClosedEventCommand
-                    };
-
-                    await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
+                    return;
                 }
-                
+
+                var result = await _dealItemsService.DealItems(
+                    userId: GlobalSetting.Instance.User.ID,
+                    page: _listPage,
+                    priorityType: enPriorityType.UserInitiated
+                );
+
+                if (result?.ResponseData != null && result.IsSuccess)
+                {
+                    if (result.ResponseData.Count < GlobalSetting.Instance.ListPageSize)
+                        _isAllItemLoad = true;
+
+                    Deals.AddRange(result.ResponseData);
+                    
+                    _listPage++;
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                }
             }
             catch (Exception ex)
             {
+                DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+
                 ProsysLogger.Instance.CrashLog(ex);
             }
-
-            DoubleTapping.ResumeTap();
         }
         
         #endregion
