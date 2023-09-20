@@ -14,7 +14,7 @@
                          mc:Ignorable="d"
                          x:Class="ProsysMobile.Pages.Other.ChangeItemListDesignPage">
    
-        <backdrop:CustomBackdrop.PageContent>
+    <backdrop:CustomBackdrop.PageContent>
         <ContentView>
 
             <Grid Style="{DynamicResource Customs.Backdrop.MainGridSecondary}">

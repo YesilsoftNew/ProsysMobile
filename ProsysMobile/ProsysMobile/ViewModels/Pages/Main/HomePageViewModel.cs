@@ -7,12 +7,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.iOSOption;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Item;
+using Xamarin.CommunityToolkit.Converters;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Main
@@ -25,7 +28,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private bool _isAllItemLoad;
         private int _listPage = 0;
-        private int openCount = 0;
         
         public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IDealItemsService dealItemsService)
         {
@@ -90,7 +92,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Commands
 
-        public ICommand CategoryClickCommand => new MvvmHelpers.Commands.Command<object>( (sender) =>
+        public ICommand CategoryClickCommand => new Command<object>( (sender) =>
         {
             try
             {
@@ -205,7 +207,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
-
+            
             IsBusy = false;
             DoubleTapping.ResumeTap();
         });
@@ -239,7 +241,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     result.ResponseData.Insert(0, Constants.ItemCategoryAll);
                     
                     Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
-                    
                 }
                 else
                 {

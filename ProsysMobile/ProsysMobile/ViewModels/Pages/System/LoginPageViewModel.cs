@@ -13,21 +13,28 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Plugin.FirebasePushNotification;
+using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Services.API.UserDevices;
 using ProsysMobile.ViewModels.Pages.Order;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly ISaveUserDevicesService _saveUserDevicesService;
         private ISignInService _signInService;
         private IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
 
-        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, ISignInService signInService)
+        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
         {
             _defaultSettingsSqLiteService = defaultSettingsSqLiteService;
             _signInService = signInService;
+            _saveUserDevicesService = saveUserDevicesService;
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -151,6 +158,8 @@ namespace ProsysMobile.ViewModels.Pages.System
                         };
 
                         _defaultSettingsSqLiteService.SaveAll(tokenSettings);
+                        
+                        _saveUserDevicesService.SaveUserDevices(TOOLS.GetUserDevices(GlobalSetting.Instance?.User?.ID ?? -1), enPriorityType.UserInitiated);
                     }
                     else
                     {

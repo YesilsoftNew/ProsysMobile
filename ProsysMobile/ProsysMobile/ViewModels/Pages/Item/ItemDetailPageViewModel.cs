@@ -1,15 +1,19 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MvvmHelpers;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Base;
+using ProsysMobile.ViewModels.Pages.Other;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Item
@@ -64,8 +68,16 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _itemPurchaseQtyTitle = "Order Amount (-)";
         public string ItemPurchaseQtyTitle { get => _itemPurchaseQtyTitle; set { _itemPurchaseQtyTitle = value; PropertyChanged(() => ItemPurchaseQtyTitle); } }
         
-        private string _categories;
-        public string Categories { get => _categories; set { _categories = value; PropertyChanged(() => Categories); } }
+        private ObservableRangeCollection<Tag> _tags;
+        public ObservableRangeCollection<Tag> Tags
+        {
+            get => _tags ?? (_tags = new ObservableRangeCollection<Tag>());
+            set
+            {
+                _tags = value;
+                PropertyChanged(() => Tags);
+            }
+        }
         
         private string _favoriteImageSource;
         public string FavoriteImageSource { get => _favoriteImageSource; set { _favoriteImageSource = value; PropertyChanged(() => FavoriteImageSource); } }
@@ -192,6 +204,30 @@ namespace ProsysMobile.ViewModels.Pages.Item
                 DialogService.WarningToastMessage("Bir hata oluştu.");
             }
         });
+
+        public ICommand ImageClickCommand => new Command((sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                
+                var model = new NavigationModel<BigImagePageViewParamModel>()
+                {
+                    Model = new BigImagePageViewParamModel
+                    {
+                        Source = ItemImage
+                    },
+                };
+
+                NavigationService.NavigateToBackdropAsync<BigImagePageViewModel>(model);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
+        });
         
         #endregion
 
@@ -225,7 +261,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemImage = responseModel.Item.Image;
                         ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
-                        Categories = responseModel.Categories;
+                        Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
                         ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
                         FavoriteImageSource = responseModel.Item.IsFavorite
                             ? Constants.SelectedFavoriteImageSource
@@ -286,7 +322,8 @@ namespace ProsysMobile.ViewModels.Pages.Item
                 ProsysLogger.Instance.CrashLog(ex);
             }
         }
-        
+
         #endregion
+        
     }
 }

@@ -26,7 +26,10 @@
 	<key>CFBundleIdentifier</key>
 	<string>com.yesilsoft.prosysmobilekuru</string>
 	<key>CFBundleVersion</key>
+<<<<<<< HEAD
 	<string>3.1</string>
+=======
+	<string>2.9</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>

@@ -2,6 +2,7 @@
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
+using Xamarin.Forms;
 
 namespace ProsysMobile.Helper
 {
@@ -45,6 +46,12 @@ namespace ProsysMobile.Helper
 
         #region Internet
         public bool IsConnectedInternet { get; set; }
+        #endregion
+
+        #region Firebase
+
+        public string FirebaseNotificationToken { get; set; } = string.Empty;
+
         #endregion
     }
 }
