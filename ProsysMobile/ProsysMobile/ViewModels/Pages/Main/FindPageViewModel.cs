@@ -32,7 +32,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private List<CategoryFilter> _selectedCategories = new List<CategoryFilter>();
         private int? _mainPageClickedCategoryId;
         private bool _isAllItemLoad;
-        private int _listPage = 1;
+        private int _listPage;
         private enItemListType _currentItemListType = enItemListType.Primary;
         private ItemCategory _itemCategoryAll = Constants.ItemCategoryAll;
 
@@ -408,8 +408,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                IsBusy = true;
-
                 if (sender is ItemsSubDto item)
                 {
 
@@ -438,7 +436,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 DialogService.WarningToastMessage("Bir hata oluştu.");
             }
 
-            IsBusy = false;
             DoubleTapping.ResumeTap();
         });
         

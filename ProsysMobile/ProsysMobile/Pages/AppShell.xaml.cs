@@ -12,6 +12,7 @@ namespace ProsysMobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AppShell : CustomShell
     {
+        public int count = 0;
         public Dictionary<string, Type> Routes { get; private set; } = new Dictionary<string, Type>();
 
         public AppShell()
@@ -36,8 +37,11 @@ namespace ProsysMobile.Pages
             try
             {
                 var tabbar = sender as TabBar;
-
-                MessagingCenter.Send<AppShell, string>(this, "AppShellTabIndexChange", tabbar.CurrentItem.TabIndex.ToString());
+                
+                if (e.PropertyName == "CurrentItem")
+                {
+                    MessagingCenter.Send<AppShell, string>(this, "AppShellTabIndexChange", tabbar.CurrentItem.TabIndex.ToString());
+                }
             }
             catch (Exception ex)
             {
