@@ -43,7 +43,7 @@ using ProsysMobile.Services.Dialog;
 namespace ProsysMobile
 {
     public partial class App
-    {
+    { 
         public static string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
         public App()
         {
