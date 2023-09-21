@@ -1,4 +1,4 @@
-﻿using ProsysMobile.Helper;
+using ProsysMobile.Helper;
 using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.ViewModels.Base;

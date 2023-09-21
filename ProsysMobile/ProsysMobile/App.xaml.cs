@@ -1,4 +1,4 @@
-﻿using Plugin.Multilingual;
+using Plugin.Multilingual;
 using ProsysMobile.Helper;
 using ProsysMobile.Helper.SQLite;
 using ProsysMobile.Models.CommonModels.SQLiteModels;

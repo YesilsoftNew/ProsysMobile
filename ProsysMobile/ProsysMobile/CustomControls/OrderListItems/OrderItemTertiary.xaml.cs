@@ -56,6 +56,54 @@ namespace ProsysMobile.CustomControls.OrderListItems
             null,
             BindingMode.TwoWay);
         
+        public static readonly BindableProperty Tag1TextProperty = BindableProperty.Create(nameof(Tag1Text),
+            typeof(string),
+            typeof(OrderItemTertiary),
+            default(string),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag2TextProperty = BindableProperty.Create(nameof(Tag2Text),
+            typeof(string),
+            typeof(OrderItemTertiary),
+            default(string),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag3TextProperty = BindableProperty.Create(nameof(Tag3Text),
+            typeof(string),
+            typeof(OrderItemTertiary),
+            default(string),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag4TextProperty = BindableProperty.Create(nameof(Tag4Text),
+            typeof(string),
+            typeof(OrderItemTertiary),
+            default(string),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag1ColorProperty = BindableProperty.Create(nameof(Tag1Color),
+            typeof(Color),
+            typeof(OrderItemTertiary),
+            default(Color),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag2ColorProperty = BindableProperty.Create(nameof(Tag2Color),
+            typeof(Color),
+            typeof(OrderItemTertiary),
+            default(Color),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag3ColorProperty = BindableProperty.Create(nameof(Tag3Color),
+            typeof(Color),
+            typeof(OrderItemTertiary),
+            default(Color),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
+        public static readonly BindableProperty Tag4ColorProperty = BindableProperty.Create(nameof(Tag4Color),
+            typeof(Color),
+            typeof(OrderItemTertiary),
+            default(Color),
+            Xamarin.Forms.BindingMode.TwoWay);
+        
         public string PriceText
         {
             get => (string)GetValue(PriceTextProperty);
@@ -98,6 +146,55 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(FavoriteCommandParameterProperty, value);
         }
         
+        public string Tag1Text
+        {
+            get => (string)GetValue(Tag1TextProperty);
+            set => SetValue(Tag1TextProperty, value);
+        }
+        
+        public string Tag2Text
+        {
+            get => (string)GetValue(Tag2TextProperty);
+            set => SetValue(Tag2TextProperty, value);
+        }
+        
+        public string Tag3Text
+        {
+            get => (string)GetValue(Tag3TextProperty);
+            set => SetValue(Tag3TextProperty, value);
+        }
+        
+        public string Tag4Text
+        {
+            get => (string)GetValue(Tag4TextProperty);
+            set => SetValue(Tag4TextProperty, value);
+        }
+        
+                
+        public Color Tag1Color
+        {
+            get => (Color)GetValue(Tag1ColorProperty);
+            set => SetValue(Tag1ColorProperty, value);
+        }
+        
+        public Color Tag2Color
+        {
+            get => (Color)GetValue(Tag2ColorProperty);
+            set => SetValue(Tag2ColorProperty, value);
+        }
+        
+        public Color Tag3Color
+        {
+            get => (Color)GetValue(Tag3ColorProperty);
+            set => SetValue(Tag3ColorProperty, value);
+        }
+        
+        public Color Tag4Color
+        {
+            get => (Color)GetValue(Tag4ColorProperty);
+            set => SetValue(Tag4ColorProperty, value);
+        }
+        
         public OrderItemTertiary()
         {
             InitializeComponent();
@@ -132,6 +229,38 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == IsFavoriteProperty.PropertyName)
             {
                 ItemImageButton.Source = IsFavorite ? Constants.SelectedFavoriteImageSource : Constants.UnSelectedFavoriteImageSource;
+            }
+            else if (propertyName == Tag1TextProperty.PropertyName)
+            {
+                Tag1.Text = Tag1Text;
+            }
+            else if (propertyName == Tag2TextProperty.PropertyName)
+            {
+                Tag2.Text = Tag2Text;
+            }
+            else if (propertyName == Tag3TextProperty.PropertyName)
+            {
+                Tag3.Text = Tag3Text;
+            }
+            else if (propertyName == Tag4TextProperty.PropertyName)
+            {
+                Tag4.Text = Tag4Text;
+            }
+            else if (propertyName == Tag1ColorProperty.PropertyName)
+            {
+                Tag1.BackgroundColor = Tag1Color;
+            }
+            else if (propertyName == Tag2ColorProperty.PropertyName)
+            {
+                Tag2.BackgroundColor = Tag2Color;
+            }
+            else if (propertyName == Tag3ColorProperty.PropertyName)
+            {
+                Tag3.BackgroundColor = Tag3Color;
+            }
+            else if (propertyName == Tag4ColorProperty.PropertyName)
+            {
+                Tag4.BackgroundColor = Tag4Color;
             }
         }
         
