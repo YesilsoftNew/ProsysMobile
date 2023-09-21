@@ -7,43 +7,49 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
-             xmlns:customContolsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:converters="clr-namespace:ProsysMobile.Converters;assembly=ProsysMobile"
+             xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CollectionViewSelectionChangedEventArgsConverter x:Key="CollectionViewSelectionChangedEventArgsConverter" />
+            <converters:CollectionViewRemainingItemsThresholdReachedEventArgsConverter x:Key="CollectionViewRemainingItemsThresholdReachedEventArgsConverter" />
+            <converters:ClickedEventArgsConverter x:Key="ClickedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         
         <Grid
             Style="{DynamicResource MainGrid}"
-            Margin="0,16,0,16">
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="0">
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="AUTO"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
-            
-            <Button
-                Grid.Row="2"
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand"
-                Text="allahbelanı"
-                Command="{Binding Allahbalaniversinmumtazcommand}"></Button>
             
             <Label
                 Grid.Row="0"
                 Text="Categories"
-                Style="{DynamicResource Caption2}"
+                Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 Margin="16,0,0,0" />
             
-            <ScrollView
+            <StackLayout
                 Grid.Row="1"
-                HorizontalOptions="CenterAndExpand"
+                HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                
+                    
                 <FlexLayout 
                     x:Name="LstCategories" 
                     Direction="Row"
@@ -81,12 +87,94 @@
                         
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
-                
+            
                 </FlexLayout>
                 
-            </ScrollView>
+            </StackLayout>
             
-        </Grid>
-      
+            <Label
+                Grid.Row="2"
+                Text="Deals"
+                Style="{DynamicResource Header2}"
+                Padding="0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="16,0,0,0" />
+            
+            <StackLayout
+                Grid.Row="3" 
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                
+                <CollectionView 
+                    x:Name="Deals"
+                     ItemsSource="{Binding Deals}" 
+                     SelectionMode="Single"
+                     SelectedItem="{Binding SelectedDeal}"
+                     RemainingItemsThreshold="5"
+                     VerticalScrollBarVisibility="Always"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+
+                    <CollectionView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                      EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                      Command="{Binding DealsClickCommand}"/>
+                        <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
+                                      EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
+                                      Command="{Binding ListDealsRemainingThresholdReachedCommand}"/>
+                    </CollectionView.Behaviors>
+
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                                 Span="2" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <customControlsOrders:OrderItemTertiary
+                                NameText="{Binding Name}"
+                                PiecesText="{Binding Pieces}"
+                                PriceText="{Binding Price}"
+                                ImageSource="{Binding Image}"
+                                IsFavorite="{Binding IsFavorite}"
+                                Tag1Text="{Binding Tag1Text}"
+                                Tag1Color="{Binding Tag1Color}"
+                                Tag2Text="{Binding Tag2Text}"
+                                Tag2Color="{Binding Tag2Color}"
+                                Tag3Text="{Binding Tag3Text}"
+                                Tag3Color="{Binding Tag3Color}"
+                                Tag4Text="{Binding Tag4Text}"
+                                Tag4Color="{Binding Tag4Color}"
+                                FavoriteCommand="{Binding Source={x:Reference Deals}, Path=BindingContext.FavoriteClickCommand}"
+                                FavoriteCommandParameter="{Binding .}"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                            </customControlsOrders:OrderItemTertiary>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+            </CollectionView>
+                
+            </StackLayout>
+            
+    </Grid>
+        
     </ContentPage.Content>
 </ContentPage>
