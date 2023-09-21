@@ -6,6 +6,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Acr.UserDialogs;
+using Android.Content;
 using Plugin.FirebasePushNotification;
 
 namespace ProsysMobile.Droid

@@ -1,4 +1,4 @@
-﻿using Plugin.Multilingual;
+using Plugin.Multilingual;
 using ProsysMobile.Helper;
 using ProsysMobile.Helper.SQLite;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
@@ -19,7 +19,6 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using Plugin.LocalNotification;
-using Plugin.LocalNotification.EventArgs;
 using ProsysMobile.Services.Dialog;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
@@ -44,7 +43,7 @@ using ProsysMobile.Services.Dialog;
 namespace ProsysMobile
 {
     public partial class App
-    {
+    { 
         public static string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
         public App()
         {
@@ -150,12 +149,20 @@ namespace ProsysMobile
                                 NotificationId = random.Next(1, int.MaxValue)
                             };
 
-                            LocalNotificationCenter.Current.Show(notification);
+                            NotificationCenter.Current.Show(notification);
                         }
                     }
                     else
                     {
-                        
+                        var notification = new NotificationRequest
+                        {
+                            BadgeNumber = 1,
+                            Description = "",
+                            Title = "",
+                            NotificationId = random.Next(1, int.MaxValue)
+                        };
+
+                        NotificationCenter.Current.Show(notification);   
                     }
                 }
                 catch (Exception)
@@ -170,6 +177,7 @@ namespace ProsysMobile
 
         protected override void OnSleep()
         {
+            Console.WriteLine("test");
         }
 
         protected override void OnResume()
