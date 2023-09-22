@@ -85,6 +85,24 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private bool _isFocusAndSelectText;
         public bool IsFocusAndSelectText { get => _isFocusAndSelectText; set { _isFocusAndSelectText = value; PropertyChanged(() => IsFocusAndSelectText); } }
         
+        private ObservableRangeCollection<string> _images;
+
+        public ObservableRangeCollection<string> Images
+        {
+            get
+            {
+                if (_images == null)
+                    _images = new ObservableRangeCollection<string>();
+
+                return _images;
+            }
+            set
+            {
+                _images = value;
+                PropertyChanged(() => Images);
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -259,6 +277,8 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemId = responseModel.Item.Id;
                         ItemName = responseModel.Item.Name;
                         ItemImage = responseModel.Item.Image;
+                        Images.Add(responseModel.Item.Image);
+                        Images.Add(responseModel.Item.Image);
                         ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
                         Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());

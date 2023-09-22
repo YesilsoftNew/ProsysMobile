@@ -51,33 +51,50 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <AbsoluteLayout
+                    <CarouselView
                         Grid.Row="0"
+                        HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
-                        HorizontalOptions="CenterAndExpand">
+                        ItemsSource="{Binding Images}"
+                        PositionChangedCommand="{Binding ImageCarouselViewPositionChangedCommand}"
+                        CurrentItemChangedCommand="{Binding ImageCarouselViewCurrentItemChangedCommand}">
+                    
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
+                                    <AbsoluteLayout
+                                        VerticalOptions="FillAndExpand"
+                                        HorizontalOptions="CenterAndExpand">
                 
-                        <ImageButton
-                            WidthRequest="200"
-                            HeightRequest="200"
-                            Aspect="AspectFill"
-                            Command="{Binding ImageClickCommand}"
-                            Source="{Binding ItemImage}"
-                            AbsoluteLayout.LayoutFlags="All"
-                            AbsoluteLayout.LayoutBounds="0,0,1,1"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand" />
+                                        <ImageButton
+                                            WidthRequest="200"
+                                            HeightRequest="200"
+                                            Aspect="AspectFill"
+                                            Command="{Binding ImageClickCommand}"
+                                            Source="{Binding .}"
+                                            AbsoluteLayout.LayoutFlags="All"
+                                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                            HorizontalOptions="FillAndExpand"
+                                            VerticalOptions="FillAndExpand" />
 
-                        <ImageButton
-                            x:Name="ItemImageButton"
-                            Aspect="AspectFit"
-                            Source="{Binding FavoriteImageSource}"
-                            Margin="0,6,9,0"
-                            Command="{Binding FavoriteClickCommand}"
-                            AbsoluteLayout.LayoutFlags="PositionProportional"
-                            AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
-                            Style="{DynamicResource ImageButton4}" />
+                                        <ImageButton
+                                            x:Name="ItemImageButton"
+                                            Aspect="AspectFit"
+                                            Source="{Binding FavoriteImageSource}"
+                                            Margin="0,6,9,0"
+                                            Command="{Binding FavoriteClickCommand}"
+                                            AbsoluteLayout.LayoutFlags="PositionProportional"
+                                            AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
+                                            Style="{DynamicResource ImageButton4}" />
                 
-                    </AbsoluteLayout>
+                                    </AbsoluteLayout>
+                                </Grid>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    
+                    </CarouselView>
                     
                     <Label
                         Grid.Row="1"
