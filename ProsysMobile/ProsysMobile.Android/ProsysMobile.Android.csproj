@@ -153,6 +153,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-hdpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-hdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-hdpi\CloseGreen.png" />
@@ -176,6 +177,7 @@
     <AndroidResource Include="Resources\drawable-ldpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-ldpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-ldpi\CloseGreen.png" />
@@ -199,6 +201,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-mdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-mdpi\CloseGreen.png" />
@@ -222,6 +225,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\CloseGreen.png" />
@@ -245,6 +249,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\CloseGreen.png" />
@@ -268,6 +273,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\BidiLogo.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\CloseBlue.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\CloseGreen.png" />
