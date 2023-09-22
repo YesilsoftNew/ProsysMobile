@@ -278,7 +278,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         ItemName = responseModel.Item.Name;
                         ItemImage = responseModel.Item.Image;
                         Images.Add(responseModel.Item.Image);
-                        Images.Add(responseModel.Item.Image);
+                        Images.Add("http://yas.yesilsoft.net/Images/Legumes.png");
                         ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
                         Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
