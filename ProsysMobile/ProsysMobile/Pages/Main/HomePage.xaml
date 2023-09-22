@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ProsysMobile.Pages.Main.HomePage"
@@ -28,6 +28,7 @@
             Style="{DynamicResource MainGrid}"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
+            Margin="0,16,0,0"
             RowSpacing="0">
             
             <Grid.RowDefinitions>
@@ -40,10 +41,11 @@
             <Label
                 Grid.Row="0"
                 Text="Categories"
-                Style="{DynamicResource Label2}"
+                Style="{DynamicResource Header2}"
+                Padding="0"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="16,0,0,0" />
+                Margin="16,0,0,8" />
             
             <StackLayout
                 Grid.Row="1"
