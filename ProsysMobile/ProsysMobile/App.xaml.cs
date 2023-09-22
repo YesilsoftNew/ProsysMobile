@@ -89,33 +89,63 @@ namespace ProsysMobile
             }
             #endregion
 
-            #region Language
+            #region Default Settings
             try
             {
-                DefaultSettingsSQLiteService _defaultSettingsSQLiteService = new DefaultSettingsSQLiteService();
-                DefaultSettings defaultSettings = _defaultSettingsSQLiteService.getSettings("Language");
+                var defaultSettingsSqLiteService = new DefaultSettingsSQLiteService();
 
-                string DeviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
-                DeviceCultureInfo = DeviceCultureInfo.Substring(0, DeviceCultureInfo.IndexOf("-"));
+                #region Language
 
-                if (DeviceCultureInfo == "tr" || DeviceCultureInfo == "en" || DeviceCultureInfo == "de")
-                    GlobalSetting.Instance.AppLanguage = DeviceCultureInfo;
+                var defaultSettingsLanguage = defaultSettingsSqLiteService.getSettings(DefaultSettingsKey.Language);
+
+                var deviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
+                deviceCultureInfo = deviceCultureInfo.Substring(0, deviceCultureInfo.IndexOf("-"));
+
+                if (deviceCultureInfo == "tr" || deviceCultureInfo == "en" || deviceCultureInfo == "de")
+                    GlobalSetting.Instance.AppLanguage = deviceCultureInfo;
                 else
                     GlobalSetting.Instance.AppLanguage = "de";
 
-                if (defaultSettings != null)
-                    GlobalSetting.Instance.AppLanguage = defaultSettings.Value;
+                if (defaultSettingsLanguage != null)
+                    GlobalSetting.Instance.AppLanguage = defaultSettingsLanguage.Value;
 
-                if (defaultSettings is null)
+                if (defaultSettingsLanguage is null)
                 {
-                    defaultSettings = new DefaultSettings();
-                    defaultSettings.Key = "Language";
-                    defaultSettings.Value = GlobalSetting.Instance.AppLanguage;
+                    defaultSettingsLanguage = new DefaultSettings();
+                    defaultSettingsLanguage.Key = DefaultSettingsKey.Language;
+                    defaultSettingsLanguage.Value = GlobalSetting.Instance.AppLanguage;
 
-                    _defaultSettingsSQLiteService.Save(defaultSettings);
+                    defaultSettingsSqLiteService.Save(defaultSettingsLanguage);
                 }
-
+                
                 TOOLS.setCulture();
+
+                #endregion
+
+                #region DeviceGuid
+
+                var defaultSettingsDeviceGuid = defaultSettingsSqLiteService.getSettings(DefaultSettingsKey.DeviceGuid);
+
+                if (defaultSettingsDeviceGuid != null)
+                    GlobalSetting.Instance.DeviceGuid = defaultSettingsDeviceGuid.Value;
+
+                if (defaultSettingsDeviceGuid is null)
+                {
+                    var newDeviceGuid = Guid.NewGuid();
+                    
+                    defaultSettingsDeviceGuid = new DefaultSettings
+                    {
+                        Key = DefaultSettingsKey.DeviceGuid,
+                        Value = newDeviceGuid.ToString()
+                    };
+
+                    defaultSettingsSqLiteService.Save(defaultSettingsDeviceGuid);
+                    
+                    GlobalSetting.Instance.DeviceGuid = defaultSettingsDeviceGuid.Value;
+                }
+                
+                #endregion
+
             }
             catch (Exception ex)
             {

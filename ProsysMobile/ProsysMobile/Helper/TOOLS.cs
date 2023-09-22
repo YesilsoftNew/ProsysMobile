@@ -284,6 +284,7 @@ namespace ProsysMobile.Helper
                 Platform = DeviceInfo.Platform.ToString(),
                 AppVersion = VersionTracking.CurrentVersion,
                 PushToken = CrossFirebasePushNotification.Current?.Token ?? "",
+                DeviceGuid = GlobalSetting.Instance.DeviceGuid,
                 Timezone = string.Empty,
                 RecordDate = DateTime.Now
             };
