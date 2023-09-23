@@ -59,9 +59,6 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _itemPieces;
         public string ItemPieces { get => _itemPieces; set { _itemPieces = value; PropertyChanged(() => ItemPieces); } }
         
-        private string _itemImage;
-        public string ItemImage { get => _itemImage; set { _itemImage = value; PropertyChanged(() => ItemImage); } }
-        
         private string _itemPurchaseQtyText;
         public string ItemPurchaseQtyText { get => _itemPurchaseQtyText; set { _itemPurchaseQtyText = value; PropertyChanged(() => ItemPurchaseQtyText); } }
         
@@ -228,12 +225,18 @@ namespace ProsysMobile.ViewModels.Pages.Item
             try
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                if (!(sender is string imageSource))
+                {
+                    DoubleTapping.ResumeTap();
+                    return;
+                }
                 
                 var model = new NavigationModel<BigImagePageViewParamModel>()
                 {
                     Model = new BigImagePageViewParamModel
                     {
-                        Source = ItemImage
+                        Source = imageSource
                     },
                 };
 
@@ -276,9 +279,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         
                         ItemId = responseModel.Item.Id;
                         ItemName = responseModel.Item.Name;
-                        ItemImage = responseModel.Item.Image;
-                        Images.Add(responseModel.Item.Image);
-                        Images.Add("http://yas.yesilsoft.net/Images/Legumes.png");
+                        Images = new ObservableRangeCollection<string>(responseModel.Item.Images);
                         ItemPieces = responseModel.Item.Pieces;
                         ItemPrice = responseModel.Item.Price;
                         Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
