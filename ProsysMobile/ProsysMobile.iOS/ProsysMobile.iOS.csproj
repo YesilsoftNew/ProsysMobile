@@ -181,6 +181,9 @@
     <BundleResource Include="Resources\ChangeItemListType.png" />
     <BundleResource Include="Resources\ChangeItemListType@2x.png" />
     <BundleResource Include="Resources\ChangeItemListType@3x.png" />
+    <BundleResource Include="Resources\ChevronLeftBlack.png" />
+    <BundleResource Include="Resources\ChevronLeftBlack@2x.png" />
+    <BundleResource Include="Resources\ChevronLeftBlack@3x.png" />
     <BundleResource Include="Resources\ChevronRight.png" />
     <BundleResource Include="Resources\ChevronRight@2x.png" />
     <BundleResource Include="Resources\ChevronRight@3x.png" />

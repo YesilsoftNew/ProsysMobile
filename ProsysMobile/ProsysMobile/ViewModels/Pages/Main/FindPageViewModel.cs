@@ -678,6 +678,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private async Task GetBestsellersAndBindFromApi()
         {
+            return;
+
             try
             {
                 var result = await _bestsellersService.GetBestsellers(enPriorityType.UserInitiated);

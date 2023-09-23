@@ -5,6 +5,7 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
 {
     public class UserDevices: Entity
     {
+        public string DeviceGuid { get; set; } = string.Empty;
         public int? UserId { get; set; } 
         public int? LastLoginUserId { get; set; } 
         public DateTime? LastLoginDateTime { get; set; } 

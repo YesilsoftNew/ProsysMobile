@@ -45,30 +45,6 @@ namespace ProsysMobile.CustomControls.Bar
             Xamarin.Forms.BindingMode.OneWay);
 
         /// <summary>
-        /// Is Online
-        /// </summary>
-        public static readonly BindableProperty IsOnlineProperty = BindableProperty.Create(nameof(IsOnline),
-            typeof(bool),
-            typeof(CustomBackDropToolbarSecondary),
-            false,
-            Xamarin.Forms.BindingMode.OneWay);
-
-        /// <summary>
-        /// IsOnline
-        /// </summary>
-        public bool IsOnline
-        {
-            get
-            {
-                return (bool)GetValue(IsOnlineProperty);
-            }
-            set
-            {
-                SetValue(IsOnlineProperty, value);
-            }
-        }
-
-        /// <summary>
         /// Title
         /// </summary>
         public string Title
@@ -127,8 +103,6 @@ namespace ProsysMobile.CustomControls.Bar
 
             ItemTitle.Text = Title;
             ItemButtonPrevious.Source = ImageSource;
-
-            IsOnlineChangeDesign();
         }
 
         /// <summary>
@@ -143,8 +117,6 @@ namespace ProsysMobile.CustomControls.Bar
                 ItemTitle.Text = Title;
             else if (propertyName == ImageSourceProperty.PropertyName)
                 ItemButtonPrevious.Source = ImageSource;
-            else if (propertyName == IsOnlineProperty.PropertyName)
-                IsOnlineChangeDesign();
         }
 
         /// <summary>
@@ -184,25 +156,6 @@ namespace ProsysMobile.CustomControls.Bar
 
             if (ItemButtonCloseClicked != null)
                 ItemButtonCloseClicked(sender, e);
-        }
-
-        /// <summary>
-        /// Change Design for IsOnline
-        /// </summary>
-        void IsOnlineChangeDesign()
-        {
-            try
-            {
-                Application.Current.Resources.TryGetValue("Green.Base", out var green);
-                Application.Current.Resources.TryGetValue("Red.Base", out var red);
-
-                ItemBoxViewConnectionStatus.BackgroundColor = IsOnline ? (Color)green : (Color)red;
-                ItemLabelConnectionStatus.Text = IsOnline ? "Çevrimiçi" : "Çevrimdışı";
-            }
-            catch (Exception ex)
-            {
-                ProsysLogger.Instance.CrashLog(ex);
-            }
         }
     }
 }

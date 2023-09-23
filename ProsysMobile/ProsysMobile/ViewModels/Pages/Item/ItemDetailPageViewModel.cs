@@ -309,7 +309,6 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     NavigationService.NavigatePopBackdropAsync();
                 }
 
-                IsFocusAndSelectText = true;
             }
             catch (Exception ex)
             {
