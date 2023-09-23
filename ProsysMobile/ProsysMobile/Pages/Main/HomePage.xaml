@@ -41,11 +41,10 @@
             <Label
                 Grid.Row="0"
                 Text="Categories"
-                Style="{DynamicResource Header2}"
-                Padding="0"
+                Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="16,0,0,8" />
+                Margin="16,0,0,10" />
             
             <StackLayout
                 Grid.Row="1"
@@ -97,8 +96,7 @@
             <Label
                 Grid.Row="2"
                 Text="Deals"
-                Style="{DynamicResource Header2}"
-                Padding="0"
+                Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 Margin="16,0,0,0" />
