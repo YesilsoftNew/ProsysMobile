@@ -43,7 +43,7 @@
                     Margin="16">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="200"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -51,50 +51,69 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <CarouselView
+                    <StackLayout
                         Grid.Row="0"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand"
-                        ItemsSource="{Binding Images}"
-                        PositionChangedCommand="{Binding ImageCarouselViewPositionChangedCommand}"
-                        CurrentItemChangedCommand="{Binding ImageCarouselViewCurrentItemChangedCommand}">
+                        VerticalOptions="FillAndExpand">
+                        
+                        <CarouselView
+                            IndicatorView="IndicatorView"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            HeightRequest="200"
+                            ItemsSource="{Binding Images}"
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Never"
+                            PositionChangedCommand="{Binding ImageCarouselViewPositionChangedCommand}"
+                            CurrentItemChangedCommand="{Binding ImageCarouselViewCurrentItemChangedCommand}">
+                        
+                            <CarouselView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand">
+                                        <AbsoluteLayout
+                                            VerticalOptions="FillAndExpand"
+                                            HorizontalOptions="CenterAndExpand">
                     
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid
-                                    HorizontalOptions="FillAndExpand"
-                                    VerticalOptions="FillAndExpand">
-                                    <AbsoluteLayout
-                                        VerticalOptions="FillAndExpand"
-                                        HorizontalOptions="CenterAndExpand">
-                
-                                        <ImageButton
-                                            WidthRequest="200"
-                                            HeightRequest="200"
-                                            Aspect="AspectFill"
-                                            Command="{Binding ImageClickCommand}"
-                                            Source="{Binding .}"
-                                            AbsoluteLayout.LayoutFlags="All"
-                                            AbsoluteLayout.LayoutBounds="0,0,1,1"
-                                            HorizontalOptions="FillAndExpand"
-                                            VerticalOptions="FillAndExpand" />
+                                            <ImageButton
+                                                WidthRequest="200"
+                                                HeightRequest="200"
+                                                Aspect="AspectFill"
+                                                Command="{Binding ImageClickCommand}"
+                                                Source="{Binding .}"
+                                                AbsoluteLayout.LayoutFlags="All"
+                                                AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand" />
 
-                                        <ImageButton
-                                            x:Name="ItemImageButton"
-                                            Aspect="AspectFit"
-                                            Source="{Binding FavoriteImageSource}"
-                                            Margin="0,6,9,0"
-                                            Command="{Binding FavoriteClickCommand}"
-                                            AbsoluteLayout.LayoutFlags="PositionProportional"
-                                            AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
-                                            Style="{DynamicResource ImageButton4}" />
-                
-                                    </AbsoluteLayout>
-                                </Grid>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
+                                            <ImageButton
+                                                x:Name="ItemImageButton"
+                                                Aspect="AspectFit"
+                                                Source="{Binding FavoriteImageSource}"
+                                                Margin="0,6,9,0"
+                                                Command="{Binding FavoriteClickCommand}"
+                                                AbsoluteLayout.LayoutFlags="PositionProportional"
+                                                AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
+                                                Style="{DynamicResource ImageButton4}" />
                     
-                    </CarouselView>
+                                        </AbsoluteLayout>
+                                    </Grid>
+                                </DataTemplate>
+                            </CarouselView.ItemTemplate>
+                        
+                        </CarouselView>
+                        
+                        <IndicatorView
+                            x:Name="IndicatorView"
+                            BackgroundColor="PaleTurquoise"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            IndicatorColor="Red"
+                            SelectedIndicatorColor="Black"
+                            IndicatorSize="2" />
+                        
+                    </StackLayout>
                     
                     <Label
                         Grid.Row="1"
