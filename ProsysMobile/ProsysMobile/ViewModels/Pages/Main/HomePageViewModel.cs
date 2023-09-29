@@ -95,7 +95,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 var category = sender as ItemCategory;
                 
-                MessagingCenter.Send<HomePageViewModel, string>(this, "OpenFindPageForMainPageClickCategory", category.ID.ToString());
+                MessagingCenter.Send(this, "OpenFindPageForMainPageClickCategory", category.ID.ToString());
             }
             catch (Exception ex)
             {

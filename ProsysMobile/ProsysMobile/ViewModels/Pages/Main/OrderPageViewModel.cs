@@ -60,6 +60,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private bool _showEmptyMsg;
         public bool ShowEmptyMsg { get => _showEmptyMsg; set { _showEmptyMsg = value; PropertyChanged(() => ShowEmptyMsg); } }
         
+        private bool _showEmptyDataGrid;
+        public bool ShowEmptyDataGrid { get => _showEmptyDataGrid; set { _showEmptyDataGrid = value; PropertyChanged(() => ShowEmptyDataGrid); } }
+        
         private string _emptyMsg;
         public string EmptyMsg { get => _emptyMsg; set { _emptyMsg = value; PropertyChanged(() => EmptyMsg); } }
         
@@ -129,8 +132,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         if (!BasketItems.Any())
                         {
                             InitializePage(
-                                isError: true,
-                                errMessage: "Sepette ürün bulunamadı!"
+                                isError: false,
+                                isEmptyData: true
                             );
                         }
                     }
@@ -215,6 +218,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
         
+        public ICommand StartShoppingClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                
+                MessagingCenter.Send(this, "OpenFindPageForBasketPage", Constants.ItemCategoryAll.ID.ToString());
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
+        });
+        
         #endregion
 
         #region Methods
@@ -236,16 +255,27 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     NetTotal = result.ResponseData.NetTotal;
                     OrderNo = result.ResponseData.OrderNo;
 
-                    InitializePage(!result.ResponseData.OrderDetailsSubDtos.Any(), !result.ResponseData.OrderDetailsSubDtos.Any() ? "Sepette ürün bulunamadı!" : string.Empty);
+                    InitializePage(
+                        isError: false,
+                        isEmptyData: !result.ResponseData.OrderDetailsSubDtos.Any()
+                    );
                 }
                 else
                 {
-                    InitializePage(true, "Ürünleri getiriken bir hata oluştu!");
+                    InitializePage(
+                        isError: true,
+                        isEmptyData:false,
+                        errMessage: "Ürünleri getiriken bir hata oluştu!"
+                    );
                 }
             }
             catch (Exception ex)
             {
-                InitializePage(true, "Bir hata oluştu!");
+                InitializePage(
+                    isError: true,
+                    isEmptyData:false,
+                    errMessage: "Bir hata oluştu!"
+                );
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -253,8 +283,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
             IsBusy = false;
         }
 
-        private void InitializePage(bool isError, string errMessage = "")
+        private void InitializePage(bool isError,bool isEmptyData, string errMessage = "")
         {
+            ShowEmptyDataGrid = false;
+
             if (isError)
             {
                 if (ShowOrderDetail)
@@ -266,6 +298,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ShowEmptyMsg = true;
                 }
                 EmptyMsg = errMessage;
+            }
+            else if (isEmptyData)
+            {
+                ShowEmptyMsg = false;
+                ShowOrderDetail = false;
+                ShowEmptyDataGrid = true;
             }
             else
             {
