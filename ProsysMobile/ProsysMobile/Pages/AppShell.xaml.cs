@@ -3,6 +3,7 @@ using ProsysMobile.Renderer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.Main;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,15 +22,18 @@ namespace ProsysMobile.Pages
             
             MessagingCenter.Subscribe<HomePageViewModel, string>(this, "OpenFindPageForMainPageClickCategory", (sender, arg) =>
             {
-                try
-                {
-                    Tabbar.CurrentItem = Tabbar.Items[1];
-                }
-                catch (Exception ex)
-                {
-                    ProsysLogger.Instance.CrashLog(ex);
-                }
+                OpenFindPage();
             });
+            
+            MessagingCenter.Subscribe<OrderPageViewModel, string>(this, "OpenFindPageForBasketPage", (sender, arg) =>
+            {
+                OpenFindPage();
+            });
+            
+            MessagingCenter.Subscribe<FavoritePageViewModel, string>(this, "OpenFindPageForFavoritePage", (sender, arg) =>
+            {
+                OpenFindPage();
+            }); 
         }
 
         private void TabBar_PropertyChanged(Object sender, PropertyChangedEventArgs e)
@@ -42,6 +46,18 @@ namespace ProsysMobile.Pages
                 {
                     MessagingCenter.Send<AppShell, string>(this, "AppShellTabIndexChange", tabbar.CurrentItem.TabIndex.ToString());
                 }
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        }
+
+        private void OpenFindPage()
+        {
+            try
+            {
+                Tabbar.CurrentItem = Tabbar.Items[1];
             }
             catch (Exception ex)
             {

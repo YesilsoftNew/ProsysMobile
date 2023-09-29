@@ -173,6 +173,8 @@
     <AndroidResource Include="Resources\drawable-hdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\nfoBlue.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\NoItemBasket.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\NoItemFavorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-hdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Settings.png" />
@@ -197,6 +199,8 @@
     <AndroidResource Include="Resources\drawable-ldpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\nfoBlue.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\NoItemBasket.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\NoItemFavorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-ldpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Settings.png" />
@@ -221,6 +225,8 @@
     <AndroidResource Include="Resources\drawable-mdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\nfoBlue.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\NoItemBasket.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\NoItemFavorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-mdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Settings.png" />
@@ -245,6 +251,8 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nfoBlue.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\NoItemBasket.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\NoItemFavorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Settings.png" />
@@ -269,6 +277,8 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\nfoBlue.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\NoItemBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\NoItemFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Settings.png" />
@@ -293,6 +303,8 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\nfoBlue.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\NoItemBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\NoItemFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Settings.png" />

@@ -33,7 +33,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private int? _mainPageClickedCategoryId;
         private bool _isAllItemLoad;
         private int _listPage;
-        private enItemListType _currentItemListType = enItemListType.Primary;
+        private enItemListType _currentItemListType = enItemListType.Secondary;
         private ItemCategory _itemCategoryAll = Constants.ItemCategoryAll;
 
 
@@ -71,6 +71,36 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ProsysLogger.Instance.CrashLog(ex);
                 }
             });
+            
+            MessagingCenter.Subscribe<OrderPageViewModel, string>(this, "OpenFindPageForBasketPage", (sender, arg) =>
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(arg))
+                    {
+                        _mainPageClickedCategoryId = _itemCategoryAll.ID;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ProsysLogger.Instance.CrashLog(ex);
+                }
+            });
+            
+            MessagingCenter.Subscribe<FavoritePageViewModel, string>(this, "OpenFindPageForFavoritePage", (sender, arg) =>
+            {
+                try
+                {
+                    if (!string.IsNullOrWhiteSpace(arg))
+                    {
+                        _mainPageClickedCategoryId = _itemCategoryAll.ID;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ProsysLogger.Instance.CrashLog(ex);
+                }
+            }); 
         }
 
         #region Propertys
@@ -461,18 +491,16 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 await GetBestsellersAndBindFromApi();
 
-                if (_mainPageClickedCategoryId is int mainPageClickedCategoryId)
+                if (_mainPageClickedCategoryId is int mainPageClickedCategoryId && mainPageClickedCategoryId != _itemCategoryAll.ID)
                 {
                     Categories.ForEach(x => x.IsSelected = false);
                     
                     if (Categories != null)
                         Categories.FirstOrDefault(x => x.ID == mainPageClickedCategoryId).IsSelected = true;
 
-                    Search = string.Empty;
-
                     _selectedCategories = new List<CategoryFilter>
                     {
-                        new CategoryFilter()
+                        new CategoryFilter
                         {
                             Id = mainPageClickedCategoryId,
                             IsMain = true
@@ -483,17 +511,29 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         categoryId: mainPageClickedCategoryId,
                         isSubCategory: true
                     );
-
-                    _isAllItemLoad = false;
-                    _listPage = 0;
-                    UpdateItemsList(
-                        resultResponseData: null,
-                        clearList: true
-                    );
-                    await GetItemsAndBindFromApi();
                     
                     _mainPageClickedCategoryId = null;
                 }
+                else
+                {
+                    _itemCategoryAll.IsSelected = true;
+                    _selectedCategories = new List<CategoryFilter>
+                    {
+                        new CategoryFilter
+                        {
+                            Id = _itemCategoryAll.ID,
+                            IsMain = true
+                        }
+                    };
+                }
+                
+                _isAllItemLoad = false;
+                _listPage = 0;
+                UpdateItemsList(
+                    resultResponseData: null,
+                    clearList: true
+                );
+                await GetItemsAndBindFromApi();
             }
             catch (Exception ex)
             {

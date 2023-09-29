@@ -71,6 +71,7 @@
                 <Grid
                     Grid.Row="0"
                     Grid.Column="1"
+                    IsVisible="{Binding ShowChangeItemListDesignButton}"
                     Padding="0,16,16,16"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
@@ -268,12 +269,61 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
+            <Grid
+                Grid.Row="1"
+                IsVisible="{Binding ShowEmptyDataGrid}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="CenterAndExpand">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <Image
+                    Grid.Row="0"
+                    Aspect="AspectFit" 
+                    HeightRequest="170"
+                    Source="NoItemFavorite"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand" />
+                
+                <Label 
+                    Grid.Row="1"
+                    Text="NO ITEMS IN FAVORITE"
+                    Style="{DynamicResource Header3}"
+                    TextColor="{StaticResource Gray3}"
+                    Margin="0,40,0,0"
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand" />
+                
+                <Label 
+                    Grid.Row="2"
+                    Text="Save your favorite items here"
+                    Style="{DynamicResource Label2}"
+                    TextColor="{StaticResource Gray9}"
+                    Margin="0,20,0,0"
+                    HorizontalTextAlignment="Center"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand" />
+                
+                <Button
+                    Grid.Row="3"
+                    Text="START SHOPPING"
+                    Style="{DynamicResource Button.Outline}"
+                    Command="{Binding StartShoppingClickCommand}"
+                    HorizontalOptions="CenterAndExpand"
+                    VerticalOptions="CenterAndExpand" />
+                
+            </Grid>
+            
             <Label
                 Grid.Row="1"
-                IsVisible="{Binding ShowEmptyText}"
-                Text="Herhangi bir kayıt bulunamadı!"
-                Style="{DynamicResource Label2}"
-                Margin="0,20,0,0"
+                Text="Herhangi bir bilgi bulunamadı."
+                IsVisible="{Binding ShowSearchEmptyText}"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand" />
 

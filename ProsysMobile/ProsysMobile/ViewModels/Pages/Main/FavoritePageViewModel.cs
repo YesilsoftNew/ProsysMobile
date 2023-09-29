@@ -53,9 +53,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
         }
 
         #region Propertys
+        
+        private bool _showChangeItemListDesignButton;
+        public bool ShowChangeItemListDesignButton { get => _showChangeItemListDesignButton; set { _showChangeItemListDesignButton = value; PropertyChanged(() => ShowChangeItemListDesignButton); } }
 
-        private bool _showEmptyText;
-        public bool ShowEmptyText { get => _showEmptyText; set { _showEmptyText = value; PropertyChanged(() => ShowEmptyText); } }
+        private bool _showSearchEmptyText;
+        public bool ShowSearchEmptyText { get => _showSearchEmptyText; set { _showSearchEmptyText = value; PropertyChanged(() => ShowSearchEmptyText); } }
+        
+        private bool _showEmptyDataGrid;
+        public bool ShowEmptyDataGrid { get => _showEmptyDataGrid; set { _showEmptyDataGrid = value; PropertyChanged(() => ShowEmptyDataGrid); } }
 
         private bool _showItemsPrimary;
         public bool ShowItemsPrimary { get => _showItemsPrimary; set { _showItemsPrimary = value; PropertyChanged(() => ShowItemsPrimary); } }
@@ -227,6 +233,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         item.IsFavorite = !item.IsFavorite;
                         
                         RemoveItemsList(item);
+
+                        CheckFilterAndBindShowItems();
                     }
                     else
                     {
@@ -246,6 +254,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
 
+        public ICommand StartShoppingClickCommand => new Command(async (sender) =>
+        {
+            try
+            {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                
+                MessagingCenter.Send(this, "OpenFindPageForFavoritePage", Constants.ItemCategoryAll.ID.ToString());
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            DoubleTapping.ResumeTap();
+        });
+        
         #endregion
 
         #region Methods
@@ -403,7 +427,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void CheckFilterAndBindShowItems()
         {
-            ShowEmptyText = false;
+            ShowInfoGrid(false);
 
             var currentList = GetCurrentItemsList();
 
@@ -411,11 +435,33 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ChangeShowItemVisibility(false);
 
-                ShowEmptyText = true;
+                ShowInfoGrid(true);
+
+                if (string.IsNullOrWhiteSpace(Search))
+                {
+                    ShowChangeItemListDesignButton = false;
+                }
             }
             else
             {
                 ChangeShowItemVisibility(true);
+                ShowChangeItemListDesignButton = true;
+            }
+        }
+
+        private void ShowInfoGrid(bool isShow)
+        {
+            if (isShow)
+            {
+                var isHaveFilter = !string.IsNullOrWhiteSpace(Search);
+
+                ShowSearchEmptyText = isHaveFilter;
+                ShowEmptyDataGrid = !isHaveFilter;
+            }
+            else
+            {
+                ShowSearchEmptyText = false;
+                ShowEmptyDataGrid = false;
             }
         }
 
