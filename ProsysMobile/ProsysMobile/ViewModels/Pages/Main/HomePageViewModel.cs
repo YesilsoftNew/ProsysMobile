@@ -83,6 +83,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private ItemsSubDto _selectedDeal;
         public ItemsSubDto SelectedDeal { get => _selectedDeal; set { _selectedDeal = value; PropertyChanged(() => SelectedDeal); } }
         
+        private bool _isRefreshingDeals;
+        public bool IsRefreshingDeals { get => _isRefreshingDeals; set { _isRefreshingDeals = value; PropertyChanged(() => IsRefreshingDeals); } }
+        
         #endregion
 
         #region Commands
@@ -207,6 +210,23 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
+        public ICommand DealsRefreshCommand => new Command(async () =>
+        {
+            try
+            {
+                IsRefreshingDeals = false;
+
+                _listPage = 0;
+                _isAllItemLoad = false;
+                Deals.Clear();
+                GetDealsAndBindFromApi();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
         #endregion
 
         #region Methods
@@ -219,7 +239,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
             _listPage = 0;
             _isAllItemLoad = false;
-            Deals = new ObservableRangeCollection<ItemsSubDto>();
+            Deals.Clear();
             GetDealsAndBindFromApi();
         }
         
