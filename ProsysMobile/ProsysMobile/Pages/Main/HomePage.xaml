@@ -106,71 +106,79 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
                 
-                <CollectionView 
-                    x:Name="Deals"
-                     ItemsSource="{Binding Deals}" 
-                     SelectionMode="Single"
-                     SelectedItem="{Binding SelectedDeal}"
-                     RemainingItemsThreshold="5"
-                     VerticalScrollBarVisibility="Always"
+                <RefreshView
+                    Command="{Binding DealsRefreshCommand}" 
+                    IsRefreshing="{Binding IsRefreshingDeals}"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
+                    
+                    <CollectionView 
+                        x:Name="Deals"
+                        ItemsSource="{Binding Deals}" 
+                        SelectionMode="Single"
+                        SelectedItem="{Binding SelectedDeal}"
+                        RemainingItemsThreshold="5"
+                        VerticalScrollBarVisibility="Always"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
 
-                    <CollectionView.Behaviors>
-                        <behaviors:EventToCommandBehavior EventName="SelectionChanged"
-                                      EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
-                                      Command="{Binding DealsClickCommand}"/>
-                        <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
-                                      EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
-                                      Command="{Binding ListDealsRemainingThresholdReachedCommand}"/>
-                    </CollectionView.Behaviors>
+                        <CollectionView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="SelectionChanged"
+                                          EventArgsConverter="{StaticResource CollectionViewSelectionChangedEventArgsConverter}"
+                                          Command="{Binding DealsClickCommand}"/>
+                            <behaviors:EventToCommandBehavior EventName="RemainingItemsThresholdReached" 
+                                          EventArgsConverter="{StaticResource CollectionViewRemainingItemsThresholdReachedEventArgsConverter}"
+                                          Command="{Binding ListDealsRemainingThresholdReachedCommand}"/>
+                        </CollectionView.Behaviors>
 
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
-                                                 Span="2" />
-                    </CollectionView.ItemsLayout>
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                                     Span="2" />
+                        </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <customControlsOrders:OrderItemTertiary
-                                NameText="{Binding Name}"
-                                PiecesText="{Binding Pieces}"
-                                PriceText="{Binding Price}"
-                                ImageSource="{Binding Image}"
-                                IsFavorite="{Binding IsFavorite}"
-                                Tag1Text="{Binding Tag1Text}"
-                                Tag1Color="{Binding Tag1Color}"
-                                Tag2Text="{Binding Tag2Text}"
-                                Tag2Color="{Binding Tag2Color}"
-                                Tag3Text="{Binding Tag3Text}"
-                                Tag3Color="{Binding Tag3Color}"
-                                Tag4Text="{Binding Tag4Text}"
-                                Tag4Color="{Binding Tag4Color}"
-                                FavoriteCommand="{Binding Source={x:Reference Deals}, Path=BindingContext.FavoriteClickCommand}"
-                                FavoriteCommandParameter="{Binding .}"
-                                HorizontalOptions="FillAndExpand"
-                                VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <customControlsOrders:OrderItemTertiary
+                                    NameText="{Binding Name}"
+                                    PiecesText="{Binding Pieces}"
+                                    PriceText="{Binding Price}"
+                                    ImageSource="{Binding Image}"
+                                    IsFavorite="{Binding IsFavorite}"
+                                    Tag1Text="{Binding Tag1Text}"
+                                    Tag1Color="{Binding Tag1Color}"
+                                    Tag2Text="{Binding Tag2Text}"
+                                    Tag2Color="{Binding Tag2Color}"
+                                    Tag3Text="{Binding Tag3Text}"
+                                    Tag3Color="{Binding Tag3Color}"
+                                    Tag4Text="{Binding Tag4Text}"
+                                    Tag4Color="{Binding Tag4Color}"
+                                    FavoriteCommand="{Binding Source={x:Reference Deals}, Path=BindingContext.FavoriteClickCommand}"
+                                    FavoriteCommandParameter="{Binding .}"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
 
-                                <VisualStateManager.VisualStateGroups>
-                                    <VisualStateGroup Name="CommonStates">
-                                        <VisualState Name="Selected">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="Transparent" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                        <VisualState x:Name="Normal">
-                                            <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="Transparent" />
-                                            </VisualState.Setters>
-                                        </VisualState>
-                                    </VisualStateGroup>
-                                </VisualStateManager.VisualStateGroups>
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup Name="CommonStates">
+                                            <VisualState Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundColor" Value="Transparent" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
 
-                            </customControlsOrders:OrderItemTertiary>
+                                </customControlsOrders:OrderItemTertiary>
 
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                </CollectionView>
+                    
+                </RefreshView>
                 
             </StackLayout>
             
