@@ -99,6 +99,38 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
         });
         
+        public ICommand DeleteAccountClickCommand => new Command(async () =>
+        {
+            try
+            {
+                var isOk = await DialogService.ConfirmAsync("Hesabı silmek istediğinize emin misiniz ?", "UYARI", "Evet","Vazgeç");
+
+                if (!isOk) return;
+                
+                return;
+                
+                _userSqLiteService.DeleteUser(GlobalSetting.Instance.User);
+                
+                GlobalSetting.Instance.User = null;
+
+                var userId = _defaultSettingsSqLiteService.getSettings("UserId");
+                var userTokenExpiredDate = _defaultSettingsSqLiteService.getSettings("UserTokenExpiredDate");
+                var userToken = _defaultSettingsSqLiteService.getSettings("UserToken");
+
+                _defaultSettingsSqLiteService.Delete(userId);
+                _defaultSettingsSqLiteService.Delete(userTokenExpiredDate);
+                _defaultSettingsSqLiteService.Delete(userToken);
+
+                await NavigationService.SetMainPageAsync<LoginPageViewModel>();
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
+        
+        
         public ICommand SettingsClickCommand => new Command<object>( (sender) =>
         {
             try

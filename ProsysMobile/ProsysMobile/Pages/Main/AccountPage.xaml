@@ -30,18 +30,19 @@
                 Grid.Row="1"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                RowSpacing="30">
+                RowSpacing="16">
                 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
                     <RowDefinition Height="AUTO"></RowDefinition>
                 </Grid.RowDefinitions>
                 
                 <Grid
                     Grid.Row="0"
                     ColumnSpacing="14"
-                    Margin="16,0"
+                    Margin="16,0,0,0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
                     
@@ -96,6 +97,7 @@
                 
                 <ScrollView
                     Grid.Row="1"
+                    Margin="0,16,0,0"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="FillAndExpand">
                     
@@ -182,9 +184,19 @@
                     Grid.Row="2"
                     Text="Sign Out"
                     Style="{DynamicResource Button.OutlineSecondary}"
-                    Margin="32,24"
+                    Margin="32,24,24,0"
                     Command="{Binding LogoutClickCommand}"
                     HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand" />
+                
+                <Button
+                    Grid.Row="3"
+                    Text="Delete Account"
+                    Style="{DynamicResource Button.Outline}"
+                    TextColor="{StaticResource Red1}"
+                    Margin="0,0,0,16"
+                    Command="{Binding DeleteAccountClickCommand}"
+                    HorizontalOptions="CenterAndExpand"
                     VerticalOptions="FillAndExpand" />
                 
             </Grid>
