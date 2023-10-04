@@ -127,7 +127,7 @@ namespace ProsysMobile.CustomControls.Other
 
                         if (grayColor != null)
                         {
-                            ItemPancakeView.Border = new Border() { Thickness = 1, Color = (Color)grayColor };
+                            ItemPancakeView.Border = new Border() { Thickness = 2, Color = (Color)grayColor };
                         }
 
                         if (blackColor != null)
