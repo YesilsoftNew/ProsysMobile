@@ -305,4 +305,7 @@
   <data name="PleaseWait" xml:space="preserve">
 	  <value>Please wait</value><comment>Generic</comment>
   </data>
+  <data name="All" xml:space="preserve">
+	  <value>All</value>
+  </data>
 </root>

@@ -68,6 +68,8 @@ namespace ProsysMobile.ViewModels.Pages.System
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
+                IsBusy = true;
+                
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
                     DialogService.WarningToastMessage(Resource.PleaseCheckYourInternetConnection);
@@ -111,7 +113,10 @@ namespace ProsysMobile.ViewModels.Pages.System
                     COMPANYCODE = CompanyCode
                 };
 
-                var result = await _signUpService.SignUp(userMobileDto, Models.CommonModels.Enums.enPriorityType.UserInitiated);
+                var result = await _signUpService.SignUp(
+                    userMobileDto,
+                    Models.CommonModels.Enums.enPriorityType.UserInitiated
+                );
 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
@@ -130,6 +135,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                 ProsysLogger.Instance.CrashLog(ex);
             }
             
+            IsBusy = false;
             DoubleTapping.ResumeTap();
         }
     }

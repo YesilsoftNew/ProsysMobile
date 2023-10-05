@@ -230,8 +230,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
-            DialogService.WarningToastMessage(Resource.Categories);
-
             GetCategoryAndBindFromApi(
                 categoryId: Constants.MainCategoryId
             );

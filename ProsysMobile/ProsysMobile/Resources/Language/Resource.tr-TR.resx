@@ -324,4 +324,7 @@
   <data name="YourRequestHasBeenSent" xml:space="preserve">
     <value>Talebiniz gönderildi!</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>Hepsi</value>
+  </data>
 </root>

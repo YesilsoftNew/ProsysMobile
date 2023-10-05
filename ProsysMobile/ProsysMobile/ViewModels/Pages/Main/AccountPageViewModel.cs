@@ -81,7 +81,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 var isOk = await DialogService.ConfirmAsync(Resource.AreYouSureYouWantToLogOut, Resource.Warning_U, Resource.Yes,Resource.Cancel);
 
-                if (!isOk) return;
+                if (!isOk)
+                {
+                    DoubleTapping.ResumeTap();
+                    return;
+                }
                 
                 _userSqLiteService.DeleteUser(GlobalSetting.Instance.User);
                 
@@ -113,7 +117,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 var isOk = await DialogService.ConfirmAsync(Resource.AreYouSureYouWantToDeleteTheAccount, Resource.Warning_U, Resource.Yes,Resource.Cancel);
 
-                if (!isOk) return;
+                if (!isOk)
+                {
+                    DoubleTapping.ResumeTap();
+                    return;
+                }
 
                 IsBusy = true;
 

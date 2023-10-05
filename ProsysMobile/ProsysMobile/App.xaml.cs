@@ -1,4 +1,3 @@
-using Plugin.Multilingual;
 using ProsysMobile.Helper;
 using ProsysMobile.Helper.SQLite;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
@@ -21,6 +20,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using Plugin.LocalNotification;
+using Plugin.Multilingual;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.Dialog;
 
@@ -101,27 +101,30 @@ namespace ProsysMobile
 
                 var defaultSettingsLanguage = defaultSettingsSqLiteService.getSettings(DefaultSettingsKey.Language);
 
-                var deviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
-                deviceCultureInfo = deviceCultureInfo.Substring(0, deviceCultureInfo.IndexOf("-"));
-
-                if (deviceCultureInfo == "tr" || deviceCultureInfo == "en" || deviceCultureInfo == "de")
-                    GlobalSetting.Instance.AppLanguage = deviceCultureInfo;
-                else
-                    GlobalSetting.Instance.AppLanguage = "de";
-
                 if (defaultSettingsLanguage != null)
                     GlobalSetting.Instance.AppLanguage = defaultSettingsLanguage.Value;
+                else
+                {
+                    var deviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
+                
+                    if (deviceCultureInfo == "tr-TR" || deviceCultureInfo == "en-EN" || deviceCultureInfo == "de-DE")
+                        GlobalSetting.Instance.AppLanguage = deviceCultureInfo;
+                    else
+                        GlobalSetting.Instance.AppLanguage = "de-DE";
+                }
 
                 if (defaultSettingsLanguage is null)
                 {
-                    defaultSettingsLanguage = new DefaultSettings();
-                    defaultSettingsLanguage.Key = DefaultSettingsKey.Language;
-                    defaultSettingsLanguage.Value = GlobalSetting.Instance.AppLanguage;
+                    defaultSettingsLanguage = new DefaultSettings
+                    {
+                        Key = DefaultSettingsKey.Language,
+                        Value = GlobalSetting.Instance.AppLanguage
+                    };
 
                     defaultSettingsSqLiteService.Save(defaultSettingsLanguage);
                 }
                 
-                TOOLS.setCulture();
+                TOOLS.SetCulture();
 
                 #endregion
 

@@ -458,5 +458,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("PleaseWait", resourceCulture);
             }
         }
+        
+        internal static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
     }
 }
