@@ -7,6 +7,7 @@ using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.Orders;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
@@ -30,17 +31,17 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         public override async Task InitializeAsync(object navigationData)
         {
-            if (navigationData != null && navigationData is NavigationModel<OrderDetailPageViewParamModel> navigationModel)
+            if (navigationData != null && navigationData is NavigationModel<OrderDetailPageViewParamModel> navigationModel && navigationModel?.Model != null)
                 _orderDetailPageViewModelViewParamModel = navigationModel;
             else
-                throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type OrderDetailPageViewModel!");
+                throw new ArgumentNullException(nameof(navigationData), $"It is mandatory to send parameter of type {nameof(OrderDetailPageViewModel)}!");
 
             PageLoad();
         }
 
         #region Propertys
         
-        private string _backdropTitle = "Order Detail (-)";
+        private string _backdropTitle = Resource.OrderDetail + " (-)";
         public string BackdropTitle { get => _backdropTitle; set { _backdropTitle = value; PropertyChanged(() => BackdropTitle); } }
         
         private string _itemPrice;
@@ -92,7 +93,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
                 {
                     _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = true;
                 
-                    DialogService.SuccessToastMessage("Sepet onaylandı!");
+                    DialogService.SuccessToastMessage(Resource.BasketConfirmed);
                 
                     SetAndClosePage(isSaveBasket: true);
                 }
@@ -106,13 +107,13 @@ namespace ProsysMobile.ViewModels.Pages.Order
                     }
                     else
                     {
-                        DialogService.ErrorToastMessage("Sepet onaylanmadı!");
+                        DialogService.ErrorToastMessage(Resource.BasketNotConfirmed);
                     }
                 }    
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -131,21 +132,11 @@ namespace ProsysMobile.ViewModels.Pages.Order
         {
             try
             {
-                if (_orderDetailPageViewModelViewParamModel?.Model != null)
-                {
-                    GetOrderAmountAndBindFromApi();
-                }
-                else
-                {
-                    DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
-                    
-                    NavigationService.NavigatePopBackdropAsync();
-                }
-                
+                GetOrderAmountAndBindFromApi();
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 NavigationService.NavigatePopBackdropAsync();
 
@@ -188,17 +179,17 @@ namespace ProsysMobile.ViewModels.Pages.Order
                     GrossTotal = responseModel.GrossTotal;
                     NetTotal = responseModel.NetTotal;
                     Deposit = responseModel.Deposit;
-                    BackdropTitle = "Order Detail" + $" ({BasketItems.Count})";
+                    BackdropTitle = Resource.OrderDetail + $" ({BasketItems.Count})";
                     _orderId = responseModel.OrderId;
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Ürün bilgilerini getiriken bir hata oluştu!");
+                    DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingTheBasketDetail);
                 }
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Ürün bilgilerini getiriken bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
 
                 ProsysLogger.Instance.CrashLog(ex);
             }

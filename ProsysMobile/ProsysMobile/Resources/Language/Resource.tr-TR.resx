@@ -120,4 +120,208 @@
   <data name="yaso" xml:space="preserve">
     <value>yaso</value>
   </data>
+  <data name="Categories" xml:space="preserve">
+    <value>Kategoriler</value>
+  </data>
+  <data name="Deals" xml:space="preserve">
+    <value>Fırsatlar</value>
+  </data>
+  <data name="ItemDetail" xml:space="preserve">
+    <value>Ürün Detayı</value>
+  </data>
+  <data name="AddBasket" xml:space="preserve">
+    <value>Sepete Ekle</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Hesap</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Hesabı Sil</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Çıkış Yap</value>
+  </data>
+  <data name="SearchHere" xml:space="preserve">
+    <value>Arama yap</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>Herhangi bir kayıt bulunamadı.</value>
+  </data>
+  <data name="Basket" xml:space="preserve">
+    <value>Sepet</value>
+  </data>
+  <data name="AddItemsYouWantToShop" xml:space="preserve">
+    <value>Alışveriş yapmak istediğiniz ürünleri ekleyin</value>
+  </data>
+  <data name="InvalidQuantity" xml:space="preserve">
+    <value>Geçersiz adet!</value>
+  </data>
+  <data name="AnErrorHasOccurred" xml:space="preserve">
+    <value>Bir hata oluştu!</value>
+  </data>
+  <data name="AnErrorOccurredWhileDeletingTheProductFromTheBasket" xml:space="preserve">
+    <value>Ürün sepetten silinirken hata oluştu!</value>
+  </data>
+  <data name="AnErrorOccurredWhileDeletingTheUser" xml:space="preserve">
+    <value>Kullanıcı silinirken bir hata oluştu!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingCategories" xml:space="preserve">
+    <value>Kategoriler getirilirken bir hata oluştu!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingProductDetails" xml:space="preserve">
+    <value>Ürün ayrıntıları alınırken bir hata oluştu!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingTheBasketDetail" xml:space="preserve">
+    <value>Sepet detayı alınırken bir hata oluştu!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingTheProducts" xml:space="preserve">
+    <value>Ürünler alınırken bir hata oluştu!</value>
+  </data>
+  <data name="ApplyBasket" xml:space="preserve">
+    <value>Sepeti Onayla</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteTheAccount" xml:space="preserve">
+    <value>Hesabı silmek istediğinizden emin misiniz?</value>
+  </data>
+  <data name="AreYouSureYouWantToLogOut" xml:space="preserve">
+    <value>Çıkış yapmak istediğinizden emin misiniz?</value>
+  </data>
+  <data name="BasketConfirmed" xml:space="preserve">
+    <value>Sepet Onaylandı!</value>
+  </data>
+  <data name="BasketNotConfirmed" xml:space="preserve">
+    <value>Sepet Onaylanmadı!</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Vazgeç</value>
+  </data>
+  <data name="ChangeListDesign" xml:space="preserve">
+    <value>Liste Görünümünü Değiştir</value>
+  </data>
+  <data name="CompanyCode" xml:space="preserve">
+    <value>Şirket kodu</value>
+  </data>
+  <data name="Deposit" xml:space="preserve">
+    <value>Depozito</value>
+  </data>
+  <data name="DontHaveAnAccount" xml:space="preserve">
+    <value>Hesabınız yok mu?</value>
+  </data>
+  <data name="DoubleView" xml:space="preserve">
+    <value>İkili Gösterim</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-posta</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Adı</value>
+  </data>
+  <data name="GrossTotal" xml:space="preserve">
+    <value>Brüt toplam</value>
+  </data>
+  <data name="ImageDetail" xml:space="preserve">
+    <value>Resim Detayı</value>
+  </data>
+  <data name="NetTotal" xml:space="preserve">
+    <value>Net toplam</value>
+  </data>
+  <data name="NewAccount" xml:space="preserve">
+    <value>Yeni hesap</value>
+  </data>
+  <data name="NoItemsInBasket_U" xml:space="preserve">
+    <value>SEPETTE ÜRÜN YOK</value>
+  </data>
+  <data name="NoItemsInFavorite_U" xml:space="preserve">
+    <value>FAVORİLERDE ÖĞE YOK</value>
+  </data>
+  <data name="NoPictureView" xml:space="preserve">
+    <value>Resimsiz Gösterim</value>
+  </data>
+  <data name="OrderAmount" xml:space="preserve">
+    <value>Sipariş miktarı</value>
+  </data>
+  <data name="OrderDetail" xml:space="preserve">
+    <value>Sipariş detayı</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Siparişler</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="PleaseCheckYourInternetConnection" xml:space="preserve">
+    <value>Lütfen internet bağlantınızı kontrol edin!</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Lütfen bekleyin</value>
+  </data>
+  <data name="PleaseWriteTheCompanyCode" xml:space="preserve">
+    <value>Lütfen şirket kodunu yazınız!</value>
+  </data>
+  <data name="PleaseWriteYourEMailAddress" xml:space="preserve">
+    <value>Lütfen e-posta adresinizi yazınız!</value>
+  </data>
+  <data name="PleaseWriteYourName" xml:space="preserve">
+    <value>Lütfen isminizi yazınız!</value>
+  </data>
+  <data name="PleaseWriteYourPassword" xml:space="preserve">
+    <value>Lütfen şifrenizi yazınız!</value>
+  </data>
+  <data name="PleaseWriteYourSurname" xml:space="preserve">
+    <value>Lütfen soyadınızı yazınız!</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Kayıt ol</value>
+  </data>
+  <data name="SaveYourFavoriteItemsHere" xml:space="preserve">
+    <value>Favori öğelerinizi buraya kaydedin</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Ayarlar</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Kayıt Ol</value>
+  </data>
+  <data name="SingleView" xml:space="preserve">
+    <value>Tekli Gösterim</value>
+  </data>
+  <data name="StartShopping_U" xml:space="preserve">
+    <value>ALIŞVERİŞE BAŞLA</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Soyadı</value>
+  </data>
+  <data name="TheProductCouldNotBeAddedToFavorites" xml:space="preserve">
+    <value>Ürün favorilere eklenemedi!</value>
+  </data>
+  <data name="TheProductCouldNotBeAddedToTheBasket" xml:space="preserve">
+    <value>Ürün sepete eklenemedi!</value>
+  </data>
+  <data name="TheProductHasBeenAddedToTheBasket" xml:space="preserve">
+    <value>Ürün sepete eklendi!</value>
+  </data>
+  <data name="VATTotal" xml:space="preserve">
+    <value>KDV Toplamı</value>
+  </data>
+  <data name="ToRegisterPleaseFillInTheInformation" xml:space="preserve">
+    <value>Kayıt olmak için lütfen bilgileri doldurunuz.</value>
+  </data>
+  <data name="Warning_U" xml:space="preserve">
+    <value>UYARI</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Hoş geldin</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Evet</value>
+  </data>
+  <data name="YourEmailOrPasswordIsIncorrect" xml:space="preserve">
+    <value>Emailiniz veya şifreniz yanlış!</value>
+  </data>
+  <data name="YourRequestHasBeenSent" xml:space="preserve">
+    <value>Talebiniz gönderildi!</value>
+  </data>
 </root>

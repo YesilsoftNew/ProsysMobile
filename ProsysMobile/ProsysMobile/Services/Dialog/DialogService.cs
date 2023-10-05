@@ -96,6 +96,9 @@ namespace ProsysMobile.Services.Dialog
 
         public void ShowLoading(string title = null, MaskType? maskType = null)
         {
+            if (string.IsNullOrWhiteSpace(title))
+                title = Resources.Language.Resource.PleaseWait;
+            
             UserDialogs.Instance.ShowLoading(title, maskType);
         }
 

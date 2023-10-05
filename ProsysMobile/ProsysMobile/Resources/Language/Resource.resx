@@ -101,4 +101,208 @@
     <value>yaso</value>
     <comment>yaso</comment>
   </data>
+  <data name="Categories" xml:space="preserve">
+	  <value>Categories</value><comment>HomePage.xaml</comment>
+  </data>
+  <data name="Deals" xml:space="preserve">
+	  <value>Deals</value><comment>HomePage.xaml</comment>
+  </data>
+  <data name="ItemDetail" xml:space="preserve">
+	  <value>Item Detail</value><comment>ItemDetailPage.xaml</comment>
+  </data>
+  <data name="AddBasket" xml:space="preserve">
+	  <value>Add Basket</value><comment>ItemDetailPage.xaml</comment>
+  </data>
+  <data name="Account" xml:space="preserve">
+	  <value>Account</value><comment>AccountPage.xaml</comment>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+	  <value>Delete Account</value><comment>AccountPage.xaml</comment>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+	  <value>Sign Out</value><comment>AccountPage.xaml</comment>
+  </data>
+  <data name="SearchHere" xml:space="preserve">
+	  <value>Search here</value><comment>Generic</comment>
+  </data>
+  <data name="NoItemsInFavorite_U" xml:space="preserve">
+	  <value>NO ITEMS IN FAVORITE</value><comment>FavoritePage.xaml</comment>
+  </data>
+  <data name="SaveYourFavoriteItemsHere" xml:space="preserve">
+	  <value>Save your favorite items here</value><comment>FavoritePage.xaml</comment>
+  </data>
+  <data name="StartShopping_U" xml:space="preserve">
+	  <value>START SHOPPING</value><comment>Generic</comment>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+	  <value>No records found.</value><comment>Generic</comment>
+  </data>
+  <data name="Basket" xml:space="preserve">
+	  <value>Basket</value><comment>OrderPage.xaml</comment>
+  </data>
+  <data name="NoItemsInBasket_U" xml:space="preserve">
+	  <value>NO ITEMS IN BASKET</value><comment>OrderPage.xaml</comment>
+  </data>
+  <data name="AddItemsYouWantToShop" xml:space="preserve">
+	  <value>Add items you want to shop</value><comment>OrderPage.xaml</comment>
+  </data>
+  <data name="GrossTotal" xml:space="preserve">
+	  <value>Gross Total</value><comment>OrderDetailPage.xaml</comment>
+  </data>
+  <data name="VATTotal" xml:space="preserve">
+	  <value>VAT Total</value><comment>OrderDetailPage.xaml</comment>
+  </data>
+  <data name="Deposit" xml:space="preserve">
+	  <value>Deposit</value><comment>OrderDetailPage.xaml</comment>
+  </data>
+  <data name="NetTotal" xml:space="preserve">
+	  <value>Net Total</value><comment>OrderDetailPage.xaml</comment>
+  </data>
+  <data name="ApplyBasket" xml:space="preserve">
+	  <value>Apply Basket</value><comment>OrderDetailPage.xaml</comment>
+  </data>
+  <data name="ImageDetail" xml:space="preserve">
+	  <value>Image Detail</value><comment>BigImagePage.xaml</comment>
+  </data>
+  <data name="ChangeListDesign" xml:space="preserve">
+	  <value>Change List Design</value><comment>ChangeItemListDesignPage.xaml</comment>
+  </data>
+  <data name="NewAccount" xml:space="preserve">
+	  <value>New Account</value><comment>CreateAccountPage.xaml</comment>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+	  <value>First Name</value><comment>Generic</comment>
+  </data>
+  <data name="Surname" xml:space="preserve">
+	  <value>Surname</value><comment>Generic</comment>
+  </data>
+  <data name="CompanyCode" xml:space="preserve">
+	  <value>Company Code</value><comment>CreateAccountPage.xaml</comment>
+  </data>
+  <data name="Email" xml:space="preserve">
+	  <value>Email</value><comment>Generic</comment>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+	  <value>Sign Up</value><comment>CreateAccountPage.xaml</comment>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+	  <value>Welcome</value><comment>LoginPage.xaml</comment>
+  </data>
+  <data name="ToRegisterPleaseFillInTheInformation" xml:space="preserve">
+	  <value>To register, please fill in the information.</value><comment>LoginPage.xaml</comment>
+  </data>
+  <data name="Password" xml:space="preserve">
+	  <value>Password</value><comment>Generic</comment>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+	  <value>Sign In</value><comment>LoginPage.xaml</comment>
+  </data>
+  <data name="DontHaveAnAccount" xml:space="preserve">
+	  <value>Don't have an account?</value><comment>LoginPage.xaml</comment>
+  </data>
+  <data name="Register" xml:space="preserve">
+	  <value>Register</value><comment>LoginPage.xaml</comment>
+  </data>
+  <data name="InvalidQuantity" xml:space="preserve">
+	  <value>Invalid quantity!</value><comment>ItemDetailPageViewModel.cs</comment>
+  </data>
+  <data name="TheProductHasBeenAddedToTheBasket" xml:space="preserve">
+	  <value>The product has been added to the basket!</value><comment>ItemDetailPageViewModel.cs</comment>
+  </data>
+  <data name="AnErrorHasOccurred" xml:space="preserve">
+	  <value>An error has occurred!</value><comment>Generic</comment>
+  </data>
+  <data name="TheProductCouldNotBeAddedToTheBasket" xml:space="preserve">
+	  <value>The product could not be added to the basket!</value><comment>ItemDetailPageViewModel.cs</comment>
+  </data>
+  <data name="TheProductCouldNotBeAddedToFavorites" xml:space="preserve">
+	  <value>The product could not be added to favorites!</value><comment>Generic</comment>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingProductDetails" xml:space="preserve">
+	  <value>An error occurred while fetching product details!</value><comment>ItemDetailPageViewModel.cs</comment>
+  </data>
+  <data name="OrderAmount" xml:space="preserve">
+	  <value>Order Amount</value><comment>ItemDetailPageViewModel.cs</comment>
+  </data>
+  <data name="Orders" xml:space="preserve">
+	  <value>Orders</value><comment>AccountPageViewModel.cs</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+	  <value>Settings</value><comment>AccountPageViewModel.cs</comment>
+  </data>
+  <data name="Warning_U" xml:space="preserve">
+	  <value>WARNING</value><comment>Generic</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+	  <value>Yes</value><comment>Generic</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+	  <value>Cancel</value><comment>Generic</comment>
+  </data>
+  <data name="AreYouSureYouWantToLogOut" xml:space="preserve">
+	  <value>Are you sure you want to log out?</value><comment>AccountPageViewModel.cs</comment>
+  </data>
+  <data name="AreYouSureYouWantToDeleteTheAccount" xml:space="preserve">
+	  <value>Are you sure you want to delete the account?</value><comment>AccountPageViewModel.cs</comment>
+  </data>
+  <data name="AnErrorOccurredWhileDeletingTheUser" xml:space="preserve">
+	  <value>An error occurred while deleting the user!</value><comment>AccountPageViewModel.cs</comment>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingTheProducts" xml:space="preserve">
+	  <value>An error occurred while fetching the products!</value><comment>FavoritePageViewModel.cs</comment>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingCategories" xml:space="preserve">
+	  <value>An error occurred while fetching categories!</value><comment>FindPageViewModel.cs</comment>
+  </data>
+  <data name="AnErrorOccurredWhileDeletingTheProductFromTheBasket" xml:space="preserve">
+	  <value>An error occurred while deleting the product from the basket!</value><comment>OrderPageViewModel.cs</comment>
+  </data>
+  <data name="OrderDetail" xml:space="preserve">
+	  <value>Order Detail</value><comment>OrderDetailPageViewModel.cs</comment>
+  </data>
+  <data name="BasketConfirmed" xml:space="preserve">
+	  <value>Basket Confirmed!</value><comment>OrderDetailPageViewModel.cs</comment>
+  </data>
+  <data name="BasketNotConfirmed" xml:space="preserve">
+	  <value>Basket Not Confirmed!</value><comment>OrderDetailPageViewModel.cs</comment>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingTheBasketDetail" xml:space="preserve">
+	  <value>An error occurred while fetching the basket detail!</value><comment>OrderDetailPageViewModel.cs</comment>
+  </data>
+  <data name="SingleView" xml:space="preserve">
+	  <value>Single View</value><comment>ChangeItemListDesignPageViewModel.cs</comment>
+  </data>
+  <data name="DoubleView" xml:space="preserve">
+	  <value>Double View</value><comment>ChangeItemListDesignPageViewModel.cs</comment>
+  </data>
+  <data name="NoPictureView" xml:space="preserve">
+	  <value>No Picture View</value><comment>ChangeItemListDesignPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseCheckYourInternetConnection" xml:space="preserve">
+	  <value>Please check your internet connection!</value><comment>CreateAccountPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseWriteYourName" xml:space="preserve">
+	  <value>Please write your name!</value><comment>CreateAccountPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseWriteYourSurname" xml:space="preserve">
+	  <value>Please write your surname!</value><comment>CreateAccountPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseWriteYourEMailAddress" xml:space="preserve">
+	  <value>Please write your email address!</value><comment>CreateAccountPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseWriteTheCompanyCode" xml:space="preserve">
+	  <value>Please write the company code!</value><comment>CreateAccountPageViewModel.cs</comment>
+  </data>
+  <data name="YourRequestHasBeenSent" xml:space="preserve">
+	  <value>Your request has been sent!</value><comment>CreateAccountPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseWriteYourPassword" xml:space="preserve">
+	  <value>Please write your password!</value><comment>LoginPageViewModel.cs</comment>
+  </data>
+  <data name="YourEmailOrPasswordIsIncorrect" xml:space="preserve">
+	  <value>Your email or password is incorrect!</value><comment>LoginPageViewModel.cs</comment>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+	  <value>Please wait</value><comment>Generic</comment>
+  </data>
 </root>

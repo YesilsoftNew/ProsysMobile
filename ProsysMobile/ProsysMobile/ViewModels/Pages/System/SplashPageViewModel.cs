@@ -1,5 +1,4 @@
 ﻿using ProsysMobile.Helper;
-using ProsysMobile.Helper.ApiClient;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
@@ -9,14 +8,11 @@ using System;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-using Plugin.FirebasePushNotification;
-using Plugin.LocalNotification;
-using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserDevices;
 using ProsysMobile.Services.API.UserMobile;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
 {
@@ -27,21 +23,20 @@ namespace ProsysMobile.ViewModels.Pages.System
         private readonly IUserMobileSQLiteService _userSqLiteService;
         private readonly ISignInService _signInService;
 
-        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSQLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
+        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
         {
-            _defaultSettingsSqLiteService = defaultSettingsSQLiteService;
+            _defaultSettingsSqLiteService = defaultSettingsSqLiteService;
             _userSqLiteService = userSqLiteService;
             _signInService = signInService;
             _saveUserDevicesService = saveUserDevicesService;
         }
 
-        public override Task InitializeAsync(object navigationData)
+        public override async Task InitializeAsync(object navigationData)
         {
-            GoToLoginPage();
-
-            return base.InitializeAsync(navigationData);
+            await GoToLoginPage();
         }
-        async Task GoToLoginPage()
+
+        private async Task GoToLoginPage()
         {
             try
             {

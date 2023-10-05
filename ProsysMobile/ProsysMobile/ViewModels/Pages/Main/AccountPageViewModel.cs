@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using ProsysMobile.ViewModels.Base;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using ProsysMobile.Endpoints.UserMobile;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.OtherModels;
-using ProsysMobile.Models.CommonModels.SQLiteModels;
 using ProsysMobile.Pages;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserMobile;
 using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Pages.System;
@@ -29,7 +27,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             _userSqLiteService = userSqLiteService;
             _userDeleteService = userDeleteService;
 
-            MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
+            MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", (sender, arg) =>
             {
                 try
                 {
@@ -59,13 +57,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
             new AccountSettings
             {
                 Image = "DepotBlack",
-                Title = "Orders",
+                Title = Resource.Orders,
                 AccountSettingsType = enAccountSettingsType.Orders
             },
             new AccountSettings
             {
                 Image = "Settings",
-                Title = "Settings",
+                Title = Resource.Settings,
                 AccountSettingsType = enAccountSettingsType.Settings
             }
         };
@@ -81,7 +79,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                var isOk = await DialogService.ConfirmAsync("Çıkmak istediğinize emin misiniz ?", "UYARI", "Evet","Vazgeç");
+                var isOk = await DialogService.ConfirmAsync(Resource.AreYouSureYouWantToLogOut, Resource.Warning_U, Resource.Yes,Resource.Cancel);
 
                 if (!isOk) return;
                 
@@ -113,7 +111,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
 
-                var isOk = await DialogService.ConfirmAsync("Hesabı silmek istediğinize emin misiniz ?", "UYARI", "Evet","Vazgeç");
+                var isOk = await DialogService.ConfirmAsync(Resource.AreYouSureYouWantToDeleteTheAccount, Resource.Warning_U, Resource.Yes,Resource.Cancel);
 
                 if (!isOk) return;
 
@@ -142,13 +140,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 else
                 {
-                    DialogService.WarningToastMessage("Kullanıcı silinemedi!");
+                    DialogService.WarningToastMessage(Resource.AnErrorOccurredWhileDeletingTheUser);
                 }
                 
             }
             catch (Exception ex)
             {
-                DialogService.WarningToastMessage("Bir hata oluştu!");
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -171,10 +169,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     switch (accountSettings.AccountSettingsType)
                     {
                         case enAccountSettingsType.Orders:
-                            DialogService.WarningToastMessage("Şuanda yapılmadı");
+                            //DialogService.WarningToastMessage("Şuanda yapılmadı");
                             break;
                         case enAccountSettingsType.Settings:
-                            DialogService.WarningToastMessage("Şuanda yapılmadı");
+                            //DialogService.WarningToastMessage("Şuanda yapılmadı");
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

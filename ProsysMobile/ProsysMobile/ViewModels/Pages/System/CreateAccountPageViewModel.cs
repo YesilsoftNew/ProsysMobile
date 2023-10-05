@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ProsysMobile.Resources.Language;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
@@ -69,72 +70,63 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
-                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz!");
-                    
+                    DialogService.WarningToastMessage(Resource.PleaseCheckYourInternetConnection);
                     DoubleTapping.ResumeTap();
-
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(FirstName))
                 {
-                    DialogService.WarningToastMessage("Lütfen isminizi yazınız!");
-                    
+                    DialogService.WarningToastMessage(Resource.PleaseWriteYourName);
                     DoubleTapping.ResumeTap();
-
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(Surname))
                 {
-                    DialogService.WarningToastMessage("Lütfen soyisminizi yazınız!");
-
+                    DialogService.WarningToastMessage(Resource.PleaseWriteYourSurname);
                     DoubleTapping.ResumeTap();
-
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(Email))
                 {
-                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız!");
-                    
+                    DialogService.WarningToastMessage(Resource.PleaseWriteYourEMailAddress);
                     DoubleTapping.ResumeTap();
-                    
                     return;
                 }
 
                 if (string.IsNullOrWhiteSpace(CompanyCode))
                 {
-                    DialogService.WarningToastMessage("Lütfen şirket kodunu yazınız!");
-                    
+                    DialogService.WarningToastMessage(Resource.PleaseWriteTheCompanyCode);
                     DoubleTapping.ResumeTap();
-
                     return;
                 }
 
-                UserMobileDto userMobileDto = new UserMobileDto();
-                userMobileDto.FIRSTNAME = FirstName;
-                userMobileDto.SURNAME = Surname;
-                userMobileDto.EMAIL = Email;
-                userMobileDto.COMPANYCODE = CompanyCode;
+                var userMobileDto = new UserMobileDto
+                {
+                    FIRSTNAME = FirstName,
+                    SURNAME = Surname,
+                    EMAIL = Email,
+                    COMPANYCODE = CompanyCode
+                };
 
                 var result = await _signUpService.SignUp(userMobileDto, Models.CommonModels.Enums.enPriorityType.UserInitiated);
 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
-                    DialogService.SuccessToastMessage("Talebiniz gönderildi!");
+                    DialogService.SuccessToastMessage(Resource.YourRequestHasBeenSent);
                     NavigationService.NavigatePopBackdropAsync();
                 }
                 else
                 {
-                    DialogService.WarningToastMessage("Bir hata oluştu!");
+                    DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
                 }
 
             }
             catch (Exception ex)
             {
-                DialogService.WarningToastMessage("Bir hata oluştu!");
-                
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
                 ProsysLogger.Instance.CrashLog(ex);
             }
             

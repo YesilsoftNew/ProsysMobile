@@ -10,6 +10,7 @@ using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Base;
@@ -37,7 +38,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
         
         public override async Task InitializeAsync(object navigationData)
         {
-            if (navigationData != null && navigationData is NavigationModel<ItemDetailPageViewParamModel> navigationModel)
+            if (navigationData != null && navigationData is NavigationModel<ItemDetailPageViewParamModel> navigationModel && navigationModel?.Model != null)
                 _itemDetailPageViewModelViewParamModel = navigationModel;
             else
                 throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ItemDetailPageViewModel!");
@@ -116,7 +117,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
 
                 if (string.IsNullOrWhiteSpace(itemPurchaseQtyTextTrimValue) || itemPurchaseQtyTextTrimValue.Contains("-") || !IsInteger(itemPurchaseQtyTextTrimValue))
                 {
-                    DialogService.WarningToastMessage("Geçersiz adet!");
+                    DialogService.WarningToastMessage(Resource.InvalidQuantity);
                     isError = true;
                 }
                 
@@ -135,7 +136,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     {
                         _itemDetailPageViewModelViewParamModel.Model.IsAddItem = true;
                     
-                        DialogService.SuccessToastMessage("Ürün sepete eklendi!");
+                        DialogService.SuccessToastMessage(Resource.TheProductHasBeenAddedToTheBasket);
                     
                         SetAndClosePage(isAddItem: true);
                     }
@@ -149,14 +150,14 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         }
                         else
                         {
-                            DialogService.ErrorToastMessage("Ürün sepete eklenemedi!");
+                            DialogService.ErrorToastMessage(Resource.TheProductCouldNotBeAddedToTheBasket);
                         }
                     }    
                 }
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -191,7 +192,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     }
                     else
                     {
-                        DialogService.WarningToastMessage("Ürün favorilere eklenemedi.");
+                        DialogService.WarningToastMessage(Resource.TheProductCouldNotBeAddedToFavorites);
                     }
                 }
                 
@@ -200,7 +201,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
             {
                 ProsysLogger.Instance.CrashLog(ex);
                 
-                DialogService.WarningToastMessage("Bir hata oluştu.");
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
 
             DoubleTapping.ResumeTap();
@@ -216,7 +217,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
             {
                 ProsysLogger.Instance.CrashLog(ex);
                 
-                DialogService.WarningToastMessage("Bir hata oluştu.");
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
         });
 
@@ -258,61 +259,51 @@ namespace ProsysMobile.ViewModels.Pages.Item
         {
             try
             {
-                if (_itemDetailPageViewModelViewParamModel?.Model != null)
+                IsBusy = true;
+                
+                var itemId = _itemDetailPageViewModelViewParamModel.Model.ItemId;
+
+                var item = await _itemDetailService.GetDetail(
+                    itemId,
+                    GlobalSetting.Instance.User.ID,
+                    enPriorityType.UserInitiated
+                );
+
+                if (item.ResponseData != null && item.IsSuccess)
                 {
-                    IsBusy = true;
+                    var responseModel = item.ResponseData;
+
+                    _itemDetailsSubDto = responseModel;
+                    _firstOpenIsFavorite = responseModel.Item.IsFavorite;
                     
-                    var itemId = _itemDetailPageViewModelViewParamModel.Model.ItemId;
-
-                    var item = await _itemDetailService.GetDetail(
-                        itemId,
-                        GlobalSetting.Instance.User.ID,
-                        enPriorityType.UserInitiated
-                    );
-
-                    if (item.ResponseData != null && item.IsSuccess)
+                    ItemId = responseModel.Item.Id;
+                    ItemName = responseModel.Item.Name;
+                    Images = new ObservableRangeCollection<string>(responseModel.Item.Images);
+                    ItemPieces = responseModel.Item.Pieces;
+                    ItemPrice = responseModel.Item.Price;
+                    Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
+                    ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
+                    FavoriteImageSource = responseModel.Item.IsFavorite
+                        ? Constants.SelectedFavoriteImageSource
+                        : Constants.UnSelectedFavoriteImageSource;
+                    
+                    var orderAmountWithUnitDesc = Resource.OrderAmount;
+                    if (!string.IsNullOrWhiteSpace(responseModel?.Item?.UnitDesc))
                     {
-                        var responseModel = item.ResponseData;
-
-                        _itemDetailsSubDto = responseModel;
-                        _firstOpenIsFavorite = responseModel.Item.IsFavorite;
-                        
-                        ItemId = responseModel.Item.Id;
-                        ItemName = responseModel.Item.Name;
-                        Images = new ObservableRangeCollection<string>(responseModel.Item.Images);
-                        ItemPieces = responseModel.Item.Pieces;
-                        ItemPrice = responseModel.Item.Price;
-                        Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
-                        ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
-                        FavoriteImageSource = responseModel.Item.IsFavorite
-                            ? Constants.SelectedFavoriteImageSource
-                            : Constants.UnSelectedFavoriteImageSource;
-                        
-                        var orderAmountWithUnitDesc = "Order Amount";
-                        if (!string.IsNullOrWhiteSpace(responseModel?.Item?.UnitDesc))
-                        {
-                            orderAmountWithUnitDesc += $" ({responseModel.Item.UnitDesc})";
-                        }
-                        ItemPurchaseQtyTitle = orderAmountWithUnitDesc;
+                        orderAmountWithUnitDesc += $" ({responseModel.Item.UnitDesc})";
                     }
-                    else
-                    {
-                        DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
-                        
-                        NavigationService.NavigatePopBackdropAsync();
-                    }    
+                    ItemPurchaseQtyTitle = orderAmountWithUnitDesc;
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                    DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingProductDetails);
                     
                     NavigationService.NavigatePopBackdropAsync();
                 }
-
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Ürün detayı getirilirken hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 NavigationService.NavigatePopBackdropAsync();
 

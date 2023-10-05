@@ -11,6 +11,7 @@ using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Item;
@@ -238,7 +239,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     }
                     else
                     {
-                        DialogService.WarningToastMessage("Ürün favorilere eklenemedi.");
+                        DialogService.WarningToastMessage(Resource.TheProductCouldNotBeAddedToFavorites);
                     }
                 }
                 
@@ -247,7 +248,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ProsysLogger.Instance.CrashLog(ex);
                 
-                DialogService.WarningToastMessage("Bir hata oluştu.");
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
 
             IsBusy = false;
@@ -359,14 +360,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                    DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingTheProducts);
                 }
 
                 CheckFilterAndBindShowItems();
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
 
                 ProsysLogger.Instance.CrashLog(ex);
             }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <backdrop:CustomBackdrop xmlns="http://xamarin.com/schemas/2014/forms"
                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                          xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                         xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
                          xmlns:backdrop="clr-namespace:ProsysMobile.Models"
                          xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
                          xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
@@ -25,11 +25,7 @@
 
                 <controlbars:CustomBackDropToolbarPrimary 
                     Grid.Row="0"
-                    Title="Change List Detail">
-                    <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
-                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
-                    </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
-                </controlbars:CustomBackDropToolbarPrimary>
+                    Title="{x:Static resource:Resource.ChangeListDesign}" />
 
                 <Grid
                     Grid.Row="1"

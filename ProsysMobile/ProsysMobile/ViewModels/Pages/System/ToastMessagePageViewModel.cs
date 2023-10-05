@@ -23,7 +23,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                if (navigationData != null && navigationData is NavigationModel<ToastMessagePageViewParamModel> navigationModel)
+                if (navigationData is NavigationModel<ToastMessagePageViewParamModel> navigationModel)
                     _toastMessagePageViewParamModel = navigationModel;
                 else
                     throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ToastMessagePageViewParamModel!");

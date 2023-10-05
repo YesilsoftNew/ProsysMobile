@@ -10,6 +10,7 @@ using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Order;
@@ -125,8 +126,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                     if (result.IsSuccess)
                     {
-                        DialogService.SuccessToastMessage("Ürün sepetten silindi!");
-
                         BasketItems.Remove(orderDetailsSubDto);
 
                         if (!BasketItems.Any())
@@ -139,13 +138,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     }
                     else
                     {
-                        DialogService.WarningToastMessage("Ürün sepetten silinemedi!");
+                        DialogService.WarningToastMessage(Resource.AnErrorOccurredWhileDeletingTheProductFromTheBasket);
                     }
                 }
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -173,7 +172,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -265,7 +264,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     InitializePage(
                         isError: true,
                         isEmptyData:false,
-                        errMessage: "Ürünleri getiriken bir hata oluştu!"
+                        errMessage: Resource.AnErrorOccurredWhileFetchingTheProducts
                     );
                 }
             }
@@ -274,7 +273,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 InitializePage(
                     isError: true,
                     isEmptyData:false,
-                    errMessage: "Bir hata oluştu!"
+                    errMessage: Resource.AnErrorHasOccurred
                 );
 
                 ProsysLogger.Instance.CrashLog(ex);

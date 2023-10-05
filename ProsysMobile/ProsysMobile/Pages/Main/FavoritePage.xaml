@@ -11,8 +11,8 @@
              xmlns:converters="clr-namespace:ProsysMobile.Converters"
              xmlns:controlEntries="clr-namespace:ProsysMobile.CustomControls.Entry"                       
              xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
-             xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
              xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -52,7 +52,7 @@
                     Grid.Column="0"
                     Margin="16,0,16,0"
                     Text="{Binding Search}"
-                    Placeholder="Search here"
+                    Placeholder="{x:Static resource:Resource.SearchHere}"
                     ImageSource="EntrySearch"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
@@ -292,7 +292,7 @@
                 
                 <Label 
                     Grid.Row="1"
-                    Text="NO ITEMS IN FAVORITE"
+                    Text="{x:Static resource:Resource.NoItemsInFavorite_U}"
                     Style="{DynamicResource Header3}"
                     TextColor="{StaticResource Gray3}"
                     Margin="0,40,0,0"
@@ -302,7 +302,7 @@
                 
                 <Label 
                     Grid.Row="2"
-                    Text="Save your favorite items here"
+                    Text="{x:Static resource:Resource.SaveYourFavoriteItemsHere}"
                     Style="{DynamicResource Label2}"
                     TextColor="{StaticResource Gray9}"
                     Margin="0,20,0,0"
@@ -312,7 +312,7 @@
                 
                 <Button
                     Grid.Row="3"
-                    Text="START SHOPPING"
+                    Text="{x:Static resource:Resource.StartShopping_U}"
                     Style="{DynamicResource Button.Outline}"
                     Command="{Binding StartShoppingClickCommand}"
                     HorizontalOptions="CenterAndExpand"
@@ -322,7 +322,7 @@
             
             <Label
                 Grid.Row="1"
-                Text="Herhangi bir bilgi bulunamadı."
+                Text="{x:Static resource:Resource.NoRecordsFound}"
                 IsVisible="{Binding ShowSearchEmptyText}"
                 HorizontalOptions="CenterAndExpand"
                 VerticalOptions="CenterAndExpand" />

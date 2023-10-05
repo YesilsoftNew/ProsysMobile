@@ -9,6 +9,7 @@
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
                          xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
                          xmlns:behaviors="http://xamarin.com/schemas/2020/toolkit"
+                         xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
                          BackgroundClickedCommand="{Binding PreviousClickedCommand}"
@@ -29,7 +30,7 @@
                 <controlbars:CustomBackDropToolbarPrimary 
                     x:Name="Header"
                     Grid.Row="0"
-                    Title="Item Detail">
+                    Title="{x:Static resource:Resource.ItemDetail}">
                     <controlbars:CustomBackDropToolbarPrimary.Behaviors>
                         <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference Header}}" EventName="ItemButtonCloseClicked"/>
                     </controlbars:CustomBackDropToolbarPrimary.Behaviors>
@@ -210,7 +211,7 @@
                         
                         <Button
                                 Grid.Column="1"
-                                Text="Add Basket"
+                                Text="{x:Static resource:Resource.AddBasket}"
                                 Command="{Binding AddBasketClickCommand}"
                                 Style="{DynamicResource Button.Primary}"
                                 BackgroundColor="{DynamicResource Color5}"

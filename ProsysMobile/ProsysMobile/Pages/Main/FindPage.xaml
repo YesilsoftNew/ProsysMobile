@@ -13,6 +13,7 @@
              xmlns:entries="clr-namespace:ProsysMobile.CustomControls.Entry"
              xmlns:customContolsOther="clr-namespace:ProsysMobile.CustomControls.Other"
              xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
+             xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -54,7 +55,7 @@
                     Grid.Column="0"
                     Margin="16,0,16,0"
                     Text="{Binding Search}"
-                    Placeholder="Search here"
+                    Placeholder="{x:Static resource:Resource.SearchHere}"
                     ImageSource="EntrySearch"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
@@ -449,7 +450,7 @@
             <Label
                 Grid.Row="3"
                 IsVisible="{Binding ShowEmptyText}"
-                Text="Herhangi bir kayıt bulunamadı!"
+                Text="{x:Static resource:Resource.NoRecordsFound}"
                 Style="{DynamicResource Label2}"
                 Margin="0,20,0,0"
                 HorizontalOptions="CenterAndExpand"

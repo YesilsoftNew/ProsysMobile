@@ -6,7 +6,9 @@ using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.System;
 using System;
+using System.Globalization;
 using System.IO;
+using System.Threading;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -19,6 +21,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using Plugin.LocalNotification;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.Dialog;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
@@ -56,13 +59,13 @@ namespace ProsysMobile
 
             ViewModelLocator.Init<SplashPageViewModel>();
 
-            GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet ? true : false;
+            GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
         
-        private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
+        private static void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
         {
-            GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet ? true : false;
+            GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet;
         }
 
         protected override void OnStart()
