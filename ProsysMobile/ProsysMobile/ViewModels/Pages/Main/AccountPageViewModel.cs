@@ -4,11 +4,13 @@ using System.Linq;
 using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ProsysMobile.Endpoints.UserMobile;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
 using ProsysMobile.Pages;
+using ProsysMobile.Services.API.UserMobile;
 using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
@@ -17,14 +19,16 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class AccountPageViewModel : ViewModelBase
     {
-        private IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
-        private IUserMobileSQLiteService _userSqLiteService;
+        private readonly IUserDeleteService _userDeleteService;
+        private readonly IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
+        private readonly IUserMobileSQLiteService _userSqLiteService;
         
-        public AccountPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, IUserMobileSQLiteService userSqLiteService)
+        public AccountPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, IUserMobileSQLiteService userSqLiteService, IUserDeleteService userDeleteService)
         {
             _defaultSettingsSqLiteService = defaultSettingsSqLiteService;
             _userSqLiteService = userSqLiteService;
-            
+            _userDeleteService = userDeleteService;
+
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
                 try
@@ -75,6 +79,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
                 var isOk = await DialogService.ConfirmAsync("Çıkmak istediğinize emin misiniz ?", "UYARI", "Evet","Vazgeç");
 
                 if (!isOk) return;
@@ -97,36 +103,58 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            DoubleTapping.ResumeTap();
         });
         
         public ICommand DeleteAccountClickCommand => new Command(async () =>
         {
             try
             {
+                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
                 var isOk = await DialogService.ConfirmAsync("Hesabı silmek istediğinize emin misiniz ?", "UYARI", "Evet","Vazgeç");
 
                 if (!isOk) return;
-                
-                return;
-                
-                _userSqLiteService.DeleteUser(GlobalSetting.Instance.User);
-                
-                GlobalSetting.Instance.User = null;
 
-                var userId = _defaultSettingsSqLiteService.getSettings("UserId");
-                var userTokenExpiredDate = _defaultSettingsSqLiteService.getSettings("UserTokenExpiredDate");
-                var userToken = _defaultSettingsSqLiteService.getSettings("UserToken");
+                IsBusy = true;
 
-                _defaultSettingsSqLiteService.Delete(userId);
-                _defaultSettingsSqLiteService.Delete(userTokenExpiredDate);
-                _defaultSettingsSqLiteService.Delete(userToken);
+                var result = await _userDeleteService.UserDelete(
+                    userId: GlobalSetting.Instance.User.ID,
+                    priorityType: enPriorityType.UserInitiated
+                );
 
-                await NavigationService.SetMainPageAsync<LoginPageViewModel>();
+                if (result != null && result.IsSuccess)
+                {
+                    _userSqLiteService.DeleteUser(GlobalSetting.Instance.User);
+                
+                    GlobalSetting.Instance.User = null;
+
+                    var userId = _defaultSettingsSqLiteService.getSettings("UserId");
+                    var userTokenExpiredDate = _defaultSettingsSqLiteService.getSettings("UserTokenExpiredDate");
+                    var userToken = _defaultSettingsSqLiteService.getSettings("UserToken");
+
+                    _defaultSettingsSqLiteService.Delete(userId);
+                    _defaultSettingsSqLiteService.Delete(userTokenExpiredDate);
+                    _defaultSettingsSqLiteService.Delete(userToken);
+
+                    await NavigationService.SetMainPageAsync<LoginPageViewModel>();
+                }
+                else
+                {
+                    DialogService.WarningToastMessage("Kullanıcı silinemedi!");
+                }
+                
             }
             catch (Exception ex)
             {
+                DialogService.WarningToastMessage("Bir hata oluştu!");
+
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            IsBusy = false;
+            DoubleTapping.ResumeTap();
         });
         
         
