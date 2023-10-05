@@ -31,6 +31,9 @@
     <Color x:Key="Gray8">#EFEFEF</Color>
     <Color x:Key="Gray9">#C1C1C1</Color>
     
+    <Color x:Key="Red1">#D03739</Color>
+
+    
     <Color x:Key="TransparentColor">Transparent</Color>
 
     <!--#endregion-->
