@@ -20,9 +20,9 @@ namespace ProsysMobile.Droid.Renderer
                 gd.SetColor(global::Android.Graphics.Color.Transparent);
                 gd.SetCornerRadius(10);
                 gd.SetStroke(2, global::Android.Graphics.Color.Transparent);
-                gd.SetPadding(0,0,0,0);
-                this.Control.SetBackgroundDrawable(gd);
-                 
+                Control.SetBackground(gd);
+                Control.SetPadding(0, 0, 0, 0);
+
                 //this.Control.SetRawInputType(InputTypes.TextFlagNoSuggestions);
             }
         }
