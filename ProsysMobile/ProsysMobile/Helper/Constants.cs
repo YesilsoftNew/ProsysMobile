@@ -1,6 +1,7 @@
 using System;
 using Plugin.FirebasePushNotification;
 using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Resources.Language;
 using Xamarin.Essentials;
 
 namespace ProsysMobile.Helper
@@ -12,7 +13,7 @@ namespace ProsysMobile.Helper
         public static ItemCategory ItemCategoryAll = new ItemCategory
         {
             ID = 0,
-            CategoryDesc = "All",
+            CategoryDesc = Resource.All,
             MainCategoryId = 0,
             Image = "http://yas.yesilsoft.net/Images/AllCategory.png",
             RecordState = null,

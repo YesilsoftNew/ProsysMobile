@@ -53,7 +53,7 @@ namespace ProsysMobile.Helper
                 if (stringValue == null)
                     return 0;
 
-                setCulture();
+                SetCulture();
 
                 int tmp;
                 if (int.TryParse(stringValue.ToString(), out tmp))
@@ -75,7 +75,7 @@ namespace ProsysMobile.Helper
                 if (stringValue == null)
                     return null;
 
-                setCulture();
+                SetCulture();
 
                 int tmp;
                 if (int.TryParse(stringValue.ToString(), out tmp))
@@ -97,7 +97,7 @@ namespace ProsysMobile.Helper
                 if (stringValue == null)
                     return 0;
 
-                setCulture();
+                SetCulture();
 
                 decimal tmp;
 
@@ -120,7 +120,7 @@ namespace ProsysMobile.Helper
                 if (stringValue == null)
                     return null;
 
-                setCulture();
+                SetCulture();
 
                 decimal tmp;
                 if (decimal.TryParse(stringValue.ToString(), out tmp))
@@ -200,7 +200,7 @@ namespace ProsysMobile.Helper
                 if (stringValue == null)
                     return 0;
 
-                setCulture();
+                SetCulture();
 
                 long tmp;
                 if (long.TryParse(stringValue.ToString(), out tmp))
@@ -215,7 +215,7 @@ namespace ProsysMobile.Helper
             }
         }
 
-        public static void setCulture()
+        public static void SetCulture()
         {
             try
             {
@@ -226,12 +226,19 @@ namespace ProsysMobile.Helper
                     CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo(GlobalSetting.Instance.AppLanguage);
                     Resource.Culture = CrossMultilingual.Current.CurrentCultureInfo;
 
-                    CultureInfo ci = new CultureInfo(GlobalSetting.Instance.AppLanguage);
-
-                    ci.DateTimeFormat.DateSeparator = "/";
-                    ci.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
-                    ci.NumberFormat.NumberDecimalSeparator = ".";
-                    ci.NumberFormat.NumberGroupSeparator = ",";
+                    CultureInfo ci = new CultureInfo(GlobalSetting.Instance.AppLanguage)
+                    {
+                        DateTimeFormat =
+                        {
+                            DateSeparator = "/",
+                            ShortDatePattern = "dd/MM/yyyy"
+                        },
+                        NumberFormat =
+                        {
+                            NumberDecimalSeparator = ".",
+                            NumberGroupSeparator = ","
+                        }
+                    };
 
                     Thread.CurrentThread.CurrentCulture = ci;
                     Thread.CurrentThread.CurrentUICulture = ci;

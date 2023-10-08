@@ -17,6 +17,7 @@ using Plugin.FirebasePushNotification;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserDevices;
 using ProsysMobile.ViewModels.Pages.Order;
 using Xamarin.Essentials;
@@ -93,7 +94,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                 
                 if (!GlobalSetting.Instance.IsConnectedInternet)
                 {
-                    DialogService.WarningToastMessage("Lütfen internet bağlantınızı kontrol ediniz!");
+                    DialogService.WarningToastMessage(Resource.PleaseCheckYourInternetConnection);
                     
                     DoubleTapping.ResumeTap();
 
@@ -102,7 +103,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(Email))
                 {
-                    DialogService.WarningToastMessage("Lütfen email adresinizi yazınız!");
+                    DialogService.WarningToastMessage(Resource.PleaseWriteYourEMailAddress);
 
                     DoubleTapping.ResumeTap();
 
@@ -111,7 +112,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 if (string.IsNullOrWhiteSpace(Password))
                 {
-                    DialogService.WarningToastMessage("Lütfen şifrenizi yazınız!");
+                    DialogService.WarningToastMessage(Resource.PleaseWriteYourPassword);
                    
                     DoubleTapping.ResumeTap();
 
@@ -163,14 +164,14 @@ namespace ProsysMobile.ViewModels.Pages.System
                     }
                     else
                     {
-                        DialogService.WarningToastMessage("Email veya şifreniz hatalı!");
+                        DialogService.WarningToastMessage(Resource.YourEmailOrPasswordIsIncorrect);
                     }    
                 }
                 
             }
             catch (Exception ex)
             {
-                DialogService.WarningToastMessage("Bir hata oluştu!");
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
 
                 ProsysLogger.Instance.CrashLog(ex);
             }

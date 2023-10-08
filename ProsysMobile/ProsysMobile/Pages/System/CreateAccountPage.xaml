@@ -5,6 +5,7 @@
                          xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
                          xmlns:controlentries="clr-namespace:ProsysMobile.CustomControls.Entry"
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
                          IsSetPanListener="True"
@@ -21,11 +22,7 @@
 
                 <controlbars:CustomBackDropToolbarPrimary 
                     Grid.Row="0"
-                    Title="New Account">
-                    <!--<controlbars:CustomBackDropToolbarSecondary.Behaviors>
-                        <behaviors:EventToCommandBehavior Command="{Binding Path=BindingContext.PreviousClickedCommand, Source={x:Reference cappedCasingReceivePage}}" EventName="ItemButtonCloseClicked"/>
-                    </controlbars:CustomBackDropToolbarSecondary.Behaviors>-->
-                </controlbars:CustomBackDropToolbarPrimary>
+                    Title="{x:Static resource:Resource.NewAccount}" />
 
                 <Grid
                     Grid.Row="1"
@@ -45,27 +42,27 @@
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="0" 
-                       Title="FirstName"
+                       Title="{x:Static resource:Resource.FirstName}"
                        Text="{Binding FirstName}"/>
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="1" 
-                       Title="Surname"
+                       Title="{x:Static resource:Resource.Surname}"
                        Text="{Binding Surname}"/>
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="2" 
-                       Title="CompanyCode"
+                       Title="{x:Static resource:Resource.CompanyCode}"
                        Text="{Binding CompanyCode}"/>
 
                     <controlentries:CustomEntryPrimary 
                        Grid.Row="3" 
-                       Title="Email"
+                       Title="{x:Static resource:Resource.Email}"
                        Text="{Binding Email}"/>
 
                     <Button 
                         Grid.Row="4"
-                        Text="Sign up"
+                        Text="{x:Static resource:Resource.SignUp}"
                         Command="{Binding RegisterClickCommand}"
                         Style="{DynamicResource Button.Primary}" 
                         VerticalOptions="FillAndExpand" 

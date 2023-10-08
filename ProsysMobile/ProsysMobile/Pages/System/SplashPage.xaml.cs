@@ -1,4 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using System.Globalization;
+using System.Threading;
+using ProsysMobile.Resources.Language;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ProsysMobile.Pages.System
@@ -8,6 +11,8 @@ namespace ProsysMobile.Pages.System
     {
         public SplashPage()
         {
+   
+            
             InitializeComponent();
         }
     }

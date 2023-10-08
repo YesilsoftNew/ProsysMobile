@@ -10,6 +10,7 @@
              xmlns:customControlsOrders="clr-namespace:ProsysMobile.CustomControls.OrderListItems"
              xmlns:converters="clr-namespace:ProsysMobile.Converters;assembly=ProsysMobile"
              xmlns:behaviors="clr-namespace:ProsysMobile.Behavior.Base"
+             xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -40,7 +41,7 @@
             
             <Label
                 Grid.Row="0"
-                Text="Categories"
+                Text="{x:Static resource:Resource.Categories}"
                 Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
@@ -95,7 +96,7 @@
             
             <Label
                 Grid.Row="2"
-                Text="Deals"
+                Text="{x:Static resource:Resource.Deals}"
                 Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"

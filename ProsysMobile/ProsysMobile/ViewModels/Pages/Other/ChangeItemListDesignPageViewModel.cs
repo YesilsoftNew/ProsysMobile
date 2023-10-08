@@ -7,6 +7,7 @@ using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
 
@@ -76,19 +77,19 @@ namespace ProsysMobile.ViewModels.Pages.Other
                 {
                     EnItemListType = enItemListType.Primary,
                     Image = "SingleView",
-                    Label = "Single View"
+                    Label = Resource.SingleView
                 },
                 new ItemListType
                 {
                     EnItemListType = enItemListType.Secondary,
                     Image = "DoubleView",
-                    Label = "Double View"
+                    Label = Resource.DoubleView
                 },
                 new ItemListType
                 {
                     EnItemListType = enItemListType.Tertiary,
                     Image = "NoPictureView",
-                    Label = "No Picture View"
+                    Label = Resource.NoPictureView
                 },
             };
         }

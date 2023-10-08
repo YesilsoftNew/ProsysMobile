@@ -12,6 +12,7 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
              xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
+             xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -41,7 +42,7 @@
                 
                 <customBars:CustomPageBarPrimary
                     Grid.Row="0"
-                    TitleText="Basket"
+                    TitleText="{x:Static resource:Resource.Basket}"
                     SecondaryText="{Binding OrderNo}" />
                 
                 <Grid
@@ -354,7 +355,7 @@
                     
                     <Label 
                         Grid.Row="1"
-                        Text="NO ITEMS IN BASKET"
+                        Text="{x:Static resource:Resource.NoItemsInBasket_U}"
                         Style="{DynamicResource Header3}"
                         TextColor="{StaticResource Gray3}"
                         Margin="0,40,0,0"
@@ -364,7 +365,7 @@
                     
                     <Label 
                         Grid.Row="2"
-                        Text="Add items you want to shop"
+                        Text="{x:Static resource:Resource.AddItemsYouWantToShop}"
                         Style="{DynamicResource Label2}"
                         TextColor="{StaticResource Gray9}"
                         Margin="0,20,0,0"
@@ -374,7 +375,7 @@
                     
                     <Button
                         Grid.Row="3"
-                        Text="START SHOPPING"
+                        Text="{x:Static resource:Resource.StartShopping_U}"
                         Style="{DynamicResource Button.Outline}"
                         Command="{Binding StartShoppingClickCommand}"
                         HorizontalOptions="CenterAndExpand"

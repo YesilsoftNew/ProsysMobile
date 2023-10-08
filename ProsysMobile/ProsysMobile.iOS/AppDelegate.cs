@@ -17,7 +17,6 @@ namespace ProsysMobile.iOS
             Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-
             #region Notifications
 
             FirebasePushNotificationManager.Initialize(options, true);

@@ -1,4 +1,3 @@
-using Plugin.Multilingual;
 using ProsysMobile.Helper;
 using ProsysMobile.Helper.SQLite;
 using ProsysMobile.Models.CommonModels.SQLiteModels;
@@ -6,7 +5,9 @@ using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.System;
 using System;
+using System.Globalization;
 using System.IO;
+using System.Threading;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -19,6 +20,8 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using Plugin.LocalNotification;
+using Plugin.Multilingual;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.Dialog;
 
 [assembly: ExportFont("poppins_black.ttf", Alias = "poppins_black")]
@@ -56,13 +59,13 @@ namespace ProsysMobile
 
             ViewModelLocator.Init<SplashPageViewModel>();
 
-            GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet ? true : false;
+            GlobalSetting.Instance.IsConnectedInternet = Connectivity.NetworkAccess == NetworkAccess.Internet;
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
         }
         
-        private void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
+        private static void Connectivity_ConnectivityChanged(object sender, Xamarin.Essentials.ConnectivityChangedEventArgs e)
         {
-            GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet ? true : false;
+            GlobalSetting.Instance.IsConnectedInternet = e.NetworkAccess == NetworkAccess.Internet;
         }
 
         protected override void OnStart()
@@ -98,27 +101,30 @@ namespace ProsysMobile
 
                 var defaultSettingsLanguage = defaultSettingsSqLiteService.getSettings(DefaultSettingsKey.Language);
 
-                var deviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
-                deviceCultureInfo = deviceCultureInfo.Substring(0, deviceCultureInfo.IndexOf("-"));
-
-                if (deviceCultureInfo == "tr" || deviceCultureInfo == "en" || deviceCultureInfo == "de")
-                    GlobalSetting.Instance.AppLanguage = deviceCultureInfo;
-                else
-                    GlobalSetting.Instance.AppLanguage = "de";
-
                 if (defaultSettingsLanguage != null)
                     GlobalSetting.Instance.AppLanguage = defaultSettingsLanguage.Value;
+                else
+                {
+                    var deviceCultureInfo = CrossMultilingual.Current.DeviceCultureInfo.Name;
+                
+                    if (deviceCultureInfo == "tr-TR" || deviceCultureInfo == "en-EN" || deviceCultureInfo == "de-DE")
+                        GlobalSetting.Instance.AppLanguage = deviceCultureInfo;
+                    else
+                        GlobalSetting.Instance.AppLanguage = "de-DE";
+                }
 
                 if (defaultSettingsLanguage is null)
                 {
-                    defaultSettingsLanguage = new DefaultSettings();
-                    defaultSettingsLanguage.Key = DefaultSettingsKey.Language;
-                    defaultSettingsLanguage.Value = GlobalSetting.Instance.AppLanguage;
+                    defaultSettingsLanguage = new DefaultSettings
+                    {
+                        Key = DefaultSettingsKey.Language,
+                        Value = GlobalSetting.Instance.AppLanguage
+                    };
 
                     defaultSettingsSqLiteService.Save(defaultSettingsLanguage);
                 }
                 
-                TOOLS.setCulture();
+                TOOLS.SetCulture();
 
                 #endregion
 

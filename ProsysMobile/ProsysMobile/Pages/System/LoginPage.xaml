@@ -7,6 +7,7 @@
              xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
              xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true"
@@ -47,13 +48,13 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0"
-                       Text="Welcome" 
+                       Text="{x:Static resource:Resource.Welcome}"
                        VerticalOptions="FillAndExpand"
                        HorizontalOptions="StartAndExpand"
                        HorizontalTextAlignment="Start"/>
 
                 <Label Grid.Row="1"
-                       Text="To register, please fill in the information."
+                       Text="{x:Static resource:Resource.ToRegisterPleaseFillInTheInformation}"
                        VerticalOptions="FillAndExpand"
                        HorizontalOptions="StartAndExpand" 
                        HorizontalTextAlignment="Start" 
@@ -63,19 +64,19 @@
 
 
             <controlentries:CustomEntryPrimary Grid.Row="2" 
-                                               Title="Email" 
+                                               Title="{x:Static resource:Resource.Email}"
                                                Text="{Binding Email}"
                                                Margin="0,35,0,0"/>
 
             <controlentries:CustomEntryPrimary Grid.Row="3" 
-                                               Title="Password" 
+                                               Title="{x:Static resource:Resource.Password}"
                                                Text="{Binding Password}"
                                                DisabledImageSource="EyeOff"
                                                IsPassword="True" 
                                                Margin="0,24,0,0"/>
 
             <Button Grid.Row="4"
-                    Text="Sign in"
+                    Text="{x:Static resource:Resource.SignIn}"
                     IsEnabled="True" 
                     Command="{Binding LoginClickCommand}"
                     Style="{DynamicResource Button.Primary}" 
@@ -97,16 +98,15 @@
 
                 <Label 
                     Grid.Column="0" 
-                    Text="Don't have an account?" 
+                    Text="{x:Static resource:Resource.DontHaveAnAccount}"
                     Style="{DynamicResource Description1}"
                     VerticalOptions="CenterAndExpand" 
                     HorizontalOptions="EndAndExpand"
                     HorizontalTextAlignment="End" />
 
-                <!-- TODO DEĞİŞÇEK TIKLANINCA AKSİYON OLAN HALİ İLE -->
                 <controlbuttons:CustomStandardButtonSecondary 
                     Grid.Column="1"
-                    Text="Register"
+                    Text="{x:Static resource:Resource.Register}"
                     Style="{DynamicResource Link1}"
                     Margin="5,0,0,0"
                     Command="{Binding RegisterClickCommand}"

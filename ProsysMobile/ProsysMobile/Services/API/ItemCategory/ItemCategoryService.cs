@@ -10,6 +10,7 @@ using Refit;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ProsysMobile.Resources.Language;
 
 namespace ProsysMobile.Services.API.ItemCategory
 {
@@ -38,7 +39,11 @@ namespace ProsysMobile.Services.API.ItemCategory
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.ItemCategory(mainCategoryId, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.ItemCategory(
+                    mainCategoryId: mainCategoryId,
+                    culture: Resource.Culture.ToString(),
+                    "Bearer " + GlobalSetting.Instance.JWTToken
+                );
 
                 result = await Policy
                           .Handle<ApiException>()

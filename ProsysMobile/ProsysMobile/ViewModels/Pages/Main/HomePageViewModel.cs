@@ -3,12 +3,15 @@ using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.ViewModels.Base;
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Item;
 using Xamarin.Forms;
@@ -66,13 +69,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private ObservableRangeCollection<ItemsSubDto> _deals;
         public ObservableRangeCollection<ItemsSubDto> Deals
         {
-            get
-            {
-                if (_deals == null)
-                    _deals = new ObservableRangeCollection<ItemsSubDto>();
-
-                return _deals;
-            }
+            get => _deals ?? (_deals = new ObservableRangeCollection<ItemsSubDto>());
             set
             {
                 _deals = value;
@@ -130,7 +127,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     }
                     else
                     {
-                        DialogService.WarningToastMessage("Ürün favorilere eklenemedi.");
+                        DialogService.WarningToastMessage(Resource.TheProductCouldNotBeAddedToFavorites);
                     }
                 }
                 
@@ -139,7 +136,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 ProsysLogger.Instance.CrashLog(ex);
                 
-                DialogService.WarningToastMessage("Bir hata oluştu.");
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
 
             DoubleTapping.ResumeTap();
@@ -259,13 +256,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu!");
+                    DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingCategories);
                 }
 
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Kategorileri getirirken bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -299,12 +296,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                    DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingTheProducts);
                 }
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage("Ürünleri getiriken bir hata oluştu!");
+                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
