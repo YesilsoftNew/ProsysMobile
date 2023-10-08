@@ -63,7 +63,22 @@ namespace ProsysMobile.ViewModels.Pages.System
                         if (userTokenDefaultSetting != null)
                         {
                             GlobalSetting.Instance.JWTToken = userTokenDefaultSetting.Value;
-                            GlobalSetting.Instance.JWTTokenExpireDate = Convert.ToDateTime(userTokenExpiredDateDefaultSetting.Value);
+                            
+                            var dateString = userTokenExpiredDateDefaultSetting.Value;
+        
+                            var fullParts = dateString.Split(' ', '/');
+                            var timeParts = fullParts[3].Split(' ', ':');
+
+                            var month = int.Parse(fullParts[0]);
+                            var day = int.Parse(fullParts[1]);
+                            var year = int.Parse(fullParts[2]);
+                            var hour = int.Parse(timeParts[0]);
+                            var minute = int.Parse(timeParts[1]);
+                            var second = int.Parse(timeParts[2]);
+
+                            var formatedDate = new DateTime(year, month, day, hour, minute, second);
+                            
+                            GlobalSetting.Instance.JWTTokenExpireDate = formatedDate;
                         }
                         else
                         {
