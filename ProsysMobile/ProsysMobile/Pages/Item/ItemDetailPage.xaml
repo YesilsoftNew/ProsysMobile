@@ -39,10 +39,10 @@
                 <Grid
                     Grid.Row="1"
                     Grid.Column="0"
-                    RowSpacing="16"
+                    RowSpacing="8"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand"
-                    Margin="16">
+                    Margin="24,16">
 
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -50,7 +50,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     
@@ -129,7 +129,6 @@
                         Grid.Row="2"
                         Text="{Binding ItemName}"
                         Style="{DynamicResource Header5}"
-                        Margin="0,12,0,0"
                         HorizontalOptions="CenterAndExpand"
                         VerticalOptions="FillAndExpand"/>
                     
@@ -142,7 +141,6 @@
                     
                     <Label
                         Grid.Row="4"
-                        Margin="0,10,0,0"
                         Text="{Binding ItemPrice}"
                         Style="{DynamicResource Header9}"
                         HorizontalOptions="CenterAndExpand"
@@ -153,7 +151,7 @@
                         Orientation="Horizontal" 
                         Margin="0,0,0,0"
                         HorizontalOptions="FillAndExpand" 
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="CenterAndExpand">
                 
                         <StackLayout
                             HorizontalOptions="FillAndExpand"
@@ -190,7 +188,6 @@
                     <Grid
                         Grid.Row="6"
                         ColumnSpacing="16"
-                        Margin="8,0,8,0"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="EndAndExpand">
                         

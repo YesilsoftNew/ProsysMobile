@@ -160,7 +160,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-hdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-hdpi\BidiLogo.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-hdpi\CloseBlue.png" />
@@ -173,8 +173,8 @@
     <AndroidResource Include="Resources\drawable-hdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\nfoBlue.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\NoItemBasket.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\NoItemFavorite.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\NoDataBasket.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\NoDataFavorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-hdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Settings.png" />
@@ -186,7 +186,7 @@
     <AndroidResource Include="Resources\drawable-ldpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BidiLogo.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-ldpi\CloseBlue.png" />
@@ -199,8 +199,8 @@
     <AndroidResource Include="Resources\drawable-ldpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\nfoBlue.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\NoItemBasket.png" />
-    <AndroidResource Include="Resources\drawable-ldpi\NoItemFavorite.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\NoDataBasket.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\NoDataFavorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-ldpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Settings.png" />
@@ -212,7 +212,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BidiLogo.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-mdpi\CloseBlue.png" />
@@ -225,8 +225,8 @@
     <AndroidResource Include="Resources\drawable-mdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\nfoBlue.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\NoItemBasket.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\NoItemFavorite.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\NoDataBasket.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\NoDataFavorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-mdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Settings.png" />
@@ -238,7 +238,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BidiLogo.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\CloseBlue.png" />
@@ -251,8 +251,8 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nfoBlue.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\NoItemBasket.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\NoItemFavorite.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\NoDataBasket.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\NoDataFavorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Settings.png" />
@@ -264,7 +264,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BidiLogo.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\CloseBlue.png" />
@@ -277,8 +277,8 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\nfoBlue.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\NoItemBasket.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\NoItemFavorite.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\NoDataBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\NoDataFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Settings.png" />
@@ -290,7 +290,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\AddBasket.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\BidiLogo.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\ChangeItemListType.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChevronLeftBlack.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChevronRight.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\CloseBlue.png" />
@@ -303,8 +303,8 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Favorite.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\nfoBlue.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\NoItemBasket.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\NoItemFavorite.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\NoDataBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\NoDataFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\NoPictureView.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\SelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Settings.png" />

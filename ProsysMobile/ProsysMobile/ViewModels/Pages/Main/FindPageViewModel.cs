@@ -35,7 +35,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private bool _isAllItemLoad;
         private int _listPage;
         private enItemListType _currentItemListType = enItemListType.Secondary;
-        private ItemCategory _itemCategoryAll = Constants.ItemCategoryAll;
+        private readonly ItemCategory _itemCategoryAll = Constants.ItemCategoryAll;
+        private bool _isPageLoad;
 
 
         public FindPageViewModel(IItemCategoryService itemCategoryService, IItemsService itemsService, IBestsellersService bestsellersService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
@@ -483,15 +484,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 _selectedCategories.Clear();
                 _itemCategoryAll.IsSelected = false;
                 Search = string.Empty;
-                CheckFilterAndBindShowItems();
-                
+                                
                 await GetCategoriesAndBindFromApi(
                     categoryId: Constants.MainCategoryId,
                     isSubCategory: false
                 );
-
                 await GetBestsellersAndBindFromApi();
-
+                
                 if (_mainPageClickedCategoryId is int mainPageClickedCategoryId && mainPageClickedCategoryId != _itemCategoryAll.ID)
                 {
                     Categories.ForEach(x => x.IsSelected = false);
@@ -535,6 +534,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     clearList: true
                 );
                 await GetItemsAndBindFromApi();
+
+                _isPageLoad = true;
             }
             catch (Exception ex)
             {
@@ -546,6 +547,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void SearchTimer()
         {
+            if (!_isPageLoad)
+            {
+                return;    
+            }
+            
             Device.StartTimer(TimeSpan.FromSeconds(0.1), () =>
             {
                 _searchTime -= 0.1;

@@ -81,7 +81,7 @@
                     
                     <controlbuttons:CustomStandardImageButton 
                         x:Name="ChangeListTypeBtn"
-                        ImageSource="ChangeItemListType"
+                        ImageSource="ChangeListType"
                         Style="{DynamicResource ImageButton1}" 
                         Command="{Binding ChangeListDesignButtonClickCommand}"
                         HorizontalOptions="FillAndExpand"
