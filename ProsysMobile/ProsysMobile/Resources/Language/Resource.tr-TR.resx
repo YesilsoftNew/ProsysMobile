@@ -327,4 +327,7 @@
   <data name="All" xml:space="preserve">
     <value>Hepsi</value>
   </data>
+  <data name="Culture" xml:space="preserve">
+    <value>tr</value>
+  </data>
 </root>

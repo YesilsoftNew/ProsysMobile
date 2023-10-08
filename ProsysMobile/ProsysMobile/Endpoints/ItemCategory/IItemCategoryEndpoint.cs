@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.UserMobile
     public interface IItemCategoryEndpoint
     {
         [Get("/api/ItemCategory/ItemCategory")]
-        Task<ServiceBaseResponse<List<ItemCategory>>> ItemCategory(long mainCategoryId, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<List<ItemCategory>>> ItemCategory(long mainCategoryId, string culture, [Header("Authorization")] string authorization);
     }
 }
