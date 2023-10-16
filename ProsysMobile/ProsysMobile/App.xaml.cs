@@ -172,7 +172,7 @@ namespace ProsysMobile
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 try
-                {
+                { 
                     if (Device.RuntimePlatform == Device.Android)
                     {
                         if (p.Data.ContainsKey("body") && p.Data.ContainsKey("title"))
