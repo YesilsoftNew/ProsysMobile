@@ -85,7 +85,7 @@
       <Version>3.4.35</Version>
     </PackageReference>
     <PackageReference Include="Plugin.LocalNotification">
-      <Version>5.2.0</Version>
+      <Version>10.1.8</Version>
     </PackageReference>
     <PackageReference Include="Plugin.Multilingual">
       <Version>1.0.2</Version>
