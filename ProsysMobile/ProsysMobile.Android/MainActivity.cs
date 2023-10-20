@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Globalization;
 using System.Threading;
 using Android.App;
@@ -8,6 +9,7 @@ using Android.OS;
 using Acr.UserDialogs;
 using Android.Content;
 using Plugin.FirebasePushNotification;
+using Color = Android.Graphics.Color;
 
 namespace ProsysMobile.Droid
 {
@@ -40,6 +42,11 @@ namespace ProsysMobile.Droid
 
             RequestedOrientation = ScreenOrientation.Portrait;
 
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            {
+                Window?.SetStatusBarColor(Color.White);
+            }
+            
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
