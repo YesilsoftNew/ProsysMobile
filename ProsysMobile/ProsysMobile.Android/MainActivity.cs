@@ -44,7 +44,7 @@ namespace ProsysMobile.Droid
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
-                Window?.SetStatusBarColor(Color.White);
+                Window?.SetStatusBarColor(Color.LightGray);
             }
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
