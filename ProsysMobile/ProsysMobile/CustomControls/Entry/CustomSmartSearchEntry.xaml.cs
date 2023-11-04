@@ -1,21 +1,20 @@
 ﻿using System;
+using System.Windows.Input;
 using ProsysMobile.Helper;
 using Xamarin.Forms;
-using Xamarin.Forms.PancakeView;
-using Xamarin.Forms.Xaml;
 
 namespace ProsysMobile.CustomControls.Entry
 {
-    // BindingMode
-    // https://learn.microsoft.com/en-us/xamarin/xamarin-forms/app-fundamentals/data-binding/binding-mode
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CustomSearchEntry : PancakeView 
+	public partial class CustomSmartSearchEntry
     {
+
+        #region BindablePropertys
+
         /// <summary>
         /// Keyboard Property
         /// </summary>
-        public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(CustomSearchEntry), Keyboard.Default,
-             coerceValue: (o, v) => (Keyboard)v ?? Keyboard.Default);
+        public static readonly BindableProperty KeyboardProperty = BindableProperty.Create(nameof(Keyboard), typeof(Keyboard), typeof(CustomSmartSearchEntry), Keyboard.Default,
+            coerceValue: (o, v) => (Keyboard)v ?? Keyboard.Default);
 
         /// <summary>
         /// Title Property
@@ -23,7 +22,7 @@ namespace ProsysMobile.CustomControls.Entry
         /// </summary>
         public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text),
             typeof(string),
-            typeof(CustomSearchEntry),
+            typeof(CustomSmartSearchEntry),
             default(string),
             Xamarin.Forms.BindingMode.TwoWay);
 
@@ -34,10 +33,10 @@ namespace ProsysMobile.CustomControls.Entry
         /// </summary>
         public static readonly BindableProperty PlaceholderProperty = BindableProperty.Create(
             nameof(Placeholder),
-            typeof(string), 
-            typeof(CustomSearchEntry),
+            typeof(string),
+            typeof(CustomSmartSearchEntry),
             "Arama Yapın",
-            Xamarin.Forms.BindingMode.TwoWay);
+            Xamarin.Forms.BindingMode.OneWay);
 
         /// <summary>
         /// ImageProperty
@@ -46,24 +45,46 @@ namespace ProsysMobile.CustomControls.Entry
         public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(
             nameof(ImageSource),
             typeof(string),
-            typeof(CustomSearchEntry),
+            typeof(CustomSmartSearchEntry),
             "SearchBlack",
-            Xamarin.Forms.BindingMode.TwoWay);
+            Xamarin.Forms.BindingMode.OneWay);
+
+
+        public static readonly BindableProperty SearchCommandProperty = BindableProperty.Create(
+            nameof(SearchCommand),
+            typeof(ICommand),
+            typeof(CustomSmartSearchEntry),
+            null);
+
+        #endregion
+
+        #region Commands
+
+        public ICommand SearchCommand { get => (ICommand)GetValue(SearchCommandProperty); set => SetValue(SearchCommandProperty, value); }
+
+        public ICommand UserStoppedTypingCommand
+        {
+            get
+            {
+                return new Command<string>((searchString) =>
+                {
+                    SearchCommand?.Execute(searchString);
+                });
+            }
+        }
+
+        #endregion
+
+        #region Propertys
 
         /// <summary>
         /// Title
         /// </summary>
         public string Text
         {
-            get
-            {
-                return (string)GetValue(TextProperty);
-            }
+            get => (string)GetValue(TextProperty);
 
-            set
-            {
-                SetValue(TextProperty, value);
-            }
+            set => SetValue(TextProperty, value);
         }
 
         /// <summary>
@@ -71,15 +92,9 @@ namespace ProsysMobile.CustomControls.Entry
         /// </summary>
         public string Placeholder
         {
-            get
-            {
-                return (string)GetValue(PlaceholderProperty);
-            }
+            get => (string)GetValue(PlaceholderProperty);
 
-            set
-            {
-                SetValue(PlaceholderProperty, value);
-            }
+            set => SetValue(PlaceholderProperty, value);
         }
 
         /// <summary>
@@ -87,15 +102,9 @@ namespace ProsysMobile.CustomControls.Entry
         /// </summary>
         public string ImageSource
         {
-            get
-            {
-                return (string)GetValue(ImageSourceProperty);
-            }
+            get => (string)GetValue(ImageSourceProperty);
 
-            set
-            {
-                SetValue(ImageSourceProperty, value);
-            }
+            set => SetValue(ImageSourceProperty, value);
         }
 
         /// <summary>
@@ -107,20 +116,25 @@ namespace ProsysMobile.CustomControls.Entry
             set => SetValue(KeyboardProperty, value);
         }
 
-        /// <summary>
-        /// Entry Text Change
-        /// </summary>
-        public event EventHandler<TextChangedEventArgs> EntryTextChanged;
+        #endregion
 
-        public CustomSearchEntry()
+        public CustomSmartSearchEntry()
         {
             InitializeComponent();
+            BindingContext = this;
 
             ItemSearch.Text = Text;
             ItemSearch.Placeholder = Placeholder;
             ItemImage.Source = ImageSource;
             ItemSearch.Keyboard = Keyboard;
         }
+
+        #region Events
+
+        /// <summary>
+        /// Entry Text Change
+        /// </summary>
+        public event EventHandler<TextChangedEventArgs> EntryTextChanged;
 
         /// <summary>
         /// On Property Changed
@@ -156,11 +170,7 @@ namespace ProsysMobile.CustomControls.Entry
         private void ItemSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             Text = e.NewTextValue;
-
-            if (EntryTextChanged != null)
-            {
-                EntryTextChanged(sender, e);
-            }
+            EntryTextChanged?.Invoke(sender, e);
         }
 
         /// <summary>
@@ -186,5 +196,7 @@ namespace ProsysMobile.CustomControls.Entry
                 throw;
             }
         }
+
+        #endregion
     }
 }
