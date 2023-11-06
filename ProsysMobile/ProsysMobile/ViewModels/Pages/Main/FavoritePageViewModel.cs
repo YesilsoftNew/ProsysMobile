@@ -12,13 +12,10 @@ using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Resources.Language;
-using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.Services.API.Items;
 using ProsysMobile.ViewModels.Pages.Item;
-using ProsysMobile.ViewModels.Pages.Order;
 using ProsysMobile.ViewModels.Pages.Other;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
@@ -27,8 +24,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private readonly IItemsService _itemsService;
         private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
 
-        private double _searchTime;
-        private bool _isTimerWorking;
         private bool _isAllItemLoad;
         private int _listPage = 1;
         private enItemListType _currentItemListType = enItemListType.Primary;
@@ -135,10 +130,16 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (sender == null) return;
 
-                _searchTime = 0.4;
+                Search = sender as string;
+                
+                _isAllItemLoad = false;
+                _listPage = 0;
+                UpdateItemsList(
+                    resultResponseData: null,
+                    clearList: true
+                );
 
-                if (!_isTimerWorking)
-                    SearchTimer();
+                GetItemsAndBindFromApi();
             }
             catch (Exception ex)
             {
@@ -295,35 +296,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
 
             IsBusy = false;
-        }
-
-        private void SearchTimer()
-        {
-            Device.StartTimer(TimeSpan.FromSeconds(0.1), () =>
-            {
-                _searchTime -= 0.1;
-
-                if (_searchTime <= 0.00)
-                {
-                    _isAllItemLoad = false;
-
-                    _listPage = 0;
-                    UpdateItemsList(
-                        resultResponseData: null,
-                        clearList: true
-                    );
-
-                    GetItemsAndBindFromApi();
-
-                    _isTimerWorking = false;
-
-                    return false;
-                }
-
-                _isTimerWorking = true;
-
-                return true;
-            });
         }
 
         private async Task GetItemsAndBindFromApi()
