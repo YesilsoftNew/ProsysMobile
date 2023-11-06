@@ -189,7 +189,7 @@
                         Grid.Row="6"
                         ColumnSpacing="16"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="EndAndExpand">
+                        VerticalOptions="CenterAndExpand">
                         
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
