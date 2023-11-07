@@ -324,7 +324,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
             {
                 _itemDetailPageViewModelViewParamModel.Model.IsAddItem = isAddItem;
                 
-                await NavigationService.NavigatePopBackdropAsync();
+                await NavigationService.NavigatePopModalAsync();
                 
                 _itemDetailPageViewModelViewParamModel.ClosedPageEventCommand.Execute(_itemDetailPageViewModelViewParamModel.Model);
             }

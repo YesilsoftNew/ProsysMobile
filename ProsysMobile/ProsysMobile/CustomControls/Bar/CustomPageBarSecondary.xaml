@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<yummy:PancakeView xmlns="http://xamarin.com/schemas/2014/forms"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   x:Class="ProsysMobile.CustomControls.Bar.CustomPageBarSecondary"
+                   xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   xmlns:button="clr-namespace:ProsysMobile.CustomControls.Button;assembly=ProsysMobile"
+                   VerticalOptions="FillAndExpand"
+                   HorizontalOptions="FillAndExpand"
+                   Style="{DynamicResource Border4}">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.5*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="2.5*"/>
+        </Grid.ColumnDefinitions>
+
+        <button:CustomStandardImageButton 
+            Grid.Column="0" 
+            x:Name="ItemButtonPrevious" 
+            ImageButtonClicked="ItemButtonPrevious_Clicked" 
+            Style="{DynamicResource NavBars.Standard.ImageButton}" 
+            VerticalOptions="CenterAndExpand" 
+            HorizontalOptions="Start"/>
+        
+        <Grid Grid.Column="1" 
+              VerticalOptions="CenterAndExpand"
+              HorizontalOptions="CenterAndExpand"
+              RowSpacing="0">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Label 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                x:Name="ItemTitle" 
+                Style="{DynamicResource Header2}" 
+                VerticalOptions="FillAndExpand" 
+                VerticalTextAlignment="Center" 
+                HorizontalTextAlignment="Center" />
+            
+        </Grid>
+        
+    </Grid>
+</yummy:PancakeView>
