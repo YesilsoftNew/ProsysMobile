@@ -74,6 +74,10 @@
       <DependentUpon>OrderItemSecondary.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="CustomControls\Backdrop\CustomBackdrop.xaml.cs">
+      <DependentUpon>CustomBackdrop.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
