@@ -19,7 +19,7 @@
 
     <ContentView>
 
-        <Grid Style="{DynamicResource Customs.Backdrop.MainGridSecondary}"
+        <Grid 
               VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"></RowDefinition>
@@ -64,7 +64,7 @@
                             IndicatorView="IndicatorView"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
-                            HeightRequest="200"
+                            HeightRequest="250"
                             ItemsSource="{Binding Images}"
                             HorizontalScrollBarVisibility="Never"
                             VerticalScrollBarVisibility="Never"
@@ -81,8 +81,8 @@
                                             HorizontalOptions="CenterAndExpand">
                     
                                             <ImageButton
-                                                WidthRequest="200"
-                                                HeightRequest="200"
+                                                WidthRequest="250"
+                                                HeightRequest="250"
                                                 Aspect="AspectFill"
                                                 BackgroundColor="Transparent"
                                                 Command="{Binding Source={x:Reference CarouselView}, Path=BindingContext.ImageClickCommand}"
