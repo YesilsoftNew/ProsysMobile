@@ -15,7 +15,8 @@
              xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
-             viewModelBase:ViewModelLocator.AutoWireViewModel="true">
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             x:Name="FavoritePageKey">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -47,26 +48,16 @@
                     <ColumnDefinition Width="AUTO"/>
                 </Grid.ColumnDefinitions>
 
-                <entries:CustomSearchEntry 
+                <entries:CustomSmartSearchEntry 
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="16,0,16,0"
                     Text="{Binding Search}"
                     Placeholder="{x:Static resource:Resource.SearchHere}"
+                    SearchCommand="{Binding BindingContext.SearchEntryTextChangedCommand, Source={Reference FavoritePageKey}}"
                     ImageSource="EntrySearch"
                     HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-
-                    <controlEntries:CustomSearchEntry.Behaviors>
-
-                        <behaviors:EventToCommandBehavior 
-                            EventName="EntryTextChanged"
-                            EventArgsConverter="{StaticResource TextChangedEventArgsConverter}"
-                            Command="{Binding SearchEntryTextChangedCommand}"/>
-
-                    </controlEntries:CustomSearchEntry.Behaviors>
-
-                </entries:CustomSearchEntry>
+                    VerticalOptions="FillAndExpand" />
 
                 <Grid
                     Grid.Row="0"

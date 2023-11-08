@@ -27,9 +27,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private readonly IItemsService _itemsService;
         private readonly IBestsellersService _bestsellersService;
         private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
-        
-        private double _searchTime;
-        private bool _isTimerWorking;
+
         private List<CategoryFilter> _selectedCategories = new List<CategoryFilter>();
         private int? _mainPageClickedCategoryId;
         private bool _isAllItemLoad;
@@ -212,10 +210,44 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (sender == null) return;
 
-                _searchTime = 0.4;
+                Search = sender as string;
+                
+                _isAllItemLoad = false;
 
-                if (!_isTimerWorking)
-                    SearchTimer();
+                var isNullSearch = string.IsNullOrWhiteSpace(Search);
+                var isNotNullSearch = !string.IsNullOrWhiteSpace(Search);
+
+                ShowBestsellers = isNullSearch;
+                ChangeShowItemVisibility(isNotNullSearch);
+                ShowChangeItemListDesignButton = isNotNullSearch;
+
+                if (!string.IsNullOrWhiteSpace(Search))
+                {
+                    Categories.Where(x => x.IsSelected).ForEach(x => x.IsSelected = false);
+
+                    Categories.FirstOrDefault(x => x.ID == _itemCategoryAll.ID).IsSelected = true;
+                    _selectedCategories = new List<CategoryFilter>
+                    {
+                        new CategoryFilter
+                        {
+                            Id = _itemCategoryAll.ID,
+                            IsMain = true
+                        }
+                    };
+                    
+                    ShowSubCategories = false;
+                }
+
+                if (!string.IsNullOrWhiteSpace(Search) || _selectedCategories.Any())
+                {
+                    _listPage = 0;
+                    UpdateItemsList(
+                        resultResponseData: null,
+                        clearList: true
+                    );
+
+                    GetItemsAndBindFromApi();
+                }
             }
             catch (Exception ex)
             {
@@ -349,7 +381,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         ClosedPageEventCommand = ItemDetailClosedEventCommand
                     };
 
-                    await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
+                    await NavigationService.NavigateToModalAsync<ItemDetailPageViewModel>(navigationModel);
                 }
 
             }
@@ -543,57 +575,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
 
             IsBusy = false;
-        }
-
-        private void SearchTimer()
-        {
-            if (!_isPageLoad)
-            {
-                return;    
-            }
-            
-            Device.StartTimer(TimeSpan.FromSeconds(0.1), () =>
-            {
-                _searchTime -= 0.1;
-
-                if (_searchTime <= 0.00)
-                {
-                    _isAllItemLoad = false;
-
-                    var isNullSearch = string.IsNullOrWhiteSpace(Search);
-                    var isNotNullSearch = !string.IsNullOrWhiteSpace(Search);
-
-                    ShowBestsellers = isNullSearch;
-                    ChangeShowItemVisibility(isNotNullSearch);
-                    ShowChangeItemListDesignButton = isNotNullSearch;
-
-                    if (!string.IsNullOrWhiteSpace(Search))
-                    {
-                        Categories.Where(x => x.IsSelected).ForEach(x => x.IsSelected = false);
-                        _selectedCategories.Clear();
-                        ShowSubCategories = false;
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(Search) || _selectedCategories.Any())
-                    {
-                        _listPage = 0;
-                        UpdateItemsList(
-                            resultResponseData: null,
-                            clearList: true
-                        );
-
-                        GetItemsAndBindFromApi();
-                    }
-
-                    _isTimerWorking = false;
-
-                    return false;
-                }
-
-                _isTimerWorking = true;
-
-                return true;
-            });
         }
 
         private async Task GetItemsAndBindFromApi()
@@ -853,7 +834,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ClosedPageEventCommand = ItemDetailClosedEventCommand
                 };
 
-                await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToModalAsync<ItemDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {

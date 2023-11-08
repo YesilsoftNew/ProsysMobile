@@ -37,7 +37,7 @@ namespace ProsysMobile.CustomControls.Entry
             typeof(string), 
             typeof(CustomSearchEntry),
             "Arama Yapın",
-            Xamarin.Forms.BindingMode.OneWay);
+            Xamarin.Forms.BindingMode.TwoWay);
 
         /// <summary>
         /// ImageProperty
@@ -48,7 +48,7 @@ namespace ProsysMobile.CustomControls.Entry
             typeof(string),
             typeof(CustomSearchEntry),
             "SearchBlack",
-            Xamarin.Forms.BindingMode.OneWay);
+            Xamarin.Forms.BindingMode.TwoWay);
 
         /// <summary>
         /// Title

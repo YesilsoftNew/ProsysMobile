@@ -9,8 +9,8 @@
                          xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
                          viewModelBase:ViewModelLocator.AutoWireViewModel="true"
                          Style="{DynamicResource Customs.Backdrop.Backdrop}"
-                         IsSetPanListener="False"
-                         SetPageAnimationRight="True"
+                         IsSetPanListener="True"
+                         SetPageAnimationRight="False"
                          mc:Ignorable="d"
                          x:Class="ProsysMobile.Pages.Other.BigImagePage">
     
@@ -23,10 +23,10 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <controlbars:CustomBackDropToolbarSecondary
+                <controlbars:CustomBackDropToolbarPrimary
                     Grid.Row="0"
                     Title="{x:Static resource:Resource.ImageDetail}">
-                </controlbars:CustomBackDropToolbarSecondary>
+                </controlbars:CustomBackDropToolbarPrimary>
 
                 <Grid
                     Grid.Row="1"
