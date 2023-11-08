@@ -185,7 +185,7 @@ namespace ProsysMobile
                                 NotificationId = random.Next(1, int.MaxValue)
                             };
 
-                            NotificationCenter.Current.Show(notification);
+                            LocalNotificationCenter.Current.Show(notification);
                         }
                     }
                     else
@@ -198,7 +198,7 @@ namespace ProsysMobile
                             NotificationId = random.Next(1, int.MaxValue)
                         };
 
-                        NotificationCenter.Current.Show(notification);   
+                        LocalNotificationCenter.Current.Show(notification);   
                     }
                 }
                 catch (Exception)
