@@ -26,7 +26,11 @@ namespace ProsysMobile.iOS
             return base.FinishedLaunching(app, options);
         }
         
-        
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, UIWindow forWindow)
+        {
+            return UIInterfaceOrientationMask.Portrait;
+        }
+
         public override void RegisteredForRemoteNotifications(UIApplication application, NSData deviceToken)
         {
             FirebasePushNotificationManager.DidRegisterRemoteNotifications(deviceToken);

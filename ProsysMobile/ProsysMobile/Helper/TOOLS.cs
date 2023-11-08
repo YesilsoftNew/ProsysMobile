@@ -8,8 +8,10 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using Plugin.FirebasePushNotification;
+using ProsysMobile.CustomControls.Entry;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace ProsysMobile.Helper
 {
@@ -295,6 +297,48 @@ namespace ProsysMobile.Helper
                 Timezone = string.Empty,
                 RecordDate = DateTime.Now
             };
+        }
+        
+        public static void LoopContentPage(dynamic obj, View content)
+        {
+            if (obj is Grid grd)
+            {
+                foreach (var grdItem in grd.Children)
+                {
+                    if (grdItem is CustomEntryPrimary gridChildEntry)
+                    {
+                        gridChildEntry.EntryFocused += (sender, args) => Keyboard_EntryFocused(sender, args, content);
+                        gridChildEntry.EntryUnFocused += (sender, args) => Keyboard_EntryUnFocused(sender, args, content);
+                    }
+                    else
+                        LoopContentPage(grdItem, content);
+                }
+            }
+
+            if (obj is StackLayout stc)
+            {
+                foreach (var stcItem in stc.Children)
+                {
+                    if (stcItem is CustomEntryPrimary stcChildEntry)
+                    {
+                        stcChildEntry.EntryFocused += (sender, args) => Keyboard_EntryFocused(sender, args, content);
+                        stcChildEntry.EntryUnFocused += (sender, args) => Keyboard_EntryUnFocused(sender, args, content);
+                    }
+                    else
+                        LoopContentPage(stcItem, content);
+                }
+            }
+        }
+
+        public static void Keyboard_EntryUnFocused(object sender, FocusEventArgs e, View content)
+        {
+            content.TranslationY = 0;
+        }
+
+        public static void Keyboard_EntryFocused(object sender, FocusEventArgs e, View content)
+        {
+            var keyboardHeight = 240;
+            content.TranslationY = -keyboardHeight;
         }
     }
 }

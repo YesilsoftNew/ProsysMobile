@@ -1,8 +1,5 @@
-using System;
-using Plugin.FirebasePushNotification;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Resources.Language;
-using Xamarin.Essentials;
 
 namespace ProsysMobile.Helper
 {
@@ -15,13 +12,12 @@ namespace ProsysMobile.Helper
             ID = 0,
             CategoryDesc = Resource.All,
             MainCategoryId = 0,
-            Image = "http://yas.yesilsoft.net/Images/AllCategory.png",
+            Image = "http://common.yas.yesilsoft.com/Categories/AllCategory.png",
             RecordState = null,
             IsSelected = false
         };
 
         public static string UnSelectedFavoriteImageSource = "UnSelectedFavorite";
         public static string SelectedFavoriteImageSource = "SelectedFavorite";
-        
     }
 }

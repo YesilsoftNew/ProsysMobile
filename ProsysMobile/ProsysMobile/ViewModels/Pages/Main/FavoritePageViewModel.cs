@@ -486,7 +486,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ClosedPageEventCommand = ItemDetailClosedEventCommand
                 };
 
-                await NavigationService.NavigateToBackdropAsync<ItemDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToModalAsync<ItemDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {
