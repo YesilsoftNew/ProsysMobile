@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
 
             <Image Grid.Row="0"
-                   Source="BidiLogo"
+                   Source="RoundLogo"
                    Aspect="AspectFit"
                    VerticalOptions="Fill" 
                    HorizontalOptions="Center"

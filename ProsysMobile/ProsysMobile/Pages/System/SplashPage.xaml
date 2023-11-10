@@ -13,7 +13,7 @@
         <Image 
             VerticalOptions="CenterAndExpand" 
             HorizontalOptions="CenterAndExpand" 
-            Source="BidiLogo" 
+            Source="RoundLogo" 
             Aspect="AspectFill" 
             HeightRequest="261"
             WidthRequest="261" />
