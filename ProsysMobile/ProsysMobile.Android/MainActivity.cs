@@ -1,19 +1,16 @@
-﻿using System;
-using System.Drawing;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Threading;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Acr.UserDialogs;
-using Android.Content;
 using Plugin.FirebasePushNotification;
 using Color = Android.Graphics.Color;
 
 namespace ProsysMobile.Droid
 {
-    [Activity(Label = "ProsysMobile", Icon = "@drawable/Logo",RoundIcon = "@drawable/Logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(Label = "Bidi Früchte", Icon = "@drawable/Logo",RoundIcon = "@drawable/Logo", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
