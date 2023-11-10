@@ -2,33 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CLIENT_ID</key>
-	<string>1096956301902-42paj1aae038mn132hg109q44ou4o43c.apps.googleusercontent.com</string>
-	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1096956301902-42paj1aae038mn132hg109q44ou4o43c</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBpKp9lSFcpfkTvFGB9CPn6qTp3ktelyMY</string>
+	<string>AIzaSyC0Cils4H54dkNSQNivSod8WvvHCouH_7g</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1096956301902</string>
+	<string>54905975426</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.yesilsoft.prosysmobilekuru</string>
+	<string>com.yesilsoft.prosysmobileyas</string>
 	<key>PROJECT_ID</key>
-	<string>prosysmobile-b573d</string>
+	<string>bidi-fruchte</string>
 	<key>STORAGE_BUCKET</key>
-	<string>prosysmobile-b573d.appspot.com</string>
+	<string>bidi-fruchte.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1096956301902:ios:eedaeade77f2816f02691f</string>
+	<string>1:54905975426:ios:9f25a7ce8964d097e2fa9b</string>
 </dict>
 </plist>

@@ -17,15 +17,15 @@ namespace ProsysMobile.CustomControls.Entry
         /// PlaceholderProperty Property
         /// Entry PlaceholderProperty
         /// </summary>
-        public static readonly BindableProperty IsFocusAndSelectTextProperty = BindableProperty.Create(nameof(IsFocusAndSelectText), typeof(bool), typeof(CustomEntryPrimary), default(string), Xamarin.Forms.BindingMode.TwoWay);
+        public static readonly BindableProperty IsSelectTextProperty = BindableProperty.Create(nameof(IsSelectText), typeof(bool), typeof(CustomEntryPrimary), default(string), Xamarin.Forms.BindingMode.TwoWay);
 
         /// <summary>
         /// Text
         /// </summary>
-        public bool IsFocusAndSelectText
+        public bool IsSelectText
         {
-            get => (bool)GetValue(IsFocusAndSelectTextProperty);
-            set => SetValue(IsFocusAndSelectTextProperty, value);
+            get => (bool)GetValue(IsSelectTextProperty);
+            set => SetValue(IsSelectTextProperty, value);
         }
 
         /// <summary>
@@ -307,7 +307,7 @@ namespace ProsysMobile.CustomControls.Entry
 
                 if (IsUpperCase)
                     ItemEntry.Keyboard = Keyboard.Create(KeyboardFlags.CapitalizeCharacter);
-
+                
                 CheckIsDisabled();
             }
             catch (Exception ex)
@@ -326,6 +326,15 @@ namespace ProsysMobile.CustomControls.Entry
             try
             {
                 EntryFocused?.Invoke(sender, e);
+                
+                if (IsSelectText)
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        ItemEntry.CursorPosition = 0;
+                        ItemEntry.SelectionLength = ItemEntry.Text.Length;
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -439,19 +448,6 @@ namespace ProsysMobile.CustomControls.Entry
                 else if (propertyName == IsPasswordProperty.PropertyName)
                 {
                     ItemEntry.IsPassword = IsPassword;
-                }
-                else if (propertyName == IsFocusAndSelectTextProperty.PropertyName)
-                {
-                    if (IsFocusAndSelectText)
-                    {
-                        ItemEntry.Focus();
-                        ItemEntry.CursorPosition = 0;
-                        ItemEntry.SelectionLength = ItemEntry.Text.Length;
-                    }
-                    else
-                    {
-                        ItemEntry.Unfocus();
-                    }
                 }
             }
             catch (Exception ex)
