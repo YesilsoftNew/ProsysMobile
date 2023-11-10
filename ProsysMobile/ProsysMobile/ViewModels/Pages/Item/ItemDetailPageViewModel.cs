@@ -80,7 +80,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _favoriteImageSource;
         public string FavoriteImageSource { get => _favoriteImageSource; set { _favoriteImageSource = value; PropertyChanged(() => FavoriteImageSource); } }
         
-        private bool _isFocusAndSelectText;
+        private bool _isFocusAndSelectText = true;
         public bool IsFocusAndSelectText { get => _isFocusAndSelectText; set { _isFocusAndSelectText = value; PropertyChanged(() => IsFocusAndSelectText); } }
         
         private ObservableRangeCollection<string> _images;
