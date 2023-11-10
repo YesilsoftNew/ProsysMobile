@@ -282,7 +282,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     ItemPieces = responseModel.Item.Pieces;
                     ItemPrice = responseModel.Item.Price;
                     Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
-                    ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) ? "0" : responseModel.Item.Amount;
+                    ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) || responseModel.Item.Amount == "0" ? "1" : responseModel.Item.Amount;
                     FavoriteImageSource = responseModel.Item.IsFavorite
                         ? Constants.SelectedFavoriteImageSource
                         : Constants.UnSelectedFavoriteImageSource;
