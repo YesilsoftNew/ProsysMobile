@@ -5,11 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     
     <!--#region Theme 1 Colors-->
-    <Color x:Key="Color1">#03254C</Color>
-    <Color x:Key="Color2">#2A9DF4</Color>
-    <Color x:Key="Color3">#187BCD</Color>
-    <Color x:Key="Color4">#1167B1</Color>
-    <Color x:Key="Color5">#0061A1</Color>
+    <Color x:Key="Color1">#418134</Color>
+    <Color x:Key="Color2">#7DCE</Color>
+    <Color x:Key="Color3">#7BD46B</Color>
+    <Color x:Key="Color4">#D4F1CA</Color>
+    <Color x:Key="Color5">#418134</Color>
     <Color x:Key="Color6">#A5A5A5</Color>
 
     <Color x:Key="Black1">#000000</Color>

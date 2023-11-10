@@ -24,7 +24,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Bidi Früchte</string>
 	<key>CFBundleIdentifier</key>
-	<string>c</string>
+	<string>com.yesilsoft.prosysmobileyas</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>CFBundleShortVersionString</key>
