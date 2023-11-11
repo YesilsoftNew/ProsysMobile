@@ -174,13 +174,31 @@ namespace ProsysMobile
             {
                 try
                 {
-                    var title = p?.Data["title"]?.ToString();
-                    var body = p?.Data["body"]?.ToString();
-                        
-                    CrossLocalNotifications.Current.Show(
-                        title: title ?? "allah belanı",
-                        body: body ?? "allah belanııııııı"
-                    );
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        var title = p?.Data["title"]?.ToString();
+                        var body = p?.Data["body"]?.ToString();
+
+                        if (!string.IsNullOrWhiteSpace(title) && !string.IsNullOrWhiteSpace(body))
+                        {
+                            CrossLocalNotifications.Current.Show(
+                                title: title,
+                                body: body
+                            );
+                        }
+                    } 
+                    else 
+                    {
+                        var notification = new NotificationRequest
+                        {
+                            BadgeNumber = 1,
+                            Description = "",
+                            Title = "",
+                            NotificationId = random.Next(1, int.MaxValue)
+                        };
+
+                        NotificationCenter.Current.Show(notification);   
+                    }
                 }
                 catch (Exception)
                 {
