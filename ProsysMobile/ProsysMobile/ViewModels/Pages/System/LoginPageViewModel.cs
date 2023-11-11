@@ -14,6 +14,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Plugin.FirebasePushNotification;
+using Plugin.LocalNotification;
+using Plugin.LocalNotifications;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
@@ -62,7 +64,7 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             try
             {
-                await GetUserAuthAsync();
+                GetUserAuthAsync();
             }
             catch (Exception ex)
             {

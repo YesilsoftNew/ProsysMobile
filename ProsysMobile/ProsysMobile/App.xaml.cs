@@ -20,6 +20,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Device = Xamarin.Forms.Device;
 using Plugin.LocalNotification;
+using Plugin.LocalNotifications;
 using Plugin.Multilingual;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.Dialog;
@@ -172,34 +173,14 @@ namespace ProsysMobile
             CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
             {
                 try
-                { 
-                    if (Device.RuntimePlatform == Device.Android)
-                    {
-                        if (p.Data.ContainsKey("body") && p.Data.ContainsKey("title"))
-                        {
-                            var notification = new NotificationRequest
-                            {
-                                BadgeNumber = 1,
-                                Description = p.Data["body"].ToString(),
-                                Title = p.Data["title"].ToString(),
-                                NotificationId = random.Next(1, int.MaxValue)
-                            };
-
-                            NotificationCenter.Current.Show(notification);
-                        }
-                    }
-                    else
-                    {
-                        var notification = new NotificationRequest
-                        {
-                            BadgeNumber = 1,
-                            Description = "",
-                            Title = "",
-                            NotificationId = random.Next(1, int.MaxValue)
-                        };
-
-                        NotificationCenter.Current.Show(notification);   
-                    }
+                {
+                    var title = p?.Data["title"]?.ToString();
+                    var body = p?.Data["body"]?.ToString();
+                        
+                    CrossLocalNotifications.Current.Show(
+                        title: title ?? "allah belanı",
+                        body: body ?? "allah belanııııııı"
+                    );
                 }
                 catch (Exception)
                 {
