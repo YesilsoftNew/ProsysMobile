@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.OS;
 using Acr.UserDialogs;
 using Plugin.FirebasePushNotification;
+using Plugin.LocalNotification;
+using Plugin.LocalNotification.Platform.Droid;
+using Plugin.LocalNotifications;
 using Color = Android.Graphics.Color;
 
 namespace ProsysMobile.Droid
@@ -34,9 +37,11 @@ namespace ProsysMobile.Droid
             
             base.OnCreate(savedInstanceState);
 
+            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.Logo;
+            
             UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this);
-
+            
             RequestedOrientation = ScreenOrientation.Portrait;
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
