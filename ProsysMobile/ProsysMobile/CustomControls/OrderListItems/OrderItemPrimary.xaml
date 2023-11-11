@@ -62,6 +62,7 @@
             Grid.Row="2"
             Text="-"
             Style="{DynamicResource Description2}"
+            TextColor="{DynamicResource Black1}"
             HorizontalOptions="Start"
             VerticalOptions="FillAndExpand"/>
                         

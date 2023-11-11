@@ -115,6 +115,7 @@
                     x:Name="ItemName"
                     Text="-"
                     Style="{DynamicResource Header6}"
+                    TextColor="{DynamicResource Black1}"
                     HorizontalTextAlignment="Center"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="FillAndExpand"/>

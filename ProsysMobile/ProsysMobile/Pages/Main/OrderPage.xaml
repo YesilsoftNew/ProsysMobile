@@ -152,6 +152,7 @@
                                                             Grid.Row="0"
                                                             Text="{Binding Name}"
                                                             Style="{DynamicResource Header3}"
+                                                            TextColor="{DynamicResource Black1}"
                                                             HorizontalOptions="StartAndExpand"
                                                             VerticalOptions="FillAndExpand" />
                                                         
@@ -244,6 +245,7 @@
                                                             Grid.Column="1"
                                                             Style="{DynamicResource Label5}"
                                                             Text="{Binding Amount}"
+                                                            TextColor="{DynamicResource Black1}"
                                                             HorizontalOptions="StartAndExpand"
                                                             VerticalOptions="CenterAndExpand"></Label>
                                                     

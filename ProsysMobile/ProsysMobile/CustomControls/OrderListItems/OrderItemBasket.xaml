@@ -87,6 +87,7 @@
                         Grid.Row="0"
                         x:Name="ItemName"
                         Style="{DynamicResource Header3}"
+                        TextColor="{DynamicResource Black1}"
                         HorizontalOptions="StartAndExpand"
                         VerticalOptions="FillAndExpand" />
                     
@@ -141,6 +142,7 @@
                     x:Name="ItemAmount"
                     Grid.Column="1"
                     Style="{DynamicResource Label5}"
+                    TextColor="{DynamicResource Black1}"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="CenterAndExpand"></Label>
                 

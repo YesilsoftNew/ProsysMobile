@@ -29,6 +29,7 @@
             Text="-"
             Margin="12,16,0,0"
             Style="{DynamicResource Header3}"
+            TextColor="{DynamicResource Black1}"
             HorizontalOptions="Start"
             VerticalOptions="FillAndExpand"/>
       

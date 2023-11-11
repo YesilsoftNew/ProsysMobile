@@ -59,6 +59,7 @@
                 x:Name="ItemName"
                 Grid.Row="0"
                 Style="{DynamicResource Header3}"
+                TextColor="{DynamicResource Black1}"
                 HorizontalOptions="StartAndExpand"
                 VerticalOptions="FillAndExpand"/>
 
