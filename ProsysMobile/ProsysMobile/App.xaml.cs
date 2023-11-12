@@ -191,7 +191,7 @@ namespace ProsysMobile
                     {
                         var notification = new NotificationRequest
                         {
-                            BadgeNumber = 1,
+                            BadgeNumber = 0,
                             Description = "",
                             Title = "",
                             NotificationId = random.Next(1, int.MaxValue)

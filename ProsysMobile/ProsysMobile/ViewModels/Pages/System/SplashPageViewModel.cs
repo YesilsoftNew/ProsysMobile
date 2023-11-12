@@ -64,8 +64,8 @@ namespace ProsysMobile.ViewModels.Pages.System
                             var fullParts = dateString.Split(' ', '/');
                             var timeParts = fullParts[3].Split(' ', ':');
 
-                            var month = int.Parse(fullParts[0]);
-                            var day = int.Parse(fullParts[1]);
+                            var day = int.Parse(fullParts[0]);
+                            var month = int.Parse(fullParts[1]);
                             var year = int.Parse(fullParts[2]);
                             var hour = int.Parse(timeParts[0]);
                             var minute = int.Parse(timeParts[1]);
@@ -102,7 +102,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                                 var expiredDateString = token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value;
                                 
                                 GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
-                                GlobalSetting.Instance.JWTTokenExpireDate = DateTime.Parse(expiredDateString);
+                                GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "MM/dd/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
                                 
                                 userTokenDefaultSetting.Key = "UserToken";
                                 userTokenDefaultSetting.Value = GlobalSetting.Instance.JWTToken;
