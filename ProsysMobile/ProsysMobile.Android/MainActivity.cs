@@ -29,7 +29,7 @@ namespace ProsysMobile.Droid
                 {
                     NumberDecimalSeparator = ".",
                     NumberGroupSeparator = ","
-                }
+                } 
             };
 
             Thread.CurrentThread.CurrentCulture = ci;
