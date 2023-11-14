@@ -134,15 +134,36 @@
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="FillAndExpand"/>
             
-                <Label
-                    x:Name="ItemPrice"
+                <Grid
                     Grid.Row="2"
                     Grid.Column="0"
-                    Text="-"
-                    Style="{DynamicResource Header4}"
                     Margin="0,0,0,11"
-                    HorizontalOptions="StartAndExpand"
-                    VerticalOptions="CenterAndExpand"/>
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label
+                        x:Name="ItemPrice"
+                        Text="-"
+                        Style="{DynamicResource Header4}"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="EndAndExpand"/>
+                    
+                    <Image
+                        x:Name="IsAddedBasketImage"
+                        Grid.Column="1"
+                        Source="AddedBasket"
+                        IsVisible="False"
+                        Style="{DynamicResource Image5}"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="StartAndExpand" />
+                    
+                </Grid>
+                
                 
             </Grid>
             

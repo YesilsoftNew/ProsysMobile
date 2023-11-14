@@ -180,6 +180,7 @@
                             Tag3Color="{Binding Tag3Color}"
                             Tag4Text="{Binding Tag4Text}"
                             Tag4Color="{Binding Tag4Color}"
+                            IsAddedBasket="{Binding IsAddedBasket}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListSecondary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
