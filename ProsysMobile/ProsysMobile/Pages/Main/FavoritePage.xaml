@@ -148,7 +148,7 @@
                  SelectedItem="{Binding SelectedItem}"
                  RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always"
-                 Margin="0,8,0,0">
+                 Margin="5,8,7.5,0">
 
                 <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
