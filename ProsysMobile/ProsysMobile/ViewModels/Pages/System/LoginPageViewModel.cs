@@ -44,8 +44,8 @@ namespace ProsysMobile.ViewModels.Pages.System
         {
             if (Debugger.IsAttached)
             {
-                Email = "test@test.com";
-                Password = "Test.1193";
+                Email = "yyy";
+                Password = "1";
             }
 
             return base.InitializeAsync(navigationData);

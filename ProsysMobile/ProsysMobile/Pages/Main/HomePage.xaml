@@ -121,7 +121,8 @@
                         RemainingItemsThreshold="5"
                         VerticalScrollBarVisibility="Always"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="FillAndExpand"
+                        Margin="5,0,7.5,0">
 
                         <CollectionView.Behaviors>
                             <behaviors:EventToCommandBehavior EventName="SelectionChanged"
