@@ -161,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\AddedBasket.png" />
     <AndroidResource Include="Resources\drawable-hdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ChevronLeftBlack.png" />
@@ -188,6 +189,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\UnSelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-hdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-ldpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\AddedBasket.png" />
     <AndroidResource Include="Resources\drawable-ldpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ChevronLeftBlack.png" />
@@ -215,6 +217,7 @@
     <AndroidResource Include="Resources\drawable-ldpi\UnSelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-ldpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-mdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\AddedBasket.png" />
     <AndroidResource Include="Resources\drawable-mdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ChevronLeftBlack.png" />
@@ -242,6 +245,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\UnSelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-mdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\AddedBasket.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ChevronLeftBlack.png" />
@@ -269,6 +273,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\UnSelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\AddedBasket.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ChevronLeftBlack.png" />
@@ -296,6 +301,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\UnSelectedFavorite.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\WarningYellow.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\AddBasket.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\AddedBasket.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\BadgeAdd.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChangeListType.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ChevronLeftBlack.png" />

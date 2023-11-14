@@ -42,5 +42,7 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public Color Tag2Color => Color.FromHex(Tag2ColorStr);
         public Color Tag3Color => Color.FromHex(Tag3ColorStr);
         public Color Tag4Color => Color.FromHex(Tag4ColorStr);
+
+        public bool IsAddedBasket { get; set; }
     }
 }
