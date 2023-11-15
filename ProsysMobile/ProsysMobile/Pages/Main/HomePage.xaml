@@ -100,7 +100,7 @@
                 Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="16,0,0,0" />
+                Margin="16,0,0,10"/>
             
             <StackLayout
                 Grid.Row="3" 
