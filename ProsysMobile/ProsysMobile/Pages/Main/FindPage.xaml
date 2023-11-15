@@ -168,9 +168,10 @@
 
                                 <customContolsOther:CustomSubCategoryGrid
                                     Text="{Binding CategoryDesc}"
-                                    Color="Blue"
+                                    Color="{DynamicResource Color6}"
                                     Margin="0,0,16,0"
                                     IsClickable="true"
+                                    IsSelected="{Binding IsSelected}"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
 
