@@ -30,6 +30,7 @@
     <Color x:Key="Gray7">#515151</Color>
     <Color x:Key="Gray8">#EFEFEF</Color>
     <Color x:Key="Gray9">#C1C1C1</Color>
+    <Color x:Key="Gray10">#D7D9D8</Color>
     
     <Color x:Key="Red1">#D03739</Color>
 
