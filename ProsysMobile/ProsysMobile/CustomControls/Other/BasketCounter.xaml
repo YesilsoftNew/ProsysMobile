@@ -17,7 +17,43 @@
             <ColumnDefinition Width="AUTO"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
+        <Grid
+            Grid.Column="0"
+            BackgroundColor="#F3F4F6"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand">
+            
+            <Image
+                Source="TrashCounter"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="5" />
+            
+        </Grid>
         
+        <Grid
+            Grid.Column="1"
+            WidthRequest="60"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand">
+            
+            
+            
+        </Grid>
+        
+        <Grid
+            Grid.Column="2"
+            BackgroundColor="#F3F4F6"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand">
+            
+            <Image
+                Source="PlusCounter"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                Margin="5" />
+            
+        </Grid>
         
     </Grid>
     
