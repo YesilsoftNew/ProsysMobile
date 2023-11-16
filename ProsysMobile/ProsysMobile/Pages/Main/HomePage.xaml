@@ -70,10 +70,10 @@
                             <customContolsOther:CustomCategoryGrid
                                 Text="{Binding CategoryDesc}"
                                 ImageSource="{Binding Image}"
-                                ImageHeight="95"
-                                ImageWidth="95"
+                                ImageHeight="50"
+                                ImageWidth="50"
                                 LabelStyle="{DynamicResource Label2}"
-                                FlexLayout.Basis="33.33%"
+                                FlexLayout.Basis="25%"
                                 RowSpacing="6"
                                 Padding="0,0,0,24"
                                 HorizontalOptions="CenterAndExpand" 
