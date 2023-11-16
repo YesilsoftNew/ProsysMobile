@@ -240,8 +240,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 else
                 {
-                    IsBusy = false;
-                    return;
                     var result = await _updateOrderDetailForItemService.UpdateOrderDetailForItem(
                         orderDetailsParam: new OrderDetailsParam
                         {
@@ -257,7 +255,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         var responseModel = result.ResponseData;
                         
                         item.StockCount = responseModel.ItemStockCount;
-                        item.UnitPrice = responseModel.ItemUnitPrice;
+                        item.StockCountInt = responseModel.ItemStockCountInt;
+                        item.Price = responseModel.ItemPrice;
                         NetTotal = responseModel.NetTotal;
                     }
                     else

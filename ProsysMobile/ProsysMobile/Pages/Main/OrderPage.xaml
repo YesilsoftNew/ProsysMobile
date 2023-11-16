@@ -230,6 +230,7 @@
                                                     
                                                         <controlOther:BasketCounter 
                                                             ItemId="{Binding Id}"
+                                                            Text="{Binding Amount}"
                                                             StockCount="{Binding StockCountInt}"
                                                             ChangeCountCommand="{Binding Source={x:Reference ListBasketItems}, Path=BindingContext.ChangeCountCommand}"
                                                             HorizontalOptions="FillAndExpand"

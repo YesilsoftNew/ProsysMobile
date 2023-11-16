@@ -84,7 +84,7 @@ namespace ProsysMobile.CustomControls.Other
                     
                     if (entryValue > 1)
                     {
-                        entryValue = entryValue - 1;
+                        entryValue -= 1;
                         EntryCounter.Text = entryValue.ToString();
                         Text = EntryCounter.Text;
                         
@@ -109,13 +109,13 @@ namespace ProsysMobile.CustomControls.Other
                 })
             });
             
-            PlusGrid.GestureRecognizers.Add(new TapGestureRecognizer()
+            PlusGrid.GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = new Command(() =>
                 {
                     var entryValue = Convert.ToInt32(EntryCounter.Text);
 
-                    entryValue = entryValue + 1;
+                    entryValue += 1;
 
                     if (entryValue > StockCount)
                     {
@@ -144,6 +144,8 @@ namespace ProsysMobile.CustomControls.Other
             if (propertyName == TextProperty.PropertyName)
             {
                 EntryCounter.Text = Text;
+
+                SetImageMinusOrTrash();
             }
         }
         
@@ -154,21 +156,24 @@ namespace ProsysMobile.CustomControls.Other
 
         private void EntryCounter_OnUnfocused(object sender, FocusEventArgs e)
         {
-            var entryText = Convert.ToInt32(EntryCounter.Text);
+            var entryText = EntryCounter.Text;
             
-            if (entryText > StockCount)
+            EntryCounter.Text = string.IsNullOrWhiteSpace(entryText) || Convert.ToInt64(entryText) < 0 ? "1" : entryText;
+            Text = EntryCounter.Text;
+
+            var entryTextInt = Convert.ToInt32(EntryCounter.Text);
+            
+            if (entryTextInt > StockCount)
             {
-                entryText = StockCount;
+                entryTextInt = StockCount;
             }
             
-            EntryCounter.Text = string.IsNullOrWhiteSpace(entryText.ToString()) || Convert.ToInt64(entryText) < 0 ? "1" : entryText.ToString();
-
-            if (focusedBeforeEntryCounterText == entryText.ToString()) return;
+            if (focusedBeforeEntryCounterText == entryTextInt.ToString()) return;
             
             ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
             {
                 ItemId = ItemId,
-                Count = Convert.ToInt32(entryText),
+                Count = entryTextInt,
                 IsDeleteItem = false
             });
             
@@ -184,7 +189,6 @@ namespace ProsysMobile.CustomControls.Other
             newTextValue = newTextValue.Replace("-", "");
 
             EntryCounter.Text = newTextValue;
-            Text = EntryCounter.Text;
         }
 
         private void SetImageMinusOrTrash()
