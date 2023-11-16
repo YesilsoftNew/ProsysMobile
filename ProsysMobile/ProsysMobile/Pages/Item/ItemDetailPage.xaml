@@ -93,7 +93,7 @@
                                                     HorizontalOptions="CenterAndExpand">
                             
                                                     <ImageButton
-                                                        Aspect="AspectFit"
+                                                        Aspect="AspectFit" 
                                                         BackgroundColor="Transparent"
                                                         Command="{Binding Source={x:Reference CarouselView}, Path=BindingContext.ImageClickCommand}"
                                                         CommandParameter="{Binding .}"
