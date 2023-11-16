@@ -31,7 +31,7 @@
                 Grid.Row="0"
                 Title="{x:Static resource:Resource.ItemDetail}"
                 PreviousClickCommand="{Binding PreviousClickedCommand}" />
-
+            
             <Grid
                 Grid.Row="1"
                 Grid.Column="0"
@@ -39,177 +39,203 @@
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
                 Margin="24,16">
-
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
                 
-                <StackLayout
-                    Grid.Row="0"
+                <Grid
+                    RowSpacing="0"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
                     
-                    <AbsoluteLayout
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                    </Grid.RowDefinitions>
+                
+                    <Grid
+                        Grid.Row="0"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">
                         
-                        <CarouselView
-                            x:Name="CarouselView"
-                            IndicatorView="IndicatorView"
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <StackLayout
+                            Grid.Row="0"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand">
+                            
+                            <AbsoluteLayout
+                                HorizontalOptions="CenterAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                
+                                <CarouselView
+                                    x:Name="CarouselView"
+                                    IndicatorView="IndicatorView"
+                                    HorizontalOptions="CenterAndExpand"
+                                    VerticalOptions="FillAndExpand"
+                                    ItemsSource="{Binding Images}"
+                                    HorizontalScrollBarVisibility="Never"
+                                    VerticalScrollBarVisibility="Never"
+                                    AbsoluteLayout.LayoutFlags="All"
+                                    AbsoluteLayout.LayoutBounds="0,0,1,1">
+                                
+                                    <CarouselView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid
+                                                HorizontalOptions="CenterAndExpand"
+                                                VerticalOptions="FillAndExpand">
+                                                <AbsoluteLayout
+                                                    VerticalOptions="FillAndExpand"
+                                                    HorizontalOptions="CenterAndExpand">
+                            
+                                                    <ImageButton
+                                                        Aspect="AspectFit" 
+                                                        BackgroundColor="Transparent"
+                                                        Command="{Binding Source={x:Reference CarouselView}, Path=BindingContext.ImageClickCommand}"
+                                                        CommandParameter="{Binding .}"
+                                                        Source="{Binding .}"
+                                                        HorizontalOptions="CenterAndExpand"
+                                                        VerticalOptions="FillAndExpand"/>
+                            
+                                                </AbsoluteLayout>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CarouselView.ItemTemplate>
+                                
+                                </CarouselView>
+
+                                <ImageButton
+                                    x:Name="ItemImageButton"
+                                    Aspect="AspectFit"
+                                    Source="{Binding FavoriteImageSource}"
+                                    Margin="0,6,9,0"
+                                    Command="{Binding Source={x:Reference CarouselView}, Path=BindingContext.FavoriteClickCommand}"
+                                    AbsoluteLayout.LayoutFlags="PositionProportional"
+                                    AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
+                                    Style="{DynamicResource ImageButton4}" />
+                                
+                            </AbsoluteLayout>
+                            
+                        </StackLayout>
+                        
+                        <IndicatorView
+                            Grid.Row="1"
+                            x:Name="IndicatorView"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
-                            HeightRequest="250"
-                            ItemsSource="{Binding Images}"
-                            HorizontalScrollBarVisibility="Never"
-                            VerticalScrollBarVisibility="Never"
-                            AbsoluteLayout.LayoutFlags="All"
-                            AbsoluteLayout.LayoutBounds="0,0,1,1">
+                            IndicatorColor="#808080"
+                            SelectedIndicatorColor="Black"
+                            IndicatorSize="5" />
                         
-                            <CarouselView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid
-                                        HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="FillAndExpand">
-                                        <AbsoluteLayout
-                                            VerticalOptions="FillAndExpand"
-                                            HorizontalOptions="CenterAndExpand">
-                    
-                                            <ImageButton
-                                                WidthRequest="250"
-                                                HeightRequest="250"
-                                                Aspect="AspectFill"
-                                                BackgroundColor="Transparent"
-                                                Command="{Binding Source={x:Reference CarouselView}, Path=BindingContext.ImageClickCommand}"
-                                                CommandParameter="{Binding .}"
-                                                Source="{Binding .}"
-                                                HorizontalOptions="FillAndExpand"
-                                                VerticalOptions="FillAndExpand" />
-                    
-                                        </AbsoluteLayout>
-                                    </Grid>
-                                </DataTemplate>
-                            </CarouselView.ItemTemplate>
+                        <Label
+                            Grid.Row="2"
+                            Text="{Binding ItemName}"
+                            Style="{DynamicResource Header5}"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand"/>
                         
-                        </CarouselView>
-
-                        <ImageButton
-                            x:Name="ItemImageButton"
-                            Aspect="AspectFit"
-                            Source="{Binding FavoriteImageSource}"
-                            Margin="0,6,9,0"
-                            Command="{Binding Source={x:Reference CarouselView}, Path=BindingContext.FavoriteClickCommand}"
-                            AbsoluteLayout.LayoutFlags="PositionProportional"
-                            AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
-                            Style="{DynamicResource ImageButton4}" />
+                        <Label
+                            Grid.Row="3"
+                            Text="{Binding ItemPieces}"
+                            Style="{DynamicResource Label2}"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand"/>
                         
-                    </AbsoluteLayout>
+                        <Label
+                            Grid.Row="4"
+                            Text="{Binding ItemPrice}"
+                            Style="{DynamicResource Header9}"
+                            HorizontalOptions="CenterAndExpand"
+                            VerticalOptions="FillAndExpand"/>
+                        
+                    </Grid>
                     
-                </StackLayout>
-                
-                <IndicatorView
-                    Grid.Row="1"
-                    x:Name="IndicatorView"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand"
-                    IndicatorColor="#808080"
-                    SelectedIndicatorColor="Black"
-                    IndicatorSize="5" />
-                
-                <Label
-                    Grid.Row="2"
-                    Text="{Binding ItemName}"
-                    Style="{DynamicResource Header5}"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="FillAndExpand"/>
-                
-                <Label
-                    Grid.Row="3"
-                    Text="{Binding ItemPieces}"
-                    Style="{DynamicResource Label2}"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="FillAndExpand"/>
-                
-                <Label
-                    Grid.Row="4"
-                    Text="{Binding ItemPrice}"
-                    Style="{DynamicResource Header9}"
-                    HorizontalOptions="CenterAndExpand"
-                    VerticalOptions="FillAndExpand"/>
-                
-                <ScrollView 
-                    Grid.Row="5" 
-                    Orientation="Horizontal" 
-                    Margin="0,0,0,0"
-                    HorizontalOptions="FillAndExpand" 
-                    VerticalOptions="CenterAndExpand">
-            
-                    <StackLayout
+                    <Grid
+                        Grid.Row="1"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand">
                         
-                        <FlexLayout
-                            x:Name="LstSubTags"
-                            Direction="Row"
-                            Wrap="NoWrap"
-                            BindableLayout.ItemsSource="{Binding Tags}"
-                            Margin="16,20,0,0"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
-        
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                    
-                                    <customContolsOther:CustomSubCategoryGrid
-                                        Text="{Binding Name}"
-                                        Color="{Binding Color}"
-                                        Margin="0,0,16,0"
-                                        HorizontalOptions="FillAndExpand"
-                                        VerticalOptions="FillAndExpand" />
-        
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                
-                        </FlexLayout>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
                         
-                    </StackLayout>
-        
-                </ScrollView>
+                        <ScrollView 
+                            Grid.Row="0" 
+                            Orientation="Horizontal" 
+                            Margin="0,0,0,0"
+                            HorizontalOptions="FillAndExpand" 
+                            VerticalOptions="CenterAndExpand">
+                    
+                            <StackLayout
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand">
+                                
+                                <FlexLayout
+                                    x:Name="LstSubTags"
+                                    Direction="Row"
+                                    Wrap="NoWrap"
+                                    BindableLayout.ItemsSource="{Binding Tags}"
+                                    Margin="16,20,0,0"
+                                    HorizontalOptions="FillAndExpand"
+                                    VerticalOptions="FillAndExpand">
                 
-                <Grid
-                    Grid.Row="6"
-                    ColumnSpacing="16"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="EndAndExpand">
-                    
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate>
+                            
+                                            <customContolsOther:CustomSubCategoryGrid
+                                                Text="{Binding Name}"
+                                                Color="{Binding Color}"
+                                                Margin="0,0,16,0"
+                                                HorizontalOptions="FillAndExpand"
+                                                VerticalOptions="FillAndExpand" />
+                
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                        
+                                </FlexLayout>
+                                
+                            </StackLayout>
+                
+                        </ScrollView>
+                        
+                        <Grid
+                            Grid.Row="1"
+                            ColumnSpacing="16"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="EndAndExpand">
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
 
-                    <entries:CustomEntryPrimary
-                        Grid.Column="0"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand"
-                        IsSelectText="{Binding IsFocusAndSelectText}"
-                        Title="{Binding ItemPurchaseQtyTitle}"
-                        Text="{Binding ItemPurchaseQtyText}"
-                        Keyboard="Numeric"
-                        Placeholder="Write" />
-                    
-                    <Button
-                            Grid.Column="1"
-                            Text="{x:Static resource:Resource.AddBasket}"
-                            Command="{Binding AddBasketClickCommand}"
-                            Style="{DynamicResource Button.Primary}"
-                            BackgroundColor="{DynamicResource Color5}"
-                            VerticalOptions="EndAndExpand"
-                            HorizontalOptions="FillAndExpand"/>
+                            <entries:CustomEntryPrimary
+                                Grid.Column="0"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                IsSelectText="{Binding IsFocusAndSelectText}"
+                                Title="{Binding ItemPurchaseQtyTitle}"
+                                Text="{Binding ItemPurchaseQtyText}"
+                                Keyboard="Numeric"
+                                Placeholder="Write" />
+                            
+                            <Button
+                                    Grid.Column="1"
+                                    Text="{x:Static resource:Resource.AddBasket}"
+                                    Command="{Binding AddBasketClickCommand}"
+                                    Style="{DynamicResource Button.Primary}"
+                                    BackgroundColor="{DynamicResource Color5}"
+                                    VerticalOptions="EndAndExpand"
+                                    HorizontalOptions="FillAndExpand"/>
+                            
+                        </Grid>
+                        
+                    </Grid>
                     
                 </Grid>
                 
