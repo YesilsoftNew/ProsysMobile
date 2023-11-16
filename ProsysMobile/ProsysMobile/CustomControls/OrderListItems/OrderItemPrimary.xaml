@@ -32,7 +32,7 @@
                         x:Name="ItemImage"
                         WidthRequest="100"
                         HeightRequest="100"
-                        Source="http://yas.yesilsoft.net/Images/Spices.png"
+                        Aspect="AspectFill"
                         HorizontalOptions="Start"
                         VerticalOptions="FillAndExpand" />
                             

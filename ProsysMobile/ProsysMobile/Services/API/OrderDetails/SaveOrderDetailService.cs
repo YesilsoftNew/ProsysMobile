@@ -25,7 +25,7 @@ namespace ProsysMobile.Services.API.OrderDetails
         
         public Task<ServiceBaseResponse<EmptyResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public async Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, enPriorityType priorityType)

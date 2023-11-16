@@ -311,4 +311,7 @@
   <data name="Culture" xml:space="preserve">
 	  <value>en</value>
   </data>
+  <data name="AnError0ccurredWhileUpdatingTheQuantity" xml:space="preserve">
+	  <value>An error occurred while updating the quantity!</value>
+  </data>
 </root>

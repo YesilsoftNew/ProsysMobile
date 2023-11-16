@@ -90,7 +90,7 @@ namespace ProsysMobile.CustomControls.OrderListItems
             ItemName.Text = NameText;
             ItemPieces.Text = PiecesText;
             ItemImage.Source = ImageSource;
-            ItemAmount.Text = AmountText;
+            //ItemAmount.Text = AmountText;
         }
         
         protected override void OnPropertyChanged(string propertyName = null)
@@ -115,7 +115,7 @@ namespace ProsysMobile.CustomControls.OrderListItems
             }
             else if (propertyName == AmountTextProperty.PropertyName)
             {
-                ItemAmount.Text = AmountText;
+                //ItemAmount.Text = AmountText;
             }
             else if (propertyName == DeleteCommandProperty.PropertyName)
             {

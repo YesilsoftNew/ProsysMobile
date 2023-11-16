@@ -25,7 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <MtouchArch>x86_64</MtouchArch>
-    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>Apple Distribution: Emrullah Altintop (3KSXXU34FD)</CodesignKey>
     <CodesignProvision>BidiFruchteNew</CodesignProvision>
@@ -174,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Account.png" />
+    <BundleResource Include="Resources\AddedBasket.png" />
+    <BundleResource Include="Resources\AddedBasket@2x.png" />
+    <BundleResource Include="Resources\AddedBasket@3x.png" />
     <BundleResource Include="Resources\BadgeAdd.png" />
     <BundleResource Include="Resources\BadgeAdd@2x.png" />
     <BundleResource Include="Resources\BadgeAdd@3x.png" />
@@ -203,6 +206,9 @@
     <BundleResource Include="Resources\Logo.png" />
     <BundleResource Include="Resources\Logo@2x.png" />
     <BundleResource Include="Resources\Logo@3x.png" />
+    <BundleResource Include="Resources\MinusCounter.png" />
+    <BundleResource Include="Resources\MinusCounter@2x.png" />
+    <BundleResource Include="Resources\MinusCounter@3x.png" />
     <BundleResource Include="Resources\NoDataBasket.png" />
     <BundleResource Include="Resources\NoDataBasket@2x.png" />
     <BundleResource Include="Resources\NoDataBasket@3x.png" />
@@ -212,6 +218,9 @@
     <BundleResource Include="Resources\NoPictureView.png" />
     <BundleResource Include="Resources\NoPictureView@2x.png" />
     <BundleResource Include="Resources\NoPictureView@3x.png" />
+    <BundleResource Include="Resources\PlusCounter.png" />
+    <BundleResource Include="Resources\PlusCounter@2x.png" />
+    <BundleResource Include="Resources\PlusCounter@3x.png" />
     <BundleResource Include="Resources\RoundLogo.png" />
     <BundleResource Include="Resources\RoundLogo@2x.png" />
     <BundleResource Include="Resources\RoundLogo@3x.png" />
@@ -230,6 +239,9 @@
     <BundleResource Include="Resources\Trash.png" />
     <BundleResource Include="Resources\Trash@2x.png" />
     <BundleResource Include="Resources\Trash@3x.png" />
+    <BundleResource Include="Resources\TrashCounter.png" />
+    <BundleResource Include="Resources\TrashCounter2x.png" />
+    <BundleResource Include="Resources\TrashCounter3x.png" />
     <BundleResource Include="Resources\UnSelectedFavorite.png" />
     <BundleResource Include="Resources\UnSelectedFavorite@2x.png" />
     <BundleResource Include="Resources\UnSelectedFavorite@3x.png" />

@@ -70,10 +70,10 @@
                             <customContolsOther:CustomCategoryGrid
                                 Text="{Binding CategoryDesc}"
                                 ImageSource="{Binding Image}"
-                                ImageHeight="95"
-                                ImageWidth="95"
+                                ImageHeight="50"
+                                ImageWidth="50"
                                 LabelStyle="{DynamicResource Label2}"
-                                FlexLayout.Basis="33.33%"
+                                FlexLayout.Basis="25%"
                                 RowSpacing="6"
                                 Padding="0,0,0,24"
                                 HorizontalOptions="CenterAndExpand" 
@@ -100,7 +100,7 @@
                 Style="{DynamicResource Label2}"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="16,0,0,0" />
+                Margin="16,0,0,10"/>
             
             <StackLayout
                 Grid.Row="3" 
@@ -121,7 +121,8 @@
                         RemainingItemsThreshold="5"
                         VerticalScrollBarVisibility="Always"
                         HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand">
+                        VerticalOptions="FillAndExpand"
+                        Margin="5,0,7.5,0">
 
                         <CollectionView.Behaviors>
                             <behaviors:EventToCommandBehavior EventName="SelectionChanged"
@@ -153,6 +154,7 @@
                                     Tag3Color="{Binding Tag3Color}"
                                     Tag4Text="{Binding Tag4Text}"
                                     Tag4Color="{Binding Tag4Color}"
+                                    IsAddedBasket="{Binding IsAddedBasket}"
                                     FavoriteCommand="{Binding Source={x:Reference Deals}, Path=BindingContext.FavoriteClickCommand}"
                                     FavoriteCommandParameter="{Binding .}"
                                     HorizontalOptions="FillAndExpand"

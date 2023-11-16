@@ -228,26 +228,13 @@
                                                         VerticalOptions="EndAndExpand"
                                                         HorizontalOptions="End">
                                                     
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="AUTO"></ColumnDefinition>
-                                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                                        </Grid.ColumnDefinitions>
-                                                    
-                                                        <Image
-                                                            Grid.Column="0"
-                                                            Source="DepotBlack"
-                                                            Style="{DynamicResource Image1}"
-                                                            HorizontalOptions="FillAndExpand"
-                                                            VerticalOptions="CenterAndExpand" />
-                                                    
-                                                        <Label
-                                                            x:Name="ItemAmount"
-                                                            Grid.Column="1"
-                                                            Style="{DynamicResource Label5}"
+                                                        <controlOther:BasketCounter 
+                                                            ItemId="{Binding Id}"
                                                             Text="{Binding Amount}"
-                                                            TextColor="{DynamicResource Black1}"
-                                                            HorizontalOptions="StartAndExpand"
-                                                            VerticalOptions="CenterAndExpand"></Label>
+                                                            StockCount="{Binding StockCountInt}"
+                                                            ChangeCountCommand="{Binding Source={x:Reference ListBasketItems}, Path=BindingContext.ChangeCountCommand}"
+                                                            HorizontalOptions="FillAndExpand"
+                                                            VerticalOptions="FillAndExpand"/>
                                                     
                                                     </Grid>
                                                     

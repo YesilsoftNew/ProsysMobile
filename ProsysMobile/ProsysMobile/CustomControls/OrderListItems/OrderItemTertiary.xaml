@@ -11,140 +11,164 @@
     
     <Grid.RowDefinitions>
         <RowDefinition Height="*"></RowDefinition>
-        <RowDefinition Height="AUTO"></RowDefinition>
     </Grid.RowDefinitions>
     
-    <Grid
+    <yummy:PancakeView
         Grid.Row="0"
+        Style="{DynamicResource Border1}"
+        Border="{yummy:BorderMarkup Color={StaticResource Gray5}, Thickness=1 }"
+        Margin="2.5,0,2.5,10"
         HorizontalOptions="FillAndExpand"
-        VerticalOptions="FillAndExpand"
-        RowSpacing="10"
-        ColumnSpacing="0"
-        Margin="8,0">
-        
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="AUTO"></RowDefinition>
-        </Grid.RowDefinitions>
-
-        <yummy:PancakeView 
-            Grid.Row="0"
-            Border="{yummy:BorderMarkup Color={StaticResource Gray5}, Thickness=1 }"
-            CornerRadius="16"
-            Margin="0,16,0,0"
-            VerticalOptions="FillAndExpand"
-            HorizontalOptions="FillAndExpand">
-               
-            <AbsoluteLayout
-                VerticalOptions="FillAndExpand"
-                HorizontalOptions="FillAndExpand">
-                
-                <Image
-                    x:Name="ItemImage"
-                    Source="http://yas.yesilsoft.net/Images/Spices.png"
-                    Aspect="AspectFill"
-                    HeightRequest="180"
-                    AbsoluteLayout.LayoutFlags="All" 
-                    AbsoluteLayout.LayoutBounds="0,0,1,1" />
-                
-                <Grid
-                    HorizontalOptions="Start"
-                    VerticalOptions="Center"
-                    AbsoluteLayout.LayoutFlags="PositionProportional" 
-                    AbsoluteLayout.LayoutBounds="0,1,AutoSize,AutoSize"
-                    RowSpacing="6"
-                    Margin="0,0,0,10">
-                    
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="AUTO"></RowDefinition>
-                        <RowDefinition Height="AUTO"></RowDefinition>
-                        <RowDefinition Height="AUTO"></RowDefinition>
-                        <RowDefinition Height="AUTO"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    
-                    <controlOther:CustomTag
-                        x:Name="Tag1"
-                        Grid.Row="0" />
-                    
-                    <controlOther:CustomTag
-                        x:Name="Tag2"
-                        Grid.Row="1" />
-                    
-                    <controlOther:CustomTag
-                        x:Name="Tag3"
-                        Grid.Row="2" />
-                    
-                    <controlOther:CustomTag
-                        x:Name="Tag4"
-                        Grid.Row="3" />
-                    
-                </Grid>
-
-                <ImageButton
-                    x:Name="ItemImageButton"
-                    Aspect="AspectFit"
-                    Clicked="ItemImageButton_OnClicked"
-                    Margin="0,6,9,0"
-                    AbsoluteLayout.LayoutFlags="PositionProportional"
-                    AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
-                    Style="{DynamicResource ImageButton4}" />
-                
-            </AbsoluteLayout>
-            
-        </yummy:PancakeView>
+        VerticalOptions="FillAndExpand">
         
         <Grid
-            Grid.Row="1"
-            Margin="6,0"
             HorizontalOptions="FillAndExpand"
             VerticalOptions="FillAndExpand"
-            RowSpacing="5">
+            RowSpacing="10"
+            ColumnSpacing="0">
             
             <Grid.RowDefinitions>
-                <RowDefinition Height="AUTO"></RowDefinition>
-                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="AUTO"></RowDefinition>
             </Grid.RowDefinitions>
-            
-            <ScrollView
+
+            <yummy:PancakeView 
                 Grid.Row="0"
-                Orientation="Horizontal"
-                HorizontalScrollBarVisibility="Never">
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand">
+                   
+                <AbsoluteLayout
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand">
+                    
+                    <Image
+                        x:Name="ItemImage"
+                        Aspect="AspectFill"
+                        HeightRequest="180"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        AbsoluteLayout.LayoutFlags="All" 
+                        AbsoluteLayout.LayoutBounds="0,0,1,1" />
+                    
+                    <Grid
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        AbsoluteLayout.LayoutFlags="PositionProportional" 
+                        AbsoluteLayout.LayoutBounds="0,1,AutoSize,AutoSize"
+                        RowSpacing="6"
+                        Margin="0,0,0,10">
+                        
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="AUTO"></RowDefinition>
+                            <RowDefinition Height="AUTO"></RowDefinition>
+                            <RowDefinition Height="AUTO"></RowDefinition>
+                            <RowDefinition Height="AUTO"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <controlOther:CustomTag
+                            x:Name="Tag1"
+                            Grid.Row="0" />
+                        
+                        <controlOther:CustomTag
+                            x:Name="Tag2"
+                            Grid.Row="1" />
+                        
+                        <controlOther:CustomTag
+                            x:Name="Tag3"
+                            Grid.Row="2" />
+                        
+                        <controlOther:CustomTag
+                            x:Name="Tag4"
+                            Grid.Row="3" />
+                        
+                    </Grid>
+
+                    <ImageButton
+                        x:Name="ItemImageButton"
+                        Aspect="AspectFit"
+                        Clicked="ItemImageButton_OnClicked"
+                        Margin="0,6,9,0"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
+                        Style="{DynamicResource ImageButton4}" />
+                    
+                </AbsoluteLayout>
+                
+            </yummy:PancakeView>
+            
+            <Grid
+                Grid.Row="1"
+                Margin="16,0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand"
+                RowSpacing="5">
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <ScrollView
+                    Grid.Row="0"
+                    Orientation="Horizontal"
+                    HorizontalScrollBarVisibility="Never">
+                
+                    <Label
+                        x:Name="ItemName"
+                        Text="-"
+                        Style="{DynamicResource Header6}"
+                        TextColor="{DynamicResource Black1}"
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                
+                </ScrollView>
             
                 <Label
-                    x:Name="ItemName"
+                    x:Name="ItemPieces"
+                    Grid.Row="1"
                     Text="-"
-                    Style="{DynamicResource Header6}"
-                    TextColor="{DynamicResource Black1}"
-                    HorizontalTextAlignment="Center"
+                    Style="{DynamicResource Label2}"
+                    Margin="0,0,0,6"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="FillAndExpand"/>
             
-            </ScrollView>
-        
-            <Label
-                x:Name="ItemPieces"
-                Grid.Row="1"
-                Text="-"
-                Style="{DynamicResource Label2}"
-                Margin="0,0,0,6"
-                HorizontalOptions="StartAndExpand"
-                VerticalOptions="FillAndExpand"/>
-        
-            <Label
-                x:Name="ItemPrice"
-                Grid.Row="2"
-                Grid.Column="0"
-                Text="-"
-                Style="{DynamicResource Header4}"
-                HorizontalOptions="StartAndExpand"
-                VerticalOptions="CenterAndExpand"/>
+                <Grid
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Margin="0,0,0,11"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="AUTO"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label
+                        x:Name="ItemPrice"
+                        Text="-"
+                        Style="{DynamicResource Header4}"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="EndAndExpand"/>
+                    
+                    <Image
+                        x:Name="IsAddedBasketImage"
+                        Grid.Column="1"
+                        Source="AddedBasket"
+                        IsVisible="False"
+                        Style="{DynamicResource Image5}"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="StartAndExpand" />
+                    
+                </Grid>
+                
+                
+            </Grid>
             
         </Grid>
         
-    </Grid>
-    
-    <controlOther:CustomLine
-        Grid.Row="1" />
+    </yummy:PancakeView>
     
 </Grid>

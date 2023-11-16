@@ -168,9 +168,10 @@
 
                                 <customContolsOther:CustomSubCategoryGrid
                                     Text="{Binding CategoryDesc}"
-                                    Color="Blue"
+                                    Color="{DynamicResource Color6}"
                                     Margin="0,0,16,0"
                                     IsClickable="true"
+                                    IsSelected="{Binding IsSelected}"
                                     HorizontalOptions="FillAndExpand"
                                     VerticalOptions="FillAndExpand">
 
@@ -326,7 +327,7 @@
                  SelectedItem="{Binding SelectedItem}"
                  RemainingItemsThreshold="5"
                  VerticalScrollBarVisibility="Always"
-                 Margin="0,8,0,0">
+                 Margin="5,8,7.5,0">
 
                 <CollectionView.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="SelectionChanged"
@@ -358,6 +359,7 @@
                             Tag3Color="{Binding Tag3Color}"
                             Tag4Text="{Binding Tag4Text}"
                             Tag4Color="{Binding Tag4Color}"
+                            IsAddedBasket="{Binding IsAddedBasket}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListSecondary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"

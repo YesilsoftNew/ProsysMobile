@@ -329,8 +329,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemCategory category)
                 {
-                    SubCategories.ForEach(x => x.IsSelected = false);
+                    SubCategories.Where(x=> x != category).ForEach(x => x.IsSelected = false);
 
+                    category.IsSelected = !category.IsSelected;
+                    
                     var isAnySelectedCategory = _selectedCategories.Any(x => x.Id == category.ID);
 
                     if (!isAnySelectedCategory)
@@ -660,11 +662,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (isSubCategory)
-                {
-                    return;
-                }
-                
                 var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
 
                 if (result.ResponseData != null && result.IsSuccess)
