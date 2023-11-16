@@ -7,6 +7,7 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public int CategoryId { get; set; }
         public string Name { get; set; } = string.Empty;
         public string StockCount { get; set; } = string.Empty;
+        public int StockCountInt { get; set; } = 61;
         public string Amount { get; set; } = string.Empty;
         public string Price { get; set; } = string.Empty;
         public string CurrencyType { get; set; } = string.Empty;

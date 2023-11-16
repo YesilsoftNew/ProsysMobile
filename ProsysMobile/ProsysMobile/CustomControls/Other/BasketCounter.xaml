@@ -3,8 +3,9 @@
                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                    x:Class="ProsysMobile.CustomControls.Other.BasketCounter"
                    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+                   xmlns:effects="clr-namespace:ProsysMobile.Renderer"
                    CornerRadius="7.35"
-                   Border="{yummy:BorderMarkup Color={DynamicResource Gray10},Thickness=1}">
+                   Border="{yummy:BorderMarkup Color={StaticResource Gray10},Thickness=1}">
     
     <Grid
         HorizontalOptions="FillAndExpand"
@@ -18,16 +19,20 @@
         </Grid.ColumnDefinitions>
         
         <Grid
+            x:Name="MinusAndTrashGrid"
             Grid.Column="0"
             BackgroundColor="#F3F4F6"
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand">
             
             <Image
+                x:Name="ImageMinusOrTrash"
                 Source="TrashCounter"
+                WidthRequest="12"
+                HeightRequest="12"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="5" />
+                Margin="10" />
             
         </Grid>
         
@@ -37,11 +42,20 @@
             HorizontalOptions="CenterAndExpand"
             VerticalOptions="CenterAndExpand">
             
-            
+            <effects:CustomEntry
+                x:Name="EntryCounter"
+                TextChanged="EntryCounter_OnTextChanged"
+                Focused="EntryCounter_OnFocused"
+                Unfocused="EntryCounter_OnUnfocused"
+                Keyboard="Numeric"
+                HorizontalTextAlignment="Center"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
             
         </Grid>
         
         <Grid
+            x:Name="PlusGrid"
             Grid.Column="2"
             BackgroundColor="#F3F4F6"
             HorizontalOptions="CenterAndExpand"
@@ -49,9 +63,11 @@
             
             <Image
                 Source="PlusCounter"
+                WidthRequest="12"
+                HeightRequest="12"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand"
-                Margin="5" />
+                Margin="10" />
             
         </Grid>
         

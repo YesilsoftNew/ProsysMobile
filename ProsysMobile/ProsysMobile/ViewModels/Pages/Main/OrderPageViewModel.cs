@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Helper;
+using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Resources.Language;
@@ -15,18 +17,21 @@ using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Order;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class OrderPageViewModel : ViewModelBase
     {
+        private readonly IUpdateOrderDetailForItemService _updateOrderDetailForItemService;
         private readonly IGetOrderDetailService _getOrderDetailService;
         private readonly IDeleteOrderDetailService _deleteOrderDetailService;
 
-        public OrderPageViewModel(IGetOrderDetailService getOrderDetailService, IDeleteOrderDetailService deleteOrderDetailService)
+        public OrderPageViewModel(IGetOrderDetailService getOrderDetailService, IDeleteOrderDetailService deleteOrderDetailService, IUpdateOrderDetailForItemService updateOrderDetailForItemService)
         {
             _getOrderDetailService = getOrderDetailService;
             _deleteOrderDetailService = deleteOrderDetailService;
+            _updateOrderDetailForItemService = updateOrderDetailForItemService;
             Xamarin.Forms.MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
                 try
@@ -119,27 +124,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is OrderDetailsSubDto orderDetailsSubDto)
                 {
-                    var result = await _deleteOrderDetailService.DeleteOrderDetail(
-                        orderDetailId: orderDetailsSubDto.OrderDetailId,
-                        priorityType: enPriorityType.UserInitiated
-                    );
-
-                    if (result.IsSuccess)
-                    {
-                        BasketItems.Remove(orderDetailsSubDto);
-
-                        if (!BasketItems.Any())
-                        {
-                            InitializePage(
-                                isError: false,
-                                isEmptyData: true
-                            );
-                        }
-                    }
-                    else
-                    {
-                        DialogService.WarningToastMessage(Resource.AnErrorOccurredWhileDeletingTheProductFromTheBasket);
-                    }
+                    DeleteItemInBasket(orderDetailsSubDto);
                 }
             }
             catch (Exception ex)
@@ -152,7 +137,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             IsBusy = false;
             DoubleTapping.ResumeTap();
         });
-        
+
         public ICommand ShowBasketClickCommand => new Command(async (sender) =>
         {
             try
@@ -231,6 +216,64 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             
             DoubleTapping.ResumeTap();
+        });
+        
+        public ICommand ChangeCountCommand => new Command(async sender =>
+        {
+            try
+            {
+                if (!(sender is ChangeItemCountCommandParameterModel changeItemCountCommandParameterModel)) return;
+                
+                var item = BasketItems.FirstOrDefault(x => x.Id == changeItemCountCommandParameterModel.ItemId);
+
+                if (item == null)
+                {
+                    DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
+                    return;
+                }
+
+                IsBusy = true;
+                
+                if (changeItemCountCommandParameterModel.IsDeleteItem)
+                {
+                    DeleteItemInBasket(item);
+                }
+                else
+                {
+                    IsBusy = false;
+                    return;
+                    var result = await _updateOrderDetailForItemService.UpdateOrderDetailForItem(
+                        orderDetailsParam: new OrderDetailsParam
+                        {
+                            UserId = GlobalSetting.Instance.User.ID,
+                            ItemId = changeItemCountCommandParameterModel.ItemId,
+                            Amount = changeItemCountCommandParameterModel.Count
+                        },
+                        priorityType: enPriorityType.UserInitiated
+                    );
+                    
+                    if (result?.ResponseData != null && result.IsSuccess)
+                    {
+                        var responseModel = result.ResponseData;
+                        
+                        item.StockCount = responseModel.ItemStockCount;
+                        item.UnitPrice = responseModel.ItemUnitPrice;
+                        NetTotal = responseModel.NetTotal;
+                    }
+                    else
+                    {
+                        DialogService.WarningToastMessage(Resource.AnError0ccurredWhileUpdatingTheQuantity);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
+
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+            
+            IsBusy = false;
         });
         
         #endregion
@@ -360,6 +403,31 @@ namespace ProsysMobile.ViewModels.Pages.Main
             IsBusy = false;
             SelectedItem = null;
             DoubleTapping.ResumeTap();
+        }
+        
+        private async void DeleteItemInBasket(OrderDetailsSubDto orderDetailsSubDto)
+        {
+            var result = await _deleteOrderDetailService.DeleteOrderDetail(
+                orderDetailId: orderDetailsSubDto.OrderDetailId,
+                priorityType: enPriorityType.UserInitiated
+            );
+
+            if (result.IsSuccess)
+            {
+                BasketItems.Remove(orderDetailsSubDto);
+
+                if (!BasketItems.Any())
+                {
+                    InitializePage(
+                        isError: false,
+                        isEmptyData: true
+                    );
+                }
+            }
+            else
+            {
+                DialogService.WarningToastMessage(Resource.AnErrorOccurredWhileDeletingTheProductFromTheBasket);
+            }
         }
         
         #endregion

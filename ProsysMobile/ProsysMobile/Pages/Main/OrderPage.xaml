@@ -228,7 +228,12 @@
                                                         VerticalOptions="EndAndExpand"
                                                         HorizontalOptions="End">
                                                     
-                                                        <controlOther:BasketCounter></controlOther:BasketCounter>
+                                                        <controlOther:BasketCounter 
+                                                            ItemId="{Binding Id}"
+                                                            StockCount="{Binding StockCountInt}"
+                                                            ChangeCountCommand="{Binding Source={x:Reference ListBasketItems}, Path=BindingContext.ChangeCountCommand}"
+                                                            HorizontalOptions="FillAndExpand"
+                                                            VerticalOptions="FillAndExpand"/>
                                                     
                                                     </Grid>
                                                     
