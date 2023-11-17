@@ -158,9 +158,9 @@
                         Grid.Column="1"
                         Source="AddedBasket"
                         IsVisible="False"
-                        Style="{DynamicResource Image5}"
+                        Style="{DynamicResource Image1}"
                         HorizontalOptions="EndAndExpand"
-                        VerticalOptions="StartAndExpand" />
+                        VerticalOptions="EndAndExpand" />
                     
                 </Grid>
                 
