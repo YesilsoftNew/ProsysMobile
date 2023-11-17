@@ -87,14 +87,27 @@ namespace ProsysMobile.CustomControls.Other
                     {
                         Application.Current.Resources.TryGetValue("Color1", out var color1Color);
                         var color1 = (Color?)color1Color;
+                        
+                        Application.Current.Resources.TryGetValue("White1", out var whiteColor);
+                        var white = (Color?)whiteColor;
 
                         if (color1 == null) return;
+                        if (white == null) return;
                         
                         ItemMain.Border = new Border { Thickness = 1, Color = (Color)color1 };
-                        ItemLabel.TextColor = (Color)color1;
+                        ItemMain.BackgroundColor = (Color)color1;
+                        ItemLabel.BackgroundColor = (Color)color1;
+                        ItemLabel.TextColor = (Color)white;
                     }
                     else
                     {
+                        Application.Current.Resources.TryGetValue("White1", out var whiteColor);
+                        var white = (Color?)whiteColor;
+                        
+                        if (white == null) return;
+                        
+                        ItemMain.BackgroundColor = (Color)white;
+                        ItemLabel.BackgroundColor = (Color)white;
                         ItemLabel.TextColor = Color;
                         ItemMain.Border = new Border { Thickness = 1, Color = Color };
                     }
