@@ -330,4 +330,7 @@
   <data name="Culture" xml:space="preserve">
     <value>tr</value>
   </data>
+  <data name="AnError0ccurredWhileUpdatingTheQuantity" xml:space="preserve">
+    <value>Adeti güncellerken bir hata oluştu!</value>
+  </data>
 </root>

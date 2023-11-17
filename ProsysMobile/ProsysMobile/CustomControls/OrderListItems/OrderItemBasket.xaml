@@ -36,10 +36,9 @@
                 x:Name="ItemImage"
                 WidthRequest="100"
                 HeightRequest="100"
-                Aspect="AspectFit"
-                Source="http://yas.yesilsoft.net/Images/Spices.png"
-                HorizontalOptions="CenterAndExpand"
-                VerticalOptions="CenterAndExpand" />
+                Aspect="AspectFill"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand" />
 
         </yummy:PancakeView>
 

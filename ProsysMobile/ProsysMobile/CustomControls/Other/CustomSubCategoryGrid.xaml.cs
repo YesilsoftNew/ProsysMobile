@@ -13,19 +13,25 @@ namespace ProsysMobile.CustomControls.Other
             typeof(string),
             typeof(CustomSubCategoryGrid),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color),
             typeof(Color),
             typeof(CustomSubCategoryGrid),
             default(Color),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable),
             typeof(bool),
             typeof(CustomSubCategoryGrid),
             default(bool),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
+        
+        public static readonly BindableProperty IsSelectedProperty = BindableProperty.Create(nameof(IsSelected),
+            typeof(bool),
+            typeof(CustomSubCategoryGrid),
+            default(bool),
+            BindingMode.TwoWay);
         
         public string Text
         {
@@ -43,6 +49,12 @@ namespace ProsysMobile.CustomControls.Other
         {
             get => (bool)GetValue(IsClickableProperty);
             set => SetValue(IsClickableProperty, value);
+        }
+        
+        public bool IsSelected
+        {
+            get => (bool)GetValue(IsSelectedProperty);
+            set => SetValue(IsSelectedProperty, value);
         }
 
         public CustomSubCategoryGrid()
@@ -66,40 +78,39 @@ namespace ProsysMobile.CustomControls.Other
             {
                 ItemLabel.TextColor = Color;
                 ItemMain.Border.Color = Color;
-            }            
-            else if (propertyName == IsClickableProperty.PropertyName)
+            }
+            else if (propertyName == IsSelectedProperty.PropertyName)
             {
                 if (IsClickable)
                 {
-                    // ItemMain.GestureRecognizers.Add(new TapGestureRecognizer()
-                    // {
-                    //     Command = new Command(x =>
-                    //     {
-                    //         try
-                    //         {
-                    //             Application.Current.Resources.TryGetValue("Black3", out var blackColor);
-                    //             var clrBlackColor = (Color?)blackColor;
-                    //
-                    //             if (ItemLabel.TextColor == Color)
-                    //             {
-                    //                 if (clrBlackColor != null)
-                    //                 {
-                    //                     ItemMain.Border = new Border() { Thickness = 1, Color = (Color)clrBlackColor };
-                    //                     ItemLabel.TextColor = (Color)clrBlackColor;
-                    //                 }
-                    //             }
-                    //             else
-                    //             {
-                    //                 ItemLabel.TextColor = Color;
-                    //                 ItemMain.Border = new Border() { Thickness = 1, Color = Color };
-                    //             }
-                    //         }
-                    //         catch (Exception ex)
-                    //         {
-                    //             ProsysLogger.Instance.CrashLog(ex);
-                    //         }
-                    //     })
-                    // });  
+                    if (IsSelected)
+                    {
+                        Application.Current.Resources.TryGetValue("Color1", out var color1Color);
+                        var color1 = (Color?)color1Color;
+                        
+                        Application.Current.Resources.TryGetValue("White1", out var whiteColor);
+                        var white = (Color?)whiteColor;
+
+                        if (color1 == null) return;
+                        if (white == null) return;
+                        
+                        ItemMain.Border = new Border { Thickness = 1, Color = (Color)color1 };
+                        ItemMain.BackgroundColor = (Color)color1;
+                        ItemLabel.BackgroundColor = (Color)color1;
+                        ItemLabel.TextColor = (Color)white;
+                    }
+                    else
+                    {
+                        Application.Current.Resources.TryGetValue("White1", out var whiteColor);
+                        var white = (Color?)whiteColor;
+                        
+                        if (white == null) return;
+                        
+                        ItemMain.BackgroundColor = (Color)white;
+                        ItemLabel.BackgroundColor = (Color)white;
+                        ItemLabel.TextColor = Color;
+                        ItemMain.Border = new Border { Thickness = 1, Color = Color };
+                    }
                 }
             }
         }

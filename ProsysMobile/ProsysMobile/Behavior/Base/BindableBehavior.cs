@@ -6,7 +6,7 @@ namespace ProsysMobile.Behavior.Base
     public class BindableBehavior<T> : Behavior<T> where T : BindableObject
     {
         public T AssociatedObject { get; private set; }
-
+ 
         protected override void OnAttachedTo(T visualElement)
         { 
             base.OnAttachedTo(visualElement);

@@ -464,5 +464,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("All", resourceCulture);
             }
         }
+        
+        internal static string AnError0ccurredWhileUpdatingTheQuantity {
+            get {
+                return ResourceManager.GetString("AnError0ccurredWhileUpdatingTheQuantity", resourceCulture);
+            }
+        }
     }
 }

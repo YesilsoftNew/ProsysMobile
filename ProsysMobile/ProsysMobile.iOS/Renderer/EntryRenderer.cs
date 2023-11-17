@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using CoreGraphics;
@@ -31,12 +32,33 @@ namespace ProsysMobile.iOS.Renderer
 
                     Control.BorderStyle = UITextBorderStyle.None;
                     Element.HeightRequest = 22;
+                    
+                    // Check only for Numeric keyboard
+                    if (Element.Keyboard == Keyboard.Numeric)
+                        AddDoneButton();
                 }
                 catch (Exception ex)
                 {
                     ProsysLogger.Instance.CrashLog(ex);
                 }
             }
+        }
+        
+        protected void AddDoneButton()
+        {
+            var toolbar = new UIToolbar(new RectangleF(0.0f, 0.0f, 50.0f, 44.0f));
+
+            var doneButton = new UIBarButtonItem(UIBarButtonSystemItem.Done, delegate
+            {
+                Control.ResignFirstResponder();
+                ((IEntryController)Element).SendCompleted();
+            });
+
+            toolbar.Items = new[] {
+                new UIBarButtonItem (UIBarButtonSystemItem.FlexibleSpace),
+                doneButton
+            };
+            Control.InputAccessoryView = toolbar;
         }
     }
 }
