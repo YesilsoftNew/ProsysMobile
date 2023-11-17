@@ -75,7 +75,9 @@ namespace ProsysMobile.CustomControls.Other
         public BasketCounter()
         {
             InitializeComponent();
-            
+
+            EntryCounter.Text = Text;
+
             MinusAndTrashGrid.GestureRecognizers.Add(new TapGestureRecognizer()
             {
                 Command = new Command(() =>
@@ -117,9 +119,9 @@ namespace ProsysMobile.CustomControls.Other
 
                     entryValue += 1;
 
-                    if (entryValue > StockCount)
+                    if (entryValue > StockCount + entryValue -1)
                     {
-                        entryValue = StockCount;
+                        entryValue = StockCount + entryValue -1;
                     }
                     
                     EntryCounter.Text = entryValue.ToString();
@@ -152,6 +154,12 @@ namespace ProsysMobile.CustomControls.Other
         private void EntryCounter_OnFocused(object sender, FocusEventArgs e)
         {
             focusedBeforeEntryCounterText = EntryCounter.Text;
+            
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                EntryCounter.CursorPosition = 0;
+                EntryCounter.SelectionLength = EntryCounter.Text.Length;
+            });
         }
 
         private void EntryCounter_OnUnfocused(object sender, FocusEventArgs e)
@@ -163,9 +171,11 @@ namespace ProsysMobile.CustomControls.Other
 
             var entryTextInt = Convert.ToInt32(EntryCounter.Text);
             
-            if (entryTextInt > StockCount)
+            if (entryTextInt > StockCount + Convert.ToInt32(focusedBeforeEntryCounterText))
             {
-                entryTextInt = StockCount;
+                entryTextInt = StockCount + Convert.ToInt32(focusedBeforeEntryCounterText);
+                EntryCounter.Text = string.IsNullOrWhiteSpace(entryTextInt.ToString()) || entryTextInt < 0 ? "1" : entryTextInt.ToString();
+                Text = EntryCounter.Text;
             }
             
             if (focusedBeforeEntryCounterText == entryTextInt.ToString()) return;
