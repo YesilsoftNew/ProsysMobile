@@ -106,7 +106,7 @@
                                                     x:Name="ItemImage"
                                                     WidthRequest="100"
                                                     HeightRequest="100"
-                                                    Aspect="AspectFit"
+                                                    Aspect="AspectFill"
                                                     Source="{Binding Image}"
                                                     HorizontalOptions="CenterAndExpand"
                                                     VerticalOptions="CenterAndExpand" />
