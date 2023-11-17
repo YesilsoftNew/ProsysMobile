@@ -152,6 +152,12 @@ namespace ProsysMobile.CustomControls.Other
         private void EntryCounter_OnFocused(object sender, FocusEventArgs e)
         {
             focusedBeforeEntryCounterText = EntryCounter.Text;
+            
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                EntryCounter.CursorPosition = 0;
+                EntryCounter.SelectionLength = EntryCounter.Text.Length;
+            });
         }
 
         private void EntryCounter_OnUnfocused(object sender, FocusEventArgs e)
