@@ -337,7 +337,7 @@ namespace ProsysMobile.Helper
 
         public static void Keyboard_EntryFocused(object sender, FocusEventArgs e, View content)
         {
-            var keyboardHeight = 240;
+            var keyboardHeight = 300;
             content.TranslationY = -keyboardHeight;
         }
     }
