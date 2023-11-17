@@ -47,6 +47,7 @@
                 TextChanged="EntryCounter_OnTextChanged"
                 Focused="EntryCounter_OnFocused"
                 Unfocused="EntryCounter_OnUnfocused"
+                ReturnType="Send"
                 Keyboard="Numeric"
                 HorizontalTextAlignment="Center"
                 HorizontalOptions="FillAndExpand"
