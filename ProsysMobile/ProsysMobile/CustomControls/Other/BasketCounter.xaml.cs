@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Input;
+using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.OtherModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -82,32 +83,43 @@ namespace ProsysMobile.CustomControls.Other
             {
                 Command = new Command(() =>
                 {
-                    var entryValue = Convert.ToInt32(EntryCounter.Text);
+                    try
+                    {
+                        if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                        var entryValue = Convert.ToInt32(EntryCounter.Text);
+
+                        if (entryValue > 1)
+                        {
+                            entryValue -= 1;
+                            EntryCounter.Text = entryValue.ToString();
+                            Text = EntryCounter.Text;
+
+                            ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
+                            {
+                                ItemId = ItemId,
+                                Count = entryValue,
+                                IsDeleteItem = false
+                            });
+
+                            SetImageMinusOrTrash();
+                        }
+                        else
+                        {
+                            ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
+                            {
+                                ItemId = ItemId,
+                                Count = 0,
+                                IsDeleteItem = true
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ProsysLogger.Instance.CrashLog(ex);
+                    }
                     
-                    if (entryValue > 1)
-                    {
-                        entryValue -= 1;
-                        EntryCounter.Text = entryValue.ToString();
-                        Text = EntryCounter.Text;
-                        
-                        ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
-                        {
-                            ItemId = ItemId,
-                            Count = entryValue,
-                            IsDeleteItem = false
-                        });
-                        
-                        SetImageMinusOrTrash();
-                    }
-                    else
-                    {
-                        ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
-                        {
-                            ItemId = ItemId,
-                            Count = 0,
-                            IsDeleteItem = true
-                        });
-                    }
+                    DoubleTapping.ResumeTap();
                 })
             });
             
@@ -115,26 +127,37 @@ namespace ProsysMobile.CustomControls.Other
             {
                 Command = new Command(() =>
                 {
-                    var entryValue = Convert.ToInt32(EntryCounter.Text);
-
-                    entryValue += 1;
-
-                    if (entryValue > StockCount + entryValue -1)
+                    try
                     {
-                        entryValue = StockCount + entryValue -1;
+                        if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+
+                        var entryValue = Convert.ToInt32(EntryCounter.Text);
+
+                        entryValue += 1;
+
+                        if (entryValue > StockCount + entryValue - 1)
+                        {
+                            entryValue = StockCount + entryValue - 1;
+                        }
+
+                        EntryCounter.Text = entryValue.ToString();
+                        Text = EntryCounter.Text;
+
+                        SetImageMinusOrTrash();
+
+                        ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
+                        {
+                            ItemId = ItemId,
+                            Count = entryValue,
+                            IsDeleteItem = false
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        ProsysLogger.Instance.CrashLog(ex);
                     }
                     
-                    EntryCounter.Text = entryValue.ToString();
-                    Text = EntryCounter.Text;
-                    
-                    SetImageMinusOrTrash();
-
-                    ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
-                    {
-                        ItemId = ItemId,
-                        Count = entryValue,
-                        IsDeleteItem = false
-                    });
+                    DoubleTapping.ResumeTap();
                 })
             });
         }
