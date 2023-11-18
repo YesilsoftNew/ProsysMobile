@@ -218,11 +218,11 @@ namespace ProsysMobile.ViewModels.Pages.Main
             try
             {
                 if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
-                IsBusy = true;
-
+                
                 if (sender is ItemsSubDto item)
                 {
+                    IsBusy = true;
+
                     var result = await _saveUserMobileFavoriteItemsService.SaveUserMobileFavoriteItems(
                         userId: GlobalSetting.Instance.User.ID,
                         itemId: item.Id,
