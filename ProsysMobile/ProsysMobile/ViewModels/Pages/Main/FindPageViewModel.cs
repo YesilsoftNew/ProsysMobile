@@ -210,8 +210,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (sender == null) return;
 
-                Search = sender as string;
-                
                 _isAllItemLoad = false;
 
                 var isNullSearch = string.IsNullOrWhiteSpace(Search);
@@ -518,7 +516,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 _selectedCategories.Clear();
                 _itemCategoryAll.IsSelected = false;
                 Search = string.Empty;
-                                
+                ShowSubCategories = false;
+         
                 await GetCategoriesAndBindFromApi(
                     categoryId: Constants.MainCategoryId,
                     isSubCategory: false
