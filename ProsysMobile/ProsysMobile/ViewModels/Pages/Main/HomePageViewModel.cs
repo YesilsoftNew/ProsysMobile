@@ -113,7 +113,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemsSubDto item)
                 {
-
+                    IsBusy = true;
+                    
                     var result = await _saveUserMobileFavoriteItemsService.SaveUserMobileFavoriteItems(
                         userId: GlobalSetting.Instance.User.ID,
                         itemId: item.Id,
@@ -139,6 +140,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
 
+            IsBusy = false;
             DoubleTapping.ResumeTap();
         });
         

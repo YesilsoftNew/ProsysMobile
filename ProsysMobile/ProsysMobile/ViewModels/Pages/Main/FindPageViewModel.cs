@@ -210,8 +210,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 if (sender == null) return;
 
-                Search = sender as string;
-                
                 _isAllItemLoad = false;
 
                 var isNullSearch = string.IsNullOrWhiteSpace(Search);
@@ -476,7 +474,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is ItemsSubDto item)
                 {
-
+                    IsBusy = true;
+                    
                     var result = await _saveUserMobileFavoriteItemsService.SaveUserMobileFavoriteItems(
                         userId: GlobalSetting.Instance.User.ID,
                         itemId: item.Id,
@@ -502,6 +501,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
 
+            IsBusy = false;
             DoubleTapping.ResumeTap();
         });
         
@@ -518,7 +518,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 _selectedCategories.Clear();
                 _itemCategoryAll.IsSelected = false;
                 Search = string.Empty;
-                                
+                ShowSubCategories = false;
+         
                 await GetCategoriesAndBindFromApi(
                     categoryId: Constants.MainCategoryId,
                     isSubCategory: false
