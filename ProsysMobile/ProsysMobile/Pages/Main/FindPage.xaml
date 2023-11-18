@@ -55,13 +55,13 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Margin="16,0,16,0"
-                    Text="{Binding Search}"
+                    Text="{Binding BindingContext.Search, Source={Reference FindPageKey}}"
                     Placeholder="{x:Static resource:Resource.SearchHere}"
                     SearchCommand="{Binding BindingContext.SearchEntryTextChangedCommand, Source={Reference FindPageKey}}"
                     ImageSource="EntrySearch"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand" />
-
+                
                 <Grid
                     Grid.Row="0"
                     Grid.Column="1"
