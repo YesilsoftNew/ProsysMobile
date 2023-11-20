@@ -340,5 +340,20 @@ namespace ProsysMobile.Helper
             var keyboardHeight = 300;
             content.TranslationY = -keyboardHeight;
         }
+
+        //İleride lazım olursa diye...
+        public static void GetParentContentView(Element parent)
+        {
+            while (parent != null)
+            {
+                if (parent is ContentPage contentPage)
+                {
+                    
+                    break;
+                }
+                
+                parent = parent.Parent;
+            }
+        }
     }
 }
