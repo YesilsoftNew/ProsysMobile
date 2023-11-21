@@ -1,12 +1,14 @@
 ﻿using Plugin.Connectivity;
 using Plugin.Multilingual;
-using ProsysMobile.Helper;
-using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Resources.Language;
 using System;
 using System.Globalization;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
+using Newtonsoft.Json;
 using Plugin.FirebasePushNotification;
 using ProsysMobile.CustomControls.Entry;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -339,6 +341,54 @@ namespace ProsysMobile.Helper
         {
             var keyboardHeight = 300;
             content.TranslationY = -keyboardHeight;
+        }
+
+        //İleride lazım olursa diye...
+        public static void GetParentContentView(Element parent)
+        {
+            while (parent != null)
+            {
+                if (parent is ContentPage contentPage)
+                {
+                    
+                    break;
+                }
+                
+                parent = parent.Parent;
+            }
+        }
+        
+        public static void SetDatabasePushNotificationToken()
+        {
+            try
+            {
+                var client = new HttpClient
+                {
+                    DefaultRequestHeaders =
+                    {
+                        Authorization = new AuthenticationHeaderValue("Bearer", GlobalSetting.Instance.JWTToken)
+                    }
+                };
+
+                var request = new HttpRequestMessage(HttpMethod.Post, App.Prosys_Api + "/api/UserDevices/SaveUserDevices");
+                
+                var sModel = GetUserDevices(GlobalSetting.Instance.User.ID);
+                
+                var json = JsonConvert.SerializeObject(sModel, Formatting.Indented, new JsonSerializerSettings
+                {
+                    NullValueHandling = NullValueHandling.Ignore
+                });
+                        
+                HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                
+                request.Content = content;
+
+                client.SendAsync(request);
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);                
+            }
         }
     }
 }
