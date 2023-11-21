@@ -381,7 +381,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         ClosedPageEventCommand = ItemDetailClosedEventCommand
                     };
 
-                    await NavigationService.NavigateToModalAsync<ItemDetailPageViewModel>(navigationModel);
+                    await NavigationService.NavigateToAsync<ItemDetailPageViewModel>(navigationModel);
                 }
 
             }
@@ -832,7 +832,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ClosedPageEventCommand = ItemDetailClosedEventCommand
                 };
 
-                await NavigationService.NavigateToModalAsync<ItemDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToAsync<ItemDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {

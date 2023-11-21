@@ -3,7 +3,6 @@ using ProsysMobile.Renderer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.Main;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
