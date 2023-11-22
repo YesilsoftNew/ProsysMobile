@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<renderer:CustomShell
+<Shell
     x:Class="ProsysMobile.Pages.AppShell"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -9,18 +9,20 @@
     xmlns:trns="clr-namespace:ProsysMobile.Helper"
     xmlns:renderer="clr-namespace:ProsysMobile.Renderer"
     xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
-    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:badge="clr-namespace:Xam.Shell.Badge;assembly=Xam.Shell.Badge"
+    xmlns:pancakeView="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    xmlns:other="clr-namespace:ProsysMobile.CustomControls.Other;assembly=ProsysMobile"
     viewModelBase:ViewModelLocator.AutoWireViewModel="true"
     FlyoutBackgroundColor="{DynamicResource White1}"
     mc:Ignorable="d"
-    TabBarTitleColor="Black"
+    TabBarTitleColor="{DynamicResource Color1}"
     Background="{DynamicResource White1}"
     ForegroundColor="darkgray"
     DisabledColor="#77869E"
     UnselectedColor="#77869E"
     TabBarIsVisible="True"
     NavBarIsVisible="False">
-
+    
     <TabBar
         x:Name="Tabbar"
         PropertyChanged="TabBar_PropertyChanged">
@@ -36,7 +38,11 @@
             </ShellContent>
         </Tab>
 
-        <Tab Icon="Order" TabIndex="2">
+        <Tab 
+            badge:Badge.BackgroundColor="Red"
+            badge:Badge.Text="{Binding BasketCount}"
+            Icon="Order" 
+            TabIndex="2">
             <ShellContent>
                 <mainPages:OrderPage />
             </ShellContent>
@@ -56,4 +62,4 @@
         </Tab>
     </TabBar>
     
-</renderer:CustomShell>
+</Shell>

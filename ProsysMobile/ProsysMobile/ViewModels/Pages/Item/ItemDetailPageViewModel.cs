@@ -132,8 +132,10 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         Amount = int.Parse(itemPurchaseQtyTextTrimValue)
                     }, enPriorityType.UserInitiated);
 
-                    if (response.IsSuccess)
+                    if (response is { ResponseData: { }, IsSuccess: true })
                     {
+                        MessagingCenter.Send(this, "UpdateBasketCount", response.ResponseData.BasketItemCount);
+                        
                         _itemDetailPageViewModelViewParamModel.Model.IsAddItem = true;
                     
                         DialogService.SuccessToastMessage(Resource.TheProductHasBeenAddedToTheBasket);

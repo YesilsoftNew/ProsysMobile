@@ -10,7 +10,7 @@ using Xamarin.Forms.Xaml;
 namespace ProsysMobile.Pages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AppShell : CustomShell
+    public partial class AppShell
     {
         public int count = 0;
         public Dictionary<string, Type> Routes { get; private set; } = new Dictionary<string, Type>();

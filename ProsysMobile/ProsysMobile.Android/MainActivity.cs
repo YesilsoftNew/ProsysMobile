@@ -9,6 +9,7 @@ using Plugin.FirebasePushNotification;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.Platform.Droid;
 using Plugin.LocalNotifications;
+using Xam.Shell.Badge.Droid;
 using Color = Android.Graphics.Color;
 
 namespace ProsysMobile.Droid
@@ -41,7 +42,8 @@ namespace ProsysMobile.Droid
             
             UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this);
-            
+            BottomBar.Init();
+
             RequestedOrientation = ScreenOrientation.Portrait;
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)

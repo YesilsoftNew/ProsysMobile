@@ -2,6 +2,7 @@
 using Foundation;
 using Plugin.FirebasePushNotification;
 using UIKit;
+using Xam.Shell.Badge.iOS;
 
 namespace ProsysMobile.iOS
 {
@@ -11,6 +12,7 @@ namespace ProsysMobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Rg.Plugins.Popup.Popup.Init();
+            BottomBar.Init();
             //Backdrop.Initializer.Init();
             //Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
 
