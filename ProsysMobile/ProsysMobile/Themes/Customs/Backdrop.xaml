@@ -24,14 +24,6 @@
         <Setter Property="RowSpacing" Value="0" />
     </Style>
     
-    <Style x:Key="Customs.Backdrop.MainGridSecondary" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{DynamicResource White1}" />
-        <Setter Property="VerticalOptions" Value="EndAndExpand" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="Padding" Value="{OnPlatform iOS=' 0,0,0,16', Android='0,0,0,38'}" />
-        <Setter Property="RowSpacing" Value="0" />
-    </Style>
-    
     <Style x:Key="Customs.Backdrop.MainGridTertiary" TargetType="Grid">
         <Setter Property="BackgroundColor" Value="{DynamicResource White1}" />
         <Setter Property="VerticalOptions" Value="FillAndExpand" />

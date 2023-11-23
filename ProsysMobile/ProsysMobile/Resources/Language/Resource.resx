@@ -314,4 +314,10 @@
   <data name="AnError0ccurredWhileUpdatingTheQuantity" xml:space="preserve">
 	  <value>An error occurred while updating the quantity!</value>
   </data>
+  <data name="YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping" xml:space="preserve">
+	  <value>Your order has been successfully received, you can continue shopping.</value><comment>OrderDetailPageViewModel.cs</comment>
+  </data>
+  <data name="AccountDetails" xml:space="preserve">
+	  <value>Account Details</value><comment>LogoutOrDeleteAccountPage.xaml</comment>
+  </data>
 </root>

@@ -42,7 +42,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                 _itemDetailPageViewModelViewParamModel = navigationModel;
             else
                 throw new ArgumentNullException(nameof(navigationData), "It is mandatory to send parameter of type ItemDetailPageViewModel!");
-
+            
             PageLoad();
         }
 
@@ -132,8 +132,10 @@ namespace ProsysMobile.ViewModels.Pages.Item
                         Amount = int.Parse(itemPurchaseQtyTextTrimValue)
                     }, enPriorityType.UserInitiated);
 
-                    if (response.IsSuccess)
+                    if (response is { ResponseData: { }, IsSuccess: true })
                     {
+                        MessagingCenter.Send(this, "UpdateBasketCount", response.ResponseData.BasketItemCount);
+                        
                         _itemDetailPageViewModelViewParamModel.Model.IsAddItem = true;
                     
                         DialogService.SuccessToastMessage(Resource.TheProductHasBeenAddedToTheBasket);
@@ -300,14 +302,14 @@ namespace ProsysMobile.ViewModels.Pages.Item
                 {
                     DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingProductDetails);
                     
-                    NavigationService.NavigatePopBackdropAsync();
+                    NavigationService.NavigatePopAsync();
                 }
             }
             catch (Exception ex)
             {
                 DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
                 
-                NavigationService.NavigatePopBackdropAsync();
+                NavigationService.NavigatePopAsync();
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
@@ -326,7 +328,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
             {
                 _itemDetailPageViewModelViewParamModel.Model.IsAddItem = isAddItem;
                 
-                await NavigationService.NavigatePopModalAsync();
+                await NavigationService.NavigatePopAsync();
                 
                 _itemDetailPageViewModelViewParamModel.ClosedPageEventCommand.Execute(_itemDetailPageViewModelViewParamModel.Model);
             }

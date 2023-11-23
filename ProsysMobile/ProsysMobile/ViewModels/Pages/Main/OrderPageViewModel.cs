@@ -392,7 +392,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     ClosedPageEventCommand = ItemDetailClosedEventCommand
                 };
                 
-                await NavigationService.NavigateToModalAsync<ItemDetailPageViewModel>(navigationModel);
+                await NavigationService.NavigateToAsync<ItemDetailPageViewModel>(navigationModel);
             }
             catch (Exception ex)
             {
@@ -411,8 +411,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 priorityType: enPriorityType.UserInitiated
             );
 
-            if (result.IsSuccess)
+            if (result.ResponseData != null && result.IsSuccess)
             {
+                MessagingCenter.Send(this, "UpdateBasketCount", result.ResponseData.BasketItemCount);
+
                 BasketItems.Remove(orderDetailsSubDto);
 
                 if (!BasketItems.Any())

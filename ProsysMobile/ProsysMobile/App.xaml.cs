@@ -48,7 +48,8 @@ namespace ProsysMobile
 {
     public partial class App
     { 
-        public static string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
+        public static readonly string Prosys_Api = "http://test.yas.yesilsoft.net";   // dev test
+
         public App()
         {
             InitializeComponent();
@@ -216,8 +217,6 @@ namespace ProsysMobile
             Console.WriteLine("test");
         }
 
-        protected override void OnResume()
-        {
-        }
+        protected override void OnResume() { }
     }
 }

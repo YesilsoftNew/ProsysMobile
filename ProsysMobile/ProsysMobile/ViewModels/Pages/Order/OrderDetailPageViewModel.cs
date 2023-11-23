@@ -93,8 +93,8 @@ namespace ProsysMobile.ViewModels.Pages.Order
                 {
                     _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = true;
                 
-                    DialogService.SuccessToastMessage(Resource.BasketConfirmed);
-                
+                    DialogService.SuccessToastMessage(Resource.YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping);
+                    
                     SetAndClosePage(isSaveBasket: true);
                 }
                 else

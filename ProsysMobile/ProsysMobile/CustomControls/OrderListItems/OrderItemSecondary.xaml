@@ -78,7 +78,18 @@
 
         </Grid>
         
+        <Image
+            Grid.Column="2" 
+            x:Name="IsAddedBasketImage"
+            Source="AddedBasket"
+            IsVisible="False"
+            HorizontalOptions="End"
+            VerticalOptions="StartAndExpand"
+            Style="{DynamicResource ImageButton4}" />
+        
+        <!--Not used-->
         <ImageButton
+            IsVisible="False"
             Grid.Column="2" 
             x:Name="ItemImageButton"
             Clicked="ItemImageButton_OnClicked"
