@@ -48,7 +48,7 @@ namespace ProsysMobile
 {
     public partial class App
     { 
-        public static string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
+        public static string Prosys_Api = "http://test.yas.yesilsoft.net";
         public App()
         {
             InitializeComponent();
