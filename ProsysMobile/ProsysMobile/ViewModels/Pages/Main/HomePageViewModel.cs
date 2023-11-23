@@ -256,8 +256,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (result is { ResponseData: { }, IsSuccess: true })
                 {
-                    result.ResponseData.ItemCategorySubDtos.Insert(0, Constants.ItemCategoryAll);
-                    
                     Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData.ItemCategorySubDtos);
                     
                     FillDealsList(result.ResponseData.DealItemsSubDtos);
