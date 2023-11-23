@@ -83,7 +83,19 @@
                         
                     </Grid>
 
+                    <Image
+                        x:Name="IsAddedBasketImage"
+                        Source="AddedBasket"
+                        Aspect="AspectFit"
+                        IsVisible="False"
+                        Style="{DynamicResource ImageButton4}"
+                        Margin="0,6,9,0"
+                        AbsoluteLayout.LayoutFlags="PositionProportional"
+                        AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize" />
+                    
+                    <!--Not used-->
                     <ImageButton
+                        IsVisible="False"
                         x:Name="ItemImageButton"
                         Aspect="AspectFit"
                         Clicked="ItemImageButton_OnClicked"
@@ -91,7 +103,7 @@
                         AbsoluteLayout.LayoutFlags="PositionProportional"
                         AbsoluteLayout.LayoutBounds="1,0,AutoSize,AutoSize"
                         Style="{DynamicResource ImageButton4}" />
-                    
+                        
                 </AbsoluteLayout>
                 
             </yummy:PancakeView>
@@ -153,6 +165,7 @@
                         HorizontalOptions="StartAndExpand"
                         VerticalOptions="EndAndExpand"/>
                     
+                    <!--
                     <Image
                         x:Name="IsAddedBasketImage"
                         Grid.Column="1"
@@ -161,7 +174,7 @@
                         Style="{DynamicResource Image1}"
                         HorizontalOptions="EndAndExpand"
                         VerticalOptions="EndAndExpand" />
-                    
+                    -->
                 </Grid>
                 
                 

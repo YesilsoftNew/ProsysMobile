@@ -13,31 +13,31 @@ namespace ProsysMobile.CustomControls.OrderListItems
             typeof(string),
             typeof(OrderItemSecondary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty NameTextProperty = BindableProperty.Create(nameof(NameText),
             typeof(string),
             typeof(OrderItemSecondary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty PiecesTextProperty = BindableProperty.Create(nameof(PiecesText),
             typeof(string),
             typeof(OrderItemSecondary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty ImageSourceProperty = BindableProperty.Create(nameof(ImageSource),
             typeof(string),
             typeof(OrderItemSecondary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty IsFavoriteProperty = BindableProperty.Create(nameof(IsFavorite),
             typeof(bool),
             typeof(OrderItemSecondary),
             default(bool),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty FavoriteCommandProperty = BindableProperty.Create(nameof(FavoriteCommand),
             typeof(ICommand),
@@ -50,6 +50,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             typeof(object),
             typeof(OrderItemSecondary),
             null,
+            BindingMode.TwoWay);
+        
+        public static readonly BindableProperty IsAddedBasketProperty = BindableProperty.Create(nameof(IsAddedBasket),
+            typeof(bool),
+            typeof(OrderItemTertiary),
+            false,
             BindingMode.TwoWay);
         
         public string PriceText
@@ -94,6 +100,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(FavoriteCommandParameterProperty, value);
         }
         
+        public bool IsAddedBasket
+        {
+            get => (bool)GetValue(IsAddedBasketProperty);
+            set => SetValue(IsAddedBasketProperty, value);
+        }
+        
         public OrderItemSecondary()
         {
             InitializeComponent();
@@ -128,6 +140,10 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == IsFavoriteProperty.PropertyName)
             {
                 ItemImageButton.Source = IsFavorite ? Constants.SelectedFavoriteImageSource : Constants.UnSelectedFavoriteImageSource;
+            }
+            else if (propertyName == IsAddedBasketProperty.PropertyName)
+            {
+                IsAddedBasketImage.IsVisible = IsAddedBasket;
             }
         }
 
