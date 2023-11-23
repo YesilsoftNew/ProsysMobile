@@ -3,8 +3,6 @@ using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.ViewModels.Base;
 using System;
-using System.Globalization;
-using System.Threading;
 using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -252,7 +250,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 
                 if (result.ResponseData != null && result.IsSuccess)
                 {
-                    result.ResponseData.Insert(0, Constants.ItemCategoryAll);
+                    //result.ResponseData.Insert(0, Constants.ItemCategoryAll);
                     
                     Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
                 }
