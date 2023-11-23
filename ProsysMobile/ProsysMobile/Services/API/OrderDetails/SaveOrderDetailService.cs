@@ -23,15 +23,15 @@ namespace ProsysMobile.Services.API.OrderDetails
             _apiRequestSelector = apiRequestSelector;
         }
         
-        public Task<ServiceBaseResponse<EmptyResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
+        public Task<ServiceBaseResponse<ChangeBasketItemCountResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<ChangeBasketItemCountResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, enPriorityType priorityType)
         {
-            ServiceBaseResponse<EmptyResponseModel> result = null;
-            Task<ServiceBaseResponse<EmptyResponseModel>> task;
+            ServiceBaseResponse<ChangeBasketItemCountResponseModel> result = null;
+            Task<ServiceBaseResponse<ChangeBasketItemCountResponseModel>> task;
             Exception exception;
 
             try

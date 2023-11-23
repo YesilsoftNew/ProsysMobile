@@ -6,8 +6,8 @@ using ProsysMobile.Services.Base;
 
 namespace ProsysMobile.Services.API.OrderDetails
 {
-    public interface ISaveOrderDetailService : IServiceBase<ServiceBaseResponse<EmptyResponseModel>>
+    public interface ISaveOrderDetailService : IServiceBase<ServiceBaseResponse<ChangeBasketItemCountResponseModel>>
     {
-        Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, enPriorityType priorityType);
+        Task<ServiceBaseResponse<ChangeBasketItemCountResponseModel>> SaveOrderDetail(OrderDetailsParam orderDetailsParam, enPriorityType priorityType);
     }
 }
