@@ -3,8 +3,8 @@ using ProsysMobile.Pages;
 using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.ViewModels.Base;
 using System;
-using System.Globalization;
-using System.Threading;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -20,20 +20,20 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class HomePageViewModel : ViewModelBase
     {
-        private readonly IItemCategoryService _itemCategoryService;
+        private readonly IGetHomePageDataService _getHomePageDataService;
         private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
         private readonly IDealItemsService _dealItemsService;
 
         private bool _isAllItemLoad;
         private int _listPage = 0;
         
-        public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IDealItemsService dealItemsService)
+        public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IDealItemsService dealItemsService, IGetHomePageDataService getHomePageDataService)
         {
-            _itemCategoryService = itemCategoryService;
             _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
             _dealItemsService = dealItemsService;
+            _getHomePageDataService = getHomePageDataService;
 
-           MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
+            MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
            {
                try
                {
@@ -91,7 +91,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                if (!DoubleTapping.AllowTap) return; 
+                
+                DoubleTapping.AllowTap = false;
 
                 var category = sender as ItemCategory;
                 
@@ -109,7 +111,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                if (!DoubleTapping.AllowTap) return; 
+                
+                DoubleTapping.AllowTap = false;
 
                 if (sender is ItemsSubDto item)
                 {
@@ -148,8 +152,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
-
+                if (!DoubleTapping.AllowTap) return; 
+                
+                DoubleTapping.AllowTap = false;
                 
                 var navigationModel = new NavigationModel<ItemDetailPageViewParamModel>
                 {
@@ -194,7 +199,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             try
             {
-                if (!DoubleTapping.AllowTap) return; DoubleTapping.AllowTap = false;
+                if (!DoubleTapping.AllowTap) return; 
+                
+                DoubleTapping.AllowTap = false;
 
                 IsBusy = true;
 
@@ -230,49 +237,49 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Methods
 
-        private void PageLoad()
-        {
-            GetCategoryAndBindFromApi(
-                categoryId: Constants.MainCategoryId
-            );
-
-            _listPage = 0;
-            _isAllItemLoad = false;
-            Deals.Clear();
-            GetDealsAndBindFromApi();
-        }
-        
-        private async void GetCategoryAndBindFromApi(int categoryId)
+        private async Task PageLoad()
         {
             try
             {
                 IsBusy = true;
                 
-                var result = await _itemCategoryService.ItemCategory(categoryId, enPriorityType.UserInitiated);
+                _listPage = 0;
+                _isAllItemLoad = false;
+                Deals.Clear();
                 
-                if (result.ResponseData != null && result.IsSuccess)
+                var result = await _getHomePageDataService.GetHomePageData(
+                    page: _listPage,
+                    userId: GlobalSetting.Instance.User.ID,
+                    mainCategoryId: Constants.MainCategoryId,
+                    priorityType: enPriorityType.UserInitiated
+                );
+
+                if (result is { ResponseData: { }, IsSuccess: true })
                 {
-                    result.ResponseData.Insert(0, Constants.ItemCategoryAll);
+                    result.ResponseData.ItemCategorySubDtos.Insert(0, Constants.ItemCategoryAll);
                     
-                    Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData);
+                    Categories = new ObservableRangeCollection<ItemCategory>(result.ResponseData.ItemCategorySubDtos);
+                    
+                    FillDealsList(result.ResponseData.DealItemsSubDtos);
+                    
+                    MessagingCenter.Send(this, "UpdateBasketCount", result.ResponseData.BasketItemCountSubDto?.BasketItemCount ?? 0);
                 }
                 else
                 {
-                    DialogService.ErrorToastMessage(Resource.AnErrorOccurredWhileFetchingCategories);
+                    DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);    
                 }
-
             }
             catch (Exception ex)
             {
-                DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
-                
                 ProsysLogger.Instance.CrashLog(ex);
+
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
-            
+
             IsBusy = false;
         }
 
-        private async void GetDealsAndBindFromApi()
+        private async Task GetDealsAndBindFromApi()
         {
             try
             {
@@ -289,12 +296,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (result?.ResponseData != null && result.IsSuccess)
                 {
-                    if (result.ResponseData.Count < GlobalSetting.Instance.ListPageSize)
-                        _isAllItemLoad = true;
-
-                    Deals.AddRange(result.ResponseData);
-                    
-                    _listPage++;
+                    FillDealsList(result.ResponseData);
                 }
                 else
                 {
@@ -307,6 +309,16 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 ProsysLogger.Instance.CrashLog(ex);
             }
+        }
+
+        private void FillDealsList(List<ItemsSubDto> deals)
+        {
+            if (deals.Count < GlobalSetting.Instance.ListPageSize)
+                _isAllItemLoad = true;
+
+            Deals.AddRange(deals);
+                    
+            _listPage++;
         }
         
         #endregion

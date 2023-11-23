@@ -17,7 +17,7 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public string Image { get; set; }
         public bool? RecordState { get; set; }
 
-        private bool _isSelected = false;
+        private bool _isSelected;
         public bool IsSelected { get => _isSelected; set { _isSelected = value; OnPropertyChanged(); } }
     }
 

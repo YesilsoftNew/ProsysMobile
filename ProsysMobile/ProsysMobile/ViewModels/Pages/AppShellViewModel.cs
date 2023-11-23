@@ -19,6 +19,11 @@ namespace ProsysMobile.ViewModels.Pages
             {
                 BasketCount = arg <= 0 ? string.Empty : arg.ToString();
             });
+            
+            MessagingCenter.Subscribe<HomePageViewModel, int>(this, "UpdateBasketCount", (sender, arg) =>
+            {
+                BasketCount = arg <= 0 ? string.Empty : arg.ToString();
+            });
 
             return base.InitializeAsync(navigationData);
         }
