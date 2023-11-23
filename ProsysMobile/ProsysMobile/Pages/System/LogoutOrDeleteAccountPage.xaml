@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<backdrop:CustomBackdrop xmlns="http://xamarin.com/schemas/2014/forms"
+                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                         x:Class="ProsysMobile.Pages.System.LogoutOrDeleteAccountPage"
+                         xmlns:backdrop="clr-namespace:ProsysMobile.Models"
+                         xmlns:controlbars="clr-namespace:ProsysMobile.CustomControls.Bar"
+                         xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+                         xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
+                         viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+                         Style="{DynamicResource Customs.Backdrop.Backdrop}"
+                         IsSetPanListener="True">
+    <backdrop:CustomBackdrop.PageContent>
+        <ContentView>
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}" VerticalOptions="EndAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <controlbars:CustomBackDropToolbarPrimary 
+                    Grid.Row="0"
+                    Title="{x:Static resource:Resource.AccountDetails}" />
+                
+                <Grid
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    RowSpacing="16"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand"
+                    Margin="16,0,16,0">
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                        <RowDefinition Height="AUTO"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Button
+                        Grid.Row="0"
+                        Text="{x:Static resource:Resource.SignOut}"
+                        Style="{DynamicResource Button.OutlineSecondary}"
+                        Margin="32,24,24,0"
+                        Command="{Binding LogoutClickCommand}"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                
+                    <Button
+                        Grid.Row="1"
+                        Text="{x:Static resource:Resource.DeleteAccount}"
+                        Style="{DynamicResource Button.Outline}"
+                        TextColor="{StaticResource Red1}"
+                        Margin="0,0,0,8"
+                        Command="{Binding DeleteAccountClickCommand}"
+                        HorizontalOptions="CenterAndExpand"
+                        VerticalOptions="FillAndExpand" />
+                    
+                </Grid>
+                
+            </Grid>
+        </ContentView>
+    </backdrop:CustomBackdrop.PageContent>
+</backdrop:CustomBackdrop>

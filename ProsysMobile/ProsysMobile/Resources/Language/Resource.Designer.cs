@@ -476,5 +476,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping", resourceCulture);
             }
         }
+        
+        internal static string AccountDetails {
+            get {
+                return ResourceManager.GetString("AccountDetails", resourceCulture);
+            }
+        }
     }
 }

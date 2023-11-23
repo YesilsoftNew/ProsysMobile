@@ -14,7 +14,7 @@
     <backdrop:CustomBackdrop.PageContent>
         <ContentView>
 
-            <Grid Style="{DynamicResource Customs.Backdrop.MainGridSecondary}">
+            <Grid Style="{DynamicResource Customs.Backdrop.MainGrid}" VerticalOptions="EndAndExpand">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
