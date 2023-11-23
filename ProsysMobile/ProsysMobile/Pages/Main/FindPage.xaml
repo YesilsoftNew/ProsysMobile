@@ -292,6 +292,7 @@
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
                             IsFavorite="{Binding IsFavorite}"
+                            IsAddedBasket="{Binding IsAddedBasket}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListPrimary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
