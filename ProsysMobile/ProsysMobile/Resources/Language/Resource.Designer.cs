@@ -470,5 +470,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("AnError0ccurredWhileUpdatingTheQuantity", resourceCulture);
             }
         }
+        
+        internal static string YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping {
+            get {
+                return ResourceManager.GetString("YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping", resourceCulture);
+            }
+        }
     }
 }
