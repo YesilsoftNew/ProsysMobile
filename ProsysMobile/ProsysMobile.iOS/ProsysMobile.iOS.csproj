@@ -204,6 +204,9 @@
     <BundleResource Include="Resources\Favorite.png" />
     <BundleResource Include="Resources\Favorite@2x.png" />
     <BundleResource Include="Resources\Favorite@3x.png" />
+    <BundleResource Include="Resources\Find.png" />
+    <BundleResource Include="Resources\Find@2x.png" />
+    <BundleResource Include="Resources\Find@3x.png" />
     <BundleResource Include="Resources\LaunchScreen.storyboard" />
     <BundleResource Include="Resources\Logo.png" />
     <BundleResource Include="Resources\Logo@2x.png" />
@@ -281,13 +284,6 @@
     <BundleResource Include="Resources\EntrySearch.png" />
     <BundleResource Include="Resources\EntrySearch@2x.png" />
     <BundleResource Include="Resources\EntrySearch@3x.png" />
-    <BundleResource Include="Resources\Find.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Find%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Find%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Home.png" />

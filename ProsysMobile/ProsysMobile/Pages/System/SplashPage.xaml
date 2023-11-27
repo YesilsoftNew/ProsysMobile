@@ -10,13 +10,31 @@
 
     <ContentPage.Content>
         
-        <Image 
-            VerticalOptions="CenterAndExpand" 
-            HorizontalOptions="CenterAndExpand" 
-            Source="RoundLogo" 
-            Aspect="AspectFill" 
-            HeightRequest="261"
-            WidthRequest="261" />
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="AUTO" />
+            </Grid.RowDefinitions>
+            
+            <Image 
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" 
+                Source="RoundLogo" 
+                Aspect="AspectFill" 
+                HeightRequest="261"
+                WidthRequest="261" />
+        
+            <Label
+                Grid.Row="1"
+                Text="{Binding VersionText}"
+                HorizontalOptions="CenterAndExpand"
+                VerticalOptions="EndAndExpand"
+                Margin="0,0,0,50" />
+            
+        </Grid>
         
     </ContentPage.Content>
 </ContentPage>

@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserDevices;
 using ProsysMobile.Services.API.UserMobile;
+using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
 {
@@ -30,9 +31,17 @@ namespace ProsysMobile.ViewModels.Pages.System
             _signInService = signInService;
             _saveUserDevicesService = saveUserDevicesService;
         }
+        
+        #region Propertys
+        
+        private string _versionText;
+        public string VersionText { get => _versionText; set { _versionText = value; PropertyChanged(() => VersionText); } }
+
+        #endregion
 
         public override async Task InitializeAsync(object navigationData)
         {
+            VersionText = "v " + Xamarin.Essentials.VersionTracking.CurrentBuild + $" ({Xamarin.Essentials.VersionTracking.CurrentVersion})";
             await GoToLoginPage();
         }
 

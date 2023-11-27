@@ -181,6 +181,7 @@
     <AndroidResource Include="Resources\drawable-hdpi\EntrySearch.png" />
     <AndroidResource Include="Resources\drawable-hdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Favorite.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Find.png" />
     <AndroidResource Include="Resources\drawable-hdpi\Logo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\MinusCounter.png" />
     <AndroidResource Include="Resources\drawable-hdpi\nfoBlue.png" />
@@ -212,6 +213,7 @@
     <AndroidResource Include="Resources\drawable-ldpi\EntrySearch.png" />
     <AndroidResource Include="Resources\drawable-ldpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Favorite.png" />
+    <AndroidResource Include="Resources\drawable-ldpi\Find.png" />
     <AndroidResource Include="Resources\drawable-ldpi\Logo.png" />
     <AndroidResource Include="Resources\drawable-ldpi\MinusCounter.png" />
     <AndroidResource Include="Resources\drawable-ldpi\nfoBlue.png" />
@@ -243,6 +245,7 @@
     <AndroidResource Include="Resources\drawable-mdpi\EntrySearch.png" />
     <AndroidResource Include="Resources\drawable-mdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Favorite.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Find.png" />
     <AndroidResource Include="Resources\drawable-mdpi\Logo.png" />
     <AndroidResource Include="Resources\drawable-mdpi\MinusCounter.png" />
     <AndroidResource Include="Resources\drawable-mdpi\nfoBlue.png" />
@@ -274,6 +277,7 @@
     <AndroidResource Include="Resources\drawable-xhdpi\EntrySearch.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Favorite.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Find.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\Logo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\MinusCounter.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\nfoBlue.png" />
@@ -305,6 +309,7 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\EntrySearch.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Favorite.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Find.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\Logo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\MinusCounter.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\nfoBlue.png" />
@@ -336,6 +341,7 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\EntrySearch.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ErrorRed.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Favorite.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Find.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\Logo.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\MinusCounter.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\nfoBlue.png" />
@@ -398,9 +404,6 @@
     <AndroidResource Include="Resources\drawable-hdpi\Account.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Find.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-hdpi\Home.png" />
   </ItemGroup>
   <ItemGroup>
@@ -408,9 +411,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\Account.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-ldpi\Find.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-ldpi\Home.png" />
@@ -422,9 +422,6 @@
     <AndroidResource Include="Resources\drawable-mdpi\Account.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\Find.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\Home.png" />
   </ItemGroup>
   <ItemGroup>
@@ -432,9 +429,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\Account.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\Find.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\Home.png" />
@@ -446,9 +440,6 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\Account.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\Find.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\Home.png" />
   </ItemGroup>
   <ItemGroup>
@@ -456,9 +447,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\Account.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Find.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\Home.png" />
