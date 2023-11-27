@@ -288,6 +288,7 @@
 
                         <customControlsOrders:OrderItemSecondary
                             NameText="{Binding Name}"
+                            UnitPriceText="{Binding UnitPriceDesc}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
@@ -348,6 +349,7 @@
                     <DataTemplate>
                         <customControlsOrders:OrderItemTertiary
                             NameText="{Binding Name}"
+                            UnitPriceText="{Binding UnitPriceDesc}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             ImageSource="{Binding Image}"
@@ -412,9 +414,11 @@
             
                         <customControlsOrders:OrderItemQuaternary
                             NameText="{Binding Name}"
+                            UnitPriceText="{Binding UnitPriceDesc}"
                             PiecesText="{Binding Pieces}"
                             PriceText="{Binding Price}"
                             IsFavorite="{Binding IsFavorite}"
+                            IsAddedBasket="{Binding IsAddedBasket}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListTertiary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"

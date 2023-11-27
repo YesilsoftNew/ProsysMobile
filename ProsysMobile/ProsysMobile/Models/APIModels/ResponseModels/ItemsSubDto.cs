@@ -29,6 +29,7 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public List<string> Images { get; set; }
         public string Amount { get; set; } = string.Empty;
         public string UnitDesc { get; set; } = string.Empty;
+        public string UnitPriceDesc { get; set; } = string.Empty;
         public string Tag1Text { get; set; } = string.Empty;
         public string Tag2Text { get; set; } = string.Empty;
         public string Tag3Text { get; set; } = string.Empty;

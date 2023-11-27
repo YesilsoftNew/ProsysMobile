@@ -110,6 +110,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             false,
             BindingMode.TwoWay);
         
+        public static readonly BindableProperty UnitPriceTextProperty = BindableProperty.Create(nameof(UnitPriceText),
+            typeof(string),
+            typeof(OrderItemTertiary),
+            string.Empty,
+            BindingMode.TwoWay);
+        
         public string PriceText
         {
             get => (string)GetValue(PriceTextProperty);
@@ -207,12 +213,19 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(IsAddedBasketProperty, value);
         }
         
+        public string UnitPriceText
+        {
+            get => (string)GetValue(UnitPriceTextProperty);
+            set => SetValue(UnitPriceTextProperty, value);
+        }
+        
         public OrderItemTertiary()
         {
             InitializeComponent();
             
             ItemPrice.Text = PriceText;
             ItemName.Text = NameText;
+            ItemUnitPrice.Text = UnitPriceText;
             ItemPieces.Text = PiecesText;
             ItemImage.Source = ImageSource;
             ItemImageButton.Source = Constants.UnSelectedFavoriteImageSource;
@@ -229,6 +242,10 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == NameTextProperty.PropertyName)
             {
                 ItemName.Text = NameText;
+            }
+            else if (propertyName == UnitPriceTextProperty.PropertyName)
+            {
+                ItemUnitPrice.Text = UnitPriceText;
             }
             else if (propertyName == PiecesTextProperty.PropertyName)
             {
