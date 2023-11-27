@@ -33,6 +33,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         #region Propertys
         
+        private string _versionText;
+        public string VersionText { get => _versionText; set { _versionText = value; PropertyChanged(() => VersionText); } }
+            
         private string _customerName;
         public string CustomerName { get => _customerName; set { _customerName = value; PropertyChanged(() => CustomerName); } }
         
@@ -115,6 +118,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
         private void PageLoad()
         {
+            VersionText = "v " + Xamarin.Essentials.VersionTracking.CurrentBuild + $" ({Xamarin.Essentials.VersionTracking.CurrentVersion})";
+
             var user = GlobalSetting.Instance.User;
 
             CustomerName = !string.IsNullOrWhiteSpace(user.CustomerName) ? user.CustomerName : "-";
