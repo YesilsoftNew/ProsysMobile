@@ -6,7 +6,7 @@
     
     <!--#region Theme 1 Colors-->
     <Color x:Key="Color1">#418134</Color>
-    <Color x:Key="Color2">#7DCE</Color>
+    <Color x:Key="Color2">#7DCE86</Color>
     <Color x:Key="Color3">#7BD46B</Color>
     <Color x:Key="Color4">#D4F1CA</Color>
     <Color x:Key="Color5">#418134</Color>
