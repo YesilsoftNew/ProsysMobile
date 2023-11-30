@@ -171,10 +171,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helper\" />
-    <Folder Include="test\" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\Account.png" />
     <BundleResource Include="Resources\AddedBasket.png" />
     <BundleResource Include="Resources\AddedBasket@2x.png" />
