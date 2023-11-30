@@ -53,6 +53,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
         
         private string _itemName;
         public string ItemName { get => _itemName; set { _itemName = value; PropertyChanged(() => ItemName); } }
+
+        private string _itemUnitPrice;
+        public string ItemUnitPrice { get => _itemUnitPrice; set { _itemUnitPrice = value; PropertyChanged(() => ItemUnitPrice); } }
         
         private string _itemPrice;
         public string ItemPrice { get => _itemPrice; set { _itemPrice = value; PropertyChanged(() => ItemPrice); } }
@@ -282,6 +285,7 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     
                     ItemId = responseModel.Item.Id;
                     ItemName = responseModel.Item.Name;
+                    ItemUnitPrice = responseModel.Item.UnitPriceDesc;
                     Images = new ObservableRangeCollection<string>(responseModel.Item.Images);
                     ItemPieces = responseModel.Item.Pieces;
                     ItemPrice = responseModel.Item.Price;

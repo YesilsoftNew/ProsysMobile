@@ -34,7 +34,7 @@ namespace ProsysMobile.CustomControls.OrderListItems
         public static readonly BindableProperty IsVisibleFavoriteImageProperty = BindableProperty.Create(nameof(IsVisibleFavoriteImage),
             typeof(bool),
             typeof(OrderItemQuaternary),
-            true,
+            false,
             Xamarin.Forms.BindingMode.TwoWay);
         
         public static readonly BindableProperty UnitPriceTextProperty = BindableProperty.Create(nameof(UnitPriceText),
@@ -60,6 +60,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             typeof(object),
             typeof(OrderItemSecondary),
             null,
+            BindingMode.TwoWay);
+        
+        public static readonly BindableProperty IsAddedBasketProperty = BindableProperty.Create(nameof(IsAddedBasket),
+            typeof(bool),
+            typeof(OrderItemSecondary),
+            false,
             BindingMode.TwoWay);
         
         public string PriceText
@@ -110,6 +116,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(FavoriteCommandParameterProperty, value);
         }
         
+        public bool IsAddedBasket
+        {
+            get => (bool)GetValue(IsAddedBasketProperty);
+            set => SetValue(IsAddedBasketProperty, value);
+        }
+        
         public OrderItemQuaternary()
         {
             InitializeComponent();
@@ -153,6 +165,10 @@ namespace ProsysMobile.CustomControls.OrderListItems
                 ItemImageButton.Source = IsFavorite
                     ? Constants.SelectedFavoriteImageSource
                     : Constants.UnSelectedFavoriteImageSource;
+            }
+            else if (propertyName == IsAddedBasketProperty.PropertyName)
+            {
+                IsAddedBasketImage.IsVisible = IsAddedBasket;
             }
         }
         

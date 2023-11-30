@@ -142,6 +142,7 @@
                             <DataTemplate>
                                 <customControlsOrders:OrderItemTertiary
                                     NameText="{Binding Name}"
+                                    UnitPriceText="{Binding UnitPriceDesc}"
                                     PiecesText="{Binding Pieces}"
                                     PriceText="{Binding Price}"
                                     ImageSource="{Binding Image}"

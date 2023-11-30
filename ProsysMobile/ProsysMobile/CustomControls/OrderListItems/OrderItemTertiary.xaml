@@ -119,6 +119,7 @@
                     <RowDefinition Height="AUTO"></RowDefinition>
                     <RowDefinition Height="AUTO"></RowDefinition>
                     <RowDefinition Height="AUTO"></RowDefinition>
+                    <RowDefinition Height="AUTO"></RowDefinition>
                 </Grid.RowDefinitions>
                 
                 <ScrollView
@@ -136,19 +137,34 @@
                         VerticalOptions="FillAndExpand"/>
                 
                 </ScrollView>
+                
+                <ScrollView
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalScrollBarVisibility="Never">
+                
+                    <Label
+                        x:Name="ItemUnitPrice"
+                        Text="-"
+                        Style="{DynamicResource Header6}"
+                        TextColor="{DynamicResource Black1}"
+                        HorizontalTextAlignment="Center"
+                        HorizontalOptions="StartAndExpand"
+                        VerticalOptions="FillAndExpand"/>
+                
+                </ScrollView>
             
                 <Label
                     x:Name="ItemPieces"
-                    Grid.Row="1"
+                    Grid.Row="2"
                     Text="-"
                     Style="{DynamicResource Label2}"
-                    Margin="0,0,0,6"
+                    Margin="0,3,0,6"
                     HorizontalOptions="StartAndExpand"
                     VerticalOptions="FillAndExpand"/>
             
                 <Grid
-                    Grid.Row="2"
-                    Grid.Column="0"
+                    Grid.Row="3"
                     Margin="0,0,0,11"
                     HorizontalOptions="FillAndExpand"
                     VerticalOptions="FillAndExpand">
@@ -176,7 +192,6 @@
                         VerticalOptions="EndAndExpand" />
                     -->
                 </Grid>
-                
                 
             </Grid>
             

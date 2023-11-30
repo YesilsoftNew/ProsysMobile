@@ -13,16 +13,9 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Plugin.FirebasePushNotification;
-using Plugin.LocalNotification;
-using Plugin.LocalNotifications;
-using ProsysMobile.Models.APIModels.ResponseModels;
-using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserDevices;
-using ProsysMobile.ViewModels.Pages.Order;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.System
@@ -143,7 +136,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                         var expiredDateString = token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value.ToString();
                         
                         GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
-                        GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "MM/dd/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                        GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "MM/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
 
                         if (result.ResponseData.UserMobile != null)
                         {
