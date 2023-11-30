@@ -204,12 +204,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
         #endregion
 
         #region Commands
-        public ICommand SearchEntryTextChangedCommand => new Command((sender) =>
+        public ICommand SearchEntryTextChangedCommand => new Command(async sender =>
         {
             try
             {
                 if (sender == null) return;
 
+                IsBusy = true;
+                
                 _isAllItemLoad = false;
 
                 var isNullSearch = string.IsNullOrWhiteSpace(Search);
@@ -244,13 +246,15 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         clearList: true
                     );
 
-                    GetItemsAndBindFromApi();
+                    await GetItemsAndBindFromApi();
                 }
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            IsBusy = false;
         });
 
         
@@ -561,7 +565,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     };
                 }
                 
-                _isAllItemLoad = false;
                 Search = string.Empty;
                 
                 _isPageLoad = true;
