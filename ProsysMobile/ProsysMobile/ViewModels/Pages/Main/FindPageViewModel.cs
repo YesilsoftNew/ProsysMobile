@@ -517,7 +517,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 _selectedCategories.Clear();
                 _itemCategoryAll.IsSelected = false;
-                Search = string.Empty;
                 ShowSubCategories = false;
          
                 await GetCategoriesAndBindFromApi(
@@ -563,13 +562,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 }
                 
                 _isAllItemLoad = false;
-                _listPage = 0;
-                UpdateItemsList(
-                    resultResponseData: null,
-                    clearList: true
-                );
-                await GetItemsAndBindFromApi();
-
+                Search = string.Empty;
+                
                 _isPageLoad = true;
             }
             catch (Exception ex)

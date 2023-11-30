@@ -111,7 +111,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                                 var expiredDateString = token.Claims.First(claim => claim.Type == "ExpiredDateTime").Value;
                                 
                                 GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
-                                GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "MM/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture);
+                                GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "M/d/yyyy h:m:ss tt", CultureInfo.InvariantCulture);
                                 
                                 userTokenDefaultSetting.Key = "UserToken";
                                 userTokenDefaultSetting.Value = GlobalSetting.Instance.JWTToken;
