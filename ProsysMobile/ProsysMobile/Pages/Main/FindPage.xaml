@@ -294,6 +294,7 @@
                             ImageSource="{Binding Image}"
                             IsFavorite="{Binding IsFavorite}"
                             IsAddedBasket="{Binding IsAddedBasket}"
+                            IsStockFinished="{Binding IsStockFinished}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListPrimary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
@@ -363,6 +364,7 @@
                             Tag4Text="{Binding Tag4Text}"
                             Tag4Color="{Binding Tag4Color}"
                             IsAddedBasket="{Binding IsAddedBasket}"
+                            IsStockFinished="{Binding IsStockFinished}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListSecondary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"
@@ -384,7 +386,6 @@
                             </VisualStateManager.VisualStateGroups>
 
                         </customControlsOrders:OrderItemTertiary>
-
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
@@ -419,6 +420,7 @@
                             PriceText="{Binding Price}"
                             IsFavorite="{Binding IsFavorite}"
                             IsAddedBasket="{Binding IsAddedBasket}"
+                            IsStockFinished="{Binding IsStockFinished}"
                             FavoriteCommand="{Binding Source={x:Reference ItemListTertiary}, Path=BindingContext.FavoriteClickCommand}"
                             FavoriteCommandParameter="{Binding .}"
                             HorizontalOptions="FillAndExpand"

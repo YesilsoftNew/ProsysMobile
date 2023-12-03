@@ -232,6 +232,7 @@
                                                             ItemId="{Binding Id}"
                                                             Text="{Binding Amount}"
                                                             StockCount="{Binding StockCountInt}"
+                                                            MaxOrderCount="{Binding MaxOrderCount}"
                                                             ChangeCountCommand="{Binding Source={x:Reference ListBasketItems}, Path=BindingContext.ChangeCountCommand}"
                                                             HorizontalOptions="FillAndExpand"
                                                             VerticalOptions="FillAndExpand"/>
