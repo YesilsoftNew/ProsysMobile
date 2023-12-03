@@ -336,4 +336,16 @@
   <data name="YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping" xml:space="preserve">
     <value>Your order has been successfully received, you can continue shopping.</value>
   </data>
+  <data name="SoldOut" xml:space="preserve">
+    <value>Tükendi</value>
+  </data>
+  <data name="ThereAreNoProductsInStock" xml:space="preserve">
+    <value>Stokta ürün kalmadı!</value>
+  </data>
+  <data name="YouHaveExceededTheMaximumPurchaseQuantity" xml:space="preserve">
+    <value>Maksimum satın alma adedini aştınız!</value>
+  </data>
+  <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
+    <value>Maksimum satın alma adedine ulaştığınız için adet güncellenemedi!</value>
+  </data>
 </root>

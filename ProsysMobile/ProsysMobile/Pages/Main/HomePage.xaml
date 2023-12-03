@@ -156,6 +156,7 @@
                                     Tag4Text="{Binding Tag4Text}"
                                     Tag4Color="{Binding Tag4Color}"
                                     IsAddedBasket="{Binding IsAddedBasket}"
+                                    IsStockFinished="{Binding IsStockFinished}"
                                     FavoriteCommand="{Binding Source={x:Reference Deals}, Path=BindingContext.FavoriteClickCommand}"
                                     FavoriteCommandParameter="{Binding .}"
                                     HorizontalOptions="FillAndExpand"

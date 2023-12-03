@@ -269,14 +269,12 @@ namespace ProsysMobile.Helper
 
         public static string GetErrorMessageWithErrorCode(string errCode)
         {
-            var errMessage = string.Empty;
-            
-            switch (errCode)
+            var errMessage = errCode switch
             {
-                case "NO_STOCK":
-                    errMessage = "Stokta ürün kalmadı!";
-                    break;
-            }
+                "NO_STOCK" => Resource.ThereAreNoProductsInStock,
+                "MAX_SHELL_COUNT" => Resource.YouHaveExceededTheMaximumPurchaseQuantity,
+                _ => string.Empty
+            };
 
             return errMessage;
         }

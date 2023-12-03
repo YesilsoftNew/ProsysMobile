@@ -19,6 +19,7 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public string UnitPrice { get; set; } = string.Empty;
         public string CurrencyType { get; set; } = string.Empty;
         public string Image { get; set; } = string.Empty;
+        public decimal MaxOrderCount { get; set; }
         
         private string _stockCount = string.Empty;
         public string StockCount { get => _stockCount; set { _stockCount = value; OnPropertyChanged(); } }

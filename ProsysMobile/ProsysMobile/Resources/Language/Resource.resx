@@ -320,4 +320,16 @@
   <data name="AccountDetails" xml:space="preserve">
 	  <value>Account Details</value><comment>LogoutOrDeleteAccountPage.xaml</comment>
   </data>
+  <data name="SoldOut" xml:space="preserve">
+	  <value>Sold out</value>
+  </data>
+  <data name="ThereAreNoProductsInStock" xml:space="preserve">
+	  <value>There are no products in stock!</value>
+  </data>
+  <data name="YouHaveExceededTheMaximumPurchaseQuantity" xml:space="preserve">
+	  <value>You have exceeded the maximum purchase quantity!</value>
+  </data>
+  <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
+	  <value>The quantity could not be updated because you have reached the maximum purchase quantity!</value>
+  </data>
 </root>
