@@ -2,6 +2,9 @@ using System;
 using System.Windows.Input;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.OtherModels;
+using ProsysMobile.Resources.Language;
+using ProsysMobile.Services.Dialog;
+using ProsysMobile.ViewModels.Base;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +13,8 @@ namespace ProsysMobile.CustomControls.Other
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BasketCounter
     {
+        protected readonly IDialogService DialogService;
+
         public static readonly BindableProperty ItemIdProperty = BindableProperty.Create(nameof(ItemId),
             typeof(int),
             typeof(BasketCounter),
@@ -39,6 +44,12 @@ namespace ProsysMobile.CustomControls.Other
             typeof(object),
             typeof(BasketCounter),
             null,
+            BindingMode.TwoWay);
+        
+        public static readonly BindableProperty MaxOrderCountProperty = BindableProperty.Create(nameof(MaxOrderCount),
+            typeof(decimal),
+            typeof(BasketCounter),
+            default(decimal),
             BindingMode.TwoWay);
 
         public int ItemId
@@ -70,12 +81,20 @@ namespace ProsysMobile.CustomControls.Other
             get => GetValue(ChangeCountCommandParameterProperty);
             set => SetValue(ChangeCountCommandParameterProperty, value);
         }
+        
+        public decimal MaxOrderCount
+        {
+            get => (decimal)GetValue(MaxOrderCountProperty);
+            set => SetValue(MaxOrderCountProperty, value);
+        }
 
         private string focusedBeforeEntryCounterText = string.Empty;
         
         public BasketCounter()
         {
             InitializeComponent();
+            
+            DialogService = ViewModelLocator.Resolve<IDialogService>();
 
             EntryCounter.Text = Text;
 
@@ -139,6 +158,12 @@ namespace ProsysMobile.CustomControls.Other
                         {
                             entryValue = StockCount + entryValue - 1;
                         }
+                        
+                        if (entryValue > MaxOrderCount)
+                        {
+                            entryValue -= 1;
+                            DialogService.WarningToastMessage(Resource.TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity);
+                        }
 
                         EntryCounter.Text = entryValue.ToString();
                         Text = EntryCounter.Text;
@@ -199,6 +224,14 @@ namespace ProsysMobile.CustomControls.Other
                 entryTextInt = StockCount + Convert.ToInt32(focusedBeforeEntryCounterText);
                 EntryCounter.Text = string.IsNullOrWhiteSpace(entryTextInt.ToString()) || entryTextInt < 0 ? "1" : entryTextInt.ToString();
                 Text = EntryCounter.Text;
+            }
+            
+            if (entryTextInt > MaxOrderCount)
+            {
+                entryTextInt = Convert.ToInt32(focusedBeforeEntryCounterText);
+                EntryCounter.Text = string.IsNullOrWhiteSpace(entryTextInt.ToString()) || entryTextInt < 0 ? "1" : entryTextInt.ToString();
+                Text = EntryCounter.Text;
+                DialogService.WarningToastMessage(Resource.TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity);
             }
             
             if (focusedBeforeEntryCounterText == entryTextInt.ToString()) return;

@@ -482,5 +482,29 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("AccountDetails", resourceCulture);
             }
         }
+        
+        internal static string SoldOut {
+            get {
+                return ResourceManager.GetString("SoldOut", resourceCulture);
+            }
+        }
+        
+        internal static string ThereAreNoProductsInStock {
+            get {
+                return ResourceManager.GetString("ThereAreNoProductsInStock", resourceCulture);
+            }
+        }
+        
+        internal static string YouHaveExceededTheMaximumPurchaseQuantity {
+            get {
+                return ResourceManager.GetString("YouHaveExceededTheMaximumPurchaseQuantity", resourceCulture);
+            }
+        }
+        
+        internal static string TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity {
+            get {
+                return ResourceManager.GetString("TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity", resourceCulture);
+            }
+        }
     }
 }

@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ProsysMobile.Helper;
+using ProsysMobile.Resources.Language;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -116,6 +113,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             string.Empty,
             BindingMode.TwoWay);
         
+        public static readonly BindableProperty IsStockFinishedProperty = BindableProperty.Create(nameof(IsStockFinished),
+            typeof(bool),
+            typeof(OrderItemTertiary),
+            false,
+            BindingMode.TwoWay);
+        
         public string PriceText
         {
             get => (string)GetValue(PriceTextProperty);
@@ -219,6 +222,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(UnitPriceTextProperty, value);
         }
         
+        public bool IsStockFinished
+        {
+            get => (bool)GetValue(IsStockFinishedProperty);
+            set => SetValue(IsStockFinishedProperty, value);
+        }
+        
         public OrderItemTertiary()
         {
             InitializeComponent();
@@ -250,6 +259,15 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == PiecesTextProperty.PropertyName)
             {
                 ItemPieces.Text = PiecesText;
+                
+                Application.Current.Resources.TryGetValue("Gray3", out var gray3Color);
+                
+                if (gray3Color == null) return;
+                
+                var gray3 = (Color)gray3Color;
+
+                ItemPieces.TextColor = gray3;
+                
             }
             else if (propertyName == ImageSourceProperty.PropertyName)
             {
@@ -295,6 +313,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             {
                 IsAddedBasketImage.IsVisible = IsAddedBasket;
             }
+            else if (propertyName == IsStockFinishedProperty.PropertyName)
+            {
+                if (!IsStockFinished) return;
+                
+                ItemPieces.Text = ItemPieces.Text + " - " + Resource.SoldOut;
+                ItemPieces.TextColor = Color.Red;            }
         }
         
         private void ItemImageButton_OnClicked(object sender, EventArgs e)

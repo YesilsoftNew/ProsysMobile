@@ -1,10 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using ProsysMobile.Helper;
+using ProsysMobile.Resources.Language;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,37 +14,37 @@ namespace ProsysMobile.CustomControls.OrderListItems
             typeof(string),
             typeof(OrderItemQuaternary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty NameTextProperty = BindableProperty.Create(nameof(NameText),
             typeof(string),
             typeof(OrderItemQuaternary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty PiecesTextProperty = BindableProperty.Create(nameof(PiecesText),
             typeof(string),
             typeof(OrderItemQuaternary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty IsVisibleFavoriteImageProperty = BindableProperty.Create(nameof(IsVisibleFavoriteImage),
             typeof(bool),
             typeof(OrderItemQuaternary),
             false,
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty UnitPriceTextProperty = BindableProperty.Create(nameof(UnitPriceText),
             typeof(string),
             typeof(OrderItemQuaternary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty IsFavoriteProperty = BindableProperty.Create(nameof(IsFavorite),
             typeof(bool),
             typeof(OrderItemSecondary),
             default(bool),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
         
         public static readonly BindableProperty FavoriteCommandProperty = BindableProperty.Create(nameof(FavoriteCommand),
             typeof(ICommand),
@@ -65,6 +62,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
         public static readonly BindableProperty IsAddedBasketProperty = BindableProperty.Create(nameof(IsAddedBasket),
             typeof(bool),
             typeof(OrderItemSecondary),
+            false,
+            BindingMode.TwoWay);
+                
+        public static readonly BindableProperty IsStockFinishedProperty = BindableProperty.Create(nameof(IsStockFinished),
+            typeof(bool),
+            typeof(OrderItemTertiary),
             false,
             BindingMode.TwoWay);
         
@@ -122,6 +125,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(IsAddedBasketProperty, value);
         }
         
+        public bool IsStockFinished
+        {
+            get => (bool)GetValue(IsStockFinishedProperty);
+            set => SetValue(IsStockFinishedProperty, value);
+        }
+        
         public OrderItemQuaternary()
         {
             InitializeComponent();
@@ -150,6 +159,15 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == PiecesTextProperty.PropertyName)
             {
                 ItemPieces.Text = PiecesText;
+                                
+                Application.Current.Resources.TryGetValue("Gray3", out var gray3Color);
+                
+                if (gray3Color == null) return;
+                
+                var gray3 = (Color)gray3Color;
+
+                ItemPieces.TextColor = gray3;
+
             }
             else if (propertyName == IsVisibleFavoriteImageProperty.PropertyName)
             {
@@ -170,6 +188,12 @@ namespace ProsysMobile.CustomControls.OrderListItems
             {
                 IsAddedBasketImage.IsVisible = IsAddedBasket;
             }
+            else if (propertyName == IsStockFinishedProperty.PropertyName)
+            {
+                if (!IsStockFinished) return;
+                
+                ItemPieces.Text = ItemPieces.Text + " - " + Resource.SoldOut;
+                ItemPieces.TextColor = Color.Red;            }
         }
         
         private void ItemImageButton_OnClicked(object sender, EventArgs e)

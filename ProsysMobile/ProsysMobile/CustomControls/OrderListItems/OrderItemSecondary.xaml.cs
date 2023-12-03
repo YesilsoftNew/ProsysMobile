@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Input;
 using ProsysMobile.Helper;
+using ProsysMobile.Resources.Language;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -62,7 +63,13 @@ namespace ProsysMobile.CustomControls.OrderListItems
             typeof(string),
             typeof(OrderItemQuaternary),
             default(string),
-            Xamarin.Forms.BindingMode.TwoWay);
+            BindingMode.TwoWay);
+        
+        public static readonly BindableProperty IsStockFinishedProperty = BindableProperty.Create(nameof(IsStockFinished),
+            typeof(bool),
+            typeof(OrderItemTertiary),
+            false,
+            BindingMode.TwoWay);
         
         public string PriceText
         {
@@ -118,10 +125,16 @@ namespace ProsysMobile.CustomControls.OrderListItems
             set => SetValue(UnitPriceTextProperty, value);
         }
         
+        public bool IsStockFinished
+        {
+            get => (bool)GetValue(IsStockFinishedProperty);
+            set => SetValue(IsStockFinishedProperty, value);
+        }
+        
         public OrderItemSecondary()
         {
             InitializeComponent();
-            
+
             ItemPrice.Text = PriceText;
             ItemName.Text = NameText;
             ItemUnitPrice.Text = UnitPriceText;
@@ -145,6 +158,15 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == PiecesTextProperty.PropertyName)
             {
                 ItemPieces.Text = PiecesText;
+                                
+                Application.Current.Resources.TryGetValue("Gray3", out var gray3Color);
+                
+                if (gray3Color == null) return;
+                
+                var gray3 = (Color)gray3Color;
+
+                ItemPieces.TextColor = gray3;
+
             }
             else if (propertyName == ImageSourceProperty.PropertyName)
             {
@@ -161,6 +183,13 @@ namespace ProsysMobile.CustomControls.OrderListItems
             else if (propertyName == UnitPriceTextProperty.PropertyName)
             {
                 ItemUnitPrice.Text = UnitPriceText;
+            }
+            else if (propertyName == IsStockFinishedProperty.PropertyName)
+            {
+                if (!IsStockFinished) return;
+                
+                ItemPieces.Text = ItemPieces.Text + " - " + Resource.SoldOut;
+                ItemPieces.TextColor = Color.Red;
             }
         }
 
