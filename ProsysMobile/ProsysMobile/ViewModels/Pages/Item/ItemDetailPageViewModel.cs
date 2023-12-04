@@ -63,6 +63,9 @@ namespace ProsysMobile.ViewModels.Pages.Item
         private string _itemPieces;
         public string ItemPieces { get => _itemPieces; set { _itemPieces = value; PropertyChanged(() => ItemPieces); } }
         
+        private Color _itemPiecesTextColor;
+        public Color ItemPiecesTextColor { get => _itemPiecesTextColor; set { _itemPiecesTextColor = value; PropertyChanged(() => ItemPiecesTextColor); } }
+        
         private string _itemPurchaseQtyText;
         public string ItemPurchaseQtyText { get => _itemPurchaseQtyText; set { _itemPurchaseQtyText = value; PropertyChanged(() => ItemPurchaseQtyText); } }
         
@@ -288,6 +291,23 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     ItemUnitPrice = responseModel.Item.UnitPriceDesc;
                     Images = new ObservableRangeCollection<string>(responseModel.Item.Images);
                     ItemPieces = responseModel.Item.Pieces;
+
+                    if (responseModel.Item.IsStockFinished)
+                    {
+                        ItemPieces = ItemPieces + " - " + Resource.SoldOut;
+                        ItemPiecesTextColor = Color.Red;
+                    }
+                    else
+                    {
+                        Application.Current.Resources.TryGetValue("Gray3", out var gray3Color);
+                
+                        if (gray3Color == null) return;
+                
+                        var gray3 = (Color)gray3Color;
+
+                        ItemPiecesTextColor = gray3;
+                    }
+                    
                     ItemPrice = responseModel.Item.Price;
                     Tags = new ObservableRangeCollection<Tag>(responseModel.Tags ?? new List<Tag>());
                     ItemPurchaseQtyText = string.IsNullOrWhiteSpace(responseModel.Item.Amount) || responseModel.Item.Amount == "0" ? "1" : responseModel.Item.Amount;
