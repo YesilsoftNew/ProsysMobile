@@ -332,4 +332,7 @@
   <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
 	  <value>The quantity could not be updated because you have reached the maximum purchase quantity!</value>
   </data>
+  <data name="StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry" xml:space="preserve">
+	  <value>The store is closed for maintenance, please try again between @xxx.</value>
+  </data>
 </root>

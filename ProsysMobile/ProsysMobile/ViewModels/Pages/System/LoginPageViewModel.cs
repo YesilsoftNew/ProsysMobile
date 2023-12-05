@@ -13,7 +13,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ProsysMobile.Models.APIModels.ResponseModels;
+using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserDevices;
 using Xamarin.Forms;
@@ -22,23 +25,25 @@ namespace ProsysMobile.ViewModels.Pages.System
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private readonly ICheckTimeService _checkTimeService;
         private readonly ISaveUserDevicesService _saveUserDevicesService;
-        private ISignInService _signInService;
-        private IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
+        private readonly ISignInService _signInService;
+        private readonly IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
 
-        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
+        public LoginPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService, ICheckTimeService checkTimeService)
         {
             _defaultSettingsSqLiteService = defaultSettingsSqLiteService;
             _signInService = signInService;
             _saveUserDevicesService = saveUserDevicesService;
+            _checkTimeService = checkTimeService;
         }
 
         public override Task InitializeAsync(object navigationData)
         {
             if (Debugger.IsAttached)
             {
-                Email = "yyy";
-                Password = "1";
+                Email = "test@test.com";
+                Password = "test123";
             }
 
             return base.InitializeAsync(navigationData);
@@ -123,9 +128,9 @@ namespace ProsysMobile.ViewModels.Pages.System
                     signIn.DeviceGuid = Guid.NewGuid();
                     signIn.Token = string.Empty;
 
-                    var result = await _signInService.SignIn(
+                    var result = await _signInService.SignIn (
                         signIn,
-                        Models.CommonModels.Enums.enPriorityType.UserInitiated
+                        enPriorityType.UserInitiated
                     );
 
                     if (result.ResponseData != null && result.IsSuccess)
@@ -138,15 +143,44 @@ namespace ProsysMobile.ViewModels.Pages.System
                         GlobalSetting.Instance.JWTToken = result.ResponseData.SignIn.Token;
                         GlobalSetting.Instance.JWTTokenExpireDate = DateTime.ParseExact(expiredDateString, "M/d/yyyy h:m:ss tt", CultureInfo.InvariantCulture);
 
+                        var checkTimeData = await _checkTimeService.CheckTime(
+                            userId: result.ResponseData.UserMobile.ID,
+                            loginDate: DateTime.Now,
+                            priorityType: enPriorityType.UserInitiated
+                        );
+                        
+                        if (checkTimeData?.ResponseData == null || !checkTimeData.IsSuccess)
+                        {
+                            DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
+                            return;
+                        }
+
+                        var notNullCheckTime = checkTimeData.ResponseData;
+                        
                         if (result.ResponseData.UserMobile != null)
                         {
                             Database.SQLConnection.Insert(result.ResponseData.UserMobile, "OR REPLACE");
                             GlobalSetting.Instance.User = result.ResponseData.UserMobile;
                         }
 
-                        await NavigationService.SetMainPageAsync<AppShellViewModel>();
+                        if (notNullCheckTime.IsContinue)
+                        {
+                            await NavigationService.SetMainPageAsync<AppShellViewModel>();
+                        }
+                        else
+                        {
+                            var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                            {
+                                Model = new MaintenancePageViewParamModel
+                                {
+                                    CheckTimeResponseModel = notNullCheckTime
+                                }
+                            };
+                            
+                            await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                        }
 
-                        var tokenSettings = new List<DefaultSettings>()
+                        var tokenSettings = new List<DefaultSettings>
                         {
                             new DefaultSettings{Key="UserToken",Value=GlobalSetting.Instance.JWTToken},
                             new DefaultSettings{Key="UserTokenExpiredDate",Value=TOOLS.ToString(GlobalSetting.Instance.JWTTokenExpireDate)},

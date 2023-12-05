@@ -506,5 +506,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity", resourceCulture);
             }
         }
+        
+        internal static string StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry {
+            get {
+                return ResourceManager.GetString("StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry", resourceCulture);
+            }
+        }
     }
 }
