@@ -348,4 +348,7 @@
   <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
     <value>Maksimum satın alma adedine ulaştığınız için adet güncellenemedi!</value>
   </data>
+  <data name="StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry" xml:space="preserve">
+    <value>Mağaza bakım çalışmaları nedeniyle kapalıdır, lütfen @xxx saatleri arasında tekrar deneyiniz.</value>
+  </data>
 </root>

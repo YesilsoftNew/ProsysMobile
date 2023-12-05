@@ -10,6 +10,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ProsysMobile.Models.CommonModels;
+using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.UserDevices;
 using ProsysMobile.Services.API.UserMobile;
@@ -19,17 +21,19 @@ namespace ProsysMobile.ViewModels.Pages.System
 {
     public class SplashPageViewModel : ViewModelBase
     {
+        private readonly ICheckTimeService _checkTimeService;
         private readonly ISaveUserDevicesService _saveUserDevicesService;
         private readonly IDefaultSettingsSQLiteService _defaultSettingsSqLiteService;
         private readonly IUserMobileSQLiteService _userSqLiteService;
         private readonly ISignInService _signInService;
 
-        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService)
+        public SplashPageViewModel(IDefaultSettingsSQLiteService defaultSettingsSqLiteService, IUserMobileSQLiteService userSqLiteService, ISignInService signInService, ISaveUserDevicesService saveUserDevicesService, ICheckTimeService checkTimeService)
         {
             _defaultSettingsSqLiteService = defaultSettingsSqLiteService;
             _userSqLiteService = userSqLiteService;
             _signInService = signInService;
             _saveUserDevicesService = saveUserDevicesService;
+            _checkTimeService = checkTimeService;
         }
         
         #region Propertys
@@ -125,8 +129,37 @@ namespace ProsysMobile.ViewModels.Pages.System
                             }
                             #endregion
                         }
+                        
+                        var checkTimeData = await _checkTimeService.CheckTime(
+                            userId: GlobalSetting.Instance.User.ID,
+                            loginDate: DateTime.Now,
+                            priorityType: enPriorityType.UserInitiated
+                        );
+                        
+                        if (checkTimeData?.ResponseData == null || !checkTimeData.IsSuccess)
+                        {
+                            DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
+                            return;
+                        }
 
-                        await NavigationService.SetMainPageAsync<AppShellViewModel>();
+                        var notNullCheckTime = checkTimeData.ResponseData;
+                        
+                        if (notNullCheckTime.IsContinue)
+                        {
+                            await NavigationService.SetMainPageAsync<AppShellViewModel>();
+                        }
+                        else
+                        {
+                            var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                            {
+                                Model = new MaintenancePageViewParamModel
+                                {
+                                    CheckTimeResponseModel = notNullCheckTime
+                                }
+                            };
+                            
+                            await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                        }
                         
                         _saveUserDevicesService.SaveUserDevices(TOOLS.GetUserDevices(GlobalSetting.Instance?.User?.ID ?? -1), enPriorityType.UserInitiated);
                     }
