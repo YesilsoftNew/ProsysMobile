@@ -512,5 +512,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry", resourceCulture);
             }
         }
+        
+        internal static string YouAreBelowTheMinimumOrderAmount {
+            get {
+                return ResourceManager.GetString("YouAreBelowTheMinimumOrderAmount", resourceCulture);
+            }
+        }
     }
 }

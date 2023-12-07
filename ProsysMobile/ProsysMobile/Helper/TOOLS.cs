@@ -273,6 +273,7 @@ namespace ProsysMobile.Helper
             {
                 "NO_STOCK" => Resource.ThereAreNoProductsInStock,
                 "MAX_SHELL_COUNT" => Resource.YouHaveExceededTheMaximumPurchaseQuantity,
+                "MIN_ORDER_PRICE" => Resource.YouAreBelowTheMinimumOrderAmount,
                 _ => string.Empty
             };
 
