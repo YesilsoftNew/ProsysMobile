@@ -2,6 +2,7 @@
 using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Main;
+using ProsysMobile.ViewModels.Pages.Order;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages
@@ -21,6 +22,11 @@ namespace ProsysMobile.ViewModels.Pages
             });
             
             MessagingCenter.Subscribe<HomePageViewModel, int>(this, "UpdateBasketCount", (sender, arg) =>
+            {
+                BasketCount = arg <= 0 ? string.Empty : arg.ToString();
+            });
+            
+            MessagingCenter.Subscribe<OrderDetailPageViewModel, int>(this, "UpdateBasketCount", (sender, arg) =>
             {
                 BasketCount = arg <= 0 ? string.Empty : arg.ToString();
             });

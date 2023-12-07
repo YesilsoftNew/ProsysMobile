@@ -150,6 +150,7 @@
                             Grid.Row="4"
                             Text="{Binding ItemPieces}"
                             Style="{DynamicResource Label2}"
+                            TextColor="{Binding ItemPiecesTextColor}"
                             HorizontalOptions="CenterAndExpand"
                             VerticalOptions="FillAndExpand"/>
                         

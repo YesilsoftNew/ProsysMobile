@@ -91,6 +91,8 @@ namespace ProsysMobile.ViewModels.Pages.Order
 
                 if (response.IsSuccess)
                 {
+                    MessagingCenter.Send(this, "UpdateBasketCount", 0);
+                    
                     _orderDetailPageViewModelViewParamModel.Model.IsSaveBasket = true;
                 
                     DialogService.SuccessToastMessage(Resource.YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping);

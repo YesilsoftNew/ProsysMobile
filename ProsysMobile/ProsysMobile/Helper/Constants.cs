@@ -19,5 +19,6 @@ namespace ProsysMobile.Helper
 
         public static string UnSelectedFavoriteImageSource = "UnSelectedFavorite";
         public static string SelectedFavoriteImageSource = "SelectedFavorite";
+        public static string ReplaceWord = "@xxx";
     }
 }

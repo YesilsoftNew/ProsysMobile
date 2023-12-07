@@ -414,7 +414,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
             if (result.ResponseData != null && result.IsSuccess)
             {
                 MessagingCenter.Send(this, "UpdateBasketCount", result.ResponseData.BasketItemCount);
-
+                NetTotal = result.ResponseData.NetTotal;
+                
                 BasketItems.Remove(orderDetailsSubDto);
 
                 if (!BasketItems.Any())

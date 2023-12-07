@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.OrderDetails
     public interface IDeleteOrderDetailEndpoint
     {
         [Post("/api/OrderDetails/DeleteOrderDetail")]
-        Task<ServiceBaseResponse<ChangeBasketItemCountResponseModel>> DeleteOrderDetail(int orderDetailId, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> DeleteOrderDetail(int orderDetailId, [Header("Authorization")] string authorization);
     }
 }
