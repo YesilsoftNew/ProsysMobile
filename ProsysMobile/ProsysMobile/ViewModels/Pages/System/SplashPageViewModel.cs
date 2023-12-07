@@ -5,6 +5,7 @@ using ProsysMobile.Models.CommonModels.SQLiteModels;
 using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -144,7 +145,7 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                         var notNullCheckTime = checkTimeData.ResponseData;
                         
-                        if (notNullCheckTime.IsContinue)
+                        if (Debugger.IsAttached || notNullCheckTime.IsContinue)
                         {
                             await NavigationService.SetMainPageAsync<AppShellViewModel>();
                         }
