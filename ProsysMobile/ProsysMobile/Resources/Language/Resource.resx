@@ -335,4 +335,7 @@
   <data name="StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry" xml:space="preserve">
 	  <value>The store is closed for maintenance, please try again between @xxx.</value>
   </data>
+  <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
+	  <value>You are below the minimum order amount!</value>
+  </data>
 </root>
