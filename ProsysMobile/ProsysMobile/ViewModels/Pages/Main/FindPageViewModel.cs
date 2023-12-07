@@ -519,6 +519,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 IsBusy = true;
 
+                Search = string.Empty;
                 _selectedCategories.Clear();
                 _itemCategoryAll.IsSelected = false;
                 ShowSubCategories = false;
@@ -564,8 +565,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         }
                     };
                 }
-                
-                Search = string.Empty;
                 
                 _isPageLoad = true;
             }
