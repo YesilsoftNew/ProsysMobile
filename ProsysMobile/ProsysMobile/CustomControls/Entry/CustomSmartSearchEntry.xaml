@@ -38,7 +38,7 @@
                 <behaviors:UserStoppedTypingBehavior
                     Command="{Binding UserStoppedTypingCommand}"
                     ShouldDismissKeyboardAutomatically="True"
-                    StoppedTypingTimeThreshold="1000" />
+                    StoppedTypingTimeThreshold="2000" />
 
             </effects:CustomEntry.Behaviors>
         </effects:CustomEntry>
