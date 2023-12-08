@@ -4,6 +4,7 @@ using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
+using Newtonsoft.Json;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -23,6 +24,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class OrderPageViewModel : ViewModelBase
     {
+        private int focusedBeforeCounterText;
+
+        
+        
         private readonly IUpdateOrderDetailForItemService _updateOrderDetailForItemService;
         private readonly IGetOrderDetailService _getOrderDetailService;
         private readonly IDeleteOrderDetailService _deleteOrderDetailService;
@@ -77,6 +82,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         
         private string _orderNo;
         public string OrderNo { get => _orderNo; set { _orderNo = value; PropertyChanged(() => OrderNo); } }
+        
+        private string _focusedBeforeEntryCounterText;
+        public string FocusedBeforeEntryCounterText { get => _focusedBeforeEntryCounterText; set { _focusedBeforeEntryCounterText = value; PropertyChanged(() => OrderNo); } }
         
         private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
         public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
@@ -218,6 +226,25 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
+        public ICommand UnFocusedCounterCommand => new Command(sender =>
+        {
+            try
+            {
+                if (sender is int value)
+                {
+                    focusedBeforeCounterText = value;
+                }
+                else
+                {
+                    focusedBeforeCounterText = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
         public ICommand ChangeCountCommand => new Command(async sender =>
         {
             try
@@ -261,7 +288,22 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     }
                     else
                     {
-                        DialogService.WarningToastMessage(Resource.AnError0ccurredWhileUpdatingTheQuantity);
+                        var errorModel = JsonConvert.DeserializeObject<ErrorModel>(result.ExceptionMessage);
+
+                        var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(errorModel.ErrorCode);
+
+                        errMessageWithErrCode = errMessageWithErrCode.Replace("@xxx", errorModel.Parameter);
+                        
+                        if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
+                        {
+                            DialogService.WarningToastMessage(errMessageWithErrCode);
+                        }
+                        else
+                        {
+                            DialogService.ErrorToastMessage(Resource.AnError0ccurredWhileUpdatingTheQuantity);
+                        }
+
+                        item.Amount = focusedBeforeCounterText;
                     }
                 }
             }

@@ -397,7 +397,7 @@
     <value>There are no products in stock!</value>
   </data>
   <data name="YouHaveExceededTheMaximumPurchaseQuantity" xml:space="preserve">
-    <value>You have exceeded the maximum purchase quantity!</value>
+    <value>You have exceeded the maximum purchase quantity! Qty: @xxx </value>
   </data>
   <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
     <value>The quantity could not be updated because you have reached the maximum purchase quantity!</value>
