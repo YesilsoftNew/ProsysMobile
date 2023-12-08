@@ -46,10 +46,10 @@ namespace ProsysMobile.CustomControls.Other
             null,
             BindingMode.TwoWay);
         
-        public static readonly BindableProperty MaxOrderCountProperty = BindableProperty.Create(nameof(MaxOrderCount),
-            typeof(decimal),
+        public static readonly BindableProperty UnFocusedCounterCommandProperty = BindableProperty.Create(nameof(UnFocusedCounterCommand),
+            typeof(ICommand),
             typeof(BasketCounter),
-            default(decimal),
+            default(ICommand),
             BindingMode.TwoWay);
 
         public int ItemId
@@ -82,11 +82,12 @@ namespace ProsysMobile.CustomControls.Other
             set => SetValue(ChangeCountCommandParameterProperty, value);
         }
         
-        public decimal MaxOrderCount
+        public ICommand UnFocusedCounterCommand
         {
-            get => (decimal)GetValue(MaxOrderCountProperty);
-            set => SetValue(MaxOrderCountProperty, value);
+            get => (ICommand)GetValue(UnFocusedCounterCommandProperty);
+            set => SetValue(UnFocusedCounterCommandProperty, value);
         }
+        
 
         private string focusedBeforeEntryCounterText = string.Empty;
         
@@ -114,11 +115,13 @@ namespace ProsysMobile.CustomControls.Other
                             EntryCounter.Text = entryValue.ToString();
                             Text = EntryCounter.Text;
 
+                            UnFocusedCounterCommand?.Execute(entryValue + 1);
+                            
                             ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
                             {
                                 ItemId = ItemId,
                                 Count = entryValue,
-                                IsDeleteItem = false
+                                IsDeleteItem = false,
                             });
 
                             SetImageMinusOrTrash();
@@ -129,7 +132,7 @@ namespace ProsysMobile.CustomControls.Other
                             {
                                 ItemId = ItemId,
                                 Count = 0,
-                                IsDeleteItem = true
+                                IsDeleteItem = true,
                             });
                         }
                     }
@@ -158,23 +161,19 @@ namespace ProsysMobile.CustomControls.Other
                         {
                             entryValue = StockCount + entryValue - 1;
                         }
-                        
-                        if (entryValue > MaxOrderCount)
-                        {
-                            entryValue -= 1;
-                            DialogService.WarningToastMessage(Resource.TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity);
-                        }
 
                         EntryCounter.Text = entryValue.ToString();
                         Text = EntryCounter.Text;
 
                         SetImageMinusOrTrash();
 
+                        UnFocusedCounterCommand?.Execute(entryValue - 1);
+                        
                         ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
                         {
                             ItemId = ItemId,
                             Count = entryValue,
-                            IsDeleteItem = false
+                            IsDeleteItem = false,
                         });
                     }
                     catch (Exception ex)
@@ -226,21 +225,15 @@ namespace ProsysMobile.CustomControls.Other
                 Text = EntryCounter.Text;
             }
             
-            if (entryTextInt > MaxOrderCount)
-            {
-                entryTextInt = Convert.ToInt32(focusedBeforeEntryCounterText);
-                EntryCounter.Text = string.IsNullOrWhiteSpace(entryTextInt.ToString()) || entryTextInt < 0 ? "1" : entryTextInt.ToString();
-                Text = EntryCounter.Text;
-                DialogService.WarningToastMessage(Resource.TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity);
-            }
-            
             if (focusedBeforeEntryCounterText == entryTextInt.ToString()) return;
+            
+            UnFocusedCounterCommand?.Execute(Convert.ToInt32(focusedBeforeEntryCounterText));
             
             ChangeCountCommand?.Execute(new ChangeItemCountCommandParameterModel
             {
                 ItemId = ItemId,
                 Count = entryTextInt,
-                IsDeleteItem = false
+                IsDeleteItem = false,
             });
             
             SetImageMinusOrTrash();

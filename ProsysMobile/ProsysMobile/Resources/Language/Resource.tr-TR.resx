@@ -346,7 +346,7 @@
     <value>Stokta ürün kalmadı!</value>
   </data>
   <data name="YouHaveExceededTheMaximumPurchaseQuantity" xml:space="preserve">
-    <value>Maksimum satın alma adedini aştınız!</value>
+    <value>Maksimum satın alma adedini aştınız! Adet: @xxx</value>
   </data>
   <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
     <value>Maksimum satın alma adedine ulaştığınız için adet güncellenemedi!</value>
