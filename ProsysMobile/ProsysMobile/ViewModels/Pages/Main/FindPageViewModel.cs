@@ -23,6 +23,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class FindPageViewModel : ViewModelBase
     {
+        private readonly IItemDetailService _itemDetailService;
         private readonly IItemCategoryService _itemCategoryService;
         private readonly IItemsService _itemsService;
         private readonly IBestsellersService _bestsellersService;
@@ -36,13 +37,13 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private readonly ItemCategory _itemCategoryAll = Constants.ItemCategoryAll;
         private bool _isPageLoad;
 
-
-        public FindPageViewModel(IItemCategoryService itemCategoryService, IItemsService itemsService, IBestsellersService bestsellersService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService)
+        public FindPageViewModel(IItemCategoryService itemCategoryService, IItemsService itemsService, IBestsellersService bestsellersService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IItemDetailService itemDetailService)
         {
             _itemCategoryService = itemCategoryService;
             _itemsService = itemsService;
             _bestsellersService = bestsellersService;
             _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
+            _itemDetailService = itemDetailService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
             {
@@ -405,26 +406,48 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (!model.IsAddItem) return;
 
+                IsBusy = true;
+                
                 if (ShowBestsellers)
                 {
                     GetBestsellersAndBindFromApi();
                 }
                 else
                 {
-                    _listPage = 0;
-                    _isAllItemLoad = false;
-                    UpdateItemsList(
-                        resultResponseData: null,
-                        clearList: true
+                    var itemDetail = await _itemDetailService.GetDetail(
+                        model.ItemId,
+                        GlobalSetting.Instance.User.ID,
+                        enPriorityType.UserInitiated
                     );
+                    
+                    if (itemDetail.ResponseData != null && itemDetail.IsSuccess)
+                    {
+                        var responseModel = itemDetail.ResponseData;
 
-                    await GetItemsAndBindFromApi();
+                        var list = GetCurrentItemsList();
+
+                        var item = list.FirstOrDefault(x => x.Id == model.ItemId);
+
+                        if (item == null) return;
+                        
+                        item.Pieces = responseModel.Item.Pieces;
+                        item.IsAddedBasket = responseModel.Item.IsAddedBasket;
+                        item.IsStockFinished = responseModel.Item.IsStockFinished;
+                    }
+                    else
+                    {
+                        DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
+                    }
                 }
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
+
+                DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
             }
+            
+            IsBusy = false;
         });
 
         public ICommand ListItemsSelectionChangedCommand => new Command(async (sender) => ItemsListClick(sender));
@@ -519,7 +542,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             {
                 IsBusy = true;
 
-                Search = string.Empty;
+                Search = null;
                 _selectedCategories.Clear();
                 _itemCategoryAll.IsSelected = false;
                 ShowSubCategories = false;
@@ -565,6 +588,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
                         }
                     };
                 }
+                
+                _listPage = 0;
+                _isAllItemLoad = false;
+                UpdateItemsList(
+                    resultResponseData: null,
+                    clearList: true
+                );
+                await GetItemsAndBindFromApi();
                 
                 _isPageLoad = true;
             }

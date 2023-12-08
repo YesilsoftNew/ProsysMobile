@@ -18,11 +18,19 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         private bool _isFavorite;
         public bool IsFavorite { get => _isFavorite; set { _isFavorite = value; OnPropertyChanged(); } }
         
+        private bool _isAddedBasket;
+        public bool IsAddedBasket { get => _isAddedBasket; set { _isAddedBasket = value; OnPropertyChanged(); } }
+        
+        private bool _isStockFinished;
+        public bool IsStockFinished { get => _isStockFinished; set { _isStockFinished = value; OnPropertyChanged(); } }
+
+        private string _pieces;
+        [JsonPropertyName("count")]
+        public string Pieces { get => _pieces; set { _pieces = value; OnPropertyChanged(); } }
+        
         public int Id { get; set;}
         public int CategoryId { get; set;}
         public string Name { get; set; }
-        [JsonPropertyName("count")]
-        public string Pieces { get; set; }
         public string Price { get; set; }
         public string CurrencyType { get; set; }
         public string Image { get; set; }
@@ -44,7 +52,5 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public Color Tag3Color => Color.FromHex(Tag3ColorStr);
         public Color Tag4Color => Color.FromHex(Tag4ColorStr);
 
-        public bool IsAddedBasket { get; set; }
-        public bool IsStockFinished { get; set; }
     }
 }
