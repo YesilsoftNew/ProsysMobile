@@ -15,7 +15,6 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         public int OrderDetailId { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; } = string.Empty;
-        public int Amount { get; set; }
         public string UnitPrice { get; set; } = string.Empty;
         public string CurrencyType { get; set; } = string.Empty;
         public string Image { get; set; } = string.Empty;
@@ -29,5 +28,8 @@ namespace ProsysMobile.Models.APIModels.ResponseModels
         
         private string _price;
         public string Price { get => _price; set { _price = value; OnPropertyChanged(); } }
+        
+        private int _amount;
+        public int Amount { get => _amount; set { _amount = value; OnPropertyChanged(); } }
     }
 }
