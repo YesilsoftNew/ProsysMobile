@@ -7,6 +7,7 @@ using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Selector;
 using Refit;
 
@@ -25,19 +26,19 @@ namespace ProsysMobile.Services.API.Items
         
         public Task<ServiceBaseResponse<ItemDetailsSubDto>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public async Task<ServiceBaseResponse<ItemDetailsSubDto>> GetDetail(int itemId,int userId, enPriorityType priorityType)
         {
             ServiceBaseResponse<ItemDetailsSubDto> result = null;
-            Task<ServiceBaseResponse<ItemDetailsSubDto>> task = null;
-            Exception exception = null;
+            Task<ServiceBaseResponse<ItemDetailsSubDto>> task;
+            Exception exception;
 
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.GetItemDetail(itemId, userId, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.GetItemDetail(itemId, userId, Resource.Culture.ToString(), "Bearer " + GlobalSetting.Instance.JWTToken);
                 
                 result = await Policy
                     .Handle<ApiException>()
