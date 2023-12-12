@@ -5,6 +5,7 @@
       xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
       xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
       xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
+      xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
       HorizontalOptions="FillAndExpand"
       VerticalOptions="FillAndExpand">
 
@@ -37,10 +38,12 @@
                 VerticalOptions="StartAndExpand"
                 HorizontalOptions="Start">
 
-                <Image
+                <ffimageloading:CachedImage
                     x:Name="ItemImage"
                     WidthRequest="100"
                     HeightRequest="100"
+                    LoadingPlaceholder="RoundLogo"
+                    ErrorPlaceholder="RoundLogo"
                     Aspect="AspectFill"
                     HorizontalOptions="CenterAndExpand"
                     VerticalOptions="CenterAndExpand" />

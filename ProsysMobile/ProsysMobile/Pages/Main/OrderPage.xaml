@@ -13,6 +13,7 @@
              xmlns:controlbuttons="clr-namespace:ProsysMobile.CustomControls.Button"
              xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
              xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              ios:Page.UseSafeArea="true"
              mc:Ignorable="d"
              viewModelBase:ViewModelLocator.AutoWireViewModel="true">
@@ -102,10 +103,12 @@
                                                 VerticalOptions="StartAndExpand"
                                                 HorizontalOptions="Start">
 
-                                                <Image
+                                                <ffimageloading:CachedImage
                                                     x:Name="ItemImage"
                                                     WidthRequest="100"
                                                     HeightRequest="100"
+                                                    LoadingPlaceholder="RoundLogo"
+                                                    ErrorPlaceholder="RoundLogo"
                                                     Aspect="AspectFill"
                                                     Source="{Binding Image}"
                                                     HorizontalOptions="CenterAndExpand"
