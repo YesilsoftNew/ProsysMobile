@@ -236,7 +236,6 @@ namespace ProsysMobile.CustomControls.OrderListItems
             ItemName.Text = NameText;
             ItemUnitPrice.Text = UnitPriceText;
             ItemPieces.Text = PiecesText;
-            ItemImage.Source = ImageSource;
             ItemImageButton.Source = Constants.UnSelectedFavoriteImageSource;
         }
         

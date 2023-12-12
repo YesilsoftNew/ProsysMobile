@@ -406,6 +406,6 @@
     <value>The store is closed for maintenance, please try again between @xxx.</value>
   </data>
   <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
-    <value>You are below the minimum order amount!</value>
+    <value>You are below the minimum order amount! Amount: @xxx</value>
   </data>
 </root>
