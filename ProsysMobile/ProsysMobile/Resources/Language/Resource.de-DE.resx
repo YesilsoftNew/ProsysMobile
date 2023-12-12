@@ -355,6 +355,6 @@
     <value>Der Shop ist wegen Wartungsarbeiten geschlossen. Bitte versuchen Sie es zwischen @xxx erneut.</value>
   </data>
   <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
-    <value>Sie haben den Mindestbestellwert unterschritten!</value>
+    <value>Sie haben den Mindestbestellwert unterschritten! Wert: @xxx</value>
   </data>
 </root>
