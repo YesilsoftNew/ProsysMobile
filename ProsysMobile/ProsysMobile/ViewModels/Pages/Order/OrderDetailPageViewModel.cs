@@ -2,10 +2,12 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
+using Newtonsoft.Json;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.Orders;
@@ -101,8 +103,12 @@ namespace ProsysMobile.ViewModels.Pages.Order
                 }
                 else
                 {
-                    var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
+                    var errorModel = JsonConvert.DeserializeObject<ErrorModel>(response.ExceptionMessage);
 
+                    var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(errorModel.ErrorCode);
+
+                    errMessageWithErrCode = errMessageWithErrCode.Replace("@xxx", errorModel.Parameter);
+                    
                     if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
                     {
                         DialogService.WarningToastMessage(errMessageWithErrCode);

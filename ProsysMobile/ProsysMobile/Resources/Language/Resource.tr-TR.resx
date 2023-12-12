@@ -355,6 +355,6 @@
     <value>Mağaza bakım çalışmaları nedeniyle kapalıdır, lütfen @xxx saatleri arasında tekrar deneyiniz.</value>
   </data>
   <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
-    <value>Minimum sipariş tutarının altındasınız!</value>
+    <value>Minimum sipariş tutarının altındasınız! Tutar: @xxx</value>
   </data>
 </root>
