@@ -332,8 +332,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     priorityType: enPriorityType.UserInitiated
                 );
 
-                if (result?.ResponseData != null && result.IsSuccess)
+                if (result is { ResponseData: { }, IsSuccess: true })
                 {
+                    MessagingCenter.Send(this, "UpdateBasketCount", result.ResponseData.OrderDetailsSubDtos.Count);
                     BasketItems.AddRange(result.ResponseData.OrderDetailsSubDtos);
                     NetTotal = result.ResponseData.NetTotal;
                     OrderNo = result.ResponseData.OrderNo;
