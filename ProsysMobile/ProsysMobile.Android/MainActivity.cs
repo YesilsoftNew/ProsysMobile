@@ -43,6 +43,7 @@ namespace ProsysMobile.Droid
             UserDialogs.Init(this);
             Rg.Plugins.Popup.Popup.Init(this);
             BottomBar.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
 
             RequestedOrientation = ScreenOrientation.Portrait;
 

@@ -13,6 +13,7 @@ namespace ProsysMobile.iOS
         {
             Rg.Plugins.Popup.Popup.Init();
             BottomBar.Init();
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             //Backdrop.Initializer.Init();
             //Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
 
