@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.OrderDetails
     public interface IGetOrderDetailEndpoint
     {
         [Get("/api/OrderDetails/GetOrderDetail")]
-        Task<ServiceBaseResponse<OrderSubDto>> GetOrderDetail(int userId, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<OrderSubDto>> GetOrderDetail(int userId, string culture, [Header("Authorization")] string authorization);
     }
 }

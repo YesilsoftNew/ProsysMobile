@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.Items
     public interface IDealItemsEndpoint
     {
         [Get("/api/Items/DealItems")]
-        Task<ServiceBaseResponse<List<ItemsSubDto>>> DealItems(int userId, int page, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<List<ItemsSubDto>>> DealItems(int userId, int page, string culture, [Header("Authorization")] string authorization);
     }
 }

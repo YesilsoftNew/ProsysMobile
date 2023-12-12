@@ -8,6 +8,7 @@ using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Selector;
 using Refit;
 
@@ -38,7 +39,15 @@ namespace ProsysMobile.Services.API.Items
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.GetItems(userId, filter, categoryIds, isFavorite, page, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.GetItems(
+                    userId: userId,
+                    filter: filter,
+                    categoryIds: categoryIds,
+                    culture: Resource.Culture.ToString(),
+                    isFavorite: isFavorite,
+                    page: page,
+                    "Bearer " + GlobalSetting.Instance.JWTToken
+                );
                 
                 result = await Policy
                     .Handle<ApiException>()

@@ -225,6 +225,8 @@ namespace ProsysMobile.Helper
             {
                 if (GlobalSetting.Instance is null) return;
 
+                GlobalSetting.Instance.AppLanguage = "de";
+                
                 if (!string.IsNullOrWhiteSpace(GlobalSetting.Instance.AppLanguage))
                 {
                     CrossMultilingual.Current.CurrentCultureInfo = new CultureInfo(GlobalSetting.Instance.AppLanguage);
