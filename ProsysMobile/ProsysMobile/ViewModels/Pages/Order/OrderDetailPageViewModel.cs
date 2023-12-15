@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
@@ -60,6 +61,9 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         private string _deposit;
         public string Deposit { get => _deposit; set { _deposit = value; PropertyChanged(() => Deposit); } }
+
+        private string _note;
+        public string Note { get => _note; set { _note = value; PropertyChanged(() => Note); } }
         
         private OrderDetailsSubDto _selectedItem;
         public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
@@ -89,8 +93,10 @@ namespace ProsysMobile.ViewModels.Pages.Order
 
                 var response = await _saveOrderService.SaveOrder(
                     orderId: _orderId,
-                    enPriorityType.UserInitiated);
-
+                    note: string.IsNullOrWhiteSpace(Note) ? null : Note,
+                    enPriorityType.UserInitiated
+                );
+                
                 if (response.IsSuccess)
                 {
                     MessagingCenter.Send(this, "UpdateBasketCount", 0);

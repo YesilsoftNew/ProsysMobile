@@ -357,4 +357,7 @@
   <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
     <value>Minimum sipariş tutarının altındasınız! Tutar: @xxx</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Not</value>
+  </data>
 </root>

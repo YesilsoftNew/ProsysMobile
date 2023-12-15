@@ -25,10 +25,10 @@ namespace ProsysMobile.Services.API.Orders
 
         public Task<ServiceBaseResponse<EmptyResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, string note, enPriorityType priorityType)
         {
             ServiceBaseResponse<EmptyResponseModel> result = null;
             Task<ServiceBaseResponse<EmptyResponseModel>> task;
@@ -37,7 +37,7 @@ namespace ProsysMobile.Services.API.Orders
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.SaveOrder(orderId ,"Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.SaveOrder(orderId, note , "Bearer " + GlobalSetting.Instance.JWTToken);
                 
                 result = await Policy
                     .Handle<ApiException>()

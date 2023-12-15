@@ -357,4 +357,7 @@
   <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
     <value>Sie haben den Mindestbestellwert unterschritten! Wert: @xxx</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Notiz</value>
+  </data>
 </root>
