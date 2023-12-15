@@ -8,6 +8,6 @@ namespace ProsysMobile.Endpoints.Orders
     public interface ISaveOrderEndpoint
     {
         [Post("/api/Orders/SaveOrder")]
-        Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, [Header("Authorization")] string authorization);
+        Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, string note, [Header("Authorization")] string authorization);
     }
 }

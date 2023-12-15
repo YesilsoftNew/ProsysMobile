@@ -408,4 +408,7 @@
   <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
     <value>You are below the minimum order amount! Amount: @xxx</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
 </root>
