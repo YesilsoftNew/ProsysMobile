@@ -43,7 +43,7 @@ namespace ProsysMobile.Services.API.Items
                     userId: userId,
                     filter: filter,
                     categoryIds: categoryIds,
-                    culture: Resource.Culture.ToString(),
+                    culture: Resource.Language,
                     isFavorite: isFavorite,
                     page: page,
                     "Bearer " + GlobalSetting.Instance.JWTToken
