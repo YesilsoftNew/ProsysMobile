@@ -518,5 +518,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("YouAreBelowTheMinimumOrderAmount", resourceCulture);
             }
         }
+        
+        internal static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
     }
 }
