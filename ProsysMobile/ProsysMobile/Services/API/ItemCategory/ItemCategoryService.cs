@@ -41,7 +41,7 @@ namespace ProsysMobile.Services.API.ItemCategory
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
                 task = api.ItemCategory(
                     mainCategoryId: mainCategoryId,
-                    culture: Resource.Culture.ToString(),
+                    culture: Resource.Language,
                     "Bearer " + GlobalSetting.Instance.JWTToken
                 );
 
