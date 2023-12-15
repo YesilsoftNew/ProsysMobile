@@ -376,7 +376,7 @@
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
-  <data name="Culture" xml:space="preserve">
+  <data name="Language" xml:space="preserve">
     <value>en</value>
   </data>
   <data name="AnError0ccurredWhileUpdatingTheQuantity" xml:space="preserve">

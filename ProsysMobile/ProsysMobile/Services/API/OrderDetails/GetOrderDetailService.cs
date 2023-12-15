@@ -39,7 +39,7 @@ namespace ProsysMobile.Services.API.OrderDetails
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.GetOrderDetail(userId, Resource.Culture.ToString(), "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.GetOrderDetail(userId, Resource.Language, "Bearer " + GlobalSetting.Instance.JWTToken);
                 result = await Policy
                     .Handle<ApiException>()
                     .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>

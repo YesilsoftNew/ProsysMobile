@@ -38,7 +38,7 @@ namespace ProsysMobile.Services.API.Items
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.GetItemDetail(itemId, userId, Resource.Culture.ToString(), "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.GetItemDetail(itemId, userId, Resource.Language, "Bearer " + GlobalSetting.Instance.JWTToken);
                 
                 result = await Policy
                     .Handle<ApiException>()
