@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:viewModelBase="clr-namespace:ProsysMobile.ViewModels.Base"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:renderer="clr-namespace:ProsysMobile.Renderer;"
+             ios:Page.UseSafeArea="true"
+             mc:Ignorable="d"
+             viewModelBase:ViewModelLocator.AutoWireViewModel="true"
+             x:Class="ProsysMobile.Pages.Order.UserOrdersPage">
+    <ContentPage.Content>
+        <Grid
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand"
+            RowSpacing="0">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="AUTO"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <ImageButton
+                Margin="0,0,8,0"
+                BackgroundColor="White"
+                Command="{Binding ClosePageClickCommand}"
+                Source="Close"
+                HorizontalOptions="End"
+                VerticalOptions="Start"></ImageButton>
+            
+            <renderer:CustomWebView 
+                Grid.Row="1" 
+                HorizontalOptions="FillAndExpand" 
+                VerticalOptions="FillAndExpand" 
+                Uri="{Binding Url}" 
+                Token="{Binding Token}" />
+            
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
