@@ -81,6 +81,7 @@
     <Compile Include="Renderer\CustomPageRenderer.cs" />
     <Compile Include="Renderer\CustomPickerRenderer.cs" />
     <Compile Include="Renderer\CustomTimePickerRenderer.cs" />
+    <Compile Include="Renderer\CustomWebViewRenderer.cs" />
     <Compile Include="Renderer\DatePickerRenderer.cs" />
     <Compile Include="Renderer\DecimalEntryRenderer.cs" />
     <Compile Include="Renderer\EntryRenderer.cs" />

@@ -48,7 +48,7 @@ namespace ProsysMobile
 {
     public partial class App
     { 
-        public static readonly string Prosys_Api = "http://test.yas.yesilsoft.net";   // dev test
+        public static readonly string Prosys_Api = "http://yas.yesilsoft.net";   // dev test
 
         public App()
         {
@@ -167,7 +167,8 @@ namespace ProsysMobile
             CrossFirebasePushNotification.Current.OnTokenRefresh +=  (source, args) =>
             {
                 GlobalSetting.Instance.FirebaseNotificationToken = args?.Token ?? "";
-                TOOLS.SetDatabasePushNotificationToken();
+                if (GlobalSetting.Instance.User != null)
+                    TOOLS.SetDatabasePushNotificationToken();
             };
             
             var random = new Random();
