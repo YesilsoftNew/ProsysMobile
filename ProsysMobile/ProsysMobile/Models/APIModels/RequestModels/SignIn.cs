@@ -8,5 +8,6 @@ namespace ProsysMobile.Models.APIModels.RequestModels
         public string Password { get; set; }
         public Guid? DeviceGuid { get; set; }
         public string Token { get; set; }
+        public string LocalTimeZone { get; set; } = TimeZoneInfo.Local.ToString();
     }
 }
