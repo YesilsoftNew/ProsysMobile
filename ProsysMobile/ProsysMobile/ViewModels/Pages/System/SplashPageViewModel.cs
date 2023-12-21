@@ -5,6 +5,7 @@ using ProsysMobile.Models.CommonModels.SQLiteModels;
 using ProsysMobile.Services.SQLite;
 using ProsysMobile.ViewModels.Base;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
@@ -94,8 +95,10 @@ namespace ProsysMobile.ViewModels.Pages.System
                             userTokenDefaultSetting = new DefaultSettings();
                             userTokenExpiredDateDefaultSetting = new DefaultSettings();
                         }
+
+                        var dateNow = DateTime.Now;
                     
-                        if (string.IsNullOrWhiteSpace(GlobalSetting.Instance.JWTToken) || DateTime.Now >= GlobalSetting.Instance.JWTTokenExpireDate)
+                        if (string.IsNullOrWhiteSpace(GlobalSetting.Instance.JWTToken) || dateNow >= GlobalSetting.Instance.JWTTokenExpireDate)
                         {
                             #region JWTToken
                             
@@ -106,7 +109,7 @@ namespace ProsysMobile.ViewModels.Pages.System
                             signIn.DeviceGuid = Guid.NewGuid();
                             signIn.Token = string.Empty;
                         
-                            var result = await _signInService.SignIn(signIn, Models.CommonModels.Enums.enPriorityType.UserInitiated);
+                            var result = await _signInService.SignIn(signIn, enPriorityType.UserInitiated);
                         
                             if (result.ResponseData != null && result.IsSuccess)
                             {
@@ -139,6 +142,12 @@ namespace ProsysMobile.ViewModels.Pages.System
                         
                         if (checkTimeData?.ResponseData == null || !checkTimeData.IsSuccess)
                         {
+                            ProsysLogger.Instance.CrashLog(new Exception("CheckTime method --yasin"), new Dictionary<string, string>
+                            {
+                                { "Custom_DateTimeNow", dateNow.ToString("dd/MM/yyyy HH:mm:ss") },
+                                { "Custom_Token", GlobalSetting.Instance.JWTToken },
+                                { "Custom_TimeZoneInfo", TimeZoneInfo.Local.ToString() }
+                            });
                             DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
                             return;
                         }

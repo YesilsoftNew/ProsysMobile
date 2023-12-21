@@ -23,8 +23,17 @@ namespace ProsysMobile.Helper
                 if (properties is null)
                     properties = new Dictionary<string, string>();
 
-                var methodName = new StackTrace(exception).GetFrame(0).GetMethod().Name;
-                var pageName = new StackTrace(exception).GetFrame(0).GetMethod().DeclaringType.FullName;
+                var methodName = "Not found!";
+                var pageName = "Not found!";
+
+                var exFrame = new StackTrace(exception).GetFrame(0);
+
+                if (exFrame != null)
+                {
+                    methodName = exFrame.GetMethod().Name;
+                    pageName = exFrame.GetMethod().DeclaringType?.FullName ?? "Not found";    
+                }
+                
                 properties.Add("JWTToken", !String.IsNullOrWhiteSpace(GlobalSetting.Instance.JWTToken) ? GlobalSetting.Instance.JWTToken : "");
                 
                 if (GlobalSetting.Instance.User != null)
