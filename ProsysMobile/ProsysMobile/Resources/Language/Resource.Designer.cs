@@ -530,5 +530,11 @@ namespace ProsysMobile.Resources.Language {
                 return ResourceManager.GetString("Note", resourceCulture);
             }
         }
+        
+        internal static string YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed {
+            get {
+                return ResourceManager.GetString("YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed", resourceCulture);
+            }
+        }
     }
 }

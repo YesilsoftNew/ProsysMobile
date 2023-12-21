@@ -360,4 +360,7 @@
   <data name="Note" xml:space="preserve">
     <value>Not</value>
   </data>
+  <data name="YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed" xml:space="preserve">
+    <value>Mağaza kapalı olduğu için işleminiz yapılmamıştır!</value>
+  </data>
 </root>
