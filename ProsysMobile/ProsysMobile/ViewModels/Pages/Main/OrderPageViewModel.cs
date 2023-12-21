@@ -17,6 +17,7 @@ using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Order;
+using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -290,6 +291,31 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     {
                         var errorModel = JsonConvert.DeserializeObject<ErrorModel>(result.ExceptionMessage);
 
+                        if (errorModel.ErrorCode == ErrorCode.CheckTime)
+                        {
+                            DialogService.WarningToastMessage(Resource.YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed);
+                            
+                            var startTime = errorModel.Parameter.Split("-")[0].Trim();
+                            var endTime = errorModel.Parameter.Split("-")[1].Trim();
+                            
+                            var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                            {
+                                Model = new MaintenancePageViewParamModel
+                                {
+                                    CheckTimeResponseModel = new CheckTimeResponseModel
+                                    {
+                                        IsContinue = false,
+                                        StartTime = startTime,
+                                        EndTime = endTime
+                                    }
+                                }
+                            };
+                            
+                            await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                            
+                            return;
+                        }
+                        
                         var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(errorModel.ErrorCode);
 
                         errMessageWithErrCode = errMessageWithErrCode.Replace("@xxx", errorModel.Parameter);
@@ -451,6 +477,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             var result = await _deleteOrderDetailService.DeleteOrderDetail(
                 orderDetailId: orderDetailsSubDto.OrderDetailId,
+                userId: GlobalSetting.Instance.User.ID,
+                processDate: DateTime.Now,
                 priorityType: enPriorityType.UserInitiated
             );
 
@@ -471,6 +499,33 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             else
             {
+                var errorModel = JsonConvert.DeserializeObject<ErrorModel>(result.ExceptionMessage);
+
+                if (errorModel.ErrorCode == ErrorCode.CheckTime)
+                {
+                    DialogService.WarningToastMessage(Resource.YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed);
+                            
+                    var startTime = errorModel.Parameter.Split("-")[0].Trim();
+                    var endTime = errorModel.Parameter.Split("-")[1].Trim();
+                            
+                    var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                    {
+                        Model = new MaintenancePageViewParamModel
+                        {
+                            CheckTimeResponseModel = new CheckTimeResponseModel
+                            {
+                                IsContinue = false,
+                                StartTime = startTime,
+                                EndTime = endTime
+                            }
+                        }
+                    };
+                            
+                    await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                            
+                    return;
+                }
+                
                 DialogService.WarningToastMessage(Resource.AnErrorOccurredWhileDeletingTheProductFromTheBasket);
             }
         }

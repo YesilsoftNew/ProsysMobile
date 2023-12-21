@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
@@ -7,6 +8,6 @@ namespace ProsysMobile.Services.API.Orders
 {
     public interface ISaveOrderService : IServiceBase<ServiceBaseResponse<EmptyResponseModel>>
     {
-        Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, string note, enPriorityType priorityType);
+        Task<ServiceBaseResponse<EmptyResponseModel>> SaveOrder(int orderId, int userId, DateTime processDate, string note, enPriorityType priorityType);
     }
 }

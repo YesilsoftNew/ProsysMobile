@@ -269,12 +269,11 @@ namespace ProsysMobile.Helper
 
         public static string GetErrorMessageWithErrorCode(string errCode)
         {
-            
             var errMessage = errCode switch
             {
-                "NO_STOCK" => Resource.ThereAreNoProductsInStock,
-                "MIN_ORDER_PRICE" => Resource.YouAreBelowTheMinimumOrderAmount,
-                "MAX_ORDER_AMOUNT" => Resource.YouHaveExceededTheMaximumPurchaseQuantity,
+                _ when errCode == ErrorCode.NoStock => Resource.ThereAreNoProductsInStock,
+                _ when errCode == ErrorCode.MinOrderPrice => Resource.YouAreBelowTheMinimumOrderAmount,
+                _ when errCode == ErrorCode.MaxOrderAmount => Resource.YouHaveExceededTheMaximumPurchaseQuantity,
                 _ => string.Empty
             };
 
