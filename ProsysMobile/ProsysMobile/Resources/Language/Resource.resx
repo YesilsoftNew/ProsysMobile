@@ -411,4 +411,7 @@
   <data name="Note" xml:space="preserve">
     <value>Note</value>
   </data>
+  <data name="YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed" xml:space="preserve">
+    <value>Your transaction has not been completed because the store is closed!</value>
+  </data>
 </root>

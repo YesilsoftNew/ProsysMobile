@@ -8,6 +8,7 @@ using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Pages;
 using ProsysMobile.Resources.Language;
+using ProsysMobile.ViewModels.Pages.Order;
 using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 
@@ -32,7 +33,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
         }
 
         #region Propertys
-        
+            
         private string _versionText;
         public string VersionText { get => _versionText; set { _versionText = value; PropertyChanged(() => VersionText); } }
             
@@ -52,12 +53,6 @@ namespace ProsysMobile.ViewModels.Pages.Main
                 Image = "DepotBlack",
                 Title = Resource.Orders,
                 AccountSettingsType = enAccountSettingsType.Orders
-            },
-            new AccountSettings
-            {
-                Image = "Settings",
-                Title = Resource.Settings,
-                AccountSettingsType = enAccountSettingsType.Settings
             }
         };
         public List<AccountSettings> Settings { get => _settings; set { _settings = value; PropertyChanged(() => Settings); } }
@@ -90,14 +85,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (sender is AccountSettings accountSettings)
                 {
-
                     switch (accountSettings.AccountSettingsType)
                     {
                         case enAccountSettingsType.Orders:
-                            //DialogService.WarningToastMessage("Şuanda yapılmadı");
-                            break;
-                        case enAccountSettingsType.Settings:
-                            //DialogService.WarningToastMessage("Şuanda yapılmadı");
+                            NavigationService.NavigateToModalAsync<UserOrdersPageViewModel>();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

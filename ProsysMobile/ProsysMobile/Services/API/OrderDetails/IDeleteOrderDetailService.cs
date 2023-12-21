@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
@@ -7,6 +8,6 @@ namespace ProsysMobile.Services.API.OrderDetails
 {
     public interface IDeleteOrderDetailService : IServiceBase<ServiceBaseResponse<DeleteOrderDetailResponseModel>>
     {
-        Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> DeleteOrderDetail(int orderDetailId, enPriorityType priorityType);
+        Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> DeleteOrderDetail(int orderDetailId, int userId, DateTime processDate, enPriorityType priorityType);
     }
 }
