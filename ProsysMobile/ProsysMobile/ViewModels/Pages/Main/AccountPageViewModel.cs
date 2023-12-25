@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ProsysMobile.ViewModels.Base;
 using System.Windows.Input;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Models.CommonModels.OtherModels;
@@ -77,7 +79,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
-        public ICommand SettingsClickCommand => new Command<object>( (sender) =>
+        public ICommand SettingsClickCommand => new Command<object>(async (sender) =>
         {
             try
             {
@@ -88,6 +90,14 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     switch (accountSettings.AccountSettingsType)
                     {
                         case enAccountSettingsType.Orders:
+                            var status = PermissionStatus.Unknown;
+
+                            status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
+
+                            if (status != PermissionStatus.Granted && Device.RuntimePlatform != Device.iOS)
+                            {
+                                status = await TOOLS.CheckPermissions(Permission.Camera);
+                            }
                             NavigationService.NavigateToModalAsync<UserOrdersPageViewModel>();
                             break;
                         default:

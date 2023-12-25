@@ -40,5 +40,7 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Bu uygulama kamera erişimini şu nedenlerle kullanmak istiyor: [WebPage'den ürün yüklerken ürünlerin resimlerini çekmek gerekiyor.]</string>
 </dict>
 </plist>

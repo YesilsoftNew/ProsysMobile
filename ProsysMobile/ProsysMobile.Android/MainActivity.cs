@@ -1,14 +1,19 @@
-﻿using System.Globalization;
+﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Threading;
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using Acr.UserDialogs;
+using Android;
+using Android.Content;
+using Android.Hardware.Camera2;
 using Plugin.FirebasePushNotification;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.Platform.Droid;
 using Plugin.LocalNotifications;
+using Plugin.Permissions;
 using Xam.Shell.Badge.Droid;
 using Color = Android.Graphics.Color;
 
@@ -44,6 +49,7 @@ namespace ProsysMobile.Droid
             Rg.Plugins.Popup.Popup.Init(this);
             BottomBar.Init();
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
 
             RequestedOrientation = ScreenOrientation.Portrait;
 
@@ -53,7 +59,7 @@ namespace ProsysMobile.Droid
             }
             
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
             #region Notification 
@@ -65,7 +71,8 @@ namespace ProsysMobile.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
+            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            RequestPermissions(new[] { Manifest.Permission.Camera, Manifest.Permission.RecordAudio }, 0);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }

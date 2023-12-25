@@ -9,7 +9,7 @@ namespace ProsysMobile.ViewModels.Pages.Order
 {
     public class UserOrdersPageViewModel : ViewModelBase
     {
-        private string _url = $"http://yas.yesilsoft.com/Order/Index?userId={GlobalSetting.Instance.User.ID}&culture={Resource.Culture}";
+        private string _url = $"https://few-snails-post.loca.lt";
         public string Url { get => _url; set { _url = value; PropertyChanged(() => Url); } }
         
         private string _token = GlobalSetting.Instance.JWTToken;
