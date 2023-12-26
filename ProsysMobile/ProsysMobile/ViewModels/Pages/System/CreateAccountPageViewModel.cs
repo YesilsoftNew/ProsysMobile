@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ProsysMobile.Models.CommonModels.Enums;
 using ProsysMobile.Resources.Language;
 using Xamarin.Forms;
 
@@ -13,11 +14,13 @@ namespace ProsysMobile.ViewModels.Pages.System
 {
     public class CreateAccountPageViewModel : ViewModelBase
     {
-        private ISignUpService _signUpService;
+        private readonly IAuthAdminService _authAdminService;
+        private readonly ISignUpService _signUpService;
 
-        public CreateAccountPageViewModel(ISignUpService signUpService)
+        public CreateAccountPageViewModel(ISignUpService signUpService, IAuthAdminService authAdminService)
         {
             _signUpService = signUpService;
+            _authAdminService = authAdminService;
         }
 
         public override Task InitializeAsync(object navigationData)
@@ -105,6 +108,21 @@ namespace ProsysMobile.ViewModels.Pages.System
                     return;
                 }
 
+                var token = string.Empty;
+                
+                var adminToken = await _authAdminService.AuthAdmin(priorityType: enPriorityType.UserInitiated);
+
+                if (!string.IsNullOrWhiteSpace(adminToken?.ResponseData) && adminToken.IsSuccess)
+                {
+                    token = adminToken.ResponseData;
+                }
+
+                if (string.IsNullOrWhiteSpace(token))
+                {
+                    DialogService.WarningToastMessage(Resource.AnErrorHasOccurred);
+                    return;
+                }
+
                 var userMobileDto = new UserMobileDto
                 {
                     FIRSTNAME = FirstName,
@@ -115,7 +133,8 @@ namespace ProsysMobile.ViewModels.Pages.System
 
                 var result = await _signUpService.SignUp(
                     userMobileDto,
-                    Models.CommonModels.Enums.enPriorityType.UserInitiated
+                    token,
+                    enPriorityType.UserInitiated
                 );
 
                 if (result.ResponseData != null && result.IsSuccess)
