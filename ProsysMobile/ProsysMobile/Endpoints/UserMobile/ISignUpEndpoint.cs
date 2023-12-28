@@ -9,6 +9,6 @@ namespace ProsysMobile.Endpoints.UserMobile
     public interface ISignUpEndpoint
     {
         [Post("/api/UserMobile/SignUp")]
-        Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto);
+        Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto, [Header("Authorization")] string authorization);
     }
 }
