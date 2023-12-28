@@ -7,6 +7,7 @@ using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Resources.Language;
 using ProsysMobile.Selector;
 using Refit;
 
@@ -37,7 +38,7 @@ namespace ProsysMobile.Services.API.Orders
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.SaveOrder(orderId, userId, processDate, note , "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.SaveOrder(orderId, userId, processDate, note, Resource.Language , "Bearer " + GlobalSetting.Instance.JWTToken);
                 
                 result = await Policy
                     .Handle<ApiException>()
