@@ -81,6 +81,7 @@
     <Compile Include="Renderer\CustomPageRenderer.cs" />
     <Compile Include="Renderer\CustomPickerRenderer.cs" />
     <Compile Include="Renderer\CustomTimePickerRenderer.cs" />
+    <Compile Include="Renderer\CustomWebViewRenderer.cs" />
     <Compile Include="Renderer\DatePickerRenderer.cs" />
     <Compile Include="Renderer\DecimalEntryRenderer.cs" />
     <Compile Include="Renderer\EntryRenderer.cs" />
@@ -160,6 +161,7 @@
     <PackageReference Include="Rg.Plugins.Popup" Version="2.1.0" />
     <PackageReference Include="Xam.Plugins.Notifier" Version="3.0.1" />
     <PackageReference Include="Xam.Shell.Badge" Version="1.0.22" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>

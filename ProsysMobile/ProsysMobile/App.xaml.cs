@@ -167,7 +167,8 @@ namespace ProsysMobile
             CrossFirebasePushNotification.Current.OnTokenRefresh +=  (source, args) =>
             {
                 GlobalSetting.Instance.FirebaseNotificationToken = args?.Token ?? "";
-                TOOLS.SetDatabasePushNotificationToken();
+                if (GlobalSetting.Instance.User != null)
+                    TOOLS.SetDatabasePushNotificationToken();
             };
             
             var random = new Random();

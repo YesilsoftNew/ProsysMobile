@@ -465,6 +465,12 @@ namespace ProsysMobile.Resources.Language {
             }
         }
         
+        internal static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
         internal static string AnError0ccurredWhileUpdatingTheQuantity {
             get {
                 return ResourceManager.GetString("AnError0ccurredWhileUpdatingTheQuantity", resourceCulture);
@@ -516,6 +522,18 @@ namespace ProsysMobile.Resources.Language {
         internal static string YouAreBelowTheMinimumOrderAmount {
             get {
                 return ResourceManager.GetString("YouAreBelowTheMinimumOrderAmount", resourceCulture);
+            }
+        }
+        
+        internal static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        internal static string YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed {
+            get {
+                return ResourceManager.GetString("YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed", resourceCulture);
             }
         }
     }

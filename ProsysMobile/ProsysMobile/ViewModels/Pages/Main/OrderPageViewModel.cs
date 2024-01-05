@@ -4,6 +4,7 @@ using ProsysMobile.ViewModels.Base;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
+using Newtonsoft.Json;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -16,6 +17,7 @@ using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Pages.Item;
 using ProsysMobile.ViewModels.Pages.Order;
+using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -23,6 +25,10 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class OrderPageViewModel : ViewModelBase
     {
+        private int focusedBeforeCounterText;
+
+        
+        
         private readonly IUpdateOrderDetailForItemService _updateOrderDetailForItemService;
         private readonly IGetOrderDetailService _getOrderDetailService;
         private readonly IDeleteOrderDetailService _deleteOrderDetailService;
@@ -77,6 +83,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
         
         private string _orderNo;
         public string OrderNo { get => _orderNo; set { _orderNo = value; PropertyChanged(() => OrderNo); } }
+        
+        private string _focusedBeforeEntryCounterText;
+        public string FocusedBeforeEntryCounterText { get => _focusedBeforeEntryCounterText; set { _focusedBeforeEntryCounterText = value; PropertyChanged(() => OrderNo); } }
         
         private ObservableRangeCollection<OrderDetailsSubDto> _basketItems;
         public ObservableRangeCollection<OrderDetailsSubDto> BasketItems
@@ -218,6 +227,25 @@ namespace ProsysMobile.ViewModels.Pages.Main
             DoubleTapping.ResumeTap();
         });
         
+        public ICommand UnFocusedCounterCommand => new Command(sender =>
+        {
+            try
+            {
+                if (sender is int value)
+                {
+                    focusedBeforeCounterText = value;
+                }
+                else
+                {
+                    focusedBeforeCounterText = 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                ProsysLogger.Instance.CrashLog(ex);
+            }
+        });
+        
         public ICommand ChangeCountCommand => new Command(async sender =>
         {
             try
@@ -261,7 +289,47 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     }
                     else
                     {
-                        DialogService.WarningToastMessage(Resource.AnError0ccurredWhileUpdatingTheQuantity);
+                        var errorModel = JsonConvert.DeserializeObject<ErrorModel>(result.ExceptionMessage);
+
+                        if (errorModel.ErrorCode == ErrorCode.CheckTime)
+                        {
+                            DialogService.WarningToastMessage(Resource.YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed);
+                            
+                            var startTime = errorModel.Parameter.Split("-")[0].Trim();
+                            var endTime = errorModel.Parameter.Split("-")[1].Trim();
+                            
+                            var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                            {
+                                Model = new MaintenancePageViewParamModel
+                                {
+                                    CheckTimeResponseModel = new CheckTimeResponseModel
+                                    {
+                                        IsContinue = false,
+                                        StartTime = startTime,
+                                        EndTime = endTime
+                                    }
+                                }
+                            };
+                            
+                            await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                            
+                            return;
+                        }
+                        
+                        var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(errorModel.ErrorCode);
+
+                        errMessageWithErrCode = errMessageWithErrCode.Replace("@xxx", errorModel.Parameter);
+                        
+                        if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
+                        {
+                            DialogService.WarningToastMessage(errMessageWithErrCode);
+                        }
+                        else
+                        {
+                            DialogService.ErrorToastMessage(Resource.AnError0ccurredWhileUpdatingTheQuantity);
+                        }
+
+                        item.Amount = focusedBeforeCounterText;
                     }
                 }
             }
@@ -290,8 +358,9 @@ namespace ProsysMobile.ViewModels.Pages.Main
                     priorityType: enPriorityType.UserInitiated
                 );
 
-                if (result?.ResponseData != null && result.IsSuccess)
+                if (result is { ResponseData: { }, IsSuccess: true })
                 {
+                    MessagingCenter.Send(this, "UpdateBasketCount", result.ResponseData.OrderDetailsSubDtos.Count);
                     BasketItems.AddRange(result.ResponseData.OrderDetailsSubDtos);
                     NetTotal = result.ResponseData.NetTotal;
                     OrderNo = result.ResponseData.OrderNo;
@@ -408,6 +477,8 @@ namespace ProsysMobile.ViewModels.Pages.Main
         {
             var result = await _deleteOrderDetailService.DeleteOrderDetail(
                 orderDetailId: orderDetailsSubDto.OrderDetailId,
+                userId: GlobalSetting.Instance.User.ID,
+                processDate: DateTime.Now,
                 priorityType: enPriorityType.UserInitiated
             );
 
@@ -428,6 +499,33 @@ namespace ProsysMobile.ViewModels.Pages.Main
             }
             else
             {
+                var errorModel = JsonConvert.DeserializeObject<ErrorModel>(result.ExceptionMessage);
+
+                if (errorModel.ErrorCode == ErrorCode.CheckTime)
+                {
+                    DialogService.WarningToastMessage(Resource.YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed);
+                            
+                    var startTime = errorModel.Parameter.Split("-")[0].Trim();
+                    var endTime = errorModel.Parameter.Split("-")[1].Trim();
+                            
+                    var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                    {
+                        Model = new MaintenancePageViewParamModel
+                        {
+                            CheckTimeResponseModel = new CheckTimeResponseModel
+                            {
+                                IsContinue = false,
+                                StartTime = startTime,
+                                EndTime = endTime
+                            }
+                        }
+                    };
+                            
+                    await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                            
+                    return;
+                }
+                
                 DialogService.WarningToastMessage(Resource.AnErrorOccurredWhileDeletingTheProductFromTheBasket);
             }
         }

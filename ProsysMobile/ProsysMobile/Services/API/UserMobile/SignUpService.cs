@@ -28,16 +28,16 @@ namespace ProsysMobile.Services.API.UserMobile
             throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto, string token, enPriorityType priorityType)
         {
             ServiceBaseResponse<UserMobileDto> result = null;
-            Task<ServiceBaseResponse<UserMobileDto>> task = null;
-            Exception exception = null;
+            Task<ServiceBaseResponse<UserMobileDto>> task;
+            Exception exception;
 
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.SignUp(userMobileDto);
+                task = api.SignUp(userMobileDto, authorization: "Bearer " + token);
 
                 result = await Policy
                           .Handle<ApiException>()

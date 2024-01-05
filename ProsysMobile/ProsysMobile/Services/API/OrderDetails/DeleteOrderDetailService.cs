@@ -25,10 +25,10 @@ namespace ProsysMobile.Services.API.OrderDetails
 
         public Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> DeleteOrderDetail(int orderDetailId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> DeleteOrderDetail(int orderDetailId, int userId, DateTime processDate, enPriorityType priorityType)
         {
             ServiceBaseResponse<DeleteOrderDetailResponseModel> result = null;
             Task<ServiceBaseResponse<DeleteOrderDetailResponseModel>> task;
@@ -37,7 +37,7 @@ namespace ProsysMobile.Services.API.OrderDetails
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.DeleteOrderDetail(orderDetailId, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.DeleteOrderDetail(orderDetailId, userId, processDate, "Bearer " + GlobalSetting.Instance.JWTToken);
                 result = await Policy
                     .Handle<ApiException>()
                     .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>

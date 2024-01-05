@@ -271,9 +271,9 @@ namespace ProsysMobile.Helper
         {
             var errMessage = errCode switch
             {
-                "NO_STOCK" => Resource.ThereAreNoProductsInStock,
-                "MAX_SHELL_COUNT" => Resource.YouHaveExceededTheMaximumPurchaseQuantity,
-                "MIN_ORDER_PRICE" => Resource.YouAreBelowTheMinimumOrderAmount,
+                _ when errCode == ErrorCode.NoStock => Resource.ThereAreNoProductsInStock,
+                _ when errCode == ErrorCode.MinOrderPrice => Resource.YouAreBelowTheMinimumOrderAmount,
+                _ when errCode == ErrorCode.MaxOrderAmount => Resource.YouHaveExceededTheMaximumPurchaseQuantity,
                 _ => string.Empty
             };
 
@@ -295,7 +295,7 @@ namespace ProsysMobile.Helper
                 AppVersion = VersionTracking.CurrentVersion,
                 PushToken = CrossFirebasePushNotification.Current?.Token ?? "",
                 DeviceGuid = GlobalSetting.Instance.DeviceGuid,
-                Timezone = string.Empty,
+                Timezone = TimeZoneInfo.Local.ToString(),
                 RecordDate = DateTime.Now
             };
         }

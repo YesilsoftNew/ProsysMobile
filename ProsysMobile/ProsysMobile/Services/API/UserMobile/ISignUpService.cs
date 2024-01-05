@@ -8,6 +8,6 @@ namespace ProsysMobile.Services.API.UserMobile
 {
     public interface ISignUpService : IServiceBase<ServiceBaseResponse<UserMobileDto>>
     {
-        Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto, enPriorityType priorityType);
+        Task<ServiceBaseResponse<UserMobileDto>> SignUp(UserMobileDto userMobileDto, string token, enPriorityType priorityType);
     }
 }

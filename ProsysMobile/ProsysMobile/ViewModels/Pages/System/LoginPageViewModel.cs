@@ -122,12 +122,12 @@ namespace ProsysMobile.ViewModels.Pages.System
                 if (!isError)
                 {
                     var signIn = new SignIn();
-
+                    
                     signIn.Email = Email;
                     signIn.Password = Password;
                     signIn.DeviceGuid = Guid.NewGuid();
                     signIn.Token = string.Empty;
-
+                    
                     var result = await _signInService.SignIn (
                         signIn,
                         enPriorityType.UserInitiated

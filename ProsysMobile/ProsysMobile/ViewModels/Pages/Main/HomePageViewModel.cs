@@ -4,6 +4,7 @@ using ProsysMobile.Services.API.ItemCategory;
 using ProsysMobile.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
@@ -20,6 +21,7 @@ namespace ProsysMobile.ViewModels.Pages.Main
 {
     public class HomePageViewModel : ViewModelBase
     {
+        private readonly IItemDetailService _itemDetailService;
         private readonly IGetHomePageDataService _getHomePageDataService;
         private readonly ISaveUserMobileFavoriteItemsService _saveUserMobileFavoriteItemsService;
         private readonly IDealItemsService _dealItemsService;
@@ -27,11 +29,12 @@ namespace ProsysMobile.ViewModels.Pages.Main
         private bool _isAllItemLoad;
         private int _listPage = 0;
         
-        public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IDealItemsService dealItemsService, IGetHomePageDataService getHomePageDataService)
+        public HomePageViewModel(IItemCategoryService itemCategoryService, ISaveUserMobileFavoriteItemsService saveUserMobileFavoriteItemsService, IDealItemsService dealItemsService, IGetHomePageDataService getHomePageDataService, IItemDetailService itemDetailService)
         {
             _saveUserMobileFavoriteItemsService = saveUserMobileFavoriteItemsService;
             _dealItemsService = dealItemsService;
             _getHomePageDataService = getHomePageDataService;
+            _itemDetailService = itemDetailService;
 
             MessagingCenter.Subscribe<AppShell, string>(this, "AppShellTabIndexChange", async (sender, arg) =>
            {
@@ -184,15 +187,39 @@ namespace ProsysMobile.ViewModels.Pages.Main
 
                 if (!model.IsAddItem) return;
 
-                _listPage = 0;
-                _isAllItemLoad = false;
-                Deals.Clear();
-                GetDealsAndBindFromApi();
+                IsBusy = true;
+                
+                var itemDetail = await _itemDetailService.GetDetail(
+                    model.ItemId,
+                    GlobalSetting.Instance.User.ID,
+                    enPriorityType.UserInitiated
+                );
+                
+                if (itemDetail.ResponseData != null && itemDetail.IsSuccess)
+                {
+                    var responseModel = itemDetail.ResponseData;
+
+                    var list = Deals;
+
+                    var item = list.FirstOrDefault(x => x.Id == model.ItemId);
+
+                    if (item == null) return;
+                        
+                    item.Pieces = responseModel.Item.Pieces;
+                    item.IsAddedBasket = responseModel.Item.IsAddedBasket;
+                    item.IsStockFinished = responseModel.Item.IsStockFinished;
+                }
+                else
+                {
+                    DialogService.ErrorToastMessage(Resource.AnErrorHasOccurred);
+                }
             }
             catch (Exception ex)
             {
                 ProsysLogger.Instance.CrashLog(ex);
             }
+            
+            IsBusy = false;
         });
         
         public ICommand ListDealsRemainingThresholdReachedCommand => new Command(async (sender) =>

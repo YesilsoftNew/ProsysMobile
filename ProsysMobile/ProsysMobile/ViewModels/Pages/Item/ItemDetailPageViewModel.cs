@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
+using Newtonsoft.Json;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
@@ -15,6 +16,7 @@ using ProsysMobile.Services.API.Items;
 using ProsysMobile.Services.API.OrderDetails;
 using ProsysMobile.ViewModels.Base;
 using ProsysMobile.ViewModels.Pages.Other;
+using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Item
@@ -150,8 +152,37 @@ namespace ProsysMobile.ViewModels.Pages.Item
                     }
                     else
                     {
-                        var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
+                        var errorModel = JsonConvert.DeserializeObject<ErrorModel>(response.ExceptionMessage);
+                        
+                        if (errorModel.ErrorCode == ErrorCode.CheckTime)
+                        {
+                            DialogService.WarningToastMessage(Resource.YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed);
+                            
+                            var startTime = errorModel.Parameter.Split("-")[0].Trim();
+                            var endTime = errorModel.Parameter.Split("-")[1].Trim();
+                            
+                            var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                            {
+                                Model = new MaintenancePageViewParamModel
+                                {
+                                    CheckTimeResponseModel = new CheckTimeResponseModel
+                                    {
+                                        IsContinue = false,
+                                        StartTime = startTime,
+                                        EndTime = endTime
+                                    }
+                                }
+                            };
+                            
+                            await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                            
+                            return;
+                        }
+                        
+                        var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(errorModel.ErrorCode);
 
+                        errMessageWithErrCode = errMessageWithErrCode.Replace("@xxx", errorModel.Parameter);
+                        
                         if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
                         {
                             DialogService.WarningToastMessage(errMessageWithErrCode);

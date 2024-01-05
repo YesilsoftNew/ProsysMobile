@@ -236,7 +236,6 @@ namespace ProsysMobile.CustomControls.OrderListItems
             ItemName.Text = NameText;
             ItemUnitPrice.Text = UnitPriceText;
             ItemPieces.Text = PiecesText;
-            ItemImage.Source = ImageSource;
             ItemImageButton.Source = Constants.UnSelectedFavoriteImageSource;
         }
         
@@ -315,10 +314,9 @@ namespace ProsysMobile.CustomControls.OrderListItems
             }
             else if (propertyName == IsStockFinishedProperty.PropertyName)
             {
-                if (!IsStockFinished) return;
-                
-                ItemPieces.Text = ItemPieces.Text + " - " + Resource.SoldOut;
-                ItemPieces.TextColor = Color.Red;            }
+                Fade.IsVisible = IsStockFinished;
+                SoldOut.IsVisible = IsStockFinished;
+            }
         }
         
         private void ItemImageButton_OnClicked(object sender, EventArgs e)

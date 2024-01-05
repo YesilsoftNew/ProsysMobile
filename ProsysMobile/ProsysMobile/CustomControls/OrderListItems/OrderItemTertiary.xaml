@@ -4,6 +4,8 @@
              x:Class="ProsysMobile.CustomControls.OrderListItems.OrderItemTertiary"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:controlOther="clr-namespace:ProsysMobile.CustomControls.Other"
+             xmlns:resource="clr-namespace:ProsysMobile.Resources.Language;assembly=ProsysMobile"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              HorizontalOptions="FillAndExpand"
              VerticalOptions="FillAndExpand"
              RowSpacing="12"
@@ -41,10 +43,12 @@
                     VerticalOptions="FillAndExpand"
                     HorizontalOptions="FillAndExpand">
                     
-                    <Image
+                    <ffimageloading:CachedImage
                         x:Name="ItemImage"
                         Aspect="AspectFill"
                         HeightRequest="180"
+                        LoadingPlaceholder="RoundLogo"
+                        ErrorPlaceholder="RoundLogo"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="FillAndExpand"
                         AbsoluteLayout.LayoutFlags="All" 
@@ -198,5 +202,28 @@
         </Grid>
         
     </yummy:PancakeView>
+    
+    <yummy:PancakeView
+        x:Name="Fade"
+        IsVisible="False"
+        Grid.Row="0"
+        Style="{DynamicResource Border1}"
+        Border="{yummy:BorderMarkup Color={StaticResource Gray5}, Thickness=1 }"
+        BackgroundColor="Black"
+        Opacity="0.6"
+        Margin="2.5,0,2.5,10"
+        HorizontalOptions="FillAndExpand"
+        VerticalOptions="FillAndExpand" />
+    
+    <Label
+        x:Name="SoldOut"
+        IsVisible="False"
+        Grid.Row="0"
+        Text="{x:Static resource:Resource.SoldOut}"
+        Style="{DynamicResource Header1}"
+        Rotation="-45"
+        TextColor="Red"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand" />
     
 </Grid>

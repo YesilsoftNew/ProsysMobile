@@ -1,15 +1,19 @@
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using MvvmHelpers;
+using Newtonsoft.Json;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels;
 using ProsysMobile.Models.CommonModels.Enums;
+using ProsysMobile.Models.CommonModels.OtherModels;
 using ProsysMobile.Models.CommonModels.ViewParamModels;
 using ProsysMobile.Resources.Language;
 using ProsysMobile.Services.API.Orders;
 using ProsysMobile.ViewModels.Base;
+using ProsysMobile.ViewModels.Pages.System;
 using Xamarin.Forms;
 
 namespace ProsysMobile.ViewModels.Pages.Order
@@ -58,6 +62,9 @@ namespace ProsysMobile.ViewModels.Pages.Order
         
         private string _deposit;
         public string Deposit { get => _deposit; set { _deposit = value; PropertyChanged(() => Deposit); } }
+
+        private string _note;
+        public string Note { get => _note; set { _note = value; PropertyChanged(() => Note); } }
         
         private OrderDetailsSubDto _selectedItem;
         public OrderDetailsSubDto SelectedItem { get => _selectedItem; set { _selectedItem = value; PropertyChanged(() => SelectedItem); } }
@@ -87,8 +94,12 @@ namespace ProsysMobile.ViewModels.Pages.Order
 
                 var response = await _saveOrderService.SaveOrder(
                     orderId: _orderId,
-                    enPriorityType.UserInitiated);
-
+                    userId: GlobalSetting.Instance.User.ID,
+                    processDate: DateTime.Now,
+                    note: string.IsNullOrWhiteSpace(Note) ? null : Note,
+                    enPriorityType.UserInitiated
+                );
+                
                 if (response.IsSuccess)
                 {
                     MessagingCenter.Send(this, "UpdateBasketCount", 0);
@@ -101,8 +112,39 @@ namespace ProsysMobile.ViewModels.Pages.Order
                 }
                 else
                 {
-                    var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(response.ExceptionMessage);
+                    var errorModel = JsonConvert.DeserializeObject<ErrorModel>(response.ExceptionMessage);
 
+                    if (errorModel.ErrorCode == ErrorCode.CheckTime)
+                    {
+                        DialogService.WarningToastMessage(Resource.YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed);
+
+                        NavigationService.NavigatePopBackdropAsync();
+                        
+                        var startTime = errorModel.Parameter.Split("-")[0].Trim();
+                        var endTime = errorModel.Parameter.Split("-")[1].Trim();
+                            
+                        var navigationModel = new NavigationModel<MaintenancePageViewParamModel>
+                        {
+                            Model = new MaintenancePageViewParamModel
+                            {
+                                CheckTimeResponseModel = new CheckTimeResponseModel
+                                {
+                                    IsContinue = false,
+                                    StartTime = startTime,
+                                    EndTime = endTime
+                                }
+                            }
+                        };
+                            
+                        await NavigationService.SetMainPageAsync<MaintenancePageViewModel>(true, navigationModel);
+                            
+                        return;
+                    }
+                    
+                    var errMessageWithErrCode = TOOLS.GetErrorMessageWithErrorCode(errorModel.ErrorCode);
+
+                    errMessageWithErrCode = errMessageWithErrCode.Replace("@xxx", errorModel.Parameter);
+                    
                     if (!string.IsNullOrWhiteSpace(errMessageWithErrCode))
                     {
                         DialogService.WarningToastMessage(errMessageWithErrCode);

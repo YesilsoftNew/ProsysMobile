@@ -1,45 +1,47 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Polly;
-using ProsysMobile.Endpoints.OrderDetails;
+using ProsysMobile.Endpoints.UserMobile;
 using ProsysMobile.Handler;
 using ProsysMobile.Helper;
 using ProsysMobile.Models.APIModels.RequestModels;
 using ProsysMobile.Models.APIModels.ResponseModels;
 using ProsysMobile.Models.CommonModels.Enums;
-using ProsysMobile.Resources.Language;
 using ProsysMobile.Selector;
 using Refit;
 
-namespace ProsysMobile.Services.API.OrderDetails
+namespace ProsysMobile.Services.API.UserMobile
 {
-    public class GetOrderDetailService : IGetOrderDetailService
+    public class AuthAdminService : IAuthAdminService
     {
-        private readonly IApiRequest<IGetOrderDetailEndpoint> _request;
-        private readonly IApiRequestSelector<IGetOrderDetailEndpoint> _apiRequestSelector;
-        
-        public GetOrderDetailService(IApiRequest<IGetOrderDetailEndpoint> request, IApiRequestSelector<IGetOrderDetailEndpoint> apiRequestSelector)
+        private readonly IApiRequest<IAuthAdminEndpoint> _request;
+        private readonly IApiRequestSelector<IAuthAdminEndpoint> _apiRequestSelector;
+
+        public AuthAdminService(IApiRequest<IAuthAdminEndpoint> request, IApiRequestSelector<IAuthAdminEndpoint> apiRequestSelector)
         {
             _request = request;
             _apiRequestSelector = apiRequestSelector;
         }
-        
-        public Task<ServiceBaseResponse<OrderSubDto>> Get(ApiFilterRequestModel apiFilterRequestModel)
+
+        public Task<ServiceBaseResponse<string>> Get(ApiFilterRequestModel apiFilterRequestModel)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
-        public async Task<ServiceBaseResponse<OrderSubDto>> GetOrderDetail(int userId, enPriorityType priorityType)
+        public async Task<ServiceBaseResponse<string>> AuthAdmin(enPriorityType priorityType)
         {
-            ServiceBaseResponse<OrderSubDto> result = null;
-            Task<ServiceBaseResponse<OrderSubDto>> task;
+            ServiceBaseResponse<string> result = null;
+            Task<ServiceBaseResponse<string>> task;
             Exception exception;
 
             try
             {
                 var api = _apiRequestSelector.GetApiRequestByPriority(_request, priorityType);
-                task = api.GetOrderDetail(userId, Resource.Language, "Bearer " + GlobalSetting.Instance.JWTToken);
+                task = api.AuthAdmin(
+                    userName: Constants.ADMIN_USERNAME,
+                    password: Constants.ADMIN_PASSWORD
+                );
+
                 result = await Policy
                     .Handle<ApiException>()
                     .WaitAndRetryAsync(retryCount: 2, sleepDurationProvider: retryAttempt =>
@@ -50,6 +52,7 @@ namespace ProsysMobile.Services.API.OrderDetails
             {
                 exception = apiException;
                 ProsysLogger.Instance.CrashLog(exception);
+
             }
             catch (Exception ex)
             {

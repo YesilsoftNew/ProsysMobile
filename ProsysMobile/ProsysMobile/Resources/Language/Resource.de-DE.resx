@@ -120,7 +120,247 @@
   <data name="yaso" xml:space="preserve">
     <value>yaso</value>
   </data>
-  <data name="Culture" xml:space="preserve">
+  <data name="Categories" xml:space="preserve">
+    <value>Kategorien</value>
+  </data>
+  <data name="Deals" xml:space="preserve">
+    <value>Angebote</value>
+  </data>
+  <data name="ItemDetail" xml:space="preserve">
+    <value>Produkt Details</value>
+  </data>
+  <data name="AddBasket" xml:space="preserve">
+    <value>In den Warenkorb legen</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Rechnung</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Konto löschen</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Ausloggen</value>
+  </data>
+  <data name="SearchHere" xml:space="preserve">
+    <value>Suche</value>
+  </data>
+  <data name="NoItemsInFavorite_U" xml:space="preserve">
+    <value>Keine Artikel In Den Favoriten</value>
+  </data>
+  <data name="SaveYourFavoriteItemsHere" xml:space="preserve">
+    <value>Speichern Sie Ihre Lieblingsartikel hier</value>
+  </data>
+  <data name="StartShopping_U" xml:space="preserve">
+    <value>Mit dem Einkaufen beginnen</value>
+  </data>
+  <data name="NoRecordsFound" xml:space="preserve">
+    <value>Kein Eintrag gefunden.</value>
+  </data>
+  <data name="Basket" xml:space="preserve">
+    <value>Warenkorb</value>
+  </data>
+  <data name="NoItemsInBasket_U" xml:space="preserve">
+    <value>Keine Produkte Im Warenkorb</value>
+  </data>
+  <data name="AddItemsYouWantToShop" xml:space="preserve">
+    <value>Fügen Sie die Produkte hinzu, die Sie kaufen möchten</value>
+  </data>
+  <data name="GrossTotal" xml:space="preserve">
+    <value>Bruttogesamt</value>
+  </data>
+  <data name="VATTotal" xml:space="preserve">
+    <value>MwSt Gesamt</value>
+  </data>
+  <data name="Deposit" xml:space="preserve">
+    <value>Pfand</value>
+  </data>
+  <data name="NetTotal" xml:space="preserve">
+    <value>Netto Gesamt</value>
+  </data>
+  <data name="ApplyBasket" xml:space="preserve">
+    <value>Warenkorb bestätigen</value>
+  </data>
+  <data name="ImageDetail" xml:space="preserve">
+    <value>Bild Details</value>
+  </data>
+  <data name="ChangeListDesign" xml:space="preserve">
+    <value>Listenansicht ändern</value>
+  </data>
+  <data name="NewAccount" xml:space="preserve">
+    <value>Neues Konto</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Nachname</value>
+  </data>
+  <data name="CompanyCode" xml:space="preserve">
+    <value>Kundennummer</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Willkommen</value>
+  </data>
+  <data name="ToRegisterPleaseFillInTheInformation" xml:space="preserve">
+    <value>Bitte füllen Sie die Informationen aus, um sich zu registrieren.</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Einloggen</value>
+  </data>
+  <data name="DontHaveAnAccount" xml:space="preserve">
+    <value>Haben Sie kein Konto?</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrieren</value>
+  </data>
+  <data name="InvalidQuantity" xml:space="preserve">
+    <value>Ungültige Menge!</value>
+  </data>
+  <data name="TheProductHasBeenAddedToTheBasket" xml:space="preserve">
+    <value>Artikel wurde zum Warenkorb hinzugefügt!</value>
+  </data>
+  <data name="AnErrorHasOccurred" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten!</value>
+  </data>
+  <data name="TheProductCouldNotBeAddedToTheBasket" xml:space="preserve">
+    <value>Artikel konnte nicht zum Warenkorb hinzugefügt werden!</value>
+  </data>
+  <data name="TheProductCouldNotBeAddedToFavorites" xml:space="preserve">
+    <value>Artikel konnte nicht zu den Favoriten hinzugefügt werden!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingProductDetails" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als die Produktdetails abgerufen wurden!</value>
+  </data>
+  <data name="OrderAmount" xml:space="preserve">
+    <value>Bestellmenge</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Bestellungen</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="Warning_U" xml:space="preserve">
+    <value>WARNUNG</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="AreYouSureYouWantToLogOut" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie sich abmelden möchten?</value>
+  </data>
+  <data name="AreYouSureYouWantToDeleteTheAccount" xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie das Konto löschen möchten?</value>
+  </data>
+  <data name="AnErrorOccurredWhileDeletingTheUser" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als der Benutzer gelöscht wurde!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingTheProducts" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als die Produkte abgerufen wurden!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingCategories" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als die Kategorien abgerufen wurden!</value>
+  </data>
+  <data name="AnErrorOccurredWhileDeletingTheProductFromTheBasket" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als das Produkt aus dem Warenkorb entfernt wurde!</value>
+  </data>
+  <data name="OrderDetail" xml:space="preserve">
+    <value>Bestelldetail</value>
+  </data>
+  <data name="BasketConfirmed" xml:space="preserve">
+    <value>Warenkorb bestätigt!</value>
+  </data>
+  <data name="BasketNotConfirmed" xml:space="preserve">
+    <value>Warenkorb nicht bestätigt!</value>
+  </data>
+  <data name="AnErrorOccurredWhileFetchingTheBasketDetail" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als die Warenkorbdetails abgerufen wurden!</value>
+  </data>
+  <data name="SingleView" xml:space="preserve">
+    <value>Einzeldarstellung</value>
+  </data>
+  <data name="DoubleView" xml:space="preserve">
+    <value>Zweifache Ansicht</value>
+  </data>
+  <data name="NoPictureView" xml:space="preserve">
+    <value>Bildlose Ansicht</value>
+  </data>
+  <data name="PleaseCheckYourInternetConnection" xml:space="preserve">
+    <value>Bitte überprüfen Sie Ihre Internetverbindung!</value>
+  </data>
+  <data name="PleaseWriteYourName" xml:space="preserve">
+    <value>Bitte geben Sie Ihren Namen ein!</value>
+  </data>
+  <data name="PleaseWriteYourSurname" xml:space="preserve">
+    <value>Bitte geben Sie Ihren Nachnamen ein!</value>
+  </data>
+  <data name="PleaseWriteYourEMailAddress" xml:space="preserve">
+    <value>Bitte geben Sie Ihre E-Mail-Adresse ein!</value>
+  </data>
+  <data name="PleaseWriteTheCompanyCode" xml:space="preserve">
+    <value>Bitte geben Sie den Kundennummer ein!</value>
+  </data>
+  <data name="YourRequestHasBeenSent" xml:space="preserve">
+    <value>Ihre Anfrage wurde gesendet!</value>
+  </data>
+  <data name="PleaseWriteYourPassword" xml:space="preserve">
+    <value>Bitte geben Sie Ihr Passwort ein!</value>
+  </data>
+  <data name="YourEmailOrPasswordIsIncorrect" xml:space="preserve">
+    <value>Ihre E-Mail oder Ihr Passwort ist falsch!</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Bitte warten Sie</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Alles</value>
+  </data>
+  <data name="Language" xml:space="preserve">
     <value>de</value>
+  </data>
+  <data name="AnError0ccurredWhileUpdatingTheQuantity" xml:space="preserve">
+    <value>Ein Fehler ist aufgetreten, als die Menge aktualisiert wurde!</value>
+  </data>
+  <data name="YourOrderHasBeenSuccessfullyReceivedYouCanContinueShopping" xml:space="preserve">
+    <value>Ihre Bestellung wurde erfolgreich erhalten, Sie können mit dem Einkaufen fortfahren.</value>
+  </data>
+  <data name="AccountDetails" xml:space="preserve">
+    <value>Kontodetails</value>
+  </data>
+  <data name="SoldOut" xml:space="preserve">
+    <value>Ausverkauft</value>
+  </data>
+  <data name="ThereAreNoProductsInStock" xml:space="preserve">
+    <value>Es sind keine Produkte auf Lager!</value>
+  </data>
+  <data name="YouHaveExceededTheMaximumPurchaseQuantity" xml:space="preserve">
+    <value>Sie haben die maximale Einkaufsmenge überschritten! Einkaufsmenge: @xxx</value>
+  </data>
+  <data name="TheQuantityCouldNotBeUpdatedBecauseYouHaveReachedTheMaximumPurchaseQuantity" xml:space="preserve">
+    <value>Die Menge konnte nicht aktualisiert werden, da Sie die maximale Einkaufsmenge erreicht haben!</value>
+  </data>
+  <data name="StoreMaintenanceWorkPleaseClosedDueToXxxAgainBetweenHoursTry" xml:space="preserve">
+    <value>Der Shop ist wegen Wartungsarbeiten geschlossen. Bitte versuchen Sie es zwischen @xxx erneut.</value>
+  </data>
+  <data name="YouAreBelowTheMinimumOrderAmount" xml:space="preserve">
+    <value>Sie haben den Mindestbestellwert unterschritten! Wert: @xxx</value>
+  </data>
+  <data name="Note" xml:space="preserve">
+    <value>Notiz</value>
+  </data>
+  <data name="YourTransactionHasNotBeenCompletedBecauseTheStoreIsClosed" xml:space="preserve">
+    <value>Ihre Transaktion wurde nicht abgeschlossen, da das Geschäft geschlossen ist!</value>
   </data>
 </root>

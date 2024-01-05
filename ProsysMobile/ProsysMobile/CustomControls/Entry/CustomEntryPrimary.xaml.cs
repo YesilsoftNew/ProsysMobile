@@ -263,6 +263,19 @@ namespace ProsysMobile.CustomControls.Entry
                 SetValue(ReturnCommandParameterProperty, value);
             }
         }
+        
+        
+        /// <summary>
+        /// DisabledImageSource Property
+        /// </summary>
+        public static readonly BindableProperty MaxLengthProperty = BindableProperty.Create(nameof(MaxLength), typeof(int), typeof(CustomEntryPrimary), int.MaxValue, BindingMode.TwoWay);
+
+        public int MaxLength
+        {
+            get => (int)GetValue(MaxLengthProperty);
+            set => SetValue(MaxLengthProperty, value);
+        }
+
 
         /// <summary>
         /// Entry Focused
@@ -448,6 +461,10 @@ namespace ProsysMobile.CustomControls.Entry
                 else if (propertyName == IsPasswordProperty.PropertyName)
                 {
                     ItemEntry.IsPassword = IsPassword;
+                }
+                else if (propertyName == MaxLengthProperty.PropertyName)
+                {
+                    ItemEntry.MaxLength = MaxLength;
                 }
             }
             catch (Exception ex)

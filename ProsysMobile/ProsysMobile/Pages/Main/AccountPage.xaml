@@ -110,7 +110,6 @@
                         Direction="Column"
                         Wrap="NoWrap"
                         BindableLayout.ItemsSource="{Binding Settings}"
-                        IsVisible="False"
                         HorizontalOptions="FillAndExpand"
                         VerticalOptions="StartAndExpand">
                     
